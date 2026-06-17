@@ -1,0 +1,864 @@
+[
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "01-introduction-to-ai-fluency",
+    "titulo": "Introdução à Fluência em IA: parar de \"usar\" e começar a colaborar",
+    "resumo": "Fluência em IA não é decorar prompt mágico, é saber colaborar com a IA de forma eficaz, eficiente, ética e segura. Esta aula abre o curso mostrando o framework dos 4Ds e por que ele continua valendo mesmo quando o modelo muda.",
+    "duracao_leitura": "8-10 minutos",
+    "conceitos": [
+      {
+        "termo": "Fluência em IA",
+        "definicao": "Capacidade de trabalhar junto com sistemas de IA de forma eficaz (gera o resultado certo), eficiente (com pouco esforço/retrabalho), ética (com responsabilidade sobre o que sai) e segura (sem expor dado ou tomar decisão cega). É uma habilidade de colaboração, não um truque de prompt."
+      },
+      {
+        "termo": "Os 4Ds",
+        "definicao": "As quatro competências centrais do framework: Delegation (decidir o que entregar pra IA e o que não), Description (descrever bem a tarefa, o contexto e o resultado esperado), Discernment (avaliar criticamente a resposta) e Diligence (assumir responsabilidade pelo uso, verificação e divulgação do trabalho)."
+      },
+      {
+        "termo": "Colaboração vs. ferramenta",
+        "definicao": "A virada de chave do curso: parar de tratar a IA como uma calculadora que cospe resposta e começar a tratá-la como um colaborador a quem você delega, instrui e cobra. Muda o resultado mais do que qualquer modelo novo."
+      },
+      {
+        "termo": "Habilidade durável",
+        "definicao": "O framework é desenhado pra sobreviver à troca de modelo. Prompt específico envelhece em meses; saber delegar, descrever, discernir e ser diligente continua valendo no GPT, no Gemini, no Claude e no que vier depois."
+      },
+      {
+        "termo": "Modelo de linguagem (LLM)",
+        "definicao": "O tipo de IA usado nos exercícios do curso (Claude, ChatGPT, Gemini etc.). Você conversa em linguagem natural e ele responde texto. Os exercícios funcionam em qualquer um — o princípio é o mesmo."
+      }
+    ],
+    "passos": [
+      "Crie uma conta gratuita em algum modelo de linguagem (claude.ai serve, e é o que uso nos exemplos) — não precisa plano pago pra fazer o curso.",
+      "Pegue uma tarefa real que você faria essa semana (um e-mail chato, um resumo, um rascunho) em vez de inventar um exercício de mentira.",
+      "Antes de digitar, decida conscientemente: isso vale a pena delegar? (Delegation).",
+      "Escreva o pedido com contexto, objetivo e formato esperado — não só uma frase solta (Description).",
+      "Leia a resposta com olho crítico: tá certo? tá inventando? serve? (Discernment).",
+      "Assuma o resultado: revise, corrija e seja honesto sobre o que foi feito com IA (Diligence)."
+    ],
+    "exemplo": {
+      "contexto": "Você precisa responder um cliente que reclamou de atraso na entrega. Em vez de pedir 'escreve um e-mail', você aplica os 4Ds.",
+      "comandos": [
+        "Delegation: decido que vale delegar o rascunho, mas a decisão comercial (dar desconto ou não) é minha.",
+        "Description: 'Escreva um e-mail curto, tom firme mas cordial, em PT-BR. Cliente: João, reclamou de atraso de 3 dias na entrega do pedido #4521. Contexto: o atraso foi nosso, transportadora falhou. Objetivo: reconhecer o erro, dar prazo novo (sexta) e não prometer desconto. Máx 6 linhas.'",
+        "Discernment: leio o rascunho — ele prometeu desconto que eu pedi pra NÃO prometer? Tom ficou submisso demais? Inventou algum dado?",
+        "Diligence: ajusto a linha que não gostei, confiro o número do pedido e mando. O e-mail é meu, não da IA."
+      ],
+      "explicacao": "O mesmo pedido sem os 4Ds vira 'escreve um e-mail pro cliente bravo' e te devolve um texto genérico que você reescreve do zero. Com os 4Ds, você gasta 30 segundos a mais na instrução e economiza 10 minutos de retrabalho — e o resultado sai do seu padrão, não do padrão médio da internet."
+    },
+    "dicas": [
+      "Não comece pela 'lista de prompts que funcionam'. Ela envelhece. Comece pelo hábito de descrever bem o que você quer — isso nunca envelhece.",
+      "Trate a IA como um estagiário muito rápido e muito confiante: rápido ajuda, confiante engana. Sempre confira antes de assinar embaixo.",
+      "Use os exercícios do curso com problema seu, de verdade. Aprender 4D com tarefa fake é como aprender a dirigir só no simulador.",
+      "Quando a resposta vier ruim, 90% das vezes o problema foi a sua descrição, não o modelo. Reescreva o pedido antes de culpar a IA."
+    ],
+    "erros_comuns": [
+      "Achar que fluência em IA é colecionar prompts mágicos — o que funciona hoje quebra na próxima versão do modelo.",
+      "Aceitar a primeira resposta sem ler com olho crítico (pular o Discernment) e mandar pro cliente algo inventado.",
+      "Delegar a decisão, não só a execução — deixar a IA decidir o que era pra você decidir.",
+      "Dar instrução de uma linha e culpar o modelo quando vem genérico, em vez de melhorar a descrição.",
+      "Esconder ou, no outro extremo, terceirizar a responsabilidade: o trabalho com IA continua sendo seu (Diligence)."
+    ],
+    "takeaway": "Fluência em IA é colaboração, não truque. Quem domina os 4Ds — delegar, descrever, discernir e ser diligente — continua na frente independente de qual modelo está em alta no mês que vem."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "02-why-do-we-need-ai-fluency",
+    "titulo": "Por que você precisa de fluência em IA",
+    "resumo": "Saber usar IA não é apertar \"enviar\" num chat. Fluência é a diferença entre quem extrai resultado real da ferramenta e quem só gera texto bonito que ninguém usa.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Fluência em IA",
+        "definicao": "Capacidade de colaborar com sistemas de IA de forma que gere resultado de verdade: rápido, confiável, ético e seguro. Não é decorar prompts mágicos — é saber o que delegar, como descrever, quando desconfiar e como conferir. É uma competência operacional, não um truque."
+      },
+      {
+        "termo": "Automação",
+        "definicao": "O modo mais básico: você dá uma instrução clara e a IA executa uma tarefa específica de ponta a ponta. Tipo 'transcreva esse áudio', 'classifique esses 200 e-mails em reclamação ou elogio'. Entrada definida, saída definida. Útil pro trabalho repetitivo que você já sabe exatamente como deve ficar."
+      },
+      {
+        "termo": "Aumento (Augmentation)",
+        "definicao": "Você e a IA pensam juntos. Não é mandar fazer e receber pronto — é um vai-e-volta onde ela puxa ângulos que você não viu e você corrige o rumo. Brainstorm de oferta, revisar a arquitetura de um sistema, debater uma decisão. O resultado é melhor do que você ou a IA fariam sozinhos."
+      },
+      {
+        "termo": "Agência (Agency)",
+        "definicao": "Você não dá mais tarefa por tarefa — você configura a IA pra agir sozinha em seu nome. Define o conhecimento, o comportamento e as regras dela e solta. É o que está por trás de Projects, Skills e agentes que rodam um fluxo inteiro. Mais alavanca, mas exige muito mais cuidado: você não está olhando cada passo."
+      },
+      {
+        "termo": "Efetivo, eficiente, ético e seguro",
+        "definicao": "Os quatro filtros de qualquer uso de IA que se sustenta. Efetivo: resolveu o problema certo. Eficiente: gastou menos do seu tempo e atenção do que fazer na mão. Ético: você assume o que saiu. Seguro: não vazou dado nem espalhou erro. Se um desses falha, não foi fluência — foi sorte ou prejuízo."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Uma mesma tarefa — responder dúvidas de clientes no WhatsApp — atravessando os três modos de colaboração, do mais simples ao mais autônomo.",
+      "comandos": [
+        "Automação: 'Classifique estas 50 mensagens em: dúvida de preço, suporte técnico, ou reclamação.'",
+        "Aumento: 'Recebi esta reclamação dura. Me ajude a pensar 3 formas de responder — uma firme, uma empática, uma que oferece solução — e me diga o risco de cada uma.'",
+        "Agência: configurar um agente com a base de conhecimento da empresa, o tom de voz e a regra 'escalar pra humano se o cliente pedir reembolso', e deixar rodando."
+      ],
+      "explicacao": "Note como o seu papel muda em cada nível. Na automação você é o operador: dá ordem, recebe resultado, confere. No aumento você é o parceiro: pensa junto e decide. Na agência você é o arquiteto: define as regras antes e fica responsável pelo que a máquina faz sem você olhar. Quanto mais autonomia você dá, menos você acompanha passo a passo — e mais a sua fluência vira a única coisa que segura a qualidade. Por isso agência sem fluência é uma bomba-relógio: o erro escala junto com a velocidade."
+    },
+    "passos": [
+      "Antes de abrir o chat, pergunte: qual desses três modos essa tarefa pede? Automação (executar), aumento (pensar junto) ou agência (configurar e soltar)?",
+      "Se for automação, capriche na instrução: entrada clara, formato de saída claro, e confira a primeira amostra antes de rodar em escala.",
+      "Se for aumento, não aceite a primeira resposta. Provoque, discorde, peça os contras. O valor está no diálogo, não no primeiro parágrafo.",
+      "Se for agência, gaste o tempo na configuração: contexto, regras, limites e o ponto de escape pra humano. É aí que você ganha ou perde.",
+      "Em qualquer modo, passe a saída pelos quatro filtros: efetivo, eficiente, ético, seguro. Se falhar em um, ajuste antes de usar."
+    ],
+    "erros_comuns": [
+      "Tratar a IA como um Google mais esperto — só perguntar e copiar. Isso te trava na automação e você nunca chega no que dá alavanca de verdade.",
+      "Aceitar a primeira resposta como verdade. Modelo escreve com a mesma confiança quando acerta e quando inventa. Fluência inclui desconfiar.",
+      "Pular pra agência (deixar o agente solto) sem dominar os modos anteriores. Você delega o trabalho e o erro junto, em escala.",
+      "Achar que fluência é colecionar prompts prontos. Prompt copiado funciona até o contexto mudar. O que se sustenta é entender por que funciona.",
+      "Ignorar o filtro ético e de segurança porque 'é só um teste'. Dado sensível colado num chat e texto enviado sem revisão já viraram problema real em muita empresa."
+    ],
+    "dicas": [
+      "Pra cada tarefa nova, classifique em automação / aumento / agência antes de digitar. Esse hábito sozinho já te coloca à frente da maioria.",
+      "Comece pelo aumento se você está aprendendo. É onde você mais vê como o modelo pensa — e onde mais aprende a guiá-lo.",
+      "Quanto mais autonomia você dá à IA, mais tempo você investe ANTES (configurando) e menos DURANTE. Inverteu? Provavelmente está usando o modo errado.",
+      "Fluência não é sobre saber tudo de IA — é sobre saber operar bem com o que ela faz. Foco em resultado, não em hype."
+    ],
+    "takeaway": "Fluência em IA não é saber prompts — é saber escolher entre mandar executar (automação), pensar junto (aumento) ou configurar e soltar (agência), e conferir o resultado nos quatro filtros: efetivo, eficiente, ético, seguro."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "03-the-4d-framework",
+    "titulo": "O Framework 4D: as quatro competências que separam quem usa IA de quem só conversa com IA",
+    "resumo": "O 4D é um mapa prático pra trabalhar com IA de forma efetiva e responsável: você decide o que delegar, descreve bem o que quer, julga o resultado com olho crítico e mantém responsabilidade sobre o que sai. Não é teoria — é o checklist mental de quem coloca IA pra operar de verdade.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Delegation (Delegação)",
+        "definicao": "Decidir, antes de abrir o chat, o que vale fazer com IA e o que vale fazer na mão. Envolve tarefa (o que dá pra automatizar?), seu próprio papel (onde meu julgamento é insubstituível?) e a capacidade real do modelo (ele consegue isso bem hoje?). Delegação ruim é a raiz da maioria das frustrações com IA."
+      },
+      {
+        "termo": "Description (Descrição)",
+        "definicao": "Comunicar com clareza o que você quer: contexto, objetivo, formato de saída e critério de sucesso. Não é decorar prompt mágico — é falar com o modelo como você briefaria um freelancer competente que nunca trabalhou com você."
+      },
+      {
+        "termo": "Discernment (Discernimento)",
+        "definicao": "Olhar o que a IA produziu com ceticismo profissional. Avaliar o produto (está certo e útil?), o processo (o raciocínio faz sentido?) e o comportamento (o modelo está alinhado com o que pedi ou inventando?). É aqui que sua expertise vira filtro."
+      },
+      {
+        "termo": "Diligence (Diligência)",
+        "definicao": "Assumir responsabilidade pelo que sai com seu nome. Inclui transparência sobre uso de IA, verificação antes de publicar/enviar, e cuidado com dados sensíveis. A IA não responde pelo erro — você responde."
+      },
+      {
+        "termo": "Automação, Augmentação e Agência",
+        "definicao": "As três formas de trabalhar com IA. Automação: ela executa tarefas pontuais sob sua instrução. Augmentação: vocês pensam e criam juntos, em diálogo. Agência: você configura o que a IA sabe e como se comporta pra ela operar sozinha em seu nome. Os 4Ds valem nas três — só mudam de peso."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Cliente automotivo me pede uma sequência de 5 e-mails de recuperação de leads frios. Em vez de jogar 'escreve 5 emails de recuperação' no Claude, aplico o 4D.",
+      "comandos": [
+        "Delegação: eu defino a estratégia (oferta, ordem psicológica dos e-mails, gatilho de cada um). Delego pra IA o rascunho do texto e variações de assunto. O posicionamento da marca eu não delego.",
+        "Descrição: dou o contexto real — quem é o cliente, ticket, tom da marca, o que já foi tentado, e o critério de sucesso (taxa de resposta, não 'e-mail bonito'). Peço formato: assunto + corpo + CTA, um por bloco.",
+        "Discernimento: leio cada e-mail perguntando 'eu enviaria isso?'. Corto promessa que a marca não cumpre, ajusto qualquer dado que a IA chutou, verifico se o CTA bate com a etapa do funil.",
+        "Diligência: confiro nome do cliente, links e ofertas antes de subir no CRM. Nada vai pro disparo sem minha revisão final — meu nome está na entrega."
+      ],
+      "explicacao": "O mesmo pedido vira um trabalho profissional ou um amontoado de texto genérico dependendo de quão bem você roda os 4 Ds. A IA não falhou nas vezes que te decepcionou — quase sempre faltou Delegação ou Descrição."
+    },
+    "passos": [
+      "Antes de abrir o chat, decida o escopo (Delegação): o que é IA, o que é você, e isso o modelo faz bem hoje?",
+      "Brief o pedido como pra um humano novo no time (Descrição): contexto + objetivo + formato + critério de sucesso.",
+      "Receba a saída e ataque ela criticamente (Discernimento): produto certo? raciocínio coerente? comportamento alinhado?",
+      "Itere — corrija o brief em vez de aceitar a primeira resposta, ou de jogar tudo fora.",
+      "Antes de entregar, faça o passe de Diligência: verifique fatos, dados sensíveis, transparência e responsabilidade.",
+      "Repita o ciclo ajustando qual D pesa mais conforme você está em automação, augmentação ou agência."
+    ],
+    "dicas": [
+      "Quando a IA te decepciona, faça o diagnóstico pelo D antes de reclamar do modelo: 90% das vezes o furo está em Delegação (pediu o que não devia) ou Descrição (briefou mal).",
+      "Discernimento exige que você saiba o suficiente do assunto pra julgar. Em terreno que você não domina, suba o nível de Diligência: verifique mais, confie menos.",
+      "Descrição não é prompt decorado. Um parágrafo de contexto honesto vale mais que dez 'truques de prompt' da internet.",
+      "Na Agência (Skills, Projects, agentes via API), Delegação e Diligência viram os Ds mais pesados — você está deixando a IA agir sozinha, então o setup e a verificação importam muito mais."
+    ],
+    "erros_comuns": [
+      "Pular a Delegação e mandar tudo pra IA — incluindo o que exige seu julgamento ou o que ela ainda não faz bem.",
+      "Tratar prompt como mágica: caçar a 'frase perfeita' em vez de simplesmente dar contexto e critério de sucesso.",
+      "Aceitar a primeira saída sem Discernimento, especialmente em assunto que você não domina o suficiente pra perceber o erro.",
+      "Esquecer a Diligência: enviar texto com dado inventado, vazar info sensível no prompt, ou publicar sem revisar achando que 'a IA já checou'.",
+      "Achar que os 4Ds são quatro fases isoladas. Eles são um ciclo — você volta pra Descrição depois do Discernimento o tempo todo."
+    ],
+    "takeaway": "Trabalhar bem com IA não é saber o prompt secreto — é rodar os 4 Ds com disciplina: delegar com critério, descrever com clareza, discernir com olho crítico e entregar com diligência. Domine esse ciclo e você fica pronto pra qualquer modelo novo que aparecer, porque a competência está em você, não na ferramenta."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "04-generative-ai-fundamentals",
+    "titulo": "Fundamentos de IA Generativa: o que de fato roda por baixo do Claude",
+    "resumo": "IA generativa cria conteúdo novo em vez de só classificar o que já existe. Entender como um LLM como o Claude prevê texto, é treinado e usa o contexto muda completamente a forma como você opera a ferramenta no dia a dia.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "IA generativa",
+        "definicao": "Categoria de modelo que produz conteúdo inédito (texto, código, imagem, áudio) a partir de um pedido, em vez de apenas rotular ou separar dados existentes. A diferença prática: um modelo de classificação responde 'isso é spam ou não'; um generativo escreve o e-mail."
+      },
+      {
+        "termo": "LLM (Large Language Model)",
+        "definicao": "Modelo de linguagem treinado em volume gigante de texto para prever o próximo pedaço de palavra dado tudo o que veio antes. O Claude é um LLM. Toda resposta que ele dá é, no fundo, uma sequência de previsões encadeadas, uma de cada vez."
+      },
+      {
+        "termo": "Arquitetura transformer",
+        "definicao": "O desenho técnico que destravou os LLMs modernos. O mecanismo de atenção permite que o modelo pese quais palavras do texto importam mais para a próxima previsão, mesmo que estejam longe uma da outra. É o que dá coerência em textos longos."
+      },
+      {
+        "termo": "Pré-treino e fine-tuning",
+        "definicao": "Pré-treino é a fase em que o modelo absorve padrões de linguagem lendo um corpus enorme. Fine-tuning é o ajuste posterior, com exemplos e feedback humano, que ensina o modelo a ser útil, honesto e seguro. Capacidade bruta vem do primeiro; comportamento vem do segundo."
+      },
+      {
+        "termo": "Janela de contexto",
+        "definicao": "A quantidade de texto que o modelo consegue 'enxergar' de uma vez numa conversa, contando seu prompt e tudo que já foi trocado. No Claude ela é grande (até 1 milhão de tokens em alguns modelos), mas não é infinita nem é memória permanente: o que sai da janela, o modelo esquece."
+      },
+      {
+        "termo": "Capacidades emergentes",
+        "definicao": "Habilidades que aparecem só quando o modelo cresce o suficiente em escala, sem terem sido programadas diretamente, como raciocinar passo a passo ou traduzir entre idiomas. Ninguém escreveu uma regra para isso; emergiu do volume de treino."
+      }
+    ],
+    "dicas": [
+      "Pare de tratar o Claude como banco de dados de fatos. Ele prevê texto plausível, não consulta uma verdade. Para fatos críticos, dê a fonte no prompt ou ligue ferramentas (busca, MCP) em vez de confiar na memória do modelo.",
+      "Use a janela de contexto a seu favor: cole o documento, o e-mail, o código relevante direto na conversa. O modelo trabalha muito melhor com o material na frente dele do que tentando lembrar de algo genérico.",
+      "Conversa longa demais degrada. Quando o contexto enche, comece um chat novo e resuma o que importa. Num Project do Claude, jogue o material recorrente no knowledge base para não recolar toda hora.",
+      "Saiba que o modelo tem corte de conhecimento. Para algo recente, traga a informação você ou habilite busca; não pergunte e aceite a resposta como atual."
+    ],
+    "exemplo": {
+      "contexto": "Você precisa que o Claude analise os números de vendas do mês a partir de uma planilha exportada, em vez de pedir uma resposta genérica sobre vendas.",
+      "comandos": [
+        "Cole o CSV de vendas direto no chat (cabe na janela de contexto)",
+        "Peça: 'Com base APENAS nesses dados, qual produto caiu vs. mês anterior e por quê os números sugerem isso'",
+        "Para recorrência: suba a planilha no knowledge base de um Project e reutilize"
+      ],
+      "explicacao": "Ao colocar os dados dentro da janela de contexto, o modelo deixa de inventar e passa a raciocinar sobre o material real. O 'APENAS nesses dados' reduz a tendência de o LLM preencher lacunas com texto plausível mas falso. É a diferença entre operar a ferramenta e ser enganado por ela."
+    },
+    "erros_comuns": [
+      "Achar que o Claude 'sabe' fatos como uma enciclopédia. Ele gera o texto mais provável, e provável não é sinônimo de correto. Daí vêm as alucinações.",
+      "Confundir janela de contexto com memória permanente. O modelo não lembra da conversa de ontem em um chat novo, a menos que você traga o contexto de volta.",
+      "Esperar conhecimento atualizado até hoje. Todo modelo tem data de corte de treino; eventos recentes precisam entrar via prompt ou ferramenta.",
+      "Tratar a saída como verdade pronta. Geração é ponto de partida que exige discernimento humano, não resposta final auditada."
+    ],
+    "takeaway": "O Claude não busca respostas, ele prevê texto provável a partir do que você dá. Quem entende isso para de brigar com alucinação e começa a alimentar o contexto certo: é aí que a ferramenta vira resultado.",
+    "passos": [
+      "Entenda que a base é previsão de texto, não consulta a fatos.",
+      "Sempre que possível, traga o material relevante para dentro da janela de contexto.",
+      "Restrinja o modelo ao material fornecido quando precisão importa.",
+      "Para conhecimento recente ou crítico, ligue ferramentas ou forneça a fonte.",
+      "Aplique discernimento humano sobre a saída antes de usar."
+    ]
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "05-capabilities-limitations",
+    "titulo": "Capacidades e limitações: o que a IA realmente faz (e onde ela quebra)",
+    "resumo": "Antes de delegar qualquer coisa pra IA, você precisa saber onde ela é forte e onde ela te trai. Essa aula mapeia as duas coisas na prática, sem hype.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "IA generativa",
+        "definicao": "Modelo que produz conteúdo novo (texto, código, imagem) em vez de só classificar ou buscar dados existentes. O Claude prevê o próximo pedaço de texto com base em padrões que aprendeu — é isso que dá a versatilidade e também a origem dos erros."
+      },
+      {
+        "termo": "Knowledge cutoff (data de corte)",
+        "definicao": "O modelo só conhece o mundo até a data em que parou de treinar. Sem ferramenta de busca conectada, ele não sabe nada que aconteceu depois. Por isso pra pergunta sobre preço de hoje, notícia da semana ou versão atual de uma lib, você precisa dar a fonte ou ligar uma ferramenta."
+      },
+      {
+        "termo": "Alucinação",
+        "definicao": "Quando o modelo gera algo plausível mas falso com total confiança: uma citação que não existe, uma função de API inventada, um número errado. Não é bug pontual, é consequência de como o modelo funciona. Some quando você dá a fonte e pede pra ele se basear nela."
+      },
+      {
+        "termo": "Janela de contexto",
+        "definicao": "O total de texto (entrada + saída) que o modelo consegue 'enxergar' de uma vez. É grande, mas finita. Conversa muito longa ou documento gigante: o começo sai de foco e o modelo perde detalhes. Resolve recomeçando o chat ou usando Projects pra fixar o material de referência."
+      },
+      {
+        "termo": "Tool use / MCP",
+        "definicao": "Capacidade do Claude de chamar ferramentas externas — rodar código, buscar na web, consultar um banco, acessar seus arquivos via MCP. É o que fura várias limitações: a data de corte some quando ele busca na web; a conta errada some quando ele roda Python de verdade."
+      },
+      {
+        "termo": "Raciocínio multi-passo",
+        "definicao": "Cadeias longas de lógica, matemática exata e contagem precisa são o calcanhar do modelo. Ele acerta muito mais quando você pede pra ele pensar passo a passo, ou melhor ainda, quando ele delega a parte exata pra uma ferramenta (código) em vez de fazer 'de cabeça'."
+      }
+    ],
+    "dicas": [
+      "Toda vez que precisar de fato verificável (data, número, nome próprio, citação), assuma que pode estar alucinado até confirmar na fonte.",
+      "Pra qualquer coisa que dependa de informação atual, dê o contexto você mesmo ou ligue uma ferramenta de busca.",
+      "Cálculo e lógica pesada: peça pra ele rodar código em vez de responder direto.",
+      "Conversa longa ficou burra? A janela de contexto encheu — recomeça com resumo ou usa Projects.",
+      "Use a versatilidade: o mesmo modelo cobre redação, código e dados. Troque de pedido, não de ferramenta."
+    ],
+    "exemplo": {
+      "contexto": "Você pede pro Claude listar as 'principais mudanças da versão mais recente' de uma biblioteca que você usa, e ele responde com um changelog detalhado, bonito e específico.",
+      "explicacao": "Esse é o caso clássico que pega gente sênior. A resposta veio confiante, formatada, com números de versão — e pode estar parcial ou totalmente inventada, porque a versão saiu depois do corte de conhecimento. A correção não é desconfiar de tudo, é mudar o método: ou você cola o changelog real e pede pra ele resumir/explicar (aí ele é ótimo), ou liga a busca web pra ele puxar a fonte. A capacidade de explicar é real; o conhecimento atualizado, não.",
+      "comandos": [
+        "Em vez de: 'quais as novidades da versão X mais recente?'",
+        "Faça: 'segue o changelog oficial colado abaixo. Me resume as 3 mudanças que afetam meu caso de uso Y: [cola o texto]'",
+        "Ou: ative a busca web e peça 'busca o changelog oficial de X e cita a fonte de cada item'"
+      ]
+    },
+    "erros_comuns": [
+      "Tratar o modelo como banco de dados de fatos. Ele é um motor de raciocínio sobre o que você dá, não um Google atualizado. Sem fonte, ele preenche os buracos com algo plausível.",
+      "Confundir tom confiante com correção. O Claude soa igualmente seguro quando acerta e quando alucina. A confiança não carrega informação sobre a verdade.",
+      "Empurrar tudo numa conversa única gigante e estranhar a queda de qualidade. Contexto cheio = detalhes do começo somem.",
+      "Pedir conta exata, contagem de itens ou lógica longa direto no chat e confiar no resultado, em vez de mandar ele rodar código.",
+      "Achar que limitação é defeito do produto. É característica da tecnologia atual — o trabalho é desenhar o fluxo pra que humano e IA cubram a fraqueza um do outro."
+    ],
+    "passos": [
+      "Antes de delegar, classifique a tarefa: é geração/raciocínio sobre o que eu forneço (forte) ou depende de fato atual/cálculo exato (fraco)?",
+      "Se depende de fato atual: forneça a fonte você mesmo ou ligue uma ferramenta (busca web, MCP, arquivos).",
+      "Se depende de exatidão (números, lógica): peça pra ele rodar código em vez de responder de cabeça.",
+      "Se a conversa esticou: reinicie com resumo ou ancore o material em Projects pra não estourar o contexto.",
+      "Sempre verifique o que for verificável antes de usar em produção — você é o controle de qualidade, não ele."
+    ],
+    "takeaway": "A IA não é mágica nem inútil: ela é excelente em transformar e raciocinar sobre o que você dá, e fraca em saber fatos atuais e fazer contas exatas sozinha. Domine essa fronteira e você delega certo; ignore e você vai confiar numa resposta linda e errada."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "06-a-closer-look-at-delegation",
+    "titulo": "Delegação na prática: decidindo o que entregar pra IA",
+    "resumo": "Delegação é a decisão consciente sobre o que você faz, o que faz junto com a IA e o que a IA faz sozinha. Sem essa clareza, você terceiriza justamente a parte que devia segurar.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Delegação",
+        "definicao": "A primeira das quatro competências do framework AI Fluency (4D). É o ato de distribuir o trabalho entre você e a IA de forma deliberada — definindo o que fica com você, o que é colaborativo e o que a IA toca sozinha. Não é sinônimo de automatizar tudo."
+      },
+      {
+        "termo": "Consciência do problema",
+        "definicao": "Saber exatamente onde você quer chegar antes de chamar a IA. Qual é o resultado bom, quais as restrições, do que esse trabalho é feito. Se você não sabe descrever um resultado bom, a IA também não vai saber entregar."
+      },
+      {
+        "termo": "Consciência da plataforma",
+        "definicao": "Conhecer de verdade o que cada ferramenta de IA faz e onde ela trava. Claude no chat, Projects, Artifacts, Skills, MCP, a API — cada um tem força e limite diferente. Escolher a ferramenta errada é onde a maioria perde tempo."
+      },
+      {
+        "termo": "Distribuição de tarefas",
+        "definicao": "O recorte fino: quebrar o trabalho em pedaços e mandar cada pedaço pra quem é mais forte nele. Julgamento, contexto de negócio e responsabilidade ficam com você; volume, rascunho, varredura e reformatação vão pra IA."
+      },
+      {
+        "termo": "Modo de colaboração",
+        "definicao": "Como você opera com a IA num pedaço específico: automação (a IA roda sozinha), aumento (vocês fazem juntos, ida e volta) ou agência (a IA executa uma sequência com autonomia limitada). O modo muda conforme o risco e a clareza da tarefa."
+      }
+    ],
+    "dicas": [
+      "Antes de abrir o chat, escreva em uma frase como é o resultado bom. Se você não consegue, o problema não é a IA — é que a tarefa ainda não está clara na sua cabeça.",
+      "Faça o teste do 'eu assino embaixo?'. Tudo que sai com seu nome (proposta pra cliente, número de relatório, decisão jurídica) você revisa. O resto pode rodar mais solto.",
+      "Comece pela tarefa que é chata, repetitiva e de baixo risco — transcrição, primeiro rascunho, classificar planilha. É onde a delegação rende mais e custa menos se der errado.",
+      "Use o próprio Claude pra montar o plano de delegação: descreva a tarefa e peça pra ele te ajudar a separar o que é seu, o que é colaborativo e o que é dele. Conversa de ida e volta, não monólogo.",
+      "Escolha a ferramenta pelo trabalho, não pela moda. Coisa pontual no chat; algo recorrente com contexto fixo vira Project ou Skill; integração com seus sistemas é API ou MCP."
+    ],
+    "erros_comuns": [
+      "Delegar a parte de julgamento e segurar a parte mecânica — o contrário do que faz sentido. Você acaba digitando rascunho enquanto deixa a IA decidir o que mandar pro cliente.",
+      "Pular a consciência do problema: abrir o chat sem saber o que é um bom resultado e esperar que a IA descubra por você.",
+      "Achar que delegar é automatizar 100%. O objetivo é a melhor divisão de trabalho, não tirar você da jogada.",
+      "Usar sempre o chat genérico pra tudo, ignorando que Projects, Skills, Artifacts e API existem justamente pra tarefas diferentes.",
+      "Não revisar o que sai porque 'a IA é boa'. Domínio do assunto é seu — sem ele você nem percebe quando a resposta está convincente e errada."
+    ],
+    "exemplo": {
+      "contexto": "Você precisa preparar uma proposta comercial pra um cliente novo. Em vez de jogar 'escreve uma proposta' no chat e aceitar o que vier, você aplica delegação de verdade.",
+      "explicacao": "Primeiro a consciência do problema: o resultado bom é uma proposta de 2 páginas, tom direto, com escopo claro e preço fechado. Depois a distribuição: o diagnóstico do cliente e o preço são SEUS (julgamento e responsabilidade); a estrutura e o primeiro rascunho são colaborativos com o Claude; a revisão de português e a formatação podem rodar quase sozinhas. A consciência da plataforma define onde: como você faz proposta toda semana, vira um Project com seu tom e seus modelos salvos, não um chat solto que esquece tudo amanhã.",
+      "comandos": [
+        "Claude, vou montar uma proposta pra um cliente de [setor]. Me ajuda a separar o que eu decido, o que fazemos juntos e o que você toca sozinho?",
+        "O resultado bom é: 2 páginas, tom direto anti-hype, escopo em bullets, preço no fim. Combinado?",
+        "Eu te passo o diagnóstico e o preço. Você estrutura o rascunho a partir disso e eu reviso antes de qualquer coisa sair."
+      ]
+    },
+    "passos": [
+      "Defina o resultado bom em uma frase antes de tocar na IA (consciência do problema).",
+      "Quebre a tarefa nos pedaços reais que ela exige.",
+      "Marque cada pedaço: seu, colaborativo ou da IA — usando o teste do 'eu assino embaixo?'.",
+      "Escolha a ferramenta certa pra cada pedaço: chat, Project, Skill, Artifact, API/MCP (consciência da plataforma).",
+      "Defina o modo de cada pedaço: automação, aumento ou agência, conforme o risco.",
+      "Rode, revise o que importa e ajuste o recorte na próxima rodada."
+    ],
+    "takeaway": "Delegar bem não é mandar tudo pra IA — é saber exatamente o que segurar. Clareza do resultado e domínio do assunto continuam sendo seus; sem isso, você terceiriza o volante junto com a tarefa."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "07-project-planning-and-delegation",
+    "titulo": "Planejamento de Projeto e Delegação: Como Quebrar um Projeto Real com a IA",
+    "resumo": "Pegar um projeto de verdade, com começo, meio e fim, e usar o Claude pra mapear as tarefas e decidir quem faz o quê. Sai do exemplo de brincadeira e entra na operação.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Delegação aplicada a projeto",
+        "definicao": "Tirar o conceito de Delegação do abstrato e usar num projeto real e multi-etapa. Em vez de delegar uma tarefa solta, você olha o projeto inteiro e decide, tarefa por tarefa, o que vai pra você, o que vai pra IA e o que é colaboração."
+      },
+      {
+        "termo": "Visão do resultado",
+        "definicao": "Antes de quebrar em tarefas, você precisa saber o que é 'pronto e bom'. Definir como é o sucesso do projeto e por que ele importa pra você. Sem isso, o Claude otimiza pro alvo errado e você só descobre no fim."
+      },
+      {
+        "termo": "Task breakdown (decomposição)",
+        "definicao": "Quebrar o projeto nas tarefas principais que precisam acontecer pra ele existir. É o passo que transforma 'quero fazer X' em uma lista concreta de coisas a executar — e é aqui que o Claude ajuda muito, porque ele enxerga tarefas que você esquece."
+      },
+      {
+        "termo": "Análise de delegação por tarefa",
+        "definicao": "Para cada tarefa, perguntar: que skill/conhecimento isso exige? Onde o humano é insubstituível (julgamento, gosto, contexto, responsabilidade)? Onde a IA acelera (volume, rascunho, pesquisa, estrutura)? Onde colaborar rende mais? É decisão consciente, não default."
+      },
+      {
+        "termo": "Plano vivo",
+        "definicao": "O plano de projeto não é um documento morto. Você salva ele porque vai voltar nele nas próximas aulas pra praticar Description, Discernment e Diligence. O plano é a espinha dorsal que conecta as 4 competências num caso real."
+      }
+    ],
+    "passos": [
+      "Escolha UM projeto de verdade — substancial o bastante pra ter tarefas variadas (pesquisa, escrita, estrutura, revisão), mas que caiba em mais ou menos 1 hora de trabalho. Tem que ser algo que você realmente queira ver pronto.",
+      "Abra uma conversa com o Claude e descreva o projeto. Em vez de pedir 'faz pra mim', peça pra ele te entrevistar: 'me faz perguntas até a gente ter uma visão clara do resultado'. Deixe ele puxar o que você não pensou.",
+      "Feche a visão antes de executar: o que é sucesso aqui? O que torna esse projeto valioso pra você especificamente? Anote isso — é o seu critério de aceite.",
+      "Liste com o Claude as tarefas principais do projeto. Não aceite a primeira lista; cobre tarefas escondidas (revisão, formatação, checagem de fonte, distribuição).",
+      "Tarefa por tarefa, faça a análise de delegação: humano, IA ou colaboração? Discuta de verdade, questione o que ele sugerir. Onde ele propõe IA, pergunte 'por quê' e 'qual o risco'.",
+      "Monte e SALVE o plano: tarefas + decisão de delegação de cada uma. Esse arquivo é o que você vai reusar nas aulas de Description, Discernment e Diligence."
+    ],
+    "exemplo": {
+      "contexto": "Eu precisava montar uma proposta comercial de 3 meses pra um cliente de eventos. Projeto real, prazo real. Em vez de pedir pro Claude 'escrever a proposta', tratei como projeto e deleguei por partes.",
+      "comandos": [
+        "Você é meu parceiro de planejamento. Vou montar uma proposta comercial de 3 meses. Antes de escrever qualquer coisa, me faça as perguntas que você precisa pra entender o resultado ideal.",
+        "Agora liste as tarefas principais pra essa proposta sair pronta — incluindo as chatas que eu costumo esquecer.",
+        "Pra cada tarefa, me diga onde EU sou insubstituível e onde você acelera. E discorde de mim se eu delegar errado.",
+        "Fecha um plano em tabela: tarefa | quem faz | por quê. Vou salvar isso."
+      ],
+      "explicacao": "O pulo do gato foi inverter a ordem: primeiro alinhar a visão e quebrar em tarefas, depois decidir delegação, e SÓ ENTÃO executar. A pesquisa de mercado e o rascunho dos textos foram pro Claude. Preço, escopo do que eu consigo entregar e o tom da relação com aquele cliente ficaram comigo — porque envolvem julgamento e responsabilidade que a IA não tem. A proposta saiu em uma sessão, e o plano virou checklist pro resto do trabalho."
+    },
+    "dicas": [
+      "Não pule a etapa da visão. 80% dos retrabalhos com IA vêm de você não ter definido 'pronto e bom' antes de mandar executar.",
+      "Force o Claude a te entrevistar em vez de só responder. Uma boa pergunta dele economiza três rodadas de correção sua.",
+      "Na decisão de delegação, o default não é 'IA faz tudo'. O default é decisão consciente. Pergunte sempre onde VOCÊ é insubstituível.",
+      "Salve o plano num lugar fixo (Projeto no Claude, um doc, o que for). Você vai voltar nele — ele é o fio condutor das próximas três competências.",
+      "Escolha um projeto que te interessa de verdade. Projeto chato você abandona na metade e perde a prática que a aula foi desenhada pra dar."
+    ],
+    "erros_comuns": [
+      "Mandar o Claude executar antes de fechar a visão do resultado — aí ele entrega algo polido, mas pro alvo errado.",
+      "Aceitar a primeira lista de tarefas como completa. Quase sempre falta revisão, checagem de fonte e distribuição.",
+      "Delegar tudo pra IA no automático, sem perguntar onde o seu julgamento, contexto ou responsabilidade são insubstituíveis.",
+      "Escolher um projeto grande demais (não cabe em 1 hora) ou pequeno demais (não tem tarefas variadas o bastante pra praticar).",
+      "Tratar o plano como descartável e não salvar — perdendo o gancho com as aulas de Description, Discernment e Diligence."
+    ],
+    "takeaway": "Projeto bom com IA não começa pedindo execução, começa pela visão e pela decisão consciente de quem faz o quê. Quebre o projeto em tarefas, decida humano/IA/colaboração tarefa por tarefa, e salve o plano — ele é a espinha que conecta as quatro competências num caso real."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "08-a-closer-look-at-description",
+    "titulo": "Description: como falar com a IA pra ela acertar de primeira",
+    "resumo": "Description é a competência de comunicar com clareza o que você quer, como quer que seja feito e como a IA deve se comportar. Sem isso, você fica refém da sorte do palpite do modelo.",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Description (a 2ª das 4D)",
+        "definicao": "A competência de articular sua intenção pra IA. Não é só escrever um prompt: é montar o briefing que transforma um pedido vago num resultado utilizável. As outras três são Delegation, Discernment e Diligence."
+      },
+      {
+        "termo": "Product Description",
+        "definicao": "Descrever o RESULTADO que você quer: formato (e-mail, tabela, código, post), tamanho, público-alvo, tom e nível de profundidade. É o 'o quê'. Ex: 'um e-mail de 4 linhas pra um cliente leigo, tom direto'."
+      },
+      {
+        "termo": "Process Description",
+        "definicao": "Descrever COMO você quer que a IA chegue lá: os passos, a ordem, o método. Ex: 'antes de escrever, me liste 3 ângulos e espera eu escolher'. Controlar o processo costuma valer mais que descrever só o destino."
+      },
+      {
+        "termo": "Performance Description",
+        "definicao": "Descrever o COMPORTAMENTO da IA durante a conversa: conciso ou detalhado, questionador ou executor, formal ou casual. Ex: 'me desafie se o plano tiver furo, não concorde só pra agradar'."
+      },
+      {
+        "termo": "Parceiro interativo, não banco de dados",
+        "definicao": "A IA não consulta uma resposta pronta nem adivinha contexto. Ela infere a partir do que você deu. Tudo que você não disser, ela preenche com um palpite estatístico — e o palpite genérico é o default."
+      }
+    ],
+    "dicas": [
+      "Especifique o público e o formato logo na primeira frase. 'Explica X' rende genérico; 'explica X pra um diretor financeiro que odeia jargão, em 5 bullets' rende usável.",
+      "Quando o resultado importa, controle o processo: peça pra a IA planejar e parar pra sua aprovação antes de produzir. Isso evita 800 linhas na direção errada.",
+      "Calibre o comportamento de propósito. Em Projects do Claude, jogue suas preferências de Performance nas instruções do projeto — assim você não repete 'seja conciso' toda vez.",
+      "Trate prompt ruim como rascunho, não como veredito. Se a resposta veio fraca, 90% das vezes o problema foi descrição incompleta sua, não burrice do modelo. Refine e mande de novo."
+    ],
+    "exemplo": {
+      "contexto": "Você quer que o Claude escreva uma mensagem de cobrança pra um cliente atrasado. Compare o pedido vago com o pedido descrito nas três dimensões.",
+      "comandos": [
+        "RUIM: 'escreve uma cobrança pro cliente que tá atrasado'",
+        "BOM (Product): 'escreve um WhatsApp curto, máximo 3 linhas, tom firme mas cordial, pra um cliente PJ que atrasou 8 dias a fatura'",
+        "BOM (Process): 'antes de escrever, me devolva 2 versões com graus de firmeza diferentes pra eu escolher'",
+        "BOM (Performance): 'se o tom soar agressivo demais pro relacionamento, me avise em vez de só obedecer'"
+      ],
+      "explicacao": "O pedido ruim força o Claude a chutar formato, tom, tamanho e contexto — e o chute é sempre o mais genérico. As três versões boas removem cada incerteza: o quê (Product), como (Process) e o comportamento esperado (Performance). O resultado sai pronto pra usar em vez de pronto pra retrabalhar."
+    },
+    "passos": [
+      "Antes de mandar o prompt, pergunte: eu disse QUAL é o resultado (formato, público, tom, tamanho)?",
+      "Pergunte: eu disse COMO quero que seja feito, ou deixei o método no automático?",
+      "Pergunte: eu disse COMO a IA deve se comportar — executar direto ou me questionar?",
+      "Mande o pedido. Se a resposta não bateu, identifique qual das três dimensões você omitiu e adicione só ela.",
+      "Quando o padrão se repete (mesmo tom, mesmo público), fixe isso nas instruções de um Project pra não redigitar."
+    ],
+    "erros_comuns": [
+      "Achar que a IA 'entendeu o contexto' que só existe na sua cabeça. Ela não conhece seu cliente, seu projeto nem seu padrão — só o que está no prompt e no Project.",
+      "Descrever só o resultado e ignorar o processo. Pra tarefas longas ou complexas, pular o 'como' é onde a IA mais descarrilha.",
+      "Esquecer a Performance e depois reclamar que a IA é bajuladora ou prolixa. Se você não pediu pra ela discordar ou ser concisa, o default vence.",
+      "Culpar o modelo por uma resposta ruim que veio de um prompt de uma linha. Antes de trocar de ferramenta, conserte a descrição."
+    ],
+    "takeaway": "A qualidade da resposta da IA é quase sempre o espelho da qualidade da sua descrição. Diga o quê (Product), como (Process) e de que jeito a IA deve agir (Performance) — e pare de pagar pedágio em retrabalho."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "09-effective-prompting-techniques",
+    "titulo": "Técnicas de prompting que funcionam de verdade",
+    "resumo": "Prompt não é mágica nem palavra secreta: é instrução clara. Aqui estão seis técnicas que eu uso todo dia pra tirar trabalho de verdade do Claude, sem decoreba.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Prompt engineering",
+        "definicao": "Desenhar a instrução que você dá pra IA. Tira o mistério: é redação técnica aplicada. Você junta princípios de comunicação humana (ser claro, dar contexto) com algumas particularidades de como o modelo processa texto."
+      },
+      {
+        "termo": "Contexto",
+        "definicao": "O 'porquê' e o 'pra quê' por trás do pedido. Quem vai ler, qual o objetivo, o que já existe. O modelo não adivinha o que está na sua cabeça — ele só tem o que você escreveu na tela."
+      },
+      {
+        "termo": "Few-shot (mostrar exemplos)",
+        "definicao": "Colar um ou dois exemplos do resultado que você quer. Vale mais que três parágrafos descrevendo o formato. O modelo copia o padrão do exemplo melhor do que segue uma descrição abstrata."
+      },
+      {
+        "termo": "Constraints (restrições)",
+        "definicao": "Os limites do output: tamanho, formato, o que incluir, o que NÃO fazer. 'Em até 5 bullets', 'sem jargão', 'só JSON'. Restrição boa é o que separa um rascunho genérico de algo usável."
+      },
+      {
+        "termo": "Pensar antes de responder",
+        "definicao": "Pedir pro modelo raciocinar passo a passo antes de cravar a resposta. Em tarefa de lógica, conta ou decisão, dar esse espaço melhora a qualidade — é a diferença entre chutar e calcular."
+      },
+      {
+        "termo": "Papel e tom",
+        "definicao": "Dizer de que ângulo o modelo deve responder e como deve soar. 'Aja como revisor cético', 'tom direto, sem hype'. Molda a resposta sem você ter que corrigir depois."
+      }
+    ],
+    "dicas": [
+      "Comece simples e itere. Mande o pedido cru, veja o que volta, e ajuste só o que ficou ruim. Prompt perfeito de primeira é exceção, não regra.",
+      "A arma secreta: peça pro próprio Claude melhorar seu prompt. 'Esse prompt tá ambíguo em algum ponto? O que você precisaria saber pra fazer melhor?' Ele aponta os buracos.",
+      "Quando a resposta vem errada, o problema quase sempre é instrução faltando, não o modelo. Pergunte: o que eu sei que ele não sabe? Aí coloque isso no prompt.",
+      "Separe instrução de conteúdo. Use marcadores claros (tags, títulos, ou só 'Texto a revisar:' antes do bloco) pro modelo saber o que é ordem e o que é material.",
+      "Em Projects, jogue o contexto recorrente (tom da marca, regras, glossário) nas instruções do projeto. Aí cada prompt novo fica curto e você não repete tudo toda vez."
+    ],
+    "exemplo": {
+      "contexto": "Você quer transformar uma anotação solta de reunião num resumo que um cliente vai ler. Compare o prompt fraco com o prompt com as técnicas aplicadas.",
+      "comandos": [
+        "Fraco: 'resume essa reunião' + cola o texto",
+        "Forte: 'Você é meu assistente de operação. Resuma a reunião abaixo PARA o cliente ler (tom direto, sem jargão técnico). Formato: 3 bullets de decisões + 1 bloco \"Próximos passos\" com responsável e prazo. Se algo ficou em aberto, marque como [pendente]. Reunião: <cola o texto>'"
+      ],
+      "explicacao": "O segundo prompt aplica quatro técnicas de uma vez: papel ('assistente de operação'), contexto ('cliente vai ler'), tom ('direto, sem jargão') e constraints (formato em bullets, bloco de próximos passos, marcar pendências). O modelo não precisa adivinhar nada — e o output já sai pronto pra colar no e-mail."
+    },
+    "passos": [
+      "Escreva o pedido com contexto: o quê, pra quê e pra quem.",
+      "Defina as constraints: formato, tamanho, o que incluir e o que evitar.",
+      "Se o formato for específico, cole um exemplo do resultado desejado.",
+      "Se for tarefa de raciocínio, peça pro modelo pensar passo a passo antes de responder.",
+      "Rode, leia o resultado e ajuste só o ponto que ficou fora — não reescreva tudo.",
+      "Travou? Peça pro próprio Claude apontar o que está ambíguo no seu prompt."
+    ],
+    "erros_comuns": [
+      "Achar que existe 'a palavra mágica'. Não existe. O que existe é instrução clara e contexto suficiente.",
+      "Pedir genérico ('escreve um texto bom') e reclamar de resultado genérico. Output ruim costuma ser reflexo de prompt vago.",
+      "Empilhar dez restrições conflitantes de uma vez. Comece com as 2-3 que importam e adicione o resto na iteração.",
+      "Misturar instrução e conteúdo no mesmo bloco sem separar, fazendo o modelo tratar parte do seu material como ordem.",
+      "Desistir na primeira resposta torta em vez de ajustar. Prompting é conversa, não comando único."
+    ],
+    "takeaway": "Prompt bom é instrução clara, não feitiço. Dê contexto, mostre o formato, ponha limites — e itere. Quando empacar, deixe o próprio Claude te ajudar a consertar o prompt."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "10-a-closer-look-at-discernment",
+    "titulo": "Discernimento: parar de confiar cego no que a IA te entrega",
+    "resumo": "Discernimento é a sua capacidade de julgar criticamente o que a IA produz, como ela chegou ali e como ela se comportou durante a conversa. É o seu papel de revisor, não de carimbador.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Discernimento (Discernment)",
+        "definicao": "A competência do framework 4D que cuida do julgamento humano em cima da IA. Enquanto a Descrição é você falando bem pra IA, o Discernimento é você avaliando bem o que volta. Sem ele, você vira um carimbo de borracha que aprova tudo que o modelo cospe."
+      },
+      {
+        "termo": "Discernimento de Produto",
+        "definicao": "Avaliar a saída em si: está correto? Faz sentido? Responde o que eu pedi? É aqui que você caça erro de fato, alucinação, número inventado, código que não roda, ou um texto bonito que não diz nada de útil pro seu caso."
+      },
+      {
+        "termo": "Discernimento de Processo",
+        "definicao": "Avaliar o caminho que a IA fez pra chegar na resposta. O raciocínio fecha? Ela pulou uma etapa? Partiu de uma premissa errada? Um resultado final pode estar certo por sorte e o raciocínio por trás estar furado — e isso te queima na próxima."
+      },
+      {
+        "termo": "Discernimento de Performance",
+        "definicao": "Avaliar como a IA se comportou na colaboração: prestou atenção no que você pediu, respeitou suas correções, manteve o tom e o nível certos? Se você corrige três vezes e ela ignora, isso é um sinal de performance ruim que muda como você vai trabalhar com ela."
+      },
+      {
+        "termo": "Loop Descrição ↔ Discernimento",
+        "definicao": "As duas competências andam juntas em ciclo: você descreve, a IA entrega, você discerne o que falhou, e devolve uma descrição melhor. Cada volta do loop aperta o resultado. Discernimento sem feedback é só reclamação."
+      },
+      {
+        "termo": "Vantagem de domínio",
+        "definicao": "Seu conhecimento da área é o que te dá poder de discernir. Num assunto que você domina, você fareja o erro na hora. Num assunto que você não conhece, você não tem como saber se a resposta linda está certa ou errada — e é exatamente aí que mais gente leva gato por lebre."
+      }
+    ],
+    "dicas": [
+      "Peça duas ou três versões da mesma coisa e compare. É muito mais fácil discernir comparando alternativas do que julgando uma resposta isolada.",
+      "Quando o assunto for fora do seu domínio, force a IA a mostrar o raciocínio e as fontes, e desconfie ativamente. Resposta confiante não é resposta correta.",
+      "Use seu discernimento como combustível de feedback, não como julgamento mudo: aponte o que está errado e por quê, e mande a IA refazer. É o loop que melhora o resultado.",
+      "Crie o hábito de checar as três camadas — produto, processo e performance — em qualquer entrega que vá pra produção ou pro cliente. As três pegam erros diferentes.",
+      "Calibre o nível de escrutínio pelo risco da tarefa. Rascunho interno tolera erro; contrato, número financeiro e código em produção exigem revisão pesada."
+    ],
+    "erros_comuns": [
+      "Aceitar a primeira resposta porque ela 'parece' bem escrita. Texto fluente engana — fluência não é correção.",
+      "Só olhar o resultado final e nunca o raciocínio. A resposta pode estar certa por acaso e te queimar quando o mesmo método for reaproveitado.",
+      "Discernir em áreas que você não domina sem nenhuma checagem externa, achando que vai perceber o erro sozinho — você não vai.",
+      "Reclamar mentalmente do output e não devolver feedback concreto pra IA. Sem fechar o loop, o próximo resultado vem com o mesmo defeito."
+    ],
+    "exemplo": {
+      "contexto": "Pedi pro Claude um cálculo de payback de uma campanha de tráfego pra um cliente da agência. Resposta veio limpa, formatada, com tabela bonita e uma conclusão segura: payback em 2,3 meses.",
+      "explicacao": "Discernimento de Produto: a tabela estava bonita, mas o número de ROAS não batia com o que eu sabia da conta — sinal de alerta. Discernimento de Processo: pedi pra mostrar a conta passo a passo e achei o furo — ele somou o investimento de mídia mas esqueceu a fee da agência no custo total, então o payback real era maior. Discernimento de Performance: na hora que apontei a fee faltando, ele recalculou tudo certo e manteve a fee nas iterações seguintes — boa performance. Se eu não dominasse o tema, teria mandado o número errado pro cliente sorrindo.",
+      "comandos": [
+        "Me dê 3 versões dessa análise de payback com premissas diferentes e diga qual é a mais conservadora",
+        "Mostre a conta passo a passo, linha por linha, antes da conclusão",
+        "Você esqueceu a fee de agência de 15% no custo total. Refaça incluindo isso e me diga o novo payback"
+      ]
+    },
+    "passos": [
+      "Olhe o produto: a resposta está correta, completa e responde de fato o que você pediu?",
+      "Olhe o processo: peça o raciocínio passo a passo e veja se o caminho fecha ou tem premissa errada.",
+      "Olhe a performance: a IA respeitou suas instruções, correções, tom e nível ao longo da conversa?",
+      "Calibre o escrutínio pelo risco: quanto mais a entrega importa, mais fundo você cava.",
+      "Feche o loop: transforme o que você achou de errado em feedback específico e peça pra refazer."
+    ],
+    "takeaway": "A IA não te tira do volante — ela te promove a revisor. Discernimento é checar três camadas (o que ela entregou, como chegou ali e como se comportou) e usar isso pra fechar o loop com a Descrição. Sem julgamento humano em cima, você não tem operação, tem aposta."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "11-the-description-discernment-loop",
+    "titulo": "O loop Descrição-Discernimento: como sair do \"prompt e reza\" e entrar em colaboração de verdade",
+    "resumo": "Descrição e Discernimento não são duas etapas separadas: são um ciclo que gira. Você descreve, avalia o que voltou, ajusta a descrição e repete até a coisa ficar boa de verdade.",
+    "duracao_leitura": "8-10 min",
+    "conceitos": [
+      {
+        "termo": "Loop Descrição-Discernimento",
+        "definicao": "O ciclo iterativo do dia a dia: você descreve o que quer, lê criticamente o que o Claude entregou (discernimento), ajusta a descrição com base no que faltou, e repete. É aqui que o trabalho real acontece — não no primeiro prompt."
+      },
+      {
+        "termo": "Descrição (as 3 camadas)",
+        "definicao": "Comunicar o que você quer em três frentes: Produto (o resultado: formato, tom, tamanho), Processo (como o Claude deve pensar/atacar a tarefa) e Performance (como ele deve se comportar com você: conciso, crítico, parceiro de ideias)."
+      },
+      {
+        "termo": "Discernimento (as 3 camadas)",
+        "definicao": "Avaliar a entrega nas mesmas três frentes: o Produto serve? O Processo que ele usou foi sólido? A Performance (o jeito de interagir) está te ajudando ou atrapalhando?"
+      },
+      {
+        "termo": "Refinar",
+        "definicao": "O elo entre discernir e descrever de novo. Em vez de jogar fora e recomeçar do zero, você diz o que funcionou, o que não funcionou e corrige a mira da descrição."
+      },
+      {
+        "termo": "Integração de julgamento humano",
+        "definicao": "A parte que não terceiriza: sua expertise, seu contexto, sua decisão final sobre o que manter, cortar ou reescrever. O output é seu, a responsabilidade também."
+      },
+      {
+        "termo": "Convergência",
+        "definicao": "O loop não é infinito. Ele tem que convergir: cada volta deve aproximar do resultado. Se três voltas não melhoraram nada, o problema é a descrição (ou a tarefa), não o modelo."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Preciso de um e-mail de cobrança amigável pra um cliente que atrasou o pagamento da mensalidade, sem soar agressivo nem passar pano.",
+      "explicacao": "Repare que o primeiro prompt nunca é o último. O valor está nas voltas: cada feedback meu corrige uma camada diferente (Produto = tom, Processo = estrutura, Performance = o Claude me desafiar em vez de obedecer cego). Na quarta volta eu paro porque convergiu — e a versão final ainda leva um ajuste meu de contexto que o modelo não tinha como saber.",
+      "comandos": [
+        "Volta 1 (Produto): 'Escreve um e-mail cobrando a mensalidade atrasada do cliente X. Tom cordial mas firme, no máximo 6 linhas, PT-BR.'",
+        "Discernimento: voltou educado demais, parece que estou pedindo desculpa por cobrar. Faltou clareza sobre o prazo.",
+        "Volta 2 (refino de Produto): 'Bom o tom, mas tá tímido. Deixa claro o valor (R$2.000), a data que venceu e dá um prazo concreto de 3 dias úteis. Mantém cordial, corta o pedido de desculpa.'",
+        "Volta 3 (Processo + Performance): 'Antes de reescrever, me lista 2 estruturas possíveis (direta vs. contextualizada) e me diz qual converte mais nesse caso. E me questiona se algo na minha abordagem soa contraproducente — não concorda só pra concordar.'",
+        "Volta 4 (Integração): pego a estrutura direta que ele recomendou, ajusto à mão a primeira linha citando que já temos histórico bom de pagamento (contexto que só eu tinha) e fecho."
+      ]
+    },
+    "passos": [
+      "Faça a primeira descrição cobrindo o que dá: Produto sempre, Processo e Performance quando a tarefa for mais complexa. Não tente acertar tudo de primeira — é loop, não one-shot.",
+      "Leia o resultado com olhar crítico, não de revisor passivo. Pergunte nas 3 camadas: o resultado serve (Produto)? O caminho que ele usou foi bom (Processo)? O jeito dele interagir tá ajudando (Performance)?",
+      "Diagnostique o que falhou antes de reagir. Output ruim quase sempre é descrição incompleta — identifique QUAL camada falhou em vez de só dizer 'tá ruim, faz de novo'.",
+      "Refine corrigindo a mira: diga o que funcionou (pra ele manter), o que não funcionou e o ajuste específico. Feedback vago gera volta vazia.",
+      "Repita até convergir. Se duas ou três voltas não aproximaram, pare e reescreva a descrição do zero ou reconsidere se a tarefa foi bem delegada.",
+      "Integre seu julgamento no final. Adicione o contexto e a expertise que o modelo não tem, decida o que entra, e assuma o resultado como seu."
+    ],
+    "erros_comuns": [
+      "Tratar o primeiro prompt como definitivo e desistir quando vem ruim — o primeiro output é matéria-prima do loop, não o produto final.",
+      "Recomeçar do zero a cada falha em vez de refinar. Você perde o que já estava bom e o Claude perde o contexto da conversa.",
+      "Dar feedback genérico tipo 'não gostei, melhora'. Sem dizer QUAL camada falhou, a próxima volta é loteria.",
+      "Discernir só o Produto e ignorar Processo e Performance. Às vezes o resultado tá ok mas o jeito de trabalhar (raso, bajulador, prolixo) é o que precisa ser corrigido.",
+      "Loop infinito: ficar girando dez voltas em algo que não converge. Se não melhora, o problema é a descrição ou a delegação, não a insistência.",
+      "Terceirizar o julgamento final. Aceitar o output sem injetar seu contexto e sem se responsabilizar pelo que sai com seu nome."
+    ],
+    "dicas": [
+      "Configure a Performance logo no começo da conversa: 'me desafie, não concorde só pra agradar' muda completamente a qualidade do loop. Modelo bajulador esconde problemas.",
+      "Use Projects do Claude pra fixar contexto recorrente (tom da marca, formato padrão) — assim você não reescreve a Descrição inteira a cada conversa nova.",
+      "Quando o resultado não converge em 2-3 voltas, troque de estratégia: peça pro Claude explicar o raciocínio dele primeiro (Processo) antes de produzir. Muitas vezes o erro tá no caminho, não na saída.",
+      "Trate cada feedback como uma descrição mais afiada, não como reclamação. 'Mais curto e corta o jargão' é melhor que 'tá ruim'.",
+      "Guarde a volta que funcionou: quando uma descrição converge bem, ela vira template pra próxima vez."
+    ],
+    "takeaway": "Resultado bom com IA não vem do prompt perfeito — vem de girar bem o loop: descrever, discernir nas três camadas, refinar a mira e integrar seu julgamento. Quem domina o loop colabora; quem só prompta, reza."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "12-a-closer-look-at-diligence",
+    "titulo": "Diligence: quem assina embaixo é você",
+    "resumo": "Das quatro competências do framework, Diligence é a única que não fala de eficiência e sim de responsabilidade. É o que separa usar IA de profissional de despejar texto de robô e fingir que é seu.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Diligence",
+        "definicao": "A quarta competência do framework 4D. Enquanto Delegation, Description e Discernment cuidam de fazer a IA produzir bem, Diligence cuida de você produzir com responsabilidade: escolha de ferramenta, honestidade sobre o uso e dono do resultado."
+      },
+      {
+        "termo": "Creation Diligence",
+        "definicao": "Cuidado na hora de escolher e operar a IA. Qual modelo, com que dados, sob quais termos. Jogar dado de cliente num chatbot aleatório sem ler a política de retenção é falha de Creation Diligence."
+      },
+      {
+        "termo": "Transparency Diligence",
+        "definicao": "Ser honesto sobre o papel da IA no trabalho, com quem precisa saber. Não é confissão pública obrigatória em tudo; é calibrar a divulgação ao contexto e à expectativa de quem recebe."
+      },
+      {
+        "termo": "Deployment Diligence",
+        "definicao": "Assumir a responsabilidade pelo que você entrega. Verificar, checar fontes, testar o código, conferir os números. Se saiu com seu nome, o erro é seu, não da máquina."
+      },
+      {
+        "termo": "Declaração de diligência",
+        "definicao": "Um parágrafo curto que reconhece como a IA participou do trabalho e afirma que você revisou e responde pelo resultado final. Útil em entregas acadêmicas, relatórios e materiais para cliente."
+      }
+    ],
+    "dicas": [
+      "Antes de colar dado sensível de cliente num chat, pergunte: esse provedor treina em cima do que eu mando? Tem retenção? Se não sei, não mando.",
+      "Calibre a transparência ao público. Num rascunho interno ninguém liga. Num parecer técnico, num TCC ou numa entrega de cliente, diga onde a IA entrou.",
+      "Nunca entregue número, citação ou trecho de código que a IA gerou sem você ter conferido. Modelo erra com confiança, e a confiança não vira verdade.",
+      "Trate a IA como estagiário brilhante e rápido, não como autoridade. Você é o sênior que assina o laudo.",
+      "Monte sua própria régua de quando divulgar e quando verificar, antes de precisar dela no aperto."
+    ],
+    "erros_comuns": [
+      "Achar que 'a IA escreveu' tira a sua responsabilidade. Quem aperta enviar é o dono do erro.",
+      "Despejar dado confidencial em qualquer ferramenta grátis sem ler os termos de uso e retenção.",
+      "Confundir transparência com obrigação de declarar tudo sempre. O ponto é honestidade com quem tem expectativa legítima de saber, não cerimônia.",
+      "Entregar saída da IA sem verificar, confiando que se soou bem está certo.",
+      "Tratar Diligence como detalhe ético opcional, quando na prática é o que protege sua reputação e a do cliente."
+    ],
+    "exemplo": {
+      "contexto": "Relatório de performance de campanha para um cliente, montado com ajuda do Claude.",
+      "explicacao": "Usei o Claude pra estruturar o relatório e redigir as análises a partir dos dados de Meta Ads que eu colei. Antes de mandar, conferi cada número contra o gerenciador, reescrevi as conclusões que estavam genéricas demais e adicionei uma nota de diligência no rodapé. O cliente recebe um documento que reflete o meu julgamento, não a opinião de um modelo. Se um número estiver errado, o erro é meu, não do Claude.",
+      "comandos": [
+        "Nota de rodapé: 'Este relatório foi produzido com apoio do Claude (Anthropic) na estruturação e redação das análises. Todos os dados foram conferidos por mim contra as fontes originais e respondo integralmente pelo conteúdo e pelas recomendações.'"
+      ]
+    },
+    "passos": [
+      "Creation: escolha a ferramenta certa e cuide do que você compartilha com ela (dados, contexto, termos de uso).",
+      "Transparency: avalie quem é o público e o que ele espera saber sobre o uso de IA, e seja honesto na medida do contexto.",
+      "Deployment: verifique tudo que sai com seu nome, conferindo fatos, fontes, números e código.",
+      "Documente quando fizer sentido: escreva uma declaração de diligência curta para entregas formais.",
+      "Crie suas próprias regras de divulgação e verificação para não improvisar na pressão."
+    ],
+    "takeaway": "As outras três competências fazem a IA produzir melhor. Diligence faz você produzir com responsabilidade. No fim, quem assina embaixo é você, e nenhum modelo divide essa conta."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "13-conclusion",
+    "titulo": "Conclusão: os 4D viram rotina, não diploma",
+    "resumo": "Fechamento do curso: os quatro D (Delegação, Descrição, Discernimento, Diligência) não são teoria pra decorar, são hábitos operacionais que você instala no dia a dia trabalhando com Claude. Fluência se constrói repetindo, não assistindo aula.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Os 4D como ciclo, não checklist",
+        "definicao": "Delegação (o que vale fazer com IA vs. sozinho), Descrição (comunicar a tarefa com clareza), Discernimento (avaliar o que voltou) e Diligência (responsabilidade pelo resultado). Na prática real eles giram em loop a cada interação, não numa ordem rígida. Você delega, descreve, olha o output, corrige a descrição, olha de novo. Quem trata como lista de etapas perde o ponto."
+      },
+      {
+        "termo": "Fluência é resultado de reps",
+        "definicao": "Você não sai fluente do curso, do mesmo jeito que ninguém sai falando inglês depois de um livro de gramática. Fluência aparece depois de N conversas reais com o Claude resolvendo problema de verdade — escrevendo um Project, montando uma Skill, debugando um output ruim. O curso te deu o mapa; a estrada é uso."
+      },
+      {
+        "termo": "Os três modos de trabalho continuam valendo",
+        "definicao": "Automação (o Claude executa uma tarefa fechada), Augmentação (vocês pensam juntos, ida e volta) e Agência (o Claude opera com mais autonomia, usando ferramentas via tool use / MCP, encadeando passos). Os 4D se aplicam aos três — só muda o peso. Em Agência, Discernimento e Diligência pesam mais porque você revisa menos de perto."
+      },
+      {
+        "termo": "IA é alavanca, não milagre",
+        "definicao": "Claude é poderoso e erra. Inventa referência, confia demais no que você afirmou, perde contexto longo. O resultado é tão bom quanto o seu enquadramento. Quem terceiriza o julgamento entrega lixo com confiança; quem mantém o julgamento no comando entrega trabalho melhor e mais rápido."
+      },
+      {
+        "termo": "Sua política pessoal de IA",
+        "definicao": "Um documento curto e seu: quando você usa IA e quando não, o que nunca cola num prompt (dado sensível de cliente, credencial, contrato sob sigilo), como você revisa antes de entregar, e como você declara o uso de IA. Não é burocracia — é o que te protege quando a coisa escala."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Como eu uso os 4D girando num caso real: gerar o relatório mensal de um cliente de tráfego dentro de um Project do Claude.",
+      "explicacao": "Delegação: a estrutura e a redação do relatório vão pro Claude; a leitura estratégica do que os números significam fica comigo. Descrição: subo os CSVs e digo o formato, o tom anti-hype e o que NÃO inventar. Discernimento: leio o rascunho caçando número que não bate com a fonte e conclusão chutada. Diligência: corrijo, assino e declaro pro cliente que o relatório foi montado com IA e revisado por mim. O ciclo não acabou no primeiro output — voltei na Descrição duas vezes até o tom ficar certo. É esse loop que vira automático com a prática.",
+      "comandos": [
+        "Project com instruções fixas: 'tom anti-hype, só números que estão nos CSVs anexados, nunca extrapole'",
+        "Anexar fontes (CSV/print) em vez de digitar os números — reduz alucinação",
+        "Prompt de revisão: 'liste cada afirmação do relatório e aponte de qual linha do CSV ela vem'"
+      ]
+    },
+    "passos": [
+      "Escolha UMA tarefa recorrente sua (relatório, e-mail, código, pesquisa) e rode os 4D nela essa semana, de propósito.",
+      "Monte um Project no Claude pra essa tarefa, com as instruções fixas que você repete sempre — isso transforma Descrição em padrão.",
+      "Crie sua política pessoal de IA num doc de meia página: o que cola, o que nunca cola, como você revisa, como você declara.",
+      "Depois de cada uso, gaste 30 segundos perguntando: onde meu julgamento fez diferença e onde eu quase aceitei lixo? É aí que a fluência cresce.",
+      "Conversa com o próprio Claude sobre como os 4D se aplicam à SUA área — ele é bom thinking partner pra isso."
+    ],
+    "erros_comuns": [
+      "Tratar os 4D como fase de projeto ('agora estou na fase Discernimento') em vez de loop a cada interação.",
+      "Achar que terminou o curso = ficou fluente. Sem reps em problema real, o conteúdo evapora.",
+      "Largar o julgamento quando o output 'parece' bom — texto confiante e bem formatado é exatamente onde o erro passa.",
+      "Pular a Diligência: usar IA em trabalho de cliente sem revisão própria e sem declarar o uso.",
+      "Colar dado sensível (credencial, contrato sob sigilo, PII de cliente) no prompt porque 'é só uma vez'."
+    ],
+    "dicas": [
+      "Instale os 4D numa tarefa real ainda esta semana — fluência é reps em problema de verdade, não aula assistida.",
+      "Use Projects e Skills pra congelar sua Descrição: o que você repete em todo prompt vira instrução fixa e some o retrabalho.",
+      "Mantenha o julgamento no comando sempre: o Claude é alavanca, e alavanca multiplica tanto o acerto quanto a besteira.",
+      "Escreva sua política pessoal de IA em meia página antes de escalar o uso — é barato agora e caro depois.",
+      "Quanto mais autonomia você dá (Agência, tool use, MCP), mais peso colocam Discernimento e Diligência. Autonomia não é desculpa pra parar de revisar."
+    ],
+    "takeaway": "Você terminou o curso com o mapa, não com a fluência. Os 4D só viram competência quando você os roda em loop em trabalho real, mantendo seu julgamento no comando — porque o Claude é a melhor alavanca que você tem, e alavanca multiplica exatamente o que você colocar nela."
+  },
+  {
+    "curso": "ai-fluency-framework-foundations",
+    "slug": "15-additional-activities",
+    "titulo": "Atividades extras: como continuar treinando AI Fluency depois do curso",
+    "resumo": "O curso acaba, mas a fluência só se desenvolve na prática repetida. Aqui ficam exercícios autoguiados pra você treinar as 4 competências (Delegation, Description, Discernment, Diligence) no seu dia a dia real.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Plano pessoal de fluência",
+        "definicao": "Um documento curto onde você mapeia onde está em cada uma das 4 competências, escolhe 1 ou 2 pra evoluir primeiro e define ações concretas com prazo. Não é teoria: é um plano de treino, como o de academia."
+      },
+      {
+        "termo": "Biblioteca de prompts e padrões",
+        "definicao": "Seu acervo pessoal das instruções que funcionam de verdade pras tarefas que você repete. Em vez de reescrever o prompt do zero toda vez, você reusa um template testado com lacunas pra preencher. Vira ativo operacional, não rascunho perdido no histórico."
+      },
+      {
+        "termo": "Treino via jogos",
+        "definicao": "Usar charadas, palavras-cruzadas, vinte perguntas e jogos de associação com o Claude pra praticar Description (instruir com precisão) e Discernment (avaliar o raciocínio). Tarefa fechada e cheia de pegadinha força clareza e avaliação crítica."
+      },
+      {
+        "termo": "Os 3 tipos de Discernment",
+        "definicao": "Product (o resultado faz sentido e bate com o objetivo?), Process (como o modelo chegou lá, considerou alternativas ou travou numa só?) e Performance (como ele comunica e colabora?). Treinar os três junto é o pulo do gato."
+      },
+      {
+        "termo": "Aprendizado autodirigido",
+        "definicao": "A responsabilidade vira sua. Ninguém vai corrigir seu prompt. Você escolhe os exercícios que batem com sua rotina e cria novos a partir das suas tarefas reais de trabalho."
+      }
+    ],
+    "dicas": [
+      "Não tente treinar as 4 competências de uma vez. Escolha 1, force ela por duas semanas, depois troca. Foco gera progresso visível.",
+      "Use suas tarefas reais de trabalho como campo de treino, não exercícios artificiais. Auditar um relatório de cliente ensina mais Discernment que qualquer jogo.",
+      "Toda vez que um prompt funcionar bem, salve na hora numa pasta ou nota. Em 30 dias você tem uma biblioteca que economiza horas.",
+      "Nos jogos, o objetivo NÃO é vencer. É observar COMO o Claude raciocina e praticar guiá-lo sem entregar a resposta.",
+      "Peça pro Claude virar seu parceiro de avaliação: cole interações passadas e pergunte que padrões fizeram elas darem certo ou errado."
+    ],
+    "erros_comuns": [
+      "Achar que terminar o curso é o fim. Sem prática repetida, a fluência evapora em semanas.",
+      "Tratar a biblioteca de prompts como burocracia e nunca atualizá-la. Acervo desatualizado é acervo morto.",
+      "Nos jogos, entregar a resposta pro Claude em vez de guiar o raciocínio dele. Isso pula justo a parte que treina a habilidade.",
+      "Só olhar o resultado final (Product Discernment) e ignorar COMO o modelo chegou nele (Process e Performance)."
+    ],
+    "passos": [
+      "Faça seu autoassessment: nas 4 competências, marque-se como iniciante, em desenvolvimento ou confiante. Seja honesto.",
+      "Escolha 1 ou 2 competências mais valiosas pro seu contexto e foque nelas primeiro.",
+      "Defina ações concretas com prazo: o que você vai praticar, com que frequência, como vai saber que evoluiu.",
+      "Comece a salvar seus melhores prompts numa biblioteca buscável, com exemplos de resultado bom anexados.",
+      "Use jogos com o Claude (charada, vinte perguntas, cruzadinha) como aquecimento de Description e Discernment.",
+      "Revise e atualize tudo a cada mês conforme você descobre o que funciona."
+    ],
+    "exemplo": {
+      "contexto": "Você quer praticar Description e Discernment sem inventar exercício artificial. Use uma charada: tarefa fechada, resposta verificável, cheia de armadilha de interpretação.",
+      "explicacao": "Você dá a charada e NÃO entrega a resposta. Observa o palpite E o raciocínio do Claude. Se ele travar numa interpretação, você guia com pistas curtas (treina Description). Você avalia se o caminho dele faz sentido (treina os 3 Discernments). Depois inverte: peça uma charada pra você e deixe o Claude te guiar. O jogo é só o pretexto; a habilidade transferível é guiar e avaliar raciocínio.",
+      "comandos": [
+        "Vou te dar uma charada. Tente resolver, mas explique seu raciocínio passo a passo ANTES de chutar a resposta.",
+        "Não vou confirmar se acertou. Reavalie: a palavra 'manga' aqui é a fruta ou a parte da camisa?",
+        "Agora inverta: crie uma charada pra mim e me guie com pistas sem entregar a resposta."
+      ]
+    },
+    "takeaway": "Fluência não é o que você sabe ao fim do curso, é o que você pratica depois dele. Monte seu plano, construa sua biblioteca de prompts e transforme tarefa real (e até jogo) em treino contínuo das 4 competências."
+  }
+]

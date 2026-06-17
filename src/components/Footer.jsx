@@ -1,28 +1,27 @@
 import { Link } from 'react-router-dom'
-import { CURSO } from '../data/estrutura.js'
+import { OFICIAL } from '../data/catalogo.js'
 
 export default function Footer() {
-  const o = CURSO.creditoOficial
   return (
     <footer className="border-t border-line mt-24">
       <div className="mx-auto max-w-6xl px-5 py-12 grid gap-8 md:grid-cols-3 text-sm">
         <div>
-          <div className="font-semibold mb-2">Claude Code na Prática</div>
-          <p className="text-fog leading-relaxed">{CURSO.subtitulo}</p>
+          <div className="font-semibold mb-2">Cursos · Pietro Mauro</div>
+          <p className="text-fog leading-relaxed">IA aplicada que opera resultado. Cursos práticos e objetivos sobre Claude, em português.</p>
         </div>
         <div>
           <div className="font-semibold mb-2">Navegar</div>
           <ul className="space-y-1.5 text-fog">
-            <li><Link to="/" className="hover:text-cloud">Início</Link></li>
-            <li><Link to="/aula/boas-vindas" className="hover:text-cloud">Começar do zero</Link></li>
-            <li><Link to="/sobre" className="hover:text-cloud">Sobre o curso</Link></li>
+            <li><Link to="/" className="hover:text-cloud">Todos os cursos</Link></li>
+            <li><Link to="/claude-code" className="hover:text-cloud">Claude Code na Prática</Link></li>
+            <li><Link to="/sobre" className="hover:text-cloud">Sobre</Link></li>
           </ul>
         </div>
         <div>
           <div className="font-semibold mb-2">Crédito</div>
           <p className="text-fog leading-relaxed">
-            Releitura própria em português. Conteúdo original e gratuito por <span className="text-cloud">{o.autor}</span>:{' '}
-            <a href={o.url} target="_blank" rel="noreferrer" className="text-brand hover:underline">{o.nome} ↗</a>
+            {OFICIAL.nota}{' '}
+            <a href={OFICIAL.base} target="_blank" rel="noreferrer" className="text-brand hover:underline">Cursos oficiais da Anthropic ↗</a>
           </p>
         </div>
       </div>

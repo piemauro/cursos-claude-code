@@ -1,8 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Clock, Lightbulb, AlertTriangle, ListChecks, BookOpen, Quote, ExternalLink } from 'lucide-react'
-import { getAula, getVizinhas } from '../lib/curso.js'
-import { CURSO } from '../data/estrutura.js'
-import { Reveal, PageWrap, Badge, CodeBlock } from '../components/Bits.jsx'
+import { getCurso, getAula, getVizinhas, OFICIAL } from '../lib/cursos.js'
+import { Reveal, PageWrap, Badge, CodeBlock, accentOf } from '../components/Bits.jsx'
 
 function Section({ icon: Icon, title, children, tone = 'brand' }) {
   const c = { brand: 'text-brand', amber: 'text-amber', fog: 'text-fog' }[tone]
@@ -15,29 +14,30 @@ function Section({ icon: Icon, title, children, tone = 'brand' }) {
 }
 
 export default function Aula() {
-  const { slug } = useParams()
-  const a = getAula(slug)
-  const { anterior, proxima, indice, total } = getVizinhas(slug)
-  if (!a) return <PageWrap><div className="mx-auto max-w-3xl px-5 py-24 text-center text-fog">Aula não encontrada. <Link to="/" className="text-brand">Início</Link></div></PageWrap>
-  const o = CURSO.creditoOficial
+  const { cursoSlug, aulaSlug } = useParams()
+  const curso = getCurso(cursoSlug)
+  const a = getAula(cursoSlug, aulaSlug)
+  const { anterior, proxima, indice, total } = getVizinhas(cursoSlug, aulaSlug)
+  if (!curso || !a) return <PageWrap><div className="mx-auto max-w-3xl px-5 py-24 text-center text-fog">Aula não encontrada. <Link to="/" className="text-brand">Início</Link></div></PageWrap>
+  const ac = accentOf(curso.accent)
   const pct = total ? Math.round(((indice + 1) / total) * 100) : 0
 
   return (
     <PageWrap>
       <article className="mx-auto max-w-3xl px-5 pt-12 pb-10">
         <div className="flex items-center justify-between text-sm">
-          <Link to="/" className="inline-flex items-center gap-1.5 text-fog hover:text-cloud"><ArrowLeft size={15} /> Início</Link>
+          <Link to={`/${cursoSlug}`} className="inline-flex items-center gap-1.5 text-fog hover:text-cloud"><ArrowLeft size={15} /> {curso.titulo}</Link>
           <span className="text-fog font-mono text-xs">{indice + 1}/{total}</span>
         </div>
-        <div className="mt-3 h-1 rounded-full bg-ink-3 overflow-hidden"><div className="h-full bg-brand" style={{ width: `${pct}%` }} /></div>
+        <div className="mt-3 h-1 rounded-full bg-ink-3 overflow-hidden"><div className={`h-full ${ac.dot}`} style={{ width: `${pct}%` }} /></div>
 
         <header className="mt-8">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge tone="fog">{a.modulo}</Badge>
+            <Badge tone="fog">{curso.titulo}</Badge>
             {a.duracao_leitura && <Badge><Clock size={11} /> {a.duracao_leitura}</Badge>}
           </div>
           <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight leading-tight">{a.titulo}</h1>
-          <p className="mt-4 text-lg text-fog leading-relaxed">{a.resumo}</p>
+          {a.resumo && <p className="mt-4 text-lg text-fog leading-relaxed">{a.resumo}</p>}
         </header>
 
         {a.takeaway && (
@@ -105,28 +105,27 @@ export default function Aula() {
 
         <Reveal className="mt-10">
           <p className="text-xs text-fog">
-            Releitura própria. Aula correspondente no curso oficial gratuito{' '}
-            <a href={o.url} target="_blank" rel="noreferrer" className="text-brand hover:underline inline-flex items-center gap-0.5">{o.nome} <ExternalLink size={11} /></a> ({o.autor}).
+            Releitura própria. Curso oficial gratuito{' '}
+            <a href={`${OFICIAL.base}/${curso.oficial}`} target="_blank" rel="noreferrer" className="text-brand hover:underline inline-flex items-center gap-0.5">na Anthropic <ExternalLink size={11} /></a>.
           </p>
         </Reveal>
 
-        {/* nav */}
         <nav className="mt-12 grid gap-3 sm:grid-cols-2">
           {anterior ? (
-            <Link to={`/aula/${anterior.slug}`} className="card card-hover p-4 group">
+            <Link to={`/${cursoSlug}/${anterior.slug}`} className="card card-hover p-4 group">
               <span className="text-xs text-fog flex items-center gap-1"><ArrowLeft size={12} /> Anterior</span>
               <div className="mt-1 font-medium group-hover:text-brand transition">{anterior.titulo}</div>
             </Link>
           ) : <span />}
           {proxima ? (
-            <Link to={`/aula/${proxima.slug}`} className="card card-hover p-4 text-right group">
+            <Link to={`/${cursoSlug}/${proxima.slug}`} className="card card-hover p-4 text-right group">
               <span className="text-xs text-fog flex items-center gap-1 justify-end">Próxima <ArrowRight size={12} /></span>
               <div className="mt-1 font-medium group-hover:text-brand transition">{proxima.titulo}</div>
             </Link>
           ) : (
-            <Link to="/sobre" className="card card-hover p-4 text-right group">
-              <span className="text-xs text-fog flex items-center gap-1 justify-end">Fim da trilha <ArrowRight size={12} /></span>
-              <div className="mt-1 font-medium group-hover:text-brand transition">Sobre o curso</div>
+            <Link to={`/${cursoSlug}`} className="card card-hover p-4 text-right group">
+              <span className="text-xs text-fog flex items-center gap-1 justify-end">Fim do curso <ArrowRight size={12} /></span>
+              <div className="mt-1 font-medium group-hover:text-brand transition">Voltar ao índice</div>
             </Link>
           )}
         </nav>

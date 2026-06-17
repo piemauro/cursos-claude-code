@@ -1,0 +1,883 @@
+[
+  {
+    "curso": "claude-platform-101",
+    "slug": "01-what-is-the-claude-developer-platform",
+    "titulo": "O que é o Claude Developer Platform (e por que ele não é \"o chat\")",
+    "resumo": "O Claude Developer Platform é o jeito de colocar o Claude dentro do seu produto via código, em vez de só conversar com ele no navegador. É API, SDK, CLI e um console pra você controlar modelo, custo, ferramentas e instruções.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Claude Developer Platform",
+        "definicao": "A infraestrutura da Anthropic pra você usar o Claude por código. Em vez de digitar numa janela de chat, seu sistema manda uma requisição estruturada e recebe uma resposta estruturada de volta. É isso que transforma o Claude de 'ferramenta que eu uso' em 'componente que roda dentro do meu produto'."
+      },
+      {
+        "termo": "Messages API",
+        "definicao": "O ponto de entrada principal. Você manda um array de mensagens (papéis user e assistant), define o system prompt, o modelo e o teto de tokens, e recebe a resposta. 90% do que você vai construir começa numa única chamada de messages.create."
+      },
+      {
+        "termo": "System prompt vs. messages",
+        "definicao": "O system prompt é onde você define o papel, o tom e as regras do Claude (fica fixo). O messages é a conversa em si — input do usuário e respostas anteriores. Separar os dois é o que te dá controle: você muda a instrução sem mexer no conteúdo, e vice-versa."
+      },
+      {
+        "termo": "As três camadas: primitivos, infraestrutura e controle",
+        "definicao": "Primitivos são os blocos que você chama no código (Messages API, tool use, files, web search, code execution, MCP, skills). Infraestrutura é o que segura a peteca quando vira escala (agentes gerenciados, retries, filas, observabilidade). Controle é o que você usa em produção (dashboards, evals). Resumo: construa com primitivos, escale na infra, opere com controle."
+      },
+      {
+        "termo": "Tool use (uso de ferramentas)",
+        "definicao": "O mecanismo que deixa o Claude pedir pra executar uma função sua — buscar num banco, chamar uma API, rodar um cálculo. Você descreve a ferramenta, o Claude decide quando usar e devolve os argumentos; seu código executa e devolve o resultado. É a ponte entre 'gerar texto' e 'fazer coisas no mundo real'."
+      },
+      {
+        "termo": "Console",
+        "definicao": "O painel da Anthropic onde você gera chaves de API, acompanha consumo e custo, testa prompts e gerencia agentes. É onde as camadas de infraestrutura e controle ficam visíveis — não é onde você programa, é onde você administra."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você tem um help desk rodando e quer um botão 'Sugerir resposta' que lê o ticket e rascunha uma réplica no tom da sua equipe. Não é pra construir um chatbot do zero — é pra plugar o Claude numa tela que já existe.",
+      "comandos": [
+        "import anthropic",
+        "client = anthropic.Anthropic()",
+        "resposta = client.messages.create(",
+        "    model=\"claude-haiku-4-5\",   # tarefa simples: Haiku resolve barato e rápido",
+        "    max_tokens=1024,",
+        "    system=TOM_E_DIRETRIZES,      # regras da equipe ficam aqui, fixas",
+        "    messages=[{\"role\": \"user\", \"content\": texto_do_ticket}],",
+        ")",
+        "rascunho = resposta.content"
+      ],
+      "explicacao": "Cada parâmetro tem um trabalho: model escolhe quem responde (Haiku pra tarefa leve, segura o custo); max_tokens limita o tamanho; system carrega o tom e as regras; messages leva o conteúdo do ticket. Uma chamada, resposta volta, botão renderiza. Repare que o Claude virou parte do fluxo do produto — não um app separado que o usuário precisa abrir."
+    },
+    "passos": [
+      "Pegue uma chave de API no Console da Anthropic.",
+      "Instale o SDK da sua linguagem (ex: pip install anthropic) e inicialize o client.",
+      "Escolha o modelo pela tarefa, não pelo hype: Haiku pra tarefas simples e em volume, Sonnet pro meio-termo, Opus pro que exige raciocínio pesado.",
+      "Escreva o system prompt com as regras fixas (tom, formato, o que NÃO fazer) e mande o input do usuário no array messages.",
+      "Faça a primeira chamada de messages.create e leia o response.content.",
+      "Só depois disso pense em tool use, MCP e agentes — você não precisa de nada disso pra entregar valor no dia 1."
+    ],
+    "erros_comuns": [
+      "Achar que 'plataforma' é a mesma coisa que o chat do Claude. O chat é uma interface; a plataforma é o acesso programático, com controle de modelo, custo e ferramentas que o chat não te dá.",
+      "Jogar tudo no Opus por padrão. Você paga caro por raciocínio que a tarefa não exige. Rascunhar uma resposta de help desk é trabalho de Haiku.",
+      "Misturar regra fixa com input do usuário no mesmo lugar. Tom e diretrizes vão no system; conteúdo variável vai no messages. Misturar os dois te tira o controle e bagunça o prompt.",
+      "Querer construir agente gerenciado, filas e observabilidade antes de fazer a primeira chamada funcionar. Comece com um messages.create. Escale depois, quando a dor aparecer.",
+      "Não definir max_tokens e tomar susto com resposta gigante (e conta gigante). Limite sempre."
+    ],
+    "dicas": [
+      "Pensa em camadas pra não se perder: construa com primitivos, escale na infraestrutura, opere com controle. Se você ainda está no 'será que funciona?', você está na camada de primitivos — fica nela.",
+      "O Console é seu painel de operação: chave, consumo, custo e teste de prompt num lugar só. Visite ele antes de escrever a primeira linha.",
+      "A pergunta certa não é 'que modelo é o melhor?', é 'qual é a tarefa?'. A tarefa escolhe o modelo, e isso define seu custo.",
+      "Quando o produto pedir agentes de verdade, a plataforma não te entrega só o modelo — ela roda o agente pra você com os agentes gerenciados. Mas isso é capítulo lá na frente."
+    ],
+    "takeaway": "O Claude Developer Platform é seu acesso por código ao Claude — API, SDK, CLI e Console — pensado em três camadas: primitivos pra construir, infraestrutura pra escalar, controle pra operar. Comece pequeno, com uma única chamada de messages.create, e suba de camada só quando a dor de escala aparecer."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "02-your-first-api-call",
+    "titulo": "Sua primeira chamada na API do Claude",
+    "resumo": "Falar com o Claude pelo chat é uma coisa; chamá-lo por código é outra — e é aqui que ele vira peça da sua operação. Nesta aula você dispara a primeira requisição e entende a estrutura que sustenta tudo depois.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "API key",
+        "definicao": "Sua credencial pessoal pra autenticar na API. Você gera em platform.claude.com, precisa de créditos na conta, e ela NUNCA pode ir pro Git. Trate como senha: vazou, revoga e gera outra."
+      },
+      {
+        "termo": "messages.create",
+        "definicao": "O método central do SDK. Toda conversa programática com o Claude passa por aqui. Você manda um modelo, um teto de tokens e uma lista de mensagens; recebe a resposta."
+      },
+      {
+        "termo": "model",
+        "definicao": "Qual Claude vai responder (ex.: um Opus pra raciocínio pesado, um Haiku pra tarefas rápidas e baratas). Trocar o modelo é mudar uma string — bom pra ajustar custo x qualidade sem reescrever nada."
+      },
+      {
+        "termo": "max_tokens",
+        "definicao": "O limite máximo de tokens que a RESPOSTA pode ter. Não é o tamanho do prompt — é o teto de saída. Serve de freio de custo e evita resposta infinita."
+      },
+      {
+        "termo": "system prompt",
+        "definicao": "A instrução de comportamento que fica fora do diálogo. É onde você define papel, tom e regras ('você é um revisor sênior, responde em uma frase'). Molda como o Claude age sem virar uma mensagem do usuário."
+      },
+      {
+        "termo": "content blocks",
+        "definicao": "A resposta vem como um ARRAY de blocos, não uma string solta. Pode ter bloco de texto, de raciocínio, de chamada de ferramenta. Por isso você sempre itera e checa o type de cada bloco."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Em vez de mandar um 'oi' inútil, você manda um pedaço de código quebrado e pede revisão. É o tipo de coisa que já tem valor operacional no dia 1.",
+      "comandos": [
+        "npm install @anthropic-ai/sdk",
+        "# .env.local (fora do Git!)",
+        "ANTHROPIC_API_KEY=sk-ant-sua-chave-aqui",
+        "",
+        "# revisor.mjs",
+        "import Anthropic from \"@anthropic-ai/sdk\";",
+        "const client = new Anthropic(); // lê ANTHROPIC_API_KEY do ambiente",
+        "",
+        "const codigo = `function soma(a, b) { return a - b; }`;",
+        "",
+        "const resp = await client.messages.create({",
+        "  model: \"claude-opus-4-8\",",
+        "  max_tokens: 1024,",
+        "  system: \"Você é um revisor de código sênior e direto. Responde em uma frase.\",",
+        "  messages: [",
+        "    { role: \"user\", content: `Revise este código:\\n${codigo}` }",
+        "  ]",
+        "});",
+        "",
+        "for (const bloco of resp.content) {",
+        "  if (bloco.type === \"text\") console.log(bloco.text);",
+        "}",
+        "",
+        "node revisor.mjs"
+      ],
+      "explicacao": "Três peças obrigatórias: model, max_tokens e messages. O system fica separado porque é instrução de papel, não fala do usuário. Repare no loop no final: a resposta é um array de blocos, então você nunca pega resp.content direto como texto — itera e filtra por type. Rode e o Claude vai apontar que a função 'soma' está subtraindo. Mesmo padrão que sustenta um endpoint de produção."
+    },
+    "passos": [
+      "Compre créditos e gere uma API key em platform.claude.com",
+      "Salve a chave num .env.local e confirme que esse arquivo está no .gitignore",
+      "Instale o SDK: npm install @anthropic-ai/sdk",
+      "Crie um arquivo .mjs com client.messages.create passando model, max_tokens e messages",
+      "Adicione um system prompt pra definir papel e tom da resposta",
+      "Itere sobre resp.content e imprima só os blocos com type 'text'",
+      "Rode com node e leia a resposta"
+    ],
+    "dicas": [
+      "Nunca hardcode a chave no código. .env.local + .gitignore não é frescura — chave vazada no GitHub é dinheiro saindo da sua conta antes de você perceber.",
+      "max_tokens é o teto da saída, não do input. Comece com 1024 e suba conforme a tarefa pedir; é seu primeiro controle de custo.",
+      "O system prompt é seu maior alavanca de qualidade nessa fase. 'Responde em uma frase' economiza tokens e te dá saída utilizável.",
+      "Pense no modelo como variável de custo: Haiku pra classificar/extrair em volume, Opus pra raciocínio que justifica o preço. É só trocar a string.",
+      "Esse mesmo messages.create é o motor de um endpoint real: pega texto do banco, manda com um system prompt, salva a resposta de volta. Script e produto compartilham a mesma chamada."
+    ],
+    "erros_comuns": [
+      "Tratar resp.content como string e tentar dar console.log direto — vem um [object Object] ou undefined. É array de blocos, sempre itera.",
+      "Esquecer max_tokens ou colocar um valor baixo demais e a resposta sair cortada no meio.",
+      "Confundir system prompt com mensagem de usuário. Regra de comportamento vai no campo system, não dentro de messages.",
+      "Commitar o .env.local sem querer. Cheque o .gitignore ANTES do primeiro commit, não depois.",
+      "Achar que precisa de framework pesado pra começar. São ~20 linhas num arquivo só."
+    ],
+    "takeaway": "Sua primeira chamada é um messages.create com três coisas: modelo, teto de tokens e mensagens. Domine esse formato com um system prompt e o loop nos content blocks — todo o resto da plataforma é variação em cima disso."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "03-choosing-the-right-model",
+    "titulo": "Escolhendo o modelo certo: pare de pagar Opus pra tarefa de Haiku",
+    "resumo": "O modelo certo não é o mais inteligente — é o mais barato cujo resultado você toparia entregar pro cliente. E a única forma de descobrir isso é medindo, não chutando.",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Tiers de modelo (Haiku, Sonnet, Opus)",
+        "definicao": "A família Claude vem em camadas. Haiku é o mais rápido e barato, feito pra volume e tarefa simples (classificar, extrair, rotear). Sonnet é o meio-termo que resolve a maior parte do trabalho de produção. Opus é o mais capaz e mais caro, pra raciocínio profundo e tarefa que realmente exige. Você troca entre eles só mudando o parâmetro model na chamada da API."
+      },
+      {
+        "termo": "Eval (avaliação)",
+        "definicao": "Um conjunto de 20-30 inputs reais do SEU fluxo, rodados em cada modelo e pontuados contra o que significa 'output bom' pro seu caso. Não precisa de framework, planilha resolve. É a única forma honesta de decidir modelo — substitui achismo por número."
+      },
+      {
+        "termo": "response.usage",
+        "definicao": "Campo que a API devolve em toda resposta com a contagem de tokens de input e output. É exatamente isso que vira conta no fim do mês. Olhar usage é como você conecta 'qualidade percebida' com 'custo real' antes de subir pra produção."
+      },
+      {
+        "termo": "Roteamento por tarefa (model routing)",
+        "definicao": "Num app de verdade você não escolhe UM modelo pro sistema inteiro. Você roteia cada tipo de tarefa pro tier que faz sentido: classificação no Haiku, redação no Sonnet, o caso difícil no Opus — tudo dentro do mesmo endpoint."
+      },
+      {
+        "termo": "Subir os tiers (bottom-up)",
+        "definicao": "A lógica de escolha começa por baixo: testa no Haiku primeiro. Se a qualidade segura, acabou e você economizou. Se não, sobe pro Sonnet. Só chega no Opus quando a tarefa de fato pede. O contrário (começar no Opus e nunca questionar) é o jeito mais comum de torrar orçamento."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você tem uma esteira de processamento de documentos: chega arquivo, precisa classificar o tipo, redigir um update pro cliente e, em alguns casos, responder um edital/RFP. Em vez de jogar tudo no Opus, roteia por tarefa.",
+      "comandos": [
+        "# Mesmo prompt, três modelos — compara latência e tokens (=custo)",
+        "for model in ['claude-haiku-4-5', 'claude-sonnet-4-6', 'claude-opus-4-7']:",
+        "    r = client.messages.create(model=model, max_tokens=300, messages=[{'role':'user','content': prompt}])",
+        "    print(model, r.usage)  # input_tokens / output_tokens",
+        "",
+        "# Na esteira real: cada tarefa no seu tier",
+        "tipo      = classificar(doc, model='claude-haiku-4-5')   # volume, barato",
+        "update    = redigir(doc,    model='claude-sonnet-4-6')   # o trabalho do dia a dia",
+        "resposta  = responder_rfp(doc, model='claude-opus-4-7')  # só quando precisa"
+      ],
+      "explicacao": "Pra uma definição de duas frases, Haiku volta em menos de um segundo com algo que você entregaria sem pensar — o capricho extra do Opus ali é dinheiro jogado fora. Pra redigir a resposta de um edital, você roda o MESMO comparativo e provavelmente para no Opus. O formato da eval é idêntico todas as vezes; o que muda é onde a qualidade para de valer o custo. Uma fila, três modelos, escolhidos por tarefa."
+    },
+    "dicas": [
+      "Monte a eval com inputs reais do seu workload, não exemplos de marketing. 20-30 já te dão sinal suficiente pra decidir.",
+      "Sempre logue response.usage em homologação. Multiplicar tokens médios pelo volume diário te dá a conta antes do susto.",
+      "Comece sempre pelo Haiku e suba. O custo do experimento é baixo e o de errar pra cima (Opus em tudo) é recorrente.",
+      "Reavalie quando lançar modelo novo. A eval é barata de rerodar e o que era 'só Opus' às vezes vira 'Sonnet resolve' de um dia pro outro."
+    ],
+    "erros_comuns": [
+      "Defaultar pro modelo mais inteligente 'pra garantir' e descobrir o custo só na fatura — em volume, isso escala feio.",
+      "Escolher por opinião ('Opus é melhor') em vez de medir contra o seu critério de output bom.",
+      "Travar um único modelo pro sistema inteiro em vez de rotear por tarefa, pagando tier caro até pra classificar e rotear.",
+      "Ignorar latência. Pra fluxo de alto volume ou tempo real, o tier mais lento pode quebrar a experiência mesmo com qualidade ótima."
+    ],
+    "passos": [
+      "Liste as tarefas reais do seu app e separe por complexidade (rotear/classificar vs. redigir vs. raciocinar fundo).",
+      "Junte 20-30 inputs representativos de cada tarefa e defina o que é 'output que eu entregaria'.",
+      "Rode a eval começando pelo Haiku, registrando qualidade e response.usage.",
+      "Suba de tier só quando a qualidade não segurar; pare no primeiro modelo que passa.",
+      "Implemente o roteamento por tarefa no endpoint e reavalie a cada modelo novo que sair."
+    ],
+    "takeaway": "O modelo certo é o mais barato cujo output você entregaria sem pedir desculpa. Descubra qual é com uma eval de 20-30 exemplos, suba os tiers de baixo pra cima e roteie por tarefa — não por sistema."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "04-the-agent-loop-explained",
+    "titulo": "O loop do agente, sem mistério",
+    "resumo": "Uma chamada de API te dá uma resposta. Um agente é você colocando essa chamada dentro de um while: Claude pede uma ferramenta, seu código executa, você devolve o resultado, repete até ele dizer que acabou.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Agent loop (loop do agente)",
+        "definicao": "O ciclo observar → decidir → agir → repetir. Você manda mensagens com ferramentas disponíveis, o Claude decide se responde ou pede uma ferramenta, seu código roda a ferramenta e devolve o resultado, e isso se repete. Não é mágica: é um while que você mesmo escreve."
+      },
+      {
+        "termo": "Tool use (uso de ferramenta)",
+        "definicao": "O mecanismo pelo qual o Claude não executa nada sozinho. Ele só declara 'quero chamar a ferramenta X com esses argumentos'. Quem executa de verdade é o SEU código. O Claude pede, você faz."
+      },
+      {
+        "termo": "stop_reason",
+        "definicao": "O campo da resposta que dirige o loop. 'tool_use' significa que o Claude quer chamar uma ferramenta (você roda e continua). 'end_turn' significa que ele terminou (você lê o texto e sai do loop). Toda a lógica de controle gira em torno desse campo."
+      },
+      {
+        "termo": "tool_use_id",
+        "definicao": "O identificador que amarra o pedido de ferramenta do Claude ao resultado que você devolve. Cada tool_result precisa carregar o tool_use_id correspondente, senão a API não sabe qual chamada aquele resultado responde — crítico quando há várias ferramentas no mesmo turno."
+      },
+      {
+        "termo": "input_schema",
+        "definicao": "O contrato JSON Schema de cada ferramenta: nome, descrição e os campos de entrada. É por aqui que o Claude entende o que a ferramenta faz e quais argumentos preencher. Descrição preguiçosa = ferramenta chamada na hora errada."
+      },
+      {
+        "termo": "Managed agents (agentes gerenciados)",
+        "definicao": "Quando você não quer ser dono do loop, a Anthropic roda esse mesmo ciclo na infraestrutura deles. A mecânica é idêntica — muda só quem segura o while."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Loop mínimo de agente: Claude decide o que vestir hoje, mas não tem como saber o clima sozinho. Você dá uma ferramenta get_clima, e ele é obrigado a chamá-la antes de responder. Esse é o esqueleto que se repete em tudo que você vai construir.",
+      "comandos": [
+        "# 1. Declare a ferramenta (nome + descrição + schema dos argumentos)",
+        "tools = [{'name': 'get_clima', 'description': 'Retorna o clima atual de uma cidade.', 'input_schema': {'type': 'object', 'properties': {'cidade': {'type': 'string'}}, 'required': ['cidade']}}]",
+        "",
+        "# 2. Seu executor real (aqui é mock; na vida real bate num banco/API)",
+        "def executar(nome, args):",
+        "    if nome == 'get_clima':",
+        "        return f\"{args['cidade']}: 31C, sol forte\"",
+        "",
+        "messages = [{'role': 'user', 'content': 'O que visto hoje em Itu?'}]",
+        "",
+        "# 3. O LOOP. Toda a inteligência de controle está no stop_reason.",
+        "while True:",
+        "    r = client.messages.create(model='claude-sonnet-4-6', max_tokens=1024, tools=tools, messages=messages)",
+        "    if r.stop_reason == 'end_turn':",
+        "        print(next(b.text for b in r.content if b.type == 'text'))",
+        "        break",
+        "    if r.stop_reason == 'tool_use':",
+        "        resultados = [{'type': 'tool_result', 'tool_use_id': b.id, 'content': executar(b.name, b.input)} for b in r.content if b.type == 'tool_use']",
+        "        messages.append({'role': 'assistant', 'content': r.content})",
+        "        messages.append({'role': 'user', 'content': resultados})"
+      ],
+      "explicacao": "Rodou? Você vê dois turnos. No primeiro, stop_reason='tool_use': o Claude pede get_clima pra Itu, seu código devolve '31C, sol forte'. No segundo, stop_reason='end_turn': ele te manda usar roupa leve. Duas chamadas de API, uma execução de ferramenta, uma resposta final. Trocar esse mock por uma ferramenta de verdade (consultar CRM, gravar no banco, ler um PDF) não muda a forma do loop — muda só o que está dentro do executar()."
+    },
+    "passos": [
+      "Declare suas ferramentas: cada uma com nome, descrição honesta e input_schema. A descrição é o que o Claude lê pra decidir quando usar — capriche nela, não no nome.",
+      "Mande a primeira mensagem do usuário com o array tools disponível.",
+      "Olhe o stop_reason da resposta. É o volante do carro.",
+      "Se for 'tool_use': percorra os blocos tool_use, execute cada ferramenta no SEU código, monte os tool_result amarrando pelo tool_use_id.",
+      "Empurre de volta pra messages: primeiro o content do assistant (o pedido dele), depois seus tool_result como role user.",
+      "Volte ao topo do loop. Repita até stop_reason virar 'end_turn', aí leia o texto final e saia."
+    ],
+    "erros_comuns": [
+      "Esquecer de devolver o content do assistant pra messages antes dos tool_result. A API rejeita: ela precisa do pedido e da resposta, na ordem.",
+      "Mandar o tool_result sem o tool_use_id certo (ou trocado). Com uma ferramenta só passa batido; com várias no mesmo turno, vira bagunça silenciosa.",
+      "Loop sem trava de segurança. Em produção, NUNCA deixe um while True puro: ferramenta que falha em silêncio pode girar pra sempre. Ponha um teto de iterações.",
+      "Descrição de ferramenta vaga ('faz coisas com dados'). O Claude chama na hora errada ou não chama. A descrição é parte do prompt, trate como tal.",
+      "Achar que o Claude executa a ferramenta. Ele só PEDE. Se seu executar() não roda, nada acontece — você é dono da execução."
+    ],
+    "dicas": [
+      "Memorize a divisão de trabalho: você é dono do loop e das ferramentas, o Claude é dono do raciocínio. Quando algo dá errado, isso te diz imediatamente onde olhar.",
+      "Comece sempre com uma ferramenta mock que retorna string fixa, como no exemplo. Valida o fluxo do loop sem depender de banco, API externa ou UI. Depois troca o miolo.",
+      "Em produção a forma é a mesma: o que muda é plumbing — resultados viram server-sent events pra UI, achados são persistidos num banco, ferramentas batem em sistemas reais. O while continua igual.",
+      "Se você não quer manter esse loop de pé, agentes gerenciados rodam exatamente esse ciclo na infra da Anthropic. Mesma mecânica, menos código seu pra babá."
+    ],
+    "takeaway": "Agente não é buzzword: é o Claude dentro de um while que você escreve. Ele observa, decide e pede ferramenta; seu código age e devolve o resultado; repete até dar end_turn. Domine essa única forma e você consegue ler — e construir — qualquer agente, do demo de clima ao sistema de produção."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "05-what-is-tool-use",
+    "titulo": "Tool use: como o Claude sai da caixa e mexe nos seus sistemas",
+    "resumo": "Tool use é o mecanismo que deixa o Claude pedir pra rodar funções suas — buscar dados, gravar registros, chamar APIs. O modelo decide o que chamar; quem executa é o seu código.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Tool use (uso de ferramentas)",
+        "definicao": "Capacidade do Claude de pedir a execução de uma função que você definiu. Ele não roda nada sozinho: descreve qual função quer e com quais argumentos, e o seu código faz o trabalho de verdade."
+      },
+      {
+        "termo": "Definição de tool",
+        "definicao": "Um schema JSON com três campos: name (o identificador), description (o texto que o Claude lê pra decidir se usa) e input_schema (os parâmetros esperados). Você manda isso no array tools da requisição."
+      },
+      {
+        "termo": "stop_reason: tool_use",
+        "definicao": "O sinal na resposta da API que diz 'parei porque quero chamar uma ferramenta'. É o gatilho pro seu loop executar a função e devolver o resultado pro modelo continuar."
+      },
+      {
+        "termo": "tool_result",
+        "definicao": "O bloco que você devolve ao Claude com a saída da função, amarrado pelo id da chamada original. É como o modelo recebe de volta o que sua função produziu."
+      },
+      {
+        "termo": "Agent loop",
+        "definicao": "O ciclo manda prompt → Claude pede tool → você executa → devolve resultado → repete até o modelo parar de pedir ferramentas e dar a resposta final."
+      },
+      {
+        "termo": "Tool runner (SDK)",
+        "definicao": "Utilitário dos SDKs (TypeScript, Python, Ruby) que monta o schema a partir das suas funções reais e gerencia o loop inteiro por baixo dos panos, eliminando boilerplate."
+      }
+    ],
+    "passos": [
+      "Liste as funções do seu sistema que o Claude precisaria acionar (consultar banco, abrir card, mandar mensagem).",
+      "Escreva a definição de cada tool: name, description bem específica e input_schema com os parâmetros e os required.",
+      "Mande o array tools junto com o prompt na chamada da API.",
+      "No retorno, cheque stop_reason. Se for tool_use, leia name e input que o Claude pediu.",
+      "Execute a função correspondente no seu código (dispatch pelo nome da tool).",
+      "Devolva a saída como tool_result amarrado ao id da chamada e repita o ciclo até o Claude parar de pedir ferramentas.",
+      "Em produção, troque o loop manual pelo tool runner do SDK pra cortar boilerplate e parar de escrever schema na mão."
+    ],
+    "exemplo": {
+      "contexto": "Agente de atendimento que precisa consultar o status de um pedido no seu banco antes de responder o cliente.",
+      "explicacao": "Você expõe uma função que já existe no seu backend como tool. O Claude lê a description, entende que precisa do status, pede a chamada com o número do pedido, e o SEU código roda a query. Note que o valor está na description: se ela fosse vaga tipo 'busca dados', o modelo erraria a hora de usar.",
+      "comandos": [
+        "// 1. Definição da tool (vai no array tools da requisição)",
+        "{ name: \"consultar_pedido\", description: \"Busca o status atual de um pedido pelo número. Retorna situação, data de envio e código de rastreio. Use quando o cliente perguntar onde está o pedido dele.\", input_schema: { type: \"object\", properties: { numero: { type: \"string\", description: \"Número do pedido informado pelo cliente\" } }, required: [\"numero\"] } }",
+        "// 2. Dispatch pelo nome quando vier stop_reason: tool_use",
+        "function rodarTool(name, input) { if (name === \"consultar_pedido\") return db.pedido(input.numero); }",
+        "// 3. Devolve o resultado amarrado ao id e segue o loop",
+        "messages.push({ role: \"user\", content: [{ type: \"tool_result\", tool_use_id: bloco.id, content: rodarTool(bloco.name, bloco.input) }] });"
+      ]
+    },
+    "dicas": [
+      "A description é onde você ganha ou perde. Escreva como se fosse pra um funcionário novo: o que a função faz, o que devolve e QUANDO usar. Description vaga é a causa número um de agente que não chama a tool certa.",
+      "Comece pelo loop manual pra entender o mecanismo, mas em produção use o tool runner do SDK. Reescrever schema na mão pra cada função é escrever o código duas vezes.",
+      "Quem executa é sempre o seu código. Isso é controle, não limitação: você valida input, trata erro e decide o que volta pro modelo antes de devolver o tool_result.",
+      "Dê várias tools e deixe o Claude escolher a ordem. Tool nova é só adicionar no array e adicionar o case no dispatch. Não tente orquestrar tudo na unha."
+    ],
+    "erros_comuns": [
+      "Achar que o Claude executa a função. Ele só PEDE; seu código roda. Quem não entende isso fica esperando mágica que não vem.",
+      "Description preguiçosa. 'Pega dados' não diz ao modelo quando usar a tool, e ele chama na hora errada ou nem chama.",
+      "Esquecer de amarrar o tool_result ao id da chamada. Sem o tool_use_id certo, o modelo não conecta o resultado ao pedido.",
+      "Não tratar erro dentro da função e devolver lixo como tool_result. O Claude vai raciocinar em cima do que você mandar — mande algo útil, inclusive a mensagem de erro.",
+      "Handwrite de schema pra dezenas de funções em vez de usar o tool runner. Vira manutenção dobrada e fonte de bug silencioso."
+    ],
+    "takeaway": "Tool use é o que tira o Claude da caixa de texto e conecta ele aos seus sistemas. O modelo decide O QUE chamar; seu código controla COMO executa. Capriche na description e deixe o SDK cuidar do loop."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "06-what-is-thinking",
+    "titulo": "O que é \"thinking\": quando deixar o Claude raciocinar antes de responder",
+    "resumo": "Thinking é o Claude pensando em voz alta antes de te entregar a resposta. Liga numa linha, e ele decide sozinho o quanto raciocinar — você só ajusta o esforço quando a tarefa pede.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Extended thinking (pensamento estendido)",
+        "definicao": "Modo em que o Claude gera um rascunho de raciocínio interno (a famosa cadeia de pensamento) ANTES de produzir a resposta final. Esse raciocínio vem visível na resposta — não é uma caixa-preta. Útil quando o problema tem etapas, comparações ou risco de erro silencioso."
+      },
+      {
+        "termo": "Thinking adaptativo",
+        "definicao": "Nos modelos Opus mais novos você não precisa mais definir orçamento de tokens de raciocínio. Você só liga o thinking e o próprio modelo decide na hora se vale pensar e o quanto. Menos parâmetro pra você errar, menos micro-gerência."
+      },
+      {
+        "termo": "Parâmetro effort",
+        "definicao": "O dial que controla a PROFUNDIDADE do raciocínio: low, medium, high (padrão), xhigh e max. Detalhe que pega muita gente: ele vai dentro do output_config, não colado no bloco de thinking. Suba o effort quando a tarefa for densa; deixe baixo quando for trivial."
+      },
+      {
+        "termo": "Thinking blocks",
+        "definicao": "Os blocos de raciocínio que aparecem na resposta junto com o texto final e eventuais chamadas de ferramenta. É onde você lê o que o Claude considerou — ótimo pra auditar a decisão, não só consumir o resultado."
+      },
+      {
+        "termo": "Custo do raciocínio",
+        "definicao": "Pensar gasta tokens e adiciona latência. Não é de graça. Por isso thinking é navalha: você liga onde o raciocínio paga a conta, e desliga onde ele só deixa a resposta mais cara e mais lenta sem melhorar nada."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Loop de agente com uma ferramenta de clima. Você pede um roteiro de viagem com paradas, pesando clima e tempo de estrada — uma decisão com trade-off real, onde o raciocínio se justifica.",
+      "comandos": [
+        "model=\"claude-opus-4-7\"",
+        "thinking={\"type\": \"adaptive\"}",
+        "output_config={\"effort\": \"high\"}  # low | medium | high | xhigh | max",
+        "tools=[weather_tool]"
+      ],
+      "explicacao": "Liga o thinking adaptativo, escolhe o effort dentro do output_config e roda. Na resposta você vê os thinking blocks com o Claude pesando as opções, depois as chamadas à ferramenta de clima por cidade, e por fim o texto com a recomendação. O ganho não é estético: num caso real, raciocinar ACROSS o documento é o que faz o agente cruzar uma informação da seção 3 com outra da seção 7 e achar o conflito — em vez de tratar cada pedaço isolado."
+    },
+    "passos": [
+      "Pergunte: a tarefa tem etapas, comparação ou trade-off? Se não, nem ligue thinking.",
+      "Ligue com thinking do tipo adaptativo — sem orçamento de tokens, o modelo decide a dose.",
+      "Defina o effort dentro de output_config (não no bloco thinking). Comece em high e ajuste.",
+      "Rode e leia os thinking blocks pra entender COMO ele chegou na resposta, não só o resultado.",
+      "Em produção, ligue o thinking só nas chamadas que decidem algo (auto-review, planejamento) e deixe desligado nas de extração/classificação."
+    ],
+    "erros_comuns": [
+      "Colar o effort do lado do bloco thinking em vez de dentro do output_config — e aí o parâmetro simplesmente não pega.",
+      "Ligar thinking em tudo. Em classificação, extração e boilerplate ele só adiciona latência e custo sem melhorar a saída.",
+      "Tentar definir orçamento de tokens de raciocínio no Opus adaptativo — não é mais assim; é só ligar e deixar o modelo dosar.",
+      "Tratar o raciocínio como caixa-preta. Ele vem visível de propósito: ignorar os thinking blocks é jogar fora a parte mais auditável da resposta.",
+      "Subir direto pro max achando que sempre melhora. Effort alto demais em tarefa simples é desperdício de tempo e token."
+    ],
+    "dicas": [
+      "Regra prática: liga thinking onde um humano júnior precisaria parar e rascunhar. Soma de números, depurar código, comparar opções com restrições. O resto vai direto.",
+      "Use os thinking blocks como ferramenta de debug do SEU prompt: se o raciocínio do Claude tá partindo de premissa errada, o problema geralmente é a instrução, não o modelo.",
+      "Em agentes, o thinking brilha quando ele precisa CONECTAR coisas espalhadas (várias seções de um doc, vários resultados de ferramenta). É aí que ele para de tratar problema por problema e enxerga o conjunto.",
+      "Trate effort como acelerador, não como liga/desliga: medium resolve a maioria dos casos sérios; reserve xhigh/max pra análise pesada de verdade."
+    ],
+    "takeaway": "Thinking é o Claude rascunhando antes de responder — e o rascunho vem visível. Ligue numa linha, deixe o modelo dosar sozinho, ajuste o effort (dentro do output_config) e use só onde o raciocínio paga a conta de latência e token. Em problema com trade-off, vale ouro; em extração e boilerplate, é só custo."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "07-built-in-tools",
+    "titulo": "Built-in tools: o que a Anthropic já roda por você",
+    "resumo": "A Anthropic entrega algumas ferramentas prontas que você só declara e ela executa nos servidores dela. Web search, code execution e web fetch chegam com o resultado já dentro da resposta, sem você ter que montar agent loop.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Server tools",
+        "definicao": "Ferramentas que você declara no array tools, mas quem executa é a Anthropic, na infraestrutura dela. As três principais hoje: web_search (busca na web com citações), code_execution (escreve e roda Python num sandbox isolado) e web_fetch (puxa o conteúdo de uma URL). Como rodam server-side, o resultado já volta dentro da mesma resposta."
+      },
+      {
+        "termo": "Client tools",
+        "definicao": "A outra categoria. Rodam onde o SEU código roda. O SDK já entrega o schema e um runner pronto, então você não escreve a definição da tool na mão. Exemplos: memory (Claude lê e grava memória entre sessões) e bash (um shell persistente pra executar comandos). Tem o mesmo formato de uma tool customizada, mas vem de fábrica."
+      },
+      {
+        "termo": "Sem agent loop",
+        "definicao": "O ponto que mais economiza código. Com tool customizada você roda o ciclo: chama, recebe tool_use, executa, devolve o resultado, chama de novo. Com server tool nada disso: a Anthropic executa por baixo e a resposta já vem com a saída. Você não checa stop_reason nem reenvia nada."
+      },
+      {
+        "termo": "Blocos novos na resposta",
+        "definicao": "Quando uma server tool roda, o content da resposta ganha tipos de bloco diferentes do text comum: um server_tool_use pra chamada da ferramenta e um bloco de resultado (ex.: o stdout do sandbox de código, ou os resultados de busca). Você itera sobre content e trata cada tipo."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Endpoint de fact-check pra revisar uma minuta de proposta antes de mandar pro cliente: ele pega cada número e cada afirmação regulatória do texto e confere contra a web ao vivo.",
+      "comandos": [
+        "tools=[{\"type\": \"web_search_20260209\", \"name\": \"web_search\"}]",
+        "resp = client.messages.create(model=\"claude-opus-4-8\", max_tokens=1024, tools=tools, messages=[{\"role\":\"user\",\"content\":\"Confira contra a web: alíquota de ISS de Itu hoje e a taxa Selic atual. Responda em uma frase com fonte.\"}])",
+        "for b in resp.content:  # itera os blocos",
+        "    if b.type == \"server_tool_use\": print(b.name, b.input)",
+        "    elif b.type == \"text\": print(b.text)"
+      ],
+      "explicacao": "Repara que não tem loop. Eu declaro a tool, mando a pergunta, e a resposta já chega com a busca feita e a citação dobrada no texto. Eu não subi crawler nenhum. Só que web na veia não é verdade automática: o que vem validado da internet ainda precisa do seu olho. Trate como insumo, não como sentença."
+    },
+    "dicas": [
+      "Antes de escrever uma tool customizada, pergunte: a Anthropic já não tem isso pronto? Buscar na web, rodar Python, puxar URL — provavelmente sim. Não reinvente o que vem de fábrica.",
+      "Os identificadores das server tools são datados (ex.: web_search_20260209, code_execution_20260120). Trate isso como versão pinada: você sabe exatamente o que está chamando e não toma surpresa quando uma versão nova sai.",
+      "Use code_execution pra conta que precisa estar certa — média, desvio, regra de três, parse de CSV. O modelo escreve o Python, o sandbox roda de verdade, e você recebe o stdout. É bem mais confiável do que pedir pro modelo 'calcular de cabeça'.",
+      "No seu código, faça switch no b.type ao iterar o content. Server tool traz blocos que tool customizada não traz; se você só olhar pro text, perde a chamada e o resultado da ferramenta."
+    ],
+    "erros_comuns": [
+      "Montar um agent loop completo pra server tool. Não precisa — a Anthropic já executou e devolveu o resultado na mesma resposta. O loop é pra tool SUA, que roda na sua máquina.",
+      "Confundir as duas categorias: server tool roda na Anthropic, client tool (memory, bash) roda onde o seu código roda. Quem decide isso muda como você trata a resposta.",
+      "Tratar resultado de web search como fato consolidado. Estar na internet não é estar certo. Endpoint de fact-check ajuda a pegar erro, não dispensa revisão humana.",
+      "Só ler os blocos text e ignorar server_tool_use e os blocos de resultado. Você perde visibilidade do que a ferramenta de fato fez."
+    ],
+    "passos": [
+      "Identifique se a capacidade que você quer (buscar na web, rodar código, puxar URL) já é uma server tool pronta — quase sempre é.",
+      "Declare a tool no array tools do messages.create com o type datado e o name.",
+      "Mande a mensagem normalmente, sem montar loop.",
+      "Itere sobre response.content fazendo switch no .type pra tratar server_tool_use, o bloco de resultado e os blocos text.",
+      "Se o caso exigir tool que roda na sua infra (memory, bash, ou algo seu), aí sim use client tool / agent loop."
+    ],
+    "takeaway": "Server tool você declara e a Anthropic roda — resultado na mesma resposta, zero agent loop. Antes de codar uma ferramenta, veja se ela já não vem pronta de fábrica."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "08-skills",
+    "titulo": "Skills: ensinando o Claude a fazer do seu jeito",
+    "resumo": "Skill é uma pasta com um SKILL.md que empacota o seu método: o procedimento, o formato e os scripts que o Claude lê sob demanda. Você sobe uma vez e o Claude passa a executar a tarefa do jeito que a sua operação exige, sem você reescrever o prompt toda hora.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Skill",
+        "definicao": "Uma pasta com um arquivo SKILL.md (mais scripts e arquivos de apoio opcionais) que descreve um procedimento. Você empacota o seu jeito de fazer uma tarefa uma vez e o Claude passa a seguir aquele roteiro sempre que aciona a Skill."
+      },
+      {
+        "termo": "SKILL.md",
+        "definicao": "O coração da Skill. Um Markdown com as instruções: as seções do output, o tom, os passos, como tratar exceções. É onde mora o 'como' que normalmente ficava espalhado na cabeça da pessoa ou colado no prompt."
+      },
+      {
+        "termo": "Progressive disclosure (carga progressiva)",
+        "definicao": "No início só o nome e a descrição da Skill entram no contexto. O conteúdo completo só carrega quando o Claude decide que aquela Skill é relevante pra tarefa. Resultado: você pode ter dezenas de Skills disponíveis sem inchar o contexto."
+      },
+      {
+        "termo": "Skill vs. tool",
+        "definicao": "Tool é o QUE o Claude pode fazer (chamar uma API, mandar e-mail, ler um arquivo). Skill é o COMO você quer que ele faça (qual formato, qual checklist, qual ordem). Tool executa ação externa; Skill é um playbook que o próprio Claude lê e segue."
+      },
+      {
+        "termo": "container.skills",
+        "definicao": "O array dentro da configuração de container onde você pluga as Skills numa chamada da API. Cada item aponta um skill_id e uma version. Por ser lista, você empilha várias Skills na mesma requisição."
+      },
+      {
+        "termo": "Skill + code execution",
+        "definicao": "Como o procedimento da Skill pode incluir scripts pra rodar de verdade (gerar um CSV, formatar um PDF, calcular algo), ligar code execution na mesma chamada faz a Skill sair do 'instruir' e ir pro 'fazer'."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Sua agência entrega relatório de status pra cliente toda semana. Hoje cada pessoa formata de um jeito. Você quer padronizar: o método vira uma Skill que qualquer chamada da API consome.",
+      "comandos": [
+        "# 1. Sobe a Skill uma vez (a pasta tem o SKILL.md com o seu padrão de relatório)",
+        "skill = client.beta.skills.create(",
+        "    display_title=\"Relatório Semanal Wise Start\",",
+        "    files=files_from_dir(\"relatorio-skill\"),",
+        ")",
+        "print(skill.id)  # guarde esse ID",
+        "",
+        "# 2. Anexa a Skill numa chamada e liga code execution",
+        "resp = client.beta.messages.create(",
+        "    model=\"claude-sonnet-4-5\",",
+        "    max_tokens=4096,",
+        "    betas=[\"skills-2025-10-02\", \"code-execution-2025-08-25\"],",
+        "    container={\"skills\": [{\"type\": \"custom\", \"skill_id\": skill.id, \"version\": \"latest\"}]},",
+        "    tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],",
+        "    messages=[{\"role\": \"user\", \"content\": f\"Gere o relatório a partir deste log:\\n\\n{log}\"}],",
+        ")"
+      ],
+      "explicacao": "O prompt do usuário virou uma linha só ('gere o relatório a partir deste log'). Todo o 'como' — seções, tom, ordem, como tratar bloqueios — está dentro do SKILL.md, não no prompt. É isso que padroniza a saída de um time inteiro sem ninguém colar template em lugar nenhum. Repare que é client.beta.messages.create e os betas no header: na escrita, Skills é beta."
+    },
+    "passos": [
+      "Identifique uma tarefa onde o COMO importa tanto quanto o QUÊ — algo que você repete e que tem um formato/checklist próprio (relatório, release notes, revisão de contrato).",
+      "Escreva o SKILL.md: as instruções do procedimento. Se a tarefa precisa rodar algo de verdade, jogue os scripts na mesma pasta.",
+      "Suba a pasta uma vez com client.beta.skills.create e guarde o skill_id retornado.",
+      "Anexe a Skill nas chamadas via container.skills, passando skill_id e version. É lista — empilhe várias se precisar.",
+      "Se o procedimento faz trabalho real (gerar arquivo, calcular), ligue code execution na mesma chamada.",
+      "Mantenha o prompt do usuário enxuto: o 'como' mora na Skill, não no prompt."
+    ],
+    "dicas": [
+      "Pense em Skill como onboarding: você documenta o método uma vez e todo agente que toca naquela tarefa já entra sabendo o padrão.",
+      "Description boa é tudo. Como só o nome e a descrição carregam no início, é a descrição que faz o Claude decidir acionar (ou ignorar) a Skill. Descrição vaga = Skill que não dispara na hora certa.",
+      "Versione (version) de propósito. 'latest' é cômodo, mas fixar uma versão te dá saída reproduzível quando você atualiza a Skill em produção.",
+      "Skills empilham. Uma Skill de 'tom da marca' + uma de 'formato de relatório' na mesma chamada compõem sem você reescrever nada.",
+      "Se você já usa Skills no Claude Code (aquelas pastas SKILL.md locais), o conceito na API é o mesmo — muda só que aqui você sobe pra workspace e referencia por ID."
+    ],
+    "erros_comuns": [
+      "Confundir Skill com tool. Se o que falta é o Claude AGIR num sistema externo, é tool (ou MCP). Se o que falta é ele seguir o SEU procedimento, é Skill.",
+      "Usar messages.create padrão em vez de client.beta.messages.create, ou esquecer o beta header — na escrita Skills é feature beta e a chamada falha sem isso.",
+      "Colar o procedimento gigante no prompt 'pra garantir'. Se o método está na Skill, o prompt fica de uma linha. Duplicar tudo no prompt mata a vantagem.",
+      "Achar que Skill grande infla o contexto de todas as chamadas. Não infla: só nome e descrição carregam até o Claude decidir usar.",
+      "Descrição genérica do tipo 'ajuda com relatórios'. Aí a Skill não dispara na hora certa ou dispara fora de hora."
+    ],
+    "takeaway": "Tool é o QUE o Claude faz; Skill é o COMO você quer feito. Quando o formato e o procedimento importam tanto quanto o resultado, empacote o seu método num SKILL.md, suba uma vez e plugue via container.skills — e pare de colar template em prompt."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "09-mcp",
+    "titulo": "MCP: parar de fazer manutenção de integração que não é sua",
+    "resumo": "MCP é um protocolo padrão que deixa o serviço terceiro (Slack, Linear, GitHub) publicar e manter a integração, enquanto você só aponta o Claude pra ela. Você para de escrever e dar manutenção em wrapper de API que vive quebrando.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "MCP (Model Context Protocol)",
+        "definicao": "Protocolo aberto e padronizado pra conectar o Claude a serviços externos. Em vez de você codar a integração com cada API, o próprio serviço expõe um servidor MCP com suas tools, schemas e autenticação prontos."
+      },
+      {
+        "termo": "Servidor MCP",
+        "definicao": "O endpoint que o serviço terceiro publica e mantém. Ele descreve quais ferramentas oferece (ler issue, buscar mensagem, criar card) e como autenticar. Quando a API muda, quem atualiza é o dono do servidor, não você."
+      },
+      {
+        "termo": "Introspecção (discovery)",
+        "definicao": "O Claude consulta o servidor MCP e descobre sozinho a lista de tools e seus schemas. Você não escreve nenhuma definição de ferramenta — só aponta a conexão e o modelo lê o cardápio na hora."
+      },
+      {
+        "termo": "Toolset / filtro de tools",
+        "definicao": "O bloco de configuração que diz QUAIS ferramentas daquele servidor o Claude pode usar. O padrão é todas; dá pra desligar tudo e habilitar só as que você quer — útil pra travar em read-only e economizar contexto."
+      },
+      {
+        "termo": "Tools vs Skills vs MCP",
+        "definicao": "Tools = SEU código pros SEUS sistemas (você mantém). Skills = o SEU processo/procedimento (instrução, não integração). MCP = sistema dos OUTROS, mantido pelos outros. Escolha pela posse do código."
+      }
+    ],
+    "dicas": [
+      "Antes de codar uma integração custom, pergunte: o serviço já tem servidor MCP oficial? Se tem, você acabou de economizar semanas de manutenção. Olhe o catálogo em modelcontextprotocol.io.",
+      "Por padrão um servidor MCP entrega TODAS as tools dele — às vezes dezenas. Cada definição come contexto e abre superfície de erro. Habilite só o que a tarefa precisa.",
+      "Pra qualquer serviço que escreve/deleta (Slack, Linear, GitHub), comece em read-only: desligue tudo no default e ligue só as tools de leitura. Você libera escrita quando confiar no fluxo, não antes.",
+      "O conector MCP na API ainda é beta — confira a documentação atual pro header/flag de beta exigido. Em ambiente de produção, fixe a versão e teste antes de subir.",
+      "Guarde token de auth em variável de ambiente / .env, nunca hardcoded no código. Servidor MCP de terceiro tem acesso real à sua conta — trate a credencial como senha."
+    ],
+    "erros_comuns": [
+      "Confundir MCP com 'mais uma API por cima da API'. O ponto não é técnico, é de POSSE: quem dá manutenção quando a integração quebrar. Com MCP, é o serviço terceiro — não você às 23h.",
+      "Habilitar o servidor inteiro 'pra garantir' e deixar o Claude com permissão de escrita/exclusão num sistema de produção. Excesso de tool = excesso de contexto e excesso de risco.",
+      "Usar MCP pros SEUS sistemas internos. Pro seu banco e suas APIs proprietárias, o caminho é tool custom — MCP brilha justamente no que NÃO é seu.",
+      "Esquecer que é beta e mandar pra produção sem fixar versão nem ler o changelog. Conector em beta muda."
+    ],
+    "exemplo": {
+      "contexto": "Você quer que o Claude consulte seu Linear (issues, projetos) sem escrever uma linha de cliente Linear.",
+      "comandos": [
+        "1. No catálogo MCP, pegue o endpoint oficial do servidor do Linear",
+        "2. Gere o token de auth no Linear e salve no .env (ex: LINEAR_MCP_TOKEN)",
+        "3. Na chamada da API: declare a conexão no bloco de mcp_servers (tipo, URL, nome, token)",
+        "4. Libere o acesso com uma entrada de toolset apontando pro nome do servidor",
+        "5. Inclua o flag/header de beta exigido pelo conector MCP",
+        "6. Pergunte ao Claude: 'quais ferramentas você tem disponíveis?' — ele lista as do Linear"
+      ],
+      "explicacao": "Repare no que você NÃO fez: nenhum schema de ferramenta, nenhum cliente Linear, nenhum tratamento de paginação da API deles. O Claude faz introspecção no servidor, lê o cardápio de tools e escolhe a certa pro prompt. Quando o Linear mudar a API deles, eles atualizam o servidor — seu código continua igual. Se quiser travar em leitura, desligue tudo no default do toolset e habilite só as tools de consulta."
+    },
+    "passos": [
+      "Identifique se o serviço que você quer integrar tem servidor MCP oficial (catálogo em modelcontextprotocol.io)",
+      "Pegue o endpoint do servidor e gere o token de auth, guardando-o em variável de ambiente",
+      "Declare a conexão no bloco mcp_servers: tipo, URL, nome de referência e token",
+      "Conceda acesso com uma entrada de toolset apontando pro nome do servidor",
+      "Decida o escopo: tudo liberado, ou desligue no default e habilite só tools específicas (read-only)",
+      "Inclua o header/flag de beta do conector MCP e rode — o Claude descobre as tools sozinho"
+    ],
+    "takeaway": "MCP não é tecnologia por tecnologia — é terceirizar a manutenção da integração pra quem é dono dela. Você aponta, o Claude descobre, e o serviço terceiro segura o abacaxi quando a API mudar. Use pra sistema dos outros; pra sistema seu, continue com tool custom."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "10-context-management",
+    "titulo": "Context management: como não estourar a janela do Claude em produção",
+    "resumo": "A janela de contexto é finita e você paga por cada token que entra e sai. Gerenciar contexto é decidir o que carregar, o que descartar e o que reaproveitar para o agente não quebrar nem custar uma fortuna.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Janela de contexto",
+        "definicao": "O total de tokens que cabem numa única chamada à API. Mesmo com janelas grandes (200k, 1M), ela é finita: quando enche, a request falha. Tudo que o Claude lê numa rodada conta aqui — system prompt, histórico, definições de ferramenta, resultados de tool, arquivos e blocos de thinking."
+      },
+      {
+        "termo": "Just-in-time context",
+        "definicao": "Padrão de design: em vez de despejar tudo no prompt de início, você carrega só o que o agente precisa agora e deixa ele buscar o resto via tool quando pedir. Não é feature da API, é escolha de arquitetura."
+      },
+      {
+        "termo": "Server-side compaction",
+        "definicao": "Recurso da API que resume turnos antigos da conversa num bloco condensado quando o input cruza um limite. Você ativa passando o parâmetro context_management na request e a sumarização acontece automática, sem você contar tokens na mão."
+      },
+      {
+        "termo": "Prompt caching",
+        "definicao": "Você marca as partes estáveis da request (system prompt, definições de ferramenta, um documento grande) e o Claude reaproveita esse trecho em chamadas seguintes a uma fração do custo, em vez de reprocessar tudo do zero toda vez."
+      },
+      {
+        "termo": "Memory tool",
+        "definicao": "Ferramenta para contexto que precisa sobreviver entre sessões. O Claude lê e escreve num diretório de memória via tool calls; você implementa o backend de armazenamento (arquivos, banco, store cifrado) do seu lado."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Um agente de suporte que roda o dia inteiro respondendo clientes. O system prompt tem 5k tokens de regras e o histórico cresce sem parar — em produção isso vira custo alto e risco de estourar a janela.",
+      "explicacao": "Em vez de carregar a base de conhecimento inteira no prompt, você cacheia o system prompt e as tool definitions (que não mudam), ativa compaction para resumir conversas longas automaticamente, e deixa o agente buscar artigos específicos via tool só quando o cliente pergunta sobre aquele tema. As quatro coisas convivem na mesma chamada.",
+      "comandos": [
+        "context_management={\"edits\": [{\"type\": \"compact\"}]}",
+        "cache_control={\"type\": \"ephemeral\"}  # no bloco estável do system prompt",
+        "tools=[{\"name\": \"buscar_artigo\", ...}]  # just-in-time, não pré-carrega tudo"
+      ]
+    },
+    "passos": [
+      "Mapeie o que entra na janela hoje: system prompt, histórico, tools, arquivos, thinking. Você não controla o que não mede.",
+      "Identifique o que é estável entre chamadas (system prompt, tool definitions, documentos fixos) e ative prompt caching nesses blocos.",
+      "Para conversas longas, ligue server-side compaction com o parâmetro context_management em vez de cortar histórico na mão.",
+      "Tire do prompt tudo que o agente só precisa às vezes e exponha como tool — deixe ele buscar just-in-time.",
+      "Se algo precisa durar entre sessões (preferências, decisões, notas), use a memory tool com seu próprio backend de armazenamento."
+    ],
+    "dicas": [
+      "Cada padrão resolve um problema diferente: caching ataca custo, compaction ataca tamanho da janela, memory tool ataca o fato de a API ser stateless. Escolha pelo que está quebrando, não pela moda.",
+      "Faça a conta do caching antes de decidir: system prompt de 4k tokens chamado 100x por hora é onde o cache deixa de ser detalhe e vira a diferença na fatura.",
+      "Janela grande não é desculpa pra encher de lixo. Quanto mais entulho no contexto, pior a qualidade da resposta — o modelo se perde no meio do ruído.",
+      "Agentes gerenciados do Claude já vêm com caching e compaction ligados por padrão. Se não quer montar tudo na mão, comece por aí."
+    ],
+    "erros_comuns": [
+      "Despejar a base de conhecimento inteira no system prompt 'pra garantir' — você paga por isso em todo request e ainda piora a resposta.",
+      "Achar que 1M de tokens é infinito. Num agente real que faz muitas tool calls, a janela enche rápido e a request começa a falhar.",
+      "Cortar histórico na unha com lógica caseira em vez de usar compaction, e acabar jogando fora justo o turno que importava.",
+      "Esquecer que você paga o contexto na entrada E na saída — contexto inflado encarece toda chamada, não só a primeira.",
+      "Usar memory tool achando que a Anthropic guarda os dados pra você. O armazenamento é seu: se você não implementar o backend, nada persiste."
+    ],
+    "takeaway": "Contexto não é grátis nem infinito: o jogo não é caber tudo na janela, é colocar as coisas certas. Cacheie o estável, compacte o antigo, busque o ocasional via tool e persista entre sessões com a memory tool."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "11-what-are-managed-agents",
+    "titulo": "O que são Managed Agents (e quando vale a pena não rodar o loop você mesmo)",
+    "resumo": "Managed Agents é a Anthropic rodando o loop do agente (raciocinar, chamar ferramenta, ler resultado, repetir) dentro de um container isolado na infra dela. Você define o agente, dispara a sessão da sua aplicação e recebe o trabalho pronto, sem manter servidor de execução.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Agent loop",
+        "definicao": "O ciclo que faz um agente ser agente: o modelo raciocina, decide chamar uma ferramenta, lê o resultado e repete até a tarefa fechar. Se você já montou agente na mão, é exatamente esse while que você escreveu. Managed Agents é esse loop hospedado na Anthropic em vez de no seu servidor."
+      },
+      {
+        "termo": "Sessão (Session)",
+        "definicao": "Uma execução individual do agente que você dispara via API a partir do seu app. Cada sessão roda no seu próprio container isolado, com filesystem, bash e acesso à web. Pode disparar várias em paralelo, uma não enxerga a outra."
+      },
+      {
+        "termo": "Environment",
+        "definicao": "O sandbox que você pré-configura: quais pacotes estão instalados, o que pode acessar a rede e o que não pode. É o que garante que o agente já abre com as ferramentas certas e dentro de limites que você definiu, em vez de improvisar."
+      },
+      {
+        "termo": "Memory store",
+        "definicao": "Um repositório de estado que o agente lê ANTES de começar e escreve DEPOIS de terminar. É o que transforma um agente amnésico (que recomeça do zero toda vez) num agente que sabe o que mudou desde a última rodada."
+      },
+      {
+        "termo": "Rubrica e grader",
+        "definicao": "Você descreve em texto o que é 'pronto' (a rubrica) e um avaliador separado, rodando no próprio contexto, dá nota ao resultado. O agente lê esse feedback, volta e corrige o que faltou. É controle de qualidade automático, não confiança cega na primeira tentativa."
+      },
+      {
+        "termo": "Coordenação multi-agente",
+        "definicao": "Um agente coordenador recebe a tarefa e delega para especialistas, cada um no seu contexto, sobre o mesmo filesystem. Os especialistas reportam, o coordenador junta tudo numa resposta só. Útil quando a tarefa tem frentes distintas que ganham rodando separadas."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Decidindo entre rodar o loop você mesmo (SDK + seu servidor) ou usar Managed Agents para uma rotina de agente que roda toda segunda de manhã.",
+      "explicacao": "A pergunta certa não é 'qual é mais moderno', é 'eu quero ser dono da infra de execução?'. Se a tarefa é stateful, recorrente e roda em paralelo, manter container, sandbox e fila de execução de pé é custo de operação que não te diferencia em nada. Managed Agents tira esse fardo: você cuida da definição do agente e do gatilho, a Anthropic cuida do isolamento e do loop. Os comandos abaixo são o esqueleto conceitual do fluxo via API, não copie como SDK literal — confira a doc da sua versão.",
+      "comandos": [
+        "# 1. Definir o agente: persona, ferramentas, rubrica",
+        "# 2. Configurar o environment (pacotes + controle de rede)",
+        "# 3. Disparar a sessão a partir do SEU backend, no gatilho que fizer sentido",
+        "# 4. Consumir o event stream pra acompanhar cada tool call em tempo real",
+        "# 5. Deixar o grader validar contra a rubrica e o agente iterar até passar"
+      ]
+    },
+    "passos": [
+      "Mapeie a tarefa antes de escolher ferramenta: ela é stateful (precisa lembrar) e recorrente, ou é one-shot? Managed Agents brilha no primeiro caso.",
+      "Defina o agente: persona, conjunto de ferramentas e, principalmente, a rubrica do que é 'pronto'. Sem rubrica clara, qualquer agente entrega 'mais ou menos'.",
+      "Configure o environment com os pacotes que a tarefa exige e trave o acesso de rede ao mínimo necessário. Sandbox aberto demais é problema esperando acontecer.",
+      "Conecte memória e MCP onde houver estado externo: memory store pra comparar com a rodada anterior, MCP pra agir em Slack, Asana, planilha etc.",
+      "Dispare a sessão pelo gatilho real do seu produto (um card movido, um cron, um alerta de monitoramento) e consuma o event stream pra ter visibilidade do que o agente está fazendo.",
+      "Coloque permissões em ações sensíveis: antes de mandar mensagem pro cliente ou mexer em prod, exija aprovação humana. Autonomia sem freio é risco, não recurso."
+    ],
+    "erros_comuns": [
+      "Achar que Managed Agents é 'mágica que dispensa pensar'. Você ainda define o que é sucesso. A diferença é que você não opera o servidor de execução, não que o agente adivinha o que você quer.",
+      "Pular a rubrica e o grader. Sem critério explícito de 'pronto', o agente para na primeira resposta plausível e você descobre o buraco depois, em produção.",
+      "Deixar o environment com rede totalmente aberta 'pra não dar erro'. Isso é dívida de segurança. Configure o mínimo e abra só o que a tarefa precisa.",
+      "Confundir agente recorrente com agente sem memória. Se você não plugar o memory store, toda rodada recomeça do zero e o relatório de segunda repete os mesmos dados estáticos da semana passada.",
+      "Dar autonomia total em ações irreversíveis. Mensagem pro cliente, deploy, deleção: isso passa por política de permissão e olho humano. Sempre."
+    ],
+    "dicas": [
+      "Comece pela rubrica, não pela persona. Se você não consegue escrever em três linhas o que é 'pronto', o agente também não vai saber.",
+      "Use o memory store cedo. É a diferença entre um agente que reporta dado morto e um que reporta o delta ('caiu 15% desde a semana passada').",
+      "Acompanhe o event stream nas primeiras semanas como se fosse log de produção. Você aprende rápido onde o agente trava e onde a rubrica está frouxa.",
+      "Trave ações sensíveis atrás de aprovação humana desde o dia um. É mais barato afrouxar depois do que limpar estrago.",
+      "Pense em paralelismo desde o desenho: sessões são isoladas, então disparar dez de uma vez é natural. Não force serial o que pode rodar junto."
+    ],
+    "takeaway": "Managed Agents não inventa um agente melhor — pega o loop que você já escreveria e roda na infra da Anthropic, com sandbox, memória, rubrica e permissões prontos. Você continua dono da definição: o que o agente faz e o que é 'pronto'. O que sai das suas costas é operar o servidor. Use quando a tarefa for stateful, recorrente e paralela; não use pra justificar não pensar no critério de sucesso."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "12-building-your-first-managed-agent",
+    "titulo": "Seu primeiro managed agent: deixa o loop rodar na infra da Anthropic",
+    "resumo": "Managed agent é o loop do agente rodando na infraestrutura da Anthropic, não no seu servidor. Você descreve o agente, abre uma sessão e só consome o stream de eventos enquanto ele trabalha.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Managed agent",
+        "definicao": "Um agent loop que executa dentro da infra da Anthropic em vez do seu backend. Você para de escrever o while loop, o tratamento de stop_reason e a execução de ferramentas na mão. Em vez disso, manda eventos pra dentro e lê eventos que saem. Vem ligado por padrão em qualquer conta da API, sem acesso especial."
+      },
+      {
+        "termo": "Agent (o primitivo)",
+        "definicao": "A persona reutilizável: modelo, system prompt e conjunto de ferramentas. Você cria uma vez e reaproveita em N execuções. Pensa nele como a definição do funcionário, não o turno de trabalho."
+      },
+      {
+        "termo": "Environment",
+        "definicao": "O sandbox onde o agente roda de verdade: cloud ou local, config de rede, etc. É o container onde arquivos são escritos, comandos rodam e o estado vive. Separado do Agent de propósito."
+      },
+      {
+        "termo": "Session",
+        "definicao": "Uma execução única de um Agent dentro de um Environment. É a unidade de trabalho. Uma sessão pode rodar por minutos ou horas, manter estado e retomar depois de uma falha de rede."
+      },
+      {
+        "termo": "Events",
+        "definicao": "O que flui pra dentro e pra fora da sessão: a mensagem que você manda (user.message), o texto do Claude (agent.message), as chamadas de ferramenta (agent.tool_use) e o sinal de que terminou (session.status_idle). Tudo é evento, tudo é plural."
+      },
+      {
+        "termo": "Agent toolset",
+        "definicao": "O pacote pronto de ferramentas da Anthropic (arquivo, bash, web) que você habilita com um type tipo agent_toolset_*. Pra tarefas comuns de mexer em arquivo e rodar comando, você não precisa definir ferramenta nenhuma."
+      }
+    ],
+    "exemplo": {
+      "contexto": "O fluxo mínimo de ponta a ponta: criar agente, criar environment, abrir o stream ANTES de mandar a kickoff, e consumir os eventos. A ordem aqui não é detalhe — o stream só entrega evento que acontece depois que ele abre.",
+      "comandos": [
+        "agent = client.beta.agents.create(name='Faxina', model='claude-opus-4-8', system='Voce organiza arquivos.', tools=[{'type':'agent_toolset_20260401','default_config':{'enabled':True}}])",
+        "env = client.beta.environments.create(name='faxina-env', config={'type':'cloud','networking':{'type':'unrestricted'}})",
+        "session = client.beta.sessions.create(agent=agent.id, environment_id=env.id, title='Organiza a pasta')",
+        "with client.beta.sessions.events.stream(session_id=session.id) as stream:",
+        "    client.beta.sessions.events.send(session_id=session.id, events=[{'type':'user.message','content':[{'type':'text','text':'Organiza os arquivos da pasta /tmp/entrada por projeto.'}]}])",
+        "    for event in stream:",
+        "        if event.type == 'agent.tool_use': print('[tool]', event.name)",
+        "        elif event.type == 'session.status_idle': break"
+      ],
+      "explicacao": "Repara que não tem loop de controle seu. Você abre o canal, joga a tarefa lá dentro e fica lendo o que volta. O while loop, o sandbox e a retomada depois de falha são responsabilidade da Anthropic. O seu código vira basicamente um consumidor de stream."
+    },
+    "dicas": [
+      "Abra o stream ANTES de mandar a mensagem de kickoff. O stream não tem histórico — ele só entrega o que acontece depois de abrir. Mandar a kickoff primeiro é o erro número um e você perde os primeiros eventos sem entender por quê.",
+      "Não confunda o Agent com a Session. O Agent (modelo + prompt + tools) é reutilizável, crie uma vez e rode em N sessões. Recriar o agente a cada tarefa é desperdício e bagunça o seu código.",
+      "Use o agent_toolset pronto antes de sair definindo ferramenta na mão. Pra 80% das tarefas de 'mexe nesses arquivos pra mim', file + bash + web já resolve.",
+      "Trate session.status_idle como o seu sinal de 'acabou' e dê break no loop. Sem isso seu consumidor fica pendurado esperando evento que não vem.",
+      "Escolha managed agent quando o loop for rodar demais, fizer coisa demais ou precisar sobreviver a um soluço de rede. Se você quer controle fino de cada passo, fica no loop manual mesmo — não é regra de ouro, é escolha de arquitetura."
+    ],
+    "erros_comuns": [
+      "Mandar a kickoff antes de abrir o stream e jurar que a API tá quebrada porque 'não chega evento nenhum'. A ordem é abrir, depois enviar.",
+      "Achar que managed agent serve pra tudo. Pra um tool use rápido de um turno só, isso é overkill — a graça aparece em tarefa longa, com estado e arquivos.",
+      "Esquecer que o environment é cloud e o arquivo é escrito LÁ, não no seu disco. Se você quer o resultado de volta, o agente tem que reportar ou você puxa do sandbox — não vai aparecer no seu /tmp local.",
+      "Tratar 'events' como singular. A API é toda no plural: você envia uma lista de eventos e lê um fluxo de eventos."
+    ],
+    "passos": [
+      "Crie o Agent uma vez: nome, modelo, system prompt e o toolset (ex.: o agent_toolset pronto).",
+      "Crie o Environment: cloud ou local, com a config de rede que a tarefa exige.",
+      "Crie a Session ligando aquele Agent àquele Environment — essa é a sua unidade de trabalho.",
+      "Abra o stream de eventos da sessão (sempre antes de mandar a tarefa).",
+      "Com o stream aberto, envie a user.message de kickoff descrevendo o que você quer.",
+      "Consuma os eventos: agent.message pro texto, agent.tool_use pras ferramentas, session.status_idle pra saber que terminou."
+    ],
+    "takeaway": "Managed agent é o agent loop entregue pronto: você descreve o agente, abre uma sessão e consome o stream, enquanto a Anthropic cuida do loop, do sandbox e da retomada. Use em tarefa longa que toca arquivo e precisa aguentar tranco — no loop rápido de um turno, continua na mão."
+  },
+  {
+    "curso": "claude-platform-101",
+    "slug": "13-building-with-claude-code",
+    "titulo": "Building with Claude Code: pare de digitar boilerplate da API",
+    "resumo": "Em vez de escrever na mão o código que chama a API da Claude, você deixa o próprio Claude Code escrever, rodar e corrigir dentro do seu terminal. É delegação de verdade, não autocomplete.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Claude Code",
+        "definicao": "Um agente que vive no seu terminal: ele lê seus arquivos, edita código, roda comandos e lê a saída (inclusive os erros) pra se corrigir. Não é um chat que cospe snippet pra você copiar — ele mexe no projeto de verdade."
+      },
+      {
+        "termo": "Skill /claude-api",
+        "definicao": "Uma skill embutida que carrega o conhecimento atualizado da API e do SDK da Claude (modelos, parâmetros, tool use). Você pode chamar na mão com /claude-api, mas ela costuma entrar sozinha quando o Claude Code percebe que você está mexendo no SDK. Serve pra ele não chutar nome de modelo nem assinatura de função de memória."
+      },
+      {
+        "termo": "Stub-first (programar a partir do esqueleto)",
+        "definicao": "Você escreve só a assinatura das funções (o que entra, o que sai) e deixa o corpo vazio. Esse esqueleto vira o contrato: o agente preenche a implementação respeitando os tipos que você definiu. Você decide a forma, ele faz o trabalho braçal."
+      },
+      {
+        "termo": "Tool runner / agent loop",
+        "definicao": "A peça que cuida do laço de tool use por você: o modelo pede pra usar uma ferramenta, o runner executa, devolve o resultado pro modelo e repete até a resposta final. É o pedaço chato de fiação que ninguém quer escrever na mão toda vez."
+      },
+      {
+        "termo": "Review do diff",
+        "definicao": "Em vez de revisar prompt e resposta, você revisa a mudança de código (o diff). É onde mora seu Discernment: o agente produz, você julga se está certo, seguro e do jeito que o projeto pede antes de aceitar."
+      }
+    ],
+    "passos": [
+      "Tenha o esqueleto pronto: um arquivo com as funções stubadas (assinatura e tipos definidos, corpo vazio). Isso é o seu contrato.",
+      "Abra a pasta do projeto no terminal e suba o Claude Code de dentro dela, pra ele ter acesso aos arquivos.",
+      "Se a skill da API não carregar sozinha, chame na mão com /claude-api — ou adicione o marketplace de skills oficiais (cuidado: o nome do repositório oficial termina com 's', é fácil errar).",
+      "Mande UM prompt que diz três coisas: qual arquivo mexer, qual padrão usar (ex.: tool runner do SDK) e qual o estado final esperado (rodar e imprimir o resultado).",
+      "Deixe ele trabalhar: preencher as funções, adicionar uma chamada de teste no fim do arquivo, executar o script e ler a saída. Se der erro, ele lê a mensagem e corrige no lugar.",
+      "Revise o diff antes de aceitar. O agente entrega, mas a decisão de mergear é sua."
+    ],
+    "exemplo": {
+      "contexto": "Você tem um arquivo TypeScript pra buscar clima, com duas funções stubadas: getWeather (recebe uma cidade, devolve temperatura e condição) e run (deve usar o tool runner do SDK). Os tipos já estão escritos; o corpo está vazio.",
+      "comandos": [
+        "claude",
+        "No arquivo src/weather.ts, implemente getWeather e run usando o tool runner do SDK da Claude, respeitando os tipos que já estão definidos. No fim do arquivo, chame run com uma cidade de exemplo, execute o script e me mostre a saída. Se der erro, corrija e rode de novo."
+      ],
+      "explicacao": "Repare que o prompt nomeia o arquivo (src/weather.ts), nomeia o padrão (tool runner do SDK) e nomeia o estado final (rodar e imprimir). Com isso o Claude Code define a tool com schema de entrada/saída, entrega pro runner, fecha o laço de tool use e imprime o resultado. Você não digitou o boilerplate — só descreveu o contrato e revisou o diff."
+    },
+    "dicas": [
+      "Prompt bom = arquivo + padrão + estado final. Sem essas três âncoras o agente vira adivinhação, e você gasta mais tempo corrigindo do que teria gasto escrevendo.",
+      "Stub primeiro, delega depois. Quem manda na forma é você (tipos, assinaturas); o agente preenche o miolo. Isso transforma 'escreva código pra mim' em 'preencha este contrato'.",
+      "Deixe ele rodar o código. Metade do valor está no loop de executar-ler-erro-corrigir. Um agente que só escreve e não roda te devolve código que parece certo mas não foi testado.",
+      "Confie na skill /claude-api pra acertar modelo e parâmetros. Conhecimento de API muda; deixe a skill puxar o atual em vez do agente recitar de memória.",
+      "Quase tudo que você escreve contra a API tem a mesma forma: define uma tool, entrega pra um runner, devolve o resultado. Decore o padrão, não o boilerplate."
+    ],
+    "erros_comuns": [
+      "Pedir 'escreve o código' sem stub nem tipos: o agente inventa a interface e você acaba refazendo. Defina o contrato antes.",
+      "Não deixar o agente executar o script: aí você recebe código que 'deveria funcionar' em vez de código que rodou e imprimiu o resultado.",
+      "Aceitar o diff no automático sem revisar. Delegação não é abdicação — o Discernment continua sendo seu trabalho.",
+      "Errar o nome do marketplace de skills oficiais (esquecer o 's' no fim) e achar que a skill não existe."
+    ],
+    "takeaway": "Escrever na mão o código que chama a Claude API funciona, mas é lento. O atalho real é: stuba o arquivo com os tipos, descreve o contrato em um prompt (arquivo + padrão + estado final), deixa o Claude Code escrever, rodar e corrigir — e você só revisa o diff."
+  }
+]

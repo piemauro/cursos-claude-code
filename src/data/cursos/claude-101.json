@@ -1,0 +1,800 @@
+[
+  {
+    "curso": "claude-101",
+    "slug": "01-what-is-claude",
+    "titulo": "O que é o Claude (e por que ele não é \"só mais um chatbot\")",
+    "duracao_leitura": "8-10 minutos",
+    "resumo": "Claude é o modelo de IA da Anthropic que você usa como parceiro de trabalho, não como caixinha de perguntas. Esta aula separa o que ele realmente faz na sua operação do hype de marketing.",
+    "conceitos": [
+      {
+        "termo": "Claude",
+        "definicao": "O modelo de linguagem (LLM) da Anthropic. É a 'inteligência' por trás de tudo: você acessa ela pelo claude.ai, pelo app, pelo Claude Code ou pela API. O nome da família de modelos atuais é Opus (o mais capaz), Sonnet (equilíbrio custo/capacidade) e Haiku (rápido e barato)."
+      },
+      {
+        "termo": "Constitutional AI",
+        "definicao": "O método de treino da Anthropic que dá ao Claude um conjunto de princípios explícitos pra se guiar (tipo uma 'constituição'), em vez de depender só de humanos rotulando resposta boa/ruim. Na prática: ele tende a ser mais previsível e menos propenso a sair dos trilhos quando você pede algo sensível."
+      },
+      {
+        "termo": "Janela de contexto",
+        "definicao": "Quanto texto o Claude consegue 'segurar na cabeça' numa mesma conversa, medido em tokens. Hoje gira em 200K tokens no padrão (uns 500 páginas) e chega a 1M em planos pagos com modelos suportados. Quanto maior, mais material você joga de uma vez (contrato inteiro, base de código, planilha) sem ele esquecer o começo."
+      },
+      {
+        "termo": "Extended thinking (raciocínio estendido)",
+        "definicao": "Modo em que o modelo 'pensa' passo a passo antes de responder, em vez de cuspir a resposta na hora. Vale pra problema que exige análise (matemática, estratégia, código difícil). Custa mais tempo/token, então não é pra toda pergunta boba."
+      },
+      {
+        "termo": "Steerability (dirigibilidade)",
+        "definicao": "A capacidade de você moldar tom, personalidade e formato da resposta com instrução. Claude segue direção bem — você diz 'responde curto, sem floreio, em bullets' e ele obedece. É isso que transforma ele de chatbot genérico em ferramenta sua."
+      },
+      {
+        "termo": "Tokens",
+        "definicao": "A unidade de texto que o modelo processa. Um token é mais ou menos 4 caracteres em inglês (em português costuma ser um pouco menos eficiente). Importa porque contexto, custo de API e limites são todos medidos em token, não em palavra."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você tem um e-mail de reclamação longo de um cliente e precisa responder com firmeza, mas sem perder a conta. Em vez de pedir 'me ajuda a responder' (vago), você dá direção.",
+      "explicacao": "A diferença de resultado entre o prompt vago e o dirigido é gritante. Quanto mais você assume o papel de quem delega (define papel, tom, formato e restrição), melhor o output. Isso é steerability na prática — e é o hábito que separa quem tira 20% do Claude de quem tira 80%.",
+      "comandos": [
+        "Prompt fraco: 'responde esse e-mail do cliente pra mim'",
+        "Prompt forte: 'Você é o head de atendimento. Responde esse e-mail mantendo o cliente, reconhecendo a falha sem prometer reembolso, em no máximo 3 parágrafos, tom firme e profissional. Aqui está o e-mail: [cola o texto]'"
+      ]
+    },
+    "dicas": [
+      "Pare de tratar o Claude como Google. Pergunta de uma linha gera resposta de uma linha. Dê contexto, papel e o resultado que você quer — é trabalho de delegação, não de busca.",
+      "Use a janela de contexto grande a seu favor: cole o documento, a planilha, o código inteiro. Ele raciocina melhor sobre material real do que sobre você descrevendo o material de memória.",
+      "Ative o raciocínio estendido só quando o problema pede análise. Pra rascunhar um e-mail ou resumir, não precisa — só queima tempo.",
+      "Sua conversa, projetos e preferências sincronizam entre web, desktop e celular logado na mesma conta. Comece no computador, termine no celular.",
+      "Escolha o modelo certo pro trabalho: Opus pra raciocínio pesado e código difícil, Sonnet pro dia a dia, Haiku quando velocidade e volume importam mais que profundidade."
+    ],
+    "erros_comuns": [
+      "Achar que Claude 'sabe tudo da internet em tempo real'. Sem uma ferramenta de busca conectada, ele responde do conhecimento de treino, que tem data de corte. Pra fato recente, conecte busca ou cole a fonte.",
+      "Confiar cegamente em número, citação ou jurisprudência sem conferir. Modelo pode errar com confiança. Discernimento é seu trabalho, não dele.",
+      "Mandar prompt de uma linha e culpar a ferramenta pelo resultado raso. Output ruim quase sempre é input ruim.",
+      "Usar Opus pra tudo e reclamar de lentidão/custo, ou usar Haiku num problema que exigia raciocínio e levar resposta superficial."
+    ],
+    "passos": [
+      "Entenda que 'Claude' é a inteligência, e você a acessa por interfaces diferentes (claude.ai e apps pra conversa; Claude Code pra mexer em arquivo e rodar comando no terminal).",
+      "Antes de pedir algo, defina: qual o papel que ele assume, qual o tom, qual o formato e qual a restrição.",
+      "Junte o material real (documento, dados, código) e cole na conversa em vez de descrever de memória.",
+      "Para tarefa simples, peça resposta direta. Para análise, peça raciocínio estendido.",
+      "Revise o output com olho crítico — confira números e fatos — e itere dando feedback específico, não 'tá ruim, refaz'."
+    ],
+    "takeaway": "Claude não é uma máquina de respostas — é um parceiro de trabalho que você dirige. O resultado é proporcional à qualidade da sua delegação: quem dá papel, contexto e formato tira 4x mais do que quem manda pergunta solta."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "02-your-first-conversation-with-claude",
+    "titulo": "Sua primeira conversa com o Claude: pare de tratar como busca e comece a tratar como colega",
+    "duracao_leitura": "8 min",
+    "resumo": "A diferença entre um resultado medíocre e um resultado útil não está no Claude, está no quanto de contexto você dá. Quem trata a conversa como um diálogo com um colega novo na equipe extrai 10x mais do que quem digita uma pergunta seca e espera mágica.",
+    "conceitos": [
+      {
+        "termo": "Contexto antes de tarefa",
+        "definicao": "O modelo é competente, mas não sabe quem você é, qual o seu negócio ou o que está em jogo. Quem você é, pra quem é o material e qual o objetivo pesam mais no resultado do que o capricho da pergunta em si."
+      },
+      {
+        "termo": "Prompt como briefing de 3 camadas",
+        "definicao": "Um bom prompt cobre: cenário (seu papel, seu objetivo, restrições), tarefa (a ação concreta: escrever, analisar, comparar, construir) e regras (formato, tom, tamanho, exemplos do que você espera)."
+      },
+      {
+        "termo": "Conversa iterativa",
+        "definicao": "O valor real não vem do primeiro prompt perfeito, vem do vai-e-volta. Você manda algo, lê a resposta, corrige o rumo. Pensar em ciclos curtos rende mais que tentar acertar tudo de primeira."
+      },
+      {
+        "termo": "Anexos como atalho de contexto",
+        "definicao": "Subir PDF, planilha, print ou código economiza parágrafos de explicação. Em vez de descrever sua realidade, você entrega a realidade e pede pra trabalhar em cima dela."
+      },
+      {
+        "termo": "AI Fluency (4D)",
+        "definicao": "Framework de quatro competências pra trabalhar com IA: Delegation (o que vale delegar), Description (como descrever bem o pedido), Discernment (avaliar criticamente a resposta) e Diligence (responsabilidade sobre o que sai). É a base por trás de 'dar contexto e iterar'."
+      },
+      {
+        "termo": "Memória e Styles",
+        "definicao": "Memória guarda contexto recorrente seu (papel, preferências, decisões) pra você não repetir tudo a cada chat. Styles fixam o jeito de escrever (conciso, formal, didático ou um estilo seu) em todas as conversas."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você precisa de um e-mail de cobrança amigável pra um cliente que está com a fatura atrasada há 10 dias.",
+      "explicacao": "O prompt fraco (à esquerda) força o Claude a inventar tudo: empresa, tom, contexto. O prompt forte entrega as 3 camadas — cenário, tarefa e regras — e o resultado vem usável de primeira ou quase.",
+      "comandos": [
+        "FRACO: 'escreve um e-mail de cobrança'",
+        "FORTE: 'Sou dono de uma agência de marketing e preciso cobrar um cliente recorrente bom, fatura de R$6 mil atrasada há 10 dias. Escreva um e-mail curto (até 120 palavras), tom cordial e sem drama, que preserve a relação, lembre do valor e dê uma saída fácil (link de pagamento ou parcelamento). Assina como Pietro.'",
+        "FOLLOW-UP: 'ficou bom, mas tira o tom de pedido de desculpa e deixa mais direto'",
+        "FOLLOW-UP: 'agora me faz uma versão pra WhatsApp, 3 linhas'"
+      ]
+    },
+    "passos": [
+      "Abra um chat novo e, antes de pedir qualquer coisa, escreva quem você é e qual o objetivo (cenário).",
+      "Diga a ação concreta que quer: escrever, analisar, comparar, resumir, construir (tarefa).",
+      "Adicione as regras: formato, tom, tamanho e, se tiver, um exemplo do que você considera bom.",
+      "Em vez de descrever sua realidade em texto, anexe o arquivo de verdade (PDF, planilha, print, código) e peça pra trabalhar em cima dele.",
+      "Leia a resposta de forma crítica e itere: peça pra expandir um ponto, mudar o tom, encurtar ou redirecionar.",
+      "Use o lápis pra editar e reenviar seu próprio prompt quando quiser refinar o pedido em vez de empilhar mensagens.",
+      "Configure Memória e um Style pra parar de repetir contexto a cada nova conversa."
+    ],
+    "erros_comuns": [
+      "Tratar o Claude como caixa de busca: digitar 3 palavras e esperar um resultado pronto pro seu contexto específico.",
+      "Caçar o 'prompt perfeito' de primeira em vez de iterar. Mandar algo decente e corrigir o rumo é mais rápido e dá resultado melhor.",
+      "Descrever em texto um documento que você poderia simplesmente anexar — desperdício de tempo e fonte de erro.",
+      "Aceitar a primeira resposta sem checar criticamente. O modelo erra; a responsabilidade pelo que sai é sua (Diligence).",
+      "Empilhar correções num chat já poluído quando o melhor seria editar o prompt original ou começar um chat limpo.",
+      "Não usar Memória/Styles e ficar repetindo 'sou X, trabalho com Y, escreva assim' em todo chat novo."
+    ],
+    "dicas": [
+      "Fale com o Claude como falaria com um colega novo e competente que acabou de entrar: ele é bom, mas não sabe nada do seu contexto até você contar.",
+      "Anexo vale mais que parágrafo. Sempre que puder mostrar em vez de descrever, mostre.",
+      "Pense em ciclos curtos: pedido pequeno, leitura, ajuste. É assim que a conversa vira ferramenta de trabalho, não pergunta avulsa.",
+      "Configure um Style com o seu tom de escrita uma vez e pare de pedir 'seja direto, sem enrolação' em todo chat.",
+      "Quando a conversa sair muito do trilho, não insista: abra um chat novo pra zerar o contexto."
+    ],
+    "takeaway": "O Claude traz a inteligência; você traz o contexto. Dê cenário, tarefa e regras, anexe o que puder e trate como diálogo — não como busca. É aí que o resultado deixa de ser genérico e vira operação."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "03-getting-better-results",
+    "titulo": "Tirando resultado melhor do Claude (sem mágica, na base do método)",
+    "duracao_leitura": "7 min",
+    "resumo": "Resposta ruim do Claude quase nunca é \"o modelo é fraco\" — é prompt sem contexto, sem formato definido ou expectativa errada de que sai pronto de primeira. Aqui você aprende a diagnosticar o que deu errado e corrigir na hora.",
+    "conceitos": [
+      {
+        "termo": "Resposta genérica",
+        "definicao": "Quando o Claude responde no automático, com cara de blog post, é sinal de que faltou contexto: quem é o público, qual seu papel, quais as restrições. O modelo preencheu as lacunas com média de internet. A correção é dar os detalhes que estavam só na sua cabeça."
+      },
+      {
+        "termo": "Iteração",
+        "definicao": "Encarar o primeiro output como rascunho, não como entrega. Você lê, aponta o que serve e o que não serve, e refina. Conversar com o Claude rende mais do que tentar escrever o prompt perfeito de uma vez."
+      },
+      {
+        "termo": "Alucinação",
+        "definicao": "O Claude às vezes afirma algo errado com toda a confiança do mundo, principalmente em fatos específicos, números e nichos. Não é mentira proposital, é o modelo gerando o que parece plausível. Em trabalho sério, você confere a fonte."
+      },
+      {
+        "termo": "AI Fluency (framework 4D)",
+        "definicao": "Modelo de competências pra colaborar bem com IA: Delegation (o que vale jogar pra IA), Description (comunicar bem o que você quer), Discernment (avaliar criticamente o output) e Diligence (usar com responsabilidade e assinar embaixo do resultado)."
+      },
+      {
+        "termo": "Eval",
+        "definicao": "Teste estruturado pra medir se o Claude é bom de verdade numa tarefa SUA. Você pega exemplos reais que já fez, roda o mesmo trabalho no Claude e compara. Tira a decisão do achismo e bota em cima de evidência."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você quer que o Claude escreva um e-mail avisando um cliente sobre atraso na entrega. O primeiro prompt vago entrega um texto morno e genérico.",
+      "explicacao": "Repare a diferença: o segundo prompt carrega contexto (relação com o cliente, histórico, tom desejado) e formato (tamanho). É exatamente a informação que estava só na sua cabeça. Não é prompt mais comprido por capricho — é prompt mais informado.",
+      "comandos": [
+        "Vago: 'Escreve um e-mail avisando que vamos atrasar a entrega.'",
+        "Operacional: 'Escreve um e-mail pro cliente (agência, relação de 8 meses, sempre pagou em dia) avisando que a entrega da landing page vai atrasar 3 dias úteis por causa de um ajuste de tracking. Tom direto e honesto, sem rodeio nem desculpa exagerada. Máximo 5 linhas.'",
+        "Depois, iterando: 'Tá bom, mas tira a parte do tracking — pro cliente é detalhe técnico. Foca na data nova e em garantir que não impacta a campanha.'"
+      ]
+    },
+    "passos": [
+      "Antes de reclamar do output, diagnostique: faltou contexto, faltou formato definido, ou sua expectativa de que sairia pronto de primeira estava errada?",
+      "Adicione o contexto que estava implícito na sua cabeça: público, seu papel, restrições, histórico.",
+      "Especifique o formato na unha: 'em bullets', 'máximo 100 palavras', 'tabela com 3 colunas'. Melhor ainda, cole um exemplo do formato que você quer.",
+      "Trate a primeira resposta como rascunho. Dê feedback cirúrgico ('corta os dois primeiros parágrafos'), não vago ('deixa melhor').",
+      "Quando a conversa azedar e você ficar empurrando, abra um chat novo com um prompt mais limpo. Costuma ser mais rápido que insistir.",
+      "Pra tarefa recorrente que importa, monte um eval simples: 5-10 exemplos reais que você já fez, rode no Claude, compare lado a lado e ajuste o prompt."
+    ],
+    "dicas": [
+      "Resposta genérica é quase sempre culpa de prompt sem contexto, não do modelo. A informação que faltou estava na sua cabeça, não no prompt.",
+      "Mostre, não só descreva. Pra formato e tom, um exemplo colado vale mais que três frases explicando.",
+      "Pra trabalho de alto risco (número, dado jurídico, fato específico) ligue a busca na web e peça a fonte. Confiança no texto não é garantia de acerto.",
+      "Feedback cirúrgico rende mais que feedback vago: 'deixa a conclusão mais acionável' bate 'melhora isso'.",
+      "Não tente acertar o prompt perfeito de primeira. É conversa, não tiro único — itera."
+    ],
+    "erros_comuns": [
+      "Achar que resposta ruim = modelo ruim, quando o problema é prompt sem contexto.",
+      "Pedir 'um texto' sem dizer tamanho nem formato e depois reclamar que veio do tamanho errado.",
+      "Confiar cego num número ou fato específico que o Claude cuspiu com confiança, sem conferir.",
+      "Ficar 15 mensagens tentando salvar uma conversa que descarrilou, em vez de recomeçar limpo.",
+      "Decidir se o Claude serve pra uma tarefa no feeling, sem nunca rodar um eval simples comparando com o que você já faz na mão."
+    ],
+    "takeaway": "Quase todo resultado ruim do Claude se resolve com mais contexto, formato explícito e a mentalidade de que o primeiro output é rascunho. E pra tarefa que importa de verdade, não confie no achismo: rode um eval e compare com o que você já faz na mão."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "04-claude-desktop-app-chat-cowork-code",
+    "titulo": "Claude desktop app: Chat, Cowork e Code (qual usar pra quê)",
+    "duracao_leitura": "7 min",
+    "resumo": "O app de desktop do Claude tem três modos: Chat pra pergunta rápida e rascunho, Cowork pra trabalho agêntico de fôlego (pesquisa, análise, entregáveis), e Code pra construir software. Saber escolher o modo certo é metade do resultado.",
+    "conceitos": [
+      {
+        "termo": "Chat",
+        "definicao": "O Claude que você já conhece do claude.ai, mas rodando nativo no seu computador. Ganha atalho de invocação rápida, captura de tela, ditado por voz e connectors locais. É o modo de conversa: pergunta, rascunho, brainstorm, ida e volta."
+      },
+      {
+        "termo": "Cowork",
+        "definicao": "Modo agêntico. Você dá um objetivo, conecta ferramentas e arquivos, e ele executa por conta própria: pesquisa cruzando fontes, lê pastas inteiras, dispara subagents em paralelo e entrega um documento pronto. Roda em ambiente isolado (sandbox) nas pastas que você libera."
+      },
+      {
+        "termo": "Code",
+        "definicao": "O Claude Code dentro do app de desktop, com ambiente de desenvolvimento completo: lê e edita seu código, roda comandos no terminal, mostra diff visual e usa git pra você reverter. Diferente do Cowork, tem acesso total ao projeto (filesystem, terminal, dev tools)."
+      },
+      {
+        "termo": "Ask / Code / Plan",
+        "definicao": "Os três níveis de autonomia dentro do modo Code. Ask: ele propõe cada mudança e espera seu OK. Code: aplica edições sozinho mas pede confirmação antes de rodar comando. Plan: escreve o plano inteiro antes de tocar em qualquer arquivo."
+      },
+      {
+        "termo": "Subagents",
+        "definicao": "Trabalhadores em segundo plano que o Claude cria pra quebrar uma tarefa grande em partes paralelas, cada um com seu próprio contexto. Ele coordena os resultados e te devolve uma entrega única — é o que dá fôlego pra tarefas longas no Cowork."
+      },
+      {
+        "termo": "Scheduled tasks",
+        "definicao": "Tarefas recorrentes no Cowork: um briefing diário do Slack + agenda, um resumo semanal do que foi entregue, triagem de inbox de manhã. Você define o que e quando, e ele executa sozinho com o app aberto — e recupera o que ficou pra trás se a máquina estava desligada."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você está olhando um dashboard de métricas que não entende e quer uma resposta sem largar a tela.",
+      "explicacao": "Esse é o caso clássico de Chat com invocação rápida: dois toques na tecla Option no Mac trazem o Claude por cima da janela atual. Você captura a tela, pergunta o que cada métrica significa, e ele responde numa janela compacta que fica por cima enquanto o dashboard continua à vista. Pra trabalho de fôlego (ex: cruzar decisões de preço de notas de reunião + Slack + e-mail e atualizar um deck), aí sim você muda pra Cowork.",
+      "comandos": [
+        "Mac: toque duas vezes em Option para abrir a invocação rápida do Chat",
+        "Arraste o cursor sobre a janela para capturar o screenshot e anexar",
+        "Alterne pra voz (ditado) quando pensar em voz alta for mais rápido que digitar"
+      ]
+    },
+    "passos": [
+      "Antes de pedir qualquer coisa, decida o formato do trabalho: é conversa (Chat), é execução de fôlego com entregável (Cowork), ou é mexer em código (Code)?",
+      "Pra dúvida rápida, rascunho ou brainstorm, fique no Chat — use invocação rápida, screenshot e voz pra não sair do que está fazendo.",
+      "Pra pesquisa cruzando fontes, ler uma pasta de dezenas de documentos ou gerar um deck/relatório pronto, abra o Cowork, aponte a pasta e os connectors, e deixe ele planejar e executar.",
+      "No Cowork, revise o plano que ele monta na barra lateral ANTES de soltar — corrigir escopo cedo economiza retrabalho.",
+      "Pra construir software, vá no Code. Escolha Local (pasta na sua máquina, com dev server) ou Remote (repo GitHub na nuvem, roda mesmo com o app fechado).",
+      "No Code, comece em Plan ou Ask em codebase que você não domina; só passe pra Code (autônomo) quando confiar no que ele está fazendo."
+    ],
+    "dicas": [
+      "Cowork e Code rodam no mesmo motor por baixo (é Claude Code nos dois) — a diferença prática é o nível de acesso: Cowork fica preso às pastas que você libera, Code tem acesso total ao projeto. Escolha pelo acesso que a tarefa precisa.",
+      "Use Remote no Code quando for um refactor grande ou demorado: a sessão continua na nuvem mesmo com o app fechado, e você volta depois pra conferir.",
+      "No Cowork, configure como scheduled task aquilo que você repete toda manhã (status, triagem de inbox). Você troca trabalho manual por começar o dia com a resposta pronta.",
+      "A ordem de prioridade do Cowork pra agir é: connector primeiro, depois Chrome, e só então interação direta com a tela. Conectar a ferramenta certa deixa tudo mais rápido e confiável do que deixar ele clicar na tela.",
+      "Diligência (o 'D' de Diligence do framework AI Fluency): no Code, o diff visual e o git existem pra você revisar antes de aceitar. Não aprove no automático — leia o que mudou."
+    ],
+    "erros_comuns": [
+      "Usar Chat pra tarefa de fôlego e reclamar que 'ficou raso'. Pesquisa cruzando 5 fontes ou ler uma pasta de 50 PDFs é trabalho de Cowork, não de uma conversa.",
+      "Esperar que o Cowork enxergue arquivos que você não liberou. Ele só lê, cria e edita dentro das pastas que você compartilhou — é sandbox por design.",
+      "Rodar tudo no modo Code (autônomo) em codebase desconhecido e levar susto. Em terreno novo, comece em Plan/Ask e suba a autonomia depois.",
+      "Achar que scheduled task roda com a máquina desligada. Ela depende do app aberto; quando você volta, ele recupera o que ficou pendente, mas não executa no vácuo.",
+      "Confundir os modos de autonomia Ask/Code/Plan (níveis de aprovação dentro do Code) com os três modos do app (Chat/Cowork/Code). São coisas de camadas diferentes."
+    ],
+    "takeaway": "Escolher o modo certo — Chat pra conversa, Cowork pra execução de fôlego com entregável, Code pra software — é a decisão que mais define a qualidade do resultado. Defina o formato do trabalho antes de digitar o prompt."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "05-introduction-to-projects",
+    "titulo": "Projects: pare de explicar tudo de novo toda conversa",
+    "resumo": "Project é um espaço de trabalho no Claude com contexto fixo: instruções e arquivos que valem pra toda conversa dentro dele. Você configura uma vez e para de repetir o mesmo briefing a cada chat.",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Project",
+        "definicao": "Um espaço isolado dentro do Claude que agrupa conversas relacionadas, com instrução fixa e uma base de arquivos própria. Tudo que você conversa lá dentro já nasce com aquele contexto carregado. Pense num 'modo de trabalho' por cliente, produto ou área."
+      },
+      {
+        "termo": "Instruções do projeto",
+        "definicao": "Um texto que vale pra TODA conversa daquele project. É onde você define papel, tom, regras e processo ('sempre cite a fonte', 'responda em PT-BR', 'quando eu colar uma transcrição, vire ata no template X'). Funciona como um system prompt seu, sem precisar de API."
+      },
+      {
+        "termo": "Base de conhecimento",
+        "definicao": "Os arquivos que você sobe pro project (PDF, DOCX, CSV, TXT, planilha, etc.). O Claude consulta esse material em qualquer chat do project sem você reanexar. É o fim do 'deixa eu colar o documento de novo'."
+      },
+      {
+        "termo": "RAG (recuperação)",
+        "definicao": "Quando o conteúdo da base passa do que cabe na janela de contexto, o Claude para de carregar tudo de uma vez e passa a buscar só os trechos relevantes pra cada pergunta. Aumenta muito a capacidade do project sem você gerenciar nada — só aparece um indicador de que entrou nesse modo."
+      },
+      {
+        "termo": "Compartilhamento (Team/Enterprise)",
+        "definicao": "Nos planos de trabalho, dá pra liberar o project pro time com níveis de acesso: ver (lê e conversa, não edita), editar (mexe em instrução e arquivos) e dono (controla quem entra). Todo mundo trabalha em cima do mesmo contexto."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Eu atendo vários clientes e vivia recolando brand guideline, tom de voz e contratos a cada conversa. Criei um project por cliente.",
+      "explicacao": "Monto um project 'Fazenda das Pedras', subo guia de marca, contratos e posts antigos na base, e escrevo a instrução fixando tom e regras. A partir daí, qualquer chat (escrever post, revisar proposta, montar e-mail) já sai no padrão do cliente, sem briefing repetido. Trocar de cliente é só trocar de project.",
+      "comandos": [
+        "Project > + New Project > nome: 'Fazenda das Pedras — conteúdo'",
+        "Instructions: 'Você escreve para a Fazenda das Pedras (eventos em Itu). Tom acolhedor, PT-BR, frases curtas. Sempre termine com CTA. Quando eu colar transcrição de reunião, devolva ata no formato: Decisões / Pendências / Responsáveis.'",
+        "Knowledge: subir 'Guia-de-Marca-Fazenda-2026.pdf', 'Contrato-Operacao-Completa.docx', 'Posts-aprovados.csv'",
+        "Novo chat dentro do project: 'Escreve um post de divulgação do pacote de eventos corporativos'"
+      ]
+    },
+    "passos": [
+      "Abra Projects na barra lateral (ou claude.ai/projects) e clique em + New Project.",
+      "Dê um nome específico e funcional (cliente, produto ou workflow) — evite 'geral' ou 'testes'.",
+      "Escreva as instruções: papel do Claude, tom, regras inegociáveis e, se quiser, um workflow do tipo 'quando eu mandar X, faça Y'. Salve.",
+      "Suba os arquivos de referência na base de conhecimento, com nomes descritivos.",
+      "(Team/Enterprise) Compartilhe com o time no nível certo: ver, editar ou dono.",
+      "Comece a trabalhar abrindo chats dentro do project — eles já herdam instrução e arquivos."
+    ],
+    "dicas": [
+      "Nomeie os arquivos como se outra pessoa fosse achar no escuro: 'Relatorio-Vendas-Q2-2026.pdf', não 'doc final (3).pdf'. O Claude usa o nome pra saber o que buscar.",
+      "Use as instruções pra automatizar tarefa repetitiva, não só pra setar tom. 'Toda transcrição que eu colar vira ata no template abaixo' transforma o project numa mini-ferramenta.",
+      "Um project por frente de trabalho. Project que vira 'gaveta de tudo' perde foco e a base fica poluída.",
+      "Cite o documento pelo nome quando perguntar ('com base no Contrato-Operacao-Completa, qual o prazo?') — ajuda o Claude a mirar a busca.",
+      "Revise a base de tempos em tempos. Documento desatualizado gera resposta desatualizada com cara de confiante."
+    ],
+    "erros_comuns": [
+      "Achar que a descrição do project serve de contexto pro Claude. Não serve — ela é só pra humanos se localizarem. O que guia o Claude são as INSTRUÇÕES.",
+      "Jogar 40 PDFs sem critério achando que 'quanto mais, melhor'. Base inchada e bagunçada piora a recuperação. Suba o que é relevante e bem nomeado.",
+      "Escrever instrução vaga ('seja profissional') e esperar consistência. Vago entra, inconsistente sai. Seja específico e dê exemplo do formato esperado.",
+      "Criar um único project pra vida inteira. Misturar cliente, finanças e estudo no mesmo lugar faz o contexto de um vazar no outro."
+    ],
+    "takeaway": "Project é contexto que você configura uma vez e reaproveita pra sempre: instrução fixa + base de arquivos. Se você está recolando o mesmo material ou reexplicando as mesmas regras toda conversa, esse trabalho deveria ser um project."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "06-creating-with-artifacts",
+    "titulo": "Criando com Artifacts: quando o Claude para de te dar texto e começa a te entregar coisa pronta",
+    "resumo": "Artifacts são saídas prontas e interativas que o Claude monta numa janela ao lado do chat, em vez de despejar tudo na conversa. Você vê o resultado renderizado, edita, baixa e publica.",
+    "duracao_leitura": "8 min",
+    "conceitos": [
+      {
+        "termo": "Artifact",
+        "definicao": "Uma saída autônoma que o Claude abre numa janela separada ao lado do chat: um documento, um trecho de código, uma página HTML, um gráfico interativo. Em vez de ficar embolado no meio da conversa, vem renderizado e pronto pra usar."
+      },
+      {
+        "termo": "Critério de criação automática",
+        "definicao": "O Claude decide sozinho virar artifact quando o conteúdo é grande (na prática, algo acima de ~15 linhas), se sustenta sozinho sem precisar do papo em volta, e é algo que você vai querer editar, reaproveitar ou baixar depois."
+      },
+      {
+        "termo": "Tipos de artifact",
+        "definicao": "Documentos (markdown, Word, PDF, PowerPoint, Excel), trechos de código em qualquer linguagem, páginas HTML completas (HTML+CSS+JS num arquivo só), imagens SVG, diagramas Mermaid (fluxograma, sequência) e componentes React interativos com lógica de verdade, não mockup."
+      },
+      {
+        "termo": "Iteração incremental",
+        "definicao": "Pedir uma mudança de cada vez no artifact em vez de despejar dez ajustes juntos. Você enxerga o que cada alteração fez e pega problema cedo, antes de virar bola de neve."
+      },
+      {
+        "termo": "Publicar (publish)",
+        "definicao": "Gerar um link público de um artifact. Só a versão escolhida vira pública (seu chat continua privado), qualquer um abre sem ter conta no Claude, pode dar 'remix' pra modificar, e não aparece em busca do Google. Dá pra despublicar quando quiser."
+      }
+    ],
+    "dicas": [
+      "Seja específico no pedido. 'Cria um controle de gastos' rende muito menos que 'cria um controle mensal de gastos onde eu lanço despesa por categoria, vejo um gráfico de pizza e recebo um aviso quando passo do orçamento'. O nível de detalhe do pedido é o teto da qualidade da entrega.",
+      "Diga pra quem é. 'Esse fluxograma é pra funcionário novo' gera um resultado diferente de 'esse fluxograma é pra equipe de engenharia'. O público muda as escolhas de linguagem e profundidade.",
+      "Se o Claude responder no chat quando você esperava um artifact, é só pedir: 'transforma isso num artifact'. Funciona como override manual do critério automático.",
+      "Use o toggle entre preview e código. No preview você vê como fica; no código você vê o que ele gerou de fato. Pra qualquer coisa que vá pra produção, olhe o código antes de confiar.",
+      "Antes de publicar, lembre: o link é aberto a qualquer pessoa que tiver ele. Não jogue dado de cliente, credencial ou número sensível dentro de um artifact que você vai publicar."
+    ],
+    "exemplo": {
+      "contexto": "Você quer um protótipo de calculadora de ROI pra mostrar pro cliente numa reunião amanhã, sem abrir editor de código nem montar planilha.",
+      "comandos": [
+        "Monta um componente React: uma calculadora de ROI de tráfego pago. Campos de entrada: investimento em mídia, ticket médio e taxa de conversão. Saída: faturamento projetado, ROAS e lucro. Público: dono de PME que não é técnico, então deixa visual e simples.",
+        "Agora adiciona um aviso em vermelho quando o ROAS ficar abaixo de 2.",
+        "Bom. Publica isso e me dá o link pra eu mandar pro cliente."
+      ],
+      "explicacao": "Repare no ritmo: pedido específico com público definido, depois UMA mudança por vez, depois publicar. O Claude abre o artifact numa janela ao lado, você testa os números ali na hora e só publica quando estiver redondo. O link vai pro cliente sem ele precisar de conta no Claude."
+    },
+    "passos": [
+      "Descreva o que você quer com o máximo de detalhe útil: o que faz, quais entradas e saídas, e pra quem é.",
+      "Deixe o Claude abrir o artifact na janela lateral. Se ele responder no chat, peça 'transforma em artifact'.",
+      "Teste no preview e olhe o código quando importar. Peça ajustes um de cada vez.",
+      "Copie, baixe ou publique conforme o uso: cópia/download pra uso próprio, publish pra mandar um link aberto."
+    ],
+    "erros_comuns": [
+      "Pedir vago e culpar a ferramenta. Entrada genérica gera saída genérica. O detalhe do prompt é o que separa um protótipo útil de um esboço inútil.",
+      "Despejar dez ajustes de uma vez. Quando algo quebra, você não sabe qual mudança foi a culpada. Vá de um em um.",
+      "Confiar no preview sem olhar o código em coisa que vai pra produção. Preview mostra como fica, não como funciona por dentro.",
+      "Publicar artifact com dado sensível dentro. Link público é link público: qualquer um com a URL acessa."
+    ],
+    "takeaway": "Artifact é o momento em que o Claude para de te dar texto pra você processar e passa a te entregar coisa pronta pra usar. Quanto mais específico o pedido e mais incremental a iteração, melhor o resultado e mais reaproveitável fica."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "07-working-with-skills",
+    "titulo": "Skills: ensinando o Claude a fazer do seu jeito, sempre igual",
+    "resumo": "Skill é uma pasta com instruções e scripts que o Claude carrega sob demanda pra executar uma tarefa do mesmo jeito toda vez. É o que transforma \"o Claude que responde bonito\" em \"o Claude que opera o seu processo\".",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Skill",
+        "definicao": "Uma pasta com um arquivo de instruções (e, opcionalmente, scripts e arquivos de referência) que o Claude carrega só quando a tarefa pede. Em vez de você reexplicar o processo toda conversa, a Skill carrega o passo a passo na hora certa."
+      },
+      {
+        "termo": "Carregamento sob demanda (progressive disclosure)",
+        "definicao": "O Claude não enfia todas as suas Skills no contexto o tempo todo. Ele lê só o nome e a descrição de cada uma; quando o seu pedido bate com uma, aí sim ele abre o conteúdo completo. Isso economiza contexto e mantém a precisão."
+      },
+      {
+        "termo": "Anthropic Skills vs Custom Skills",
+        "definicao": "As Anthropic Skills já vêm prontas (criar e editar xlsx, docx, pptx, pdf) e disparam sozinhas. As Custom Skills são as suas: o seu processo de fechamento de mês, a sua revisão de tom de marca, o seu checklist de contrato."
+      },
+      {
+        "termo": "Skill vs Project",
+        "definicao": "Project guarda conhecimento (material de referência que o Claude consulta). Skill executa processo (o passo a passo que o Claude segue). Um é o QUE; o outro é o COMO. Os dois se completam: a Skill pode ler o que está no Project."
+      },
+      {
+        "termo": "Sandbox / execução de código",
+        "definicao": "Skills rodam no ambiente isolado de execução de código do Claude. Por isso, no app web, você precisa ter 'Code execution and file creation' ligado. É também o que permite a Skill mexer de verdade em arquivos."
+      }
+    ],
+    "passos": [
+      "No app web (planos Pro, Max, Team ou Enterprise), vá em Settings > Capabilities e garanta que 'Code execution and file creation' esteja ligado — sem isso, Skill não roda.",
+      "Desça até a seção Skills e ligue/desligue cada uma conforme o uso. Em Enterprise, o Owner precisa liberar antes no Admin.",
+      "Pra usar uma Anthropic Skill, não faça nada de especial: peça 'monta uma planilha de despesas com fórmula de total' e ela dispara sozinha. A saída vem como arquivo pra baixar.",
+      "Pra criar uma Custom Skill sem escrever código, abra um chat novo e diga o que quer ('quero uma skill que revisa texto no tom da minha marca'). O Claude te entrevista sobre o processo.",
+      "Suba material de apoio (template, style guide, exemplos bons). Quanto mais concreto, melhor a Skill fica.",
+      "Salve. O Claude monta a estrutura de arquivos certinha. A partir daí ela aparece na sua lista e dispara sozinha quando for relevante — e você pode pedir pro Claude editar a Skill depois.",
+      "No Claude Code, o caminho é o mesmo conceito mas via arquivos: cada Skill é um SKILL.md com nome + descrição no topo, dentro de uma pasta de skills."
+    ],
+    "exemplo": {
+      "contexto": "Toda sexta eu fechava o relatório de campanha de um cliente: pegava CSV do Meta, screenshot do CRM, montava um PDF com 10 seções na mesma ordem, mesmo tom, mesma análise. Reexplicar isso pro Claude toda semana era retrabalho puro.",
+      "comandos": [
+        "Abri um chat: 'quero criar uma skill pra gerar relatório de marketing em PDF, organizado por cliente/ano/mês'",
+        "Respondi a entrevista do Claude: quais seções, em que ordem, o que é um bom relatório, o que nunca pode faltar",
+        "Subi 2 exemplos de relatórios antigos que eu considerava bons + o template visual",
+        "Salvei. Na sexta seguinte: 'gera o relatório do cliente X de junho' — e ela rodou o processo inteiro sozinha"
+      ],
+      "explicacao": "A diferença prática: antes eu delegava uma TAREFA e revisava muito porque cada vez saía um pouco diferente. Com a Skill eu delego um PROCESSO — sai igual toda vez, o que reduz a Diligence (o esforço de checar) justamente porque a consistência virou padrão, não sorte."
+    },
+    "dicas": [
+      "Boa Skill nasce de processo que você JÁ repete. Não invente Skill pra coisa que você faz uma vez por ano — pra isso, um bom prompt resolve.",
+      "A descrição da Skill (o 'quando usar') é o que mais importa: é por ela que o Claude decide disparar ou não. Descrição vaga = Skill que nunca acende ou acende na hora errada.",
+      "Pense em Description e Delegation do framework 4D: descrever bem o processo é o que permite delegar com confiança. Skill é Description virada arquivo permanente.",
+      "Combine com Project: deixe o conhecimento (perfis de cliente, dados) no Project e o processo na Skill. A Skill puxa o conteúdo do Project na hora.",
+      "Itere. A primeira versão raramente é a final — peça pro Claude ajustar a Skill depois de ver o resultado real algumas vezes."
+    ],
+    "erros_comuns": [
+      "Achar que Skill é só pra criar Office. Documento é o caso de entrada; o valor de verdade está em codificar SEU processo de negócio.",
+      "Esquecer de ligar 'Code execution and file creation' e ficar achando que as Skills sumiram — sem o sandbox, elas não aparecem nem rodam.",
+      "Instalar Custom Skill de fonte desconhecida sem olhar o conteúdo. Skill pode conter código executável: leia antes de confiar. As da Anthropic são testadas; as de terceiros, você confere.",
+      "Tentar 'forçar' a Skill no comando. Você não precisa chamar pelo nome — descreva a tarefa e deixe o Claude escolher. Se ele não escolhe, o problema costuma estar na descrição da Skill.",
+      "Transformar tudo em Skill. Excesso de Skills mal descritas polui a decisão do modelo. Menos, bem descritas, ganha de muitas e genéricas."
+    ],
+    "takeaway": "Skill é o ponto em que o Claude para de só responder e passa a operar o seu processo — sempre do mesmo jeito. Projects guardam o que você sabe; Skills executam como você trabalha. Comece pela tarefa chata que você repete toda semana."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "08-connecting-your-tools",
+    "titulo": "Conectando suas ferramentas ao Claude",
+    "duracao_leitura": "8 min",
+    "resumo": "Conectores dão ao Claude acesso direto às ferramentas que você já usa (Gmail, Drive, Notion, Slack, sua máquina) em vez de você ficar copiando e colando contexto. Por baixo, o que faz isso funcionar é o MCP, um padrão aberto pra plugar qualquer app no modelo.",
+    "conceitos": [
+      {
+        "termo": "Conector",
+        "definicao": "Uma ponte que dá ao Claude permissão pra ler dados e, em alguns casos, executar ações dentro de um app seu (buscar um e-mail, criar uma task, ler um doc). Some o copia-e-cola: o Claude trabalha com a sua informação real."
+      },
+      {
+        "termo": "MCP (Model Context Protocol)",
+        "definicao": "O padrão aberto que faz os conectores funcionarem. É a tomada universal: em vez de cada app inventar uma integração própria, todos falam a mesma língua com o modelo. Quem constrói um servidor MCP pluga em qualquer cliente que fale MCP."
+      },
+      {
+        "termo": "Conector web vs. extensão desktop",
+        "definicao": "Web liga o Claude a serviços na nuvem via OAuth (Gmail, Notion, Slack, Asana). Extensão desktop roda local, pelo app Claude Desktop, e alcança seus arquivos e apps nativos da máquina (file system, navegador, Figma)."
+      },
+      {
+        "termo": "Escopo de permissão (scope)",
+        "definicao": "O recorte do que você autoriza. O Claude só enxerga o que VOCÊ enxerga naquela conta, nunca mais. Você liga e desliga permissão por app e revoga quando quiser, no Claude ou direto no serviço."
+      },
+      {
+        "termo": "Tool use",
+        "definicao": "O mecanismo que faz o modelo decidir QUANDO chamar uma ferramenta conectada e com quais argumentos. O conector expõe a ferramenta; o tool use é o Claude raciocinando sobre usá-la na hora certa dentro da conversa."
+      }
+    ],
+    "passos": [
+      "Abra o diretório de conectores em claude.ai/directory, ou clique no botão + no canto da conversa e escolha Conectores.",
+      "Escolha o conector e clique em Connect. Você vai cair na tela de login do próprio serviço (OAuth), não numa caixa pedindo sua senha pro Claude.",
+      "Leia as permissões que estão sendo pedidas ANTES de autorizar. Conceda só o que faz sentido pro seu uso.",
+      "Volte pro Claude e teste com um pedido pequeno e verificável: 'consegue ver meus últimos 3 e-mails de hoje?'. Confirme que o que ele trouxe bate com a realidade.",
+      "Pra extensão desktop: instale o Claude Desktop, vá em Configurações > Extensões, instale e siga o setup específico daquela extensão."
+    ],
+    "exemplo": {
+      "contexto": "Operação real: toda segunda eu preciso fechar o status da semana de um cliente. Antes era abrir Drive, abrir CRM, abrir e-mail e juntar tudo na mão. Com Drive e o CRM conectados, eu delego o trabalho pesado.",
+      "comandos": [
+        "Busca no Drive a ata da última reunião da pasta 'Cliente X' e me resume as decisões em 5 bullets",
+        "No CRM, qual o estágio atual das oportunidades abertas do Cliente X e o valor somado?",
+        "Cruza as duas coisas: tem alguma decisão da ata que ainda não virou tarefa ou oportunidade no CRM?"
+      ],
+      "explicacao": "O ganho não é ter um app conectado, é combinar fontes. O terceiro comando é onde mora o valor: o Claude lê o doc E o CRM e aponta o gap entre o que foi combinado e o que está registrado. Esse cruzamento é o que você levava 40 minutos pra fazer na mão."
+    },
+    "dicas": [
+      "Comece por UMA ferramenta, a que mais te faz copiar e colar contexto hoje. Conectar tudo de uma vez vira ruído e você não confia em nada.",
+      "OAuth de verdade: você loga no site do serviço, não entrega senha pro Claude. Se algum 'conector' pedir sua senha direto, desconfie.",
+      "Pra ações que escrevem (criar task, mandar e-mail, atualizar registro), peça pro Claude te mostrar o rascunho antes de disparar. Leitura é barata; ação errada custa.",
+      "Conector custom só de fonte confiável. É código de terceiro rodando com acesso aos seus dados, mesmo cuidado que você teria com uma extensão de navegador.",
+      "Revogue o que você não usa mais. Acesso esquecido é superfície de risco parada."
+    ],
+    "erros_comuns": [
+      "Achar que conector 'sabe tudo' do app. Ele só alcança o que a SUA conta alcança e o que o escopo permitiu. Não é mágica, é permissão.",
+      "Pular o teste inicial e já confiar em pedido complexo. Sempre valide com um pedido pequeno e checável primeiro (Diligence do framework 4D).",
+      "Conceder permissão de escrita quando você só queria leitura. Leia os scopes; conceda o mínimo.",
+      "Conectar dez ferramentas de uma vez e depois não saber de onde o Claude tirou determinada informação. Menos é mais no começo.",
+      "Esquecer que dá pra revogar. Se um conector te deixou desconfortável, você desliga no Claude ou no próprio serviço, na hora."
+    ],
+    "takeaway": "Conector bom é o que mata um copia-e-cola recorrente seu. Conecte a ferramenta que mais te faz isso, teste com um pedido pequeno e verificável, e só então confie em workflows que cruzam fontes. Permissão mínima, ação revisada, escopo revogável."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "09-enterprise-search",
+    "titulo": "Enterprise Search: o Claude que conhece a sua empresa",
+    "duracao_leitura": "7 min",
+    "resumo": "Enterprise Search transforma o Claude num buscador interno que cruza Slack, Drive, e-mail e SharePoint da sua empresa e responde citando a fonte. Respeitando exatamente as permissões que você já tem.",
+    "conceitos": [
+      {
+        "termo": "Enterprise Search",
+        "definicao": "Um item fixo no menu lateral do Claude (algo como \"Pergunte à [sua empresa]\") que busca e cruza informação espalhada pelas ferramentas internas da organização. Na prática é um Project pré-montado, com a base de conhecimento da empresa já plugada, pronto pra uso."
+      },
+      {
+        "termo": "Conectores (connectors)",
+        "definicao": "As pontes entre o Claude e suas ferramentas: documentos (Google Drive, SharePoint), chat (Slack, Teams) e e-mail (Gmail). Quanto mais conectores ligados, mais completa a resposta. Cada usuário autentica os seus."
+      },
+      {
+        "termo": "Setup em duas etapas",
+        "definicao": "Primeiro um admin (Owner) liga e configura o recurso pra organização inteira, escolhendo os conectores padrão. Depois cada pessoa autentica com a própria conta. Sem a segunda etapa, o usuário não busca nada."
+      },
+      {
+        "termo": "Permissões herdadas",
+        "definicao": "O Claude só enxerga o que VOCÊ já poderia abrir na ferramenta original. Ele não cria um atalho pra dado restrito. Se você não tem acesso ao canal ou à pasta, ele também não tem na sua busca."
+      },
+      {
+        "termo": "Citação de fonte",
+        "definicao": "Toda resposta vem com o link de onde a informação saiu. Isso muda tudo na operação: você não confia cego, abre a origem e confere antes de agir."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você voltou de duas semanas de férias e precisa se situar rápido, sem ficar incomodando seis pessoas no Slack.",
+      "comandos": [
+        "Abra \"Pergunte à [sua empresa]\" no menu lateral",
+        "Pergunte: \"O que rolou de importante no projeto X nas últimas duas semanas? Me dá os bloqueios atuais e quem está tocando cada frente.\"",
+        "Abra os links citados pra confirmar antes de responder qualquer pessoa"
+      ],
+      "explicacao": "O Claude varre Slack, Drive e e-mail conectados, junta tudo numa resposta só e cita a origem de cada ponto. Em vez de reconstruir o contexto na mão, você valida o que ele trouxe abrindo as fontes. É busca + síntese, não só busca."
+    },
+    "dicas": [
+      "Só está em planos Team e Enterprise, e precisa de um admin pra ligar. Se você está no Free, Pro ou Max, isso aqui não se aplica ainda — pode pular.",
+      "Ligue todos os conectores que fizerem sentido pro seu trabalho. Resposta incompleta quase sempre é conector faltando, não falha do modelo.",
+      "Use pra pergunta que cruza fontes (\"resume as decisões da liderança da semana\"), não pra abrir um documento específico que você já sabe onde está.",
+      "Trate como ferramenta de onboarding: novo na equipe pergunta \"como funciona nosso sistema de autenticação?\" e \"com quem falo sobre billing?\" antes de tomar o tempo de alguém.",
+      "Sempre confira a fonte citada. O valor da citação é justamente esse — não é enfeite, é o seu controle de qualidade (Discernment, na prática)."
+    ],
+    "erros_comuns": [
+      "Achar que o Claude vira uma brecha de segurança e expõe dado restrito. Não vira: ele herda exatamente as suas permissões da ferramenta de origem.",
+      "Configurar como admin e esperar que todo mundo já saia usando. Cada pessoa ainda precisa autenticar a própria conta — sem isso, a busca dela fica vazia.",
+      "Usar pra perguntas que um chat normal com conector já resolve. Enterprise Search brilha em síntese entre múltiplas fontes, não em lookup pontual.",
+      "Confiar na resposta sem abrir os links. A citação existe pra você verificar; ignorá-la é abrir mão da diligência."
+    ],
+    "takeaway": "Enterprise Search é o Claude com a memória da sua empresa já carregada: pergunta em linguagem natural, resposta cruzando Slack, Drive e e-mail, com fonte citada e suas permissões respeitadas. Menos \"quem sabe disso aqui?\", mais resposta direta — desde que você confira a fonte.",
+    "passos": [
+      "Confirme o plano: precisa ser Team ou Enterprise com o recurso habilitado por um admin.",
+      "Admin (Owner): abra \"Pergunte à sua org\" no menu, clique em configurar, escolha um conector de Documentos e um de Chat (e-mail é opcional mas recomendado), nomeie e finalize.",
+      "Usuário: clique no projeto que apareceu fixado no seu menu e siga o onboarding guiado.",
+      "Autentique cada serviço que quiser buscar (Slack, Google, Microsoft 365) com a sua própria conta.",
+      "Comece perguntando algo que cruze fontes e abra as citações pra validar."
+    ]
+  },
+  {
+    "curso": "claude-101",
+    "slug": "10-research-mode-for-deep-dives",
+    "titulo": "Research: quando você precisa de investigação de verdade, não de uma resposta rápida",
+    "duracao_leitura": "8 min",
+    "resumo": "Research é o modo em que o Claude para de te dar uma resposta única e passa a investigar um tema de forma agêntica: faz várias buscas encadeadas, cruza fontes e te entrega um relatório com citações. Serve pra trabalho que tomaria horas — não pra perguntar a cotação do dólar.",
+    "conceitos": [
+      {
+        "termo": "Research",
+        "definicao": "Modo do Claude que troca a resposta-relâmpago por uma investigação de múltiplas etapas. Em vez de uma busca, ele roda várias, decidindo sozinho o que procurar a seguir, e fecha com um relatório organizado e citado."
+      },
+      {
+        "termo": "Busca agêntica (multi-step)",
+        "definicao": "O Claude não executa uma query e para. Ele lê o que achou, identifica buracos, segue pistas e dispara novas buscas em cima do resultado anterior. Você define o objetivo; ele conduz o caminho."
+      },
+      {
+        "termo": "Extended thinking automático",
+        "definicao": "No Research o raciocínio estendido liga sozinho. Antes de sair buscando, o Claude planeja a abordagem, quebra a pergunta em partes e decide quais ângulos atacar — é o que separa um relatório de uma colagem de links."
+      },
+      {
+        "termo": "Citações verificáveis",
+        "definicao": "Cada afirmação do relatório aponta pra fonte. Isso não é enfeite: é o que te deixa auditar antes de mandar pro cliente ou pra diretoria. Sem citação, é palpite com cara de dado."
+      },
+      {
+        "termo": "Integrações conectadas",
+        "definicao": "Com Google Workspace, Slack e afins plugados, o Research mistura web pública com o seu contexto interno (e-mails, agenda, docs). Dá pra desligar a web e fazer pesquisa só interna."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Vou entrar numa reunião com um possível cliente do setor automotivo e preciso chegar com leitura de mercado, não com achismo.",
+      "comandos": [
+        "Ativar Research no menu + (web search precisa estar ligada)",
+        "Prompt: 'Faça uma análise do mercado de estética automotiva premium no interior de SP. Estruture em: (1) principais players e posicionamento, (2) faixas de ticket praticadas, (3) canais de aquisição que esse setor usa, (4) 3 gaps de oportunidade. Foque em negócios de bairro/cidade média, não em rede nacional. Traga citações.'",
+        "Deixar rodar em background (5 a 15 min no comum; investigações pesadas podem ir a 45) e revisar o relatório clicando nas fontes"
+      ],
+      "explicacao": "Repare no que o prompt faz: define escopo (interior de SP, premium, não-rede), pede estrutura nomeada em 4 seções e exige citação. O Claude organiza o relatório exatamente nessas seções. Prompt vago tipo 'fala do mercado automotivo' devolve genérico — e aí a culpa é do prompt, não da ferramenta."
+    },
+    "passos": [
+      "Decida se é caso de Research: precisa cruzar várias fontes e gerar um relatório? Vai. É um fato pontual? Use busca normal e economize 10 minutos.",
+      "Ative Research no menu + do chat. Confirme que a web search está ligada — sem ela o modo não funciona (a não ser que você queira pesquisa só interna).",
+      "Escreva um prompt com escopo, restrições (orçamento, prazo, região) e a estrutura de seções que você quer no final.",
+      "Se não souber enquadrar, peça antes: 'me ajude a montar um bom prompt de Research pra investigar X'. Refinar o prompt custa menos que rodar de novo.",
+      "Deixe rodar em background. Faça outra coisa.",
+      "Quando entregar, audite pelas citações. Clique nas fontes das afirmações que vão virar decisão. Confie, mas confira."
+    ],
+    "dicas": [
+      "Trate o tempo (5 a 45 min) como um sinal: se a pergunta não vale 15 minutos de investigação, ela não é caso de Research. É só busca.",
+      "Estrutura no prompt = estrutura no relatório. Liste as seções que você quer e o Claude se organiza em volta delas. Isso é o maior alavancador de qualidade.",
+      "Com integrações plugadas, você pode desligar a web e rodar Research só no seu mundo: 'o que a gente discutiu sobre o lançamento do Q3 entre Slack e Docs?'. Ótimo pra recuperar contexto interno espalhado.",
+      "Combine web + interno num prompt só: 'resuma o que já falamos sobre o cliente X nos meus e-mails e depois pesquise benchmarks do setor dele'. É aqui que o Research vira injusto de bom."
+    ],
+    "erros_comuns": [
+      "Usar Research pra pergunta de uma fonte só (cotação, endereço, telefone). Você espera 10 minutos por algo que a busca normal resolve em 3 segundos.",
+      "Mandar prompt genérico e reclamar do relatório genérico. Sem escopo e sem restrição, o Claude não tem como focar — e relatório longo não é o mesmo que relatório útil.",
+      "Confundir Research com extended thinking puro. Se a resposta vem de raciocinar (debugar código, resolver lógica, matemática) e não de coletar informação externa, Research é overkill.",
+      "Aceitar o relatório sem checar as citações nas partes que viram decisão. A citação existe justamente pra isso — pular essa etapa joga fora a maior vantagem do modo.",
+      "Esquecer de ligar a web search e achar que o Research travou."
+    ],
+    "takeaway": "Research não é uma busca melhor — é trocar uma resposta por uma investigação. Use quando o trabalho tomaria horas e exige cruzar fontes; pra fato pontual, busca normal. E sempre confira as citações antes de tratar o relatório como verdade."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "11-claude-in-action-use-cases-by-role",
+    "titulo": "Claude na prática: casos de uso por função",
+    "resumo": "Esta aula tira o Claude do abstrato e mostra trabalho real por área: vendas, marketing, finanças, RH, jurídico e pesquisa. A ideia não é \"tarefa mágica\", é você reconhecer o seu próprio processo e delegar a parte chata.",
+    "duracao_leitura": "8 minutos",
+    "conceitos": [
+      {
+        "termo": "Caso de uso por função",
+        "definicao": "Um par concreto problema+solução amarrado ao seu papel no trabalho (vendedor, analista, advogado). Em vez de 'o que IA faz', a pergunta vira 'o que ELA resolve no MEU dia'. É o que separa quem testa de quem incorpora na rotina."
+      },
+      {
+        "termo": "Delegação (do AI Fluency 4D)",
+        "definicao": "A primeira das quatro competências: decidir o que entregar pro Claude e o que manter na sua mão. Casos de uso são, no fundo, decisões de delegação já mapeadas — você não delega 'fazer meu trabalho', delega um pedaço bem recortado dele."
+      },
+      {
+        "termo": "Tarefa repetível",
+        "definicao": "Um trabalho que você refaz com formato parecido toda semana (relatório de pipeline, resumo de feedback, onboarding). É o melhor ponto de entrada: alto volume, baixo risco de errar feio, e ganho de tempo que você sente na primeira semana."
+      },
+      {
+        "termo": "Skill (de marca/processo)",
+        "definicao": "Um pacote reutilizável que ensina o Claude o SEU padrão — tom de voz, estrutura de relatório, regras de compliance. Transforma um caso de uso pontual em algo que roda igual toda vez, sem você reescrever o prompt."
+      },
+      {
+        "termo": "Discernimento",
+        "definicao": "A terceira competência do 4D: avaliar criticamente o que o Claude entregou antes de usar. Em finanças e jurídico isso não é opcional — número e cláusula você confere SEMPRE, o Claude acelera o rascunho, não assina embaixo."
+      }
+    ],
+    "dicas": [
+      "Comece pela tarefa que você mais odeia fazer e que se repete — relatório semanal, resumo de reunião, transformar planilha em texto. ROI imediato e zero drama se sair errado.",
+      "Não peça 'me ajuda com vendas'. Peça 'monte uma battle card comparando meu produto X com o concorrente Y, com objeções comuns e como responder'. Caso de uso bom é específico.",
+      "Use Projects pra fixar contexto recorrente: cole seu ICP, seu tom de marca, seu template de relatório uma vez e reaproveite em toda conversa daquela área.",
+      "Em finanças e jurídico, trate a saída como rascunho de júnior: ótimo ponto de partida, conferência obrigatória. Número errado com confiança é pior que número nenhum.",
+      "Quando um caso de uso virar rotina (você repete o mesmo prompt toda semana), empacote como Skill. Aí o padrão roda sozinho e qualquer um do time usa igual."
+    ],
+    "takeaway": "O Claude não substitui a sua função — ele come a parte repetível dela. Escolha UMA tarefa chata que você refaz toda semana, delegue ainda hoje, e confira a saída como se fosse rascunho de estagiário. É assim que vira hábito, não demo.",
+    "passos": [
+      "Liste as 3 tarefas que mais comem seu tempo e que têm formato repetível.",
+      "Escolha a de menor risco (errar não quebra nada caro) pra ser seu primeiro caso de uso.",
+      "Escreva um prompt específico: contexto + o que quer + formato da saída.",
+      "Use o resultado, mas confira como rascunho — corrija e devolva o ajuste pro Claude.",
+      "Repetiu 3 vezes com o mesmo padrão? Fixe num Project ou empacote como Skill."
+    ],
+    "erros_comuns": [
+      "Tentar delegar a função inteira de uma vez em vez de recortar uma tarefa específica — frustra e você abandona.",
+      "Confiar cegamente em número, data ou cláusula que o Claude gerou, sem conferir a fonte.",
+      "Ficar reescrevendo o mesmo prompt toda semana em vez de fixar o contexto num Project ou Skill.",
+      "Achar que se não tem caso de uso 'da sua área' na lista, o Claude não serve — a lista é inspiração, não limite."
+    ],
+    "exemplo": {
+      "contexto": "Você é gestor de marketing e toda segunda monta um relatório de performance das campanhas do mês pra apresentar pro cliente. Hoje isso leva 2 horas garimpando planilha.",
+      "explicacao": "Você não pede 'analisa marketing'. Você dá o contexto (cliente, período, metas), anexa o CSV de métricas, e define o formato da saída. O Claude vira o analista que faz o primeiro rascunho — você entra no discernimento, valida os números contra a fonte e ajusta a narrativa. Fixando isso num Project, na próxima campanha é só trocar o anexo.",
+      "comandos": [
+        "Anexe o CSV de métricas da campanha no chat (ou crie um Project 'Relatórios Cliente X' e cole o template lá).",
+        "Prompt: 'Você é meu analista de mídia. Analise este CSV de campanha de maio. Compare CPL e CTR contra a meta de R$45/lead. Aponte os 3 maiores destaques e os 2 maiores problemas. Saída em tópicos curtos, linguagem pra cliente leigo.'",
+        "Confira cada número citado contra o CSV original antes de mandar pro cliente.",
+        "Funcionou? Salve o prompt como Skill 'relatorio-campanha' pra rodar igual todo mês."
+      ]
+    }
+  },
+  {
+    "curso": "claude-101",
+    "slug": "12-other-ways-to-work-with-claude",
+    "titulo": "Outras formas de trabalhar com o Claude: leve a inteligência pra onde o trabalho já acontece",
+    "resumo": "O Claude não vive só no chat do Claude.ai. Ele aparece dentro do terminal, do Slack, do Excel, do PowerPoint e do navegador — a ideia é parar de mudar de janela e trazer a inteligência pra dentro da ferramenta onde você já opera.",
+    "duracao_leitura": "8 min",
+    "conceitos": [
+      {
+        "termo": "Claude.ai como uma das interfaces (não a única)",
+        "definicao": "O chat web/desktop/mobile é o ponto de entrada genérico — bom pra pesquisa, escrita, análise e criação de arquivos. Mas é só UM jeito de falar com o mesmo modelo. Pensar 'Claude = aba do navegador' é o que te prende a copiar e colar o dia inteiro."
+      },
+      {
+        "termo": "Claude Code",
+        "definicao": "Claude agêntico dentro do terminal/IDE. Ele lê seu repositório de verdade, roda comandos, edita arquivos, executa testes e cria commits. Você descreve a tarefa em português e ele opera o ambiente — não devolve só um trecho de código pra você colar."
+      },
+      {
+        "termo": "Claude no Slack",
+        "definicao": "Claude dentro dos canais e threads. Resume discussão longa, puxa contexto de conversas pra preparar reunião e — marcando @Claude num bug — consegue abrir uma sessão de Claude Code usando aquele contexto. A inteligência mora onde o time já conversa."
+      },
+      {
+        "termo": "Claude for Excel e Claude for PowerPoint",
+        "definicao": "Claude como barra lateral dentro do Office. No Excel ele entende fórmulas entre abas, rastreia erros tipo #REF! e mexe no modelo preservando dependências. No PowerPoint ele transforma um documento em rascunho de slides e padroniza formatação sem destruir seu template e sua marca."
+      },
+      {
+        "termo": "Claude for Chrome",
+        "definicao": "Extensão que coloca o Claude como barra lateral no navegador. Ele enxerga a aba aberta, resume páginas, ajuda no e-mail e executa fluxos de vários passos. Está em research preview: peça permissão antes de ações de risco e use em sites confiáveis."
+      },
+      {
+        "termo": "Mesma inteligência, ambientes diferentes",
+        "definicao": "O ganho não é 'mais um app'. É reduzir atrito: cada superfície dá ao Claude o contexto que já está ali (seu código, sua thread, sua planilha, sua aba) sem você ter que reexplicar tudo no chat."
+      }
+    ],
+    "dicas": [
+      "Escolha a superfície pelo contexto, não pela moda: se o dado já está numa planilha, use o Claude for Excel; se está num repositório, Claude Code. Levar o trabalho pro chat e voltar é onde você perde tempo.",
+      "Comece pelo terminal se você é técnico. Claude Code é o salto de produtividade mais imediato: ele executa, não só sugere. Teste primeiro em tarefas chatas (lint, conflito de merge, release notes).",
+      "Trate o Claude for Chrome como estagiário em treinamento: research preview significa supervisão. Ótimo pra puxar contexto de CRM, dashboard e ferramenta interna — mas confira ações sensíveis antes de aprovar.",
+      "No Slack, o pulo do gato é o handoff: discussão de bug vira sessão de Claude Code marcando @Claude. O contexto da thread já vai junto, você não recomeça do zero."
+    ],
+    "exemplo": {
+      "contexto": "Você é consultor e recebe um relatório de campanha numa planilha com 6 abas, fórmulas cruzadas e um #REF! quebrando o total do mês. Cenário típico de operação, não de demonstração.",
+      "explicacao": "Em vez de exportar pro chat, abrir conversa, colar print e reexplicar a estrutura, você fala com o Claude na barra lateral do próprio Excel. Ele já vê o workbook inteiro, rastreia de onde vem o #REF! e propõe a correção preservando as dependências. Mesma lógica vale pra cada ferramenta: a superfície certa elimina o ritual de copiar-colar-reexplicar.",
+      "comandos": [
+        "[Claude for Excel] \"Rastreia a origem do #REF! na aba Resumo e me diz qual célula quebrou.\"",
+        "[Claude Code] \"Roda os testes, corrige os erros de lint e faz um commit com mensagem convencional.\"",
+        "[Claude no Slack] \"@Claude resume essa thread e abre uma sessão de Claude Code pra esse bug.\""
+      ]
+    },
+    "passos": [
+      "Identifique ONDE o trabalho já está acontecendo (terminal, Slack, Excel, PowerPoint, navegador).",
+      "Use a superfície do Claude que vive nesse ambiente, em vez de migrar tudo pro chat.",
+      "Deixe o Claude usar o contexto que já está ali — código, thread, planilha, aba — sem reexplicar.",
+      "Em ações sensíveis (Chrome, sites externos), revise antes de aprovar — supervisão é parte do fluxo."
+    ],
+    "erros_comuns": [
+      "Achar que 'usar Claude' é só abrir o Claude.ai e colar texto — você acaba sendo a ponte manual entre as ferramentas.",
+      "Tratar Claude Code como gerador de snippet: ele executa o ambiente de verdade, então pedir só 'me dá o código' desperdiça o que ele tem de melhor.",
+      "Usar o Claude for Chrome em tarefas de alto risco ou sites sensíveis ignorando que está em research preview e exige supervisão."
+    ],
+    "takeaway": "Claude é uma inteligência, não um site. O ganho de produtividade real vem de levá-lo pra dentro da ferramenta onde o trabalho já está — terminal, Slack, Excel, PowerPoint, navegador — e parar de ser o copia-e-cola entre as janelas."
+  },
+  {
+    "curso": "claude-101",
+    "slug": "13-what-s-next",
+    "titulo": "What's next? Saindo do curso e entrando na operação",
+    "resumo": "Terminar o Claude 101 não é a linha de chegada, é o ponto de partida. O que separa quem \"fez um curso de IA\" de quem realmente ganha tempo é colocar isso pra rodar numa tarefa real da sua semana.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Fundação vs. fluência",
+        "definicao": "O curso te deu o mapa: prompt com contexto + tarefa + formato, iteração, Projects, Artifacts, Skills, conectores, modo de pesquisa. Fluência de verdade não vem de assistir, vem de repetição em problema real. A intuição de 'quando o Claude ajuda e quando não' só nasce no uso."
+      },
+      {
+        "termo": "As 4 competências (4D)",
+        "definicao": "O framework de AI Fluency que sustenta tudo: Delegação (escolher o que vale passar pro Claude), Descrição (saber pedir com contexto), Discernimento (avaliar criticamente a resposta) e Diligência (responsabilidade pelo resultado — você assina embaixo, não a IA)."
+      },
+      {
+        "termo": "Próximas camadas de profundidade",
+        "definicao": "Claude 101 cobre claude.ai. O degrau seguinte é onde mora a operação séria: Claude Code pra dev e automação no terminal, Cowork pra trabalho multi-etapa no desktop, a API pra plugar o Claude dentro dos seus próprios produtos e fluxos."
+      },
+      {
+        "termo": "Skills e MCP",
+        "definicao": "Skills empacotam um procedimento repetível (seu jeito de fazer relatório, contrato, post) pra não reexplicar toda vez. MCP/conectores ligam o Claude às suas ferramentas reais — Drive, Slack, CRM, banco — pra ele trabalhar com seus dados, não com achismo."
+      },
+      {
+        "termo": "Tarefa-âncora",
+        "definicao": "Em vez de 'usar IA pra tudo', escolha UMA tarefa recorrente e chata da sua semana e resolva ela com o Claude de ponta a ponta. É assim que o hábito gruda: ROI visível numa coisa específica antes de generalizar."
+      }
+    ],
+    "dicas": [
+      "Escolha agora uma tarefa que você repete toda semana (responder um tipo de e-mail, resumir reunião, montar um relatório) e faça ela inteira com o Claude hoje. Cronometre o antes e o depois.",
+      "Pare de tratar a primeira resposta como final. O ganho real está na segunda e terceira iteração, quando você dá o contexto que faltou.",
+      "Quando uma tarefa virar rotina, transforme o prompt em um Project ou Skill. Você não deveria reescrever a mesma instrução duas vezes.",
+      "Suba o degrau certo pro seu caso: se você mexe com código ou automação, vá pro Claude Code; se é trabalho de escritório multi-etapa, Cowork; se você constrói produto, a API.",
+      "Mantенha o discernimento ligado: o Claude erra com confiança. Em decisão que tem consequência (jurídico, financeiro, número que vai pro cliente), você confere. Sempre."
+    ],
+    "erros_comuns": [
+      "Achar que terminar o curso é o objetivo. O curso é o meio; o objetivo é tempo de volta no seu dia.",
+      "Tentar 'usar IA em tudo' de uma vez, se espalhar, não ver ROI em nada e desistir. Comece estreito.",
+      "Delegar e largar — aceitar a saída sem revisar. Diligência é parte do trabalho, não opcional.",
+      "Ficar preso no claude.ai quando seu problema já pedia Claude Code, Cowork ou API há semanas."
+    ],
+    "exemplo": {
+      "contexto": "Você terminou o Claude 101 e quer transformar isso em ganho real de operação ainda esta semana, não 'algum dia'.",
+      "explicacao": "O movimento certo não é estudar mais — é executar uma tarefa-âncora de ponta a ponta e, se ela for recorrente, fossilizar isso num Project ou Skill pra nunca mais reexplicar. Depois, suba o degrau de ferramenta conforme seu caso.",
+      "comandos": [
+        "1. Liste 3 tarefas que você repetiu na última semana e que te deram preguiça.",
+        "2. Escolha a mais frequente. Abra o Claude e descreva: contexto (quem é o público, qual o objetivo) + tarefa + formato de saída.",
+        "3. Itere 2-3 vezes corrigindo o que ficou genérico ou no tom errado, em vez de aceitar a primeira resposta.",
+        "4. Funcionou? Salve as instruções num Project (ou vire uma Skill) pra reusar sem reescrever.",
+        "5. Se a tarefa envolve código/terminal, repita no Claude Code; se é trabalho multi-etapa no desktop, no Cowork."
+      ]
+    },
+    "passos": [
+      "Recapitule mentalmente as 4 competências: Delegação, Descrição, Discernimento, Diligência.",
+      "Escolha uma única tarefa-âncora recorrente da sua semana.",
+      "Resolva ela inteira com o Claude, iterando até ficar útil de verdade.",
+      "Transforme o que funcionou em Project ou Skill reutilizável.",
+      "Identifique se seu próximo passo é Claude Code, Cowork ou a API e dê esse passo."
+    ],
+    "takeaway": "Curso terminado não é resultado — resultado é tempo de volta no seu dia. Pegue UMA tarefa chata da sua semana e resolva ela com o Claude hoje. A fluência vem de fazer, não de assistir."
+  }
+]

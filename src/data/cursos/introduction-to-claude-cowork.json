@@ -1,0 +1,854 @@
+[
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "01-what-is-claude-cowork",
+    "titulo": "O que é o Claude Cowork: parar de perguntar e começar a delegar",
+    "resumo": "Cowork é o modo do Claude no app desktop onde ele não responde uma pergunta — ele executa o trabalho inteiro, nos seus arquivos e nas suas ferramentas, e devolve um entregável pronto.",
+    "duracao_leitura": "7 min",
+    "conceitos": [
+      {
+        "termo": "Claude Cowork",
+        "definicao": "Um modo dentro do app desktop do Claude onde você aponta uma pasta, conecta seus apps e descreve um resultado. O Claude monta um plano, executa os passos usando as ferramentas que precisar e salva um arquivo finalizado de volta na pasta. Não é um chat mais esperto — é um jeito diferente de trabalhar."
+      },
+      {
+        "termo": "Delegar vs. perguntar",
+        "definicao": "A mudança mental central. No Chat você pergunta e itera resposta por resposta. No Cowork você entrega um pedaço inteiro de trabalho — coleta de contexto, análise, produção de arquivo — e ele volta concluído. Regra prática: use Cowork pro trabalho que você normalmente FARIA você mesmo, não pro que você só PERGUNTARIA."
+      },
+      {
+        "termo": "Trabalho multi-step e longo",
+        "definicao": "O formato que o Cowork foi feito pra carregar: tarefas que cruzam várias ferramentas, levam tempo e terminam num artefato real. Ele sustenta o arco inteiro do começo ao fim, em vez de exigir que você costure cada passo na mão como no Chat turno a turno."
+      },
+      {
+        "termo": "Trabalha no seu ambiente",
+        "definicao": "O Cowork age onde seu trabalho mora, não ao lado dele: lê e escreve nos seus arquivos locais, puxa contexto dos apps conectados (Gmail, Slack, Drive, calendário, CRM) e, via Claude no Chrome, lê e atua em páginas atrás de login que não têm conector."
+      },
+      {
+        "termo": "Você no controle",
+        "definicao": "O Cowork mostra o plano antes de começar e, por padrão, pede permissão antes de ações que importam — enviar, deletar, compartilhar. Você acompanha, corrige o rumo a qualquer momento e nada irreversível acontece pelas suas costas."
+      },
+      {
+        "termo": "Chat vs. Cowork vs. Code",
+        "definicao": "Três modos pra formatos diferentes de trabalho. Chat: pensar junto, rascunhar, tirar dúvida, uma ferramenta por vez. Cowork: delegar entregáveis multi-step com várias ferramentas. Code: ambiente de desenvolvimento dentro do repositório, com terminal e git, pra escrever e shippar software."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Cenário real do tipo que o Cowork tira da sua frente: fechar um resumo de decisões de pricing pra mandar pra diretoria.",
+      "explicacao": "Repare na anatomia. A informação está espalhada em quatro lugares diferentes (pasta de notas, e-mails, Slack, decks), são vários passos encadeados, e termina num arquivo concreto que alguém vai ler. No Chat você teria que abrir cada fonte, colar pedaço por pedaço e montar o resumo na mão. No Cowork você descreve o resultado uma vez e recebe o entregável pronto. Esse é o formato: arquivos locais + várias ferramentas + vários passos + um entregável real.",
+      "comandos": [
+        "Prompt: 'O que a gente decidiu sobre pricing no último trimestre? Olha as notas de reunião na pasta Vendas Q3, meus e-mails do time comercial e o canal de liderança no Slack, cruza com os decks de proposta e me escreve um resumo de uma página pra mandar pra diretoria.'",
+        "Plano (o Cowork mostra antes de agir): 1) ler notas da pasta local  2) buscar e-mails relevantes  3) varrer o canal do Slack  4) extrair pontos dos decks  5) sintetizar a página  6) salvar o .docx na pasta",
+        "Entregável: resumo-pricing-Q3.docx salvo de volta na sua pasta, pronto pra revisar e enviar"
+      ]
+    },
+    "passos": [
+      "Abra o modo Cowork no app desktop do Claude.",
+      "Aponte o Claude pra uma pasta no seu computador onde o trabalho vive (e onde o entregável vai ser salvo).",
+      "Conecte os apps que têm o contexto que ele vai precisar: Gmail, Slack, Drive, calendário, CRM.",
+      "Descreva o RESULTADO que você quer — não a próxima pergunta, mas a tarefa inteira pronta.",
+      "Leia o plano que ele propõe e ajuste se precisar antes de liberar.",
+      "Acompanhe a execução, aprove as ações sensíveis (enviar/deletar/compartilhar) e pegue o entregável na pasta."
+    ],
+    "erros_comuns": [
+      "Tratar o Cowork como um chat mais inteligente: digitar uma perguntinha, esperar a resposta e iterar. Funciona, mas desperdiça o que ele tem de melhor — delegar o trabalho inteiro.",
+      "Levar pro Cowork tarefa que cabe numa única resposta. Se é pensar, rascunhar ou tirar dúvida rápida, o lugar é o Chat.",
+      "Não apontar a pasta nem conectar os apps e depois reclamar que faltou contexto. O Cowork age no SEU ambiente — ele precisa de acesso ao ambiente.",
+      "Usar Cowork pra trabalho de código dentro de repositório. Editar fonte, rodar testes e commitar é território do Code, não do Cowork."
+    ],
+    "dicas": [
+      "Teste rápido pra decidir o modo: se o valor está no PENSAR, vá de Chat; se está no FAZER e termina num arquivo, vá de Cowork; se é dentro de um repositório, é Code.",
+      "Escreva o prompt como se estivesse passando a tarefa pra alguém da equipe: diga onde está a informação, o que cruzar e qual o formato do entregável final.",
+      "Não tenha medo de soltar e voltar depois. O Cowork é feito pra trabalho longo — coloque em movimento e vá fazer outra coisa.",
+      "Olhe o plano antes de aprovar. É de graça corrigir o rumo ali, e é o seu maior ponto de controle."
+    ],
+    "takeaway": "Chat é pra pensar com o Claude, Code é pra construir software com o Claude, e Cowork é pra delegar trabalho pro Claude. Pega aquela tarefa chata que você faz toda semana, que cruza várias ferramentas e termina num arquivo — é exatamente o que o Cowork tira da sua frente."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "02-setting-up-claude-cowork",
+    "titulo": "Configurando o Claude Cowork: pasta, conectores e permissões",
+    "duracao_leitura": "8 minutos",
+    "resumo": "Cowork vive dentro do app de desktop do Claude e trabalha numa pasta real do seu computador, com acesso de leitura E escrita. O setup é três decisões: qual pasta, quais conectores e quanto controle você quer sobre as ações.",
+    "conceitos": [
+      {
+        "termo": "Pasta de trabalho",
+        "definicao": "O diretório local que você aponta pro Cowork. É o único lugar onde o Claude tem leitura E escrita: ele lê tudo que está dentro (docx, xlsx, pdf, pptx) e salva os resultados de volta ali. Diferente do Chat, onde você só faz upload e ele não grava nada no seu disco."
+      },
+      {
+        "termo": "Conectores",
+        "definicao": "Pontes pros apps onde seu trabalho já acontece: e-mail, calendário, Slack, Drive, CRM. Você configura uma vez na área Customize e liga/desliga por tarefa. Atenção: a maioria dos conectores de nuvem (Google Drive, M365) é só leitura e busca — não criam nem editam arquivos como a pasta local faz."
+      },
+      {
+        "termo": "Ask before acting",
+        "definicao": "Modo padrão de permissão. O Claude pausa e pede seu OK antes de cada ação que toca o mundo externo: enviar e-mail, postar mensagem, compartilhar arquivo. É o modo de quem está aprendendo a confiar no fluxo."
+      },
+      {
+        "termo": "Act without asking",
+        "definicao": "Modo em que o Claude executa sem pausar pra aprovação. Mais rápido, mais arriscado. Só use quando estiver supervisionando ao vivo, com arquivos e ferramentas que você já conhece e confia."
+      },
+      {
+        "termo": "Guardrail de exclusão",
+        "definicao": "Regra fixa nos dois modos: o Claude SEMPRE pergunta antes de deletar um arquivo permanentemente. Esse prompt não tem como pular. É a trava que te deixa delegar sem medo de perder coisa."
+      }
+    ],
+    "passos": [
+      "Instale o app de desktop do Claude (Mac ou Windows) em claude.com/download, entre na conta e procure o Cowork no seletor de modo no canto superior direito. Se não aparecer, provavelmente falta plano pago ou versão mais nova.",
+      "Aponte pra uma pasta com 'Work in a project' na barra de prompt. Escolha a MENOR pasta que contém o que a tarefa precisa — não a sua pasta inteira de Documentos.",
+      "Configure os conectores em Customize. Comece pelo app onde mora a maior parte do seu contexto: pra muita gente é e-mail e storage de nuvem.",
+      "Escolha o modo de permissão. Comece em 'Ask before acting' até pegar confiança no fluxo.",
+      "Delegue uma tarefa pequena de verdade pra sentir como funciona — e confirmar que o setup está OK."
+    ],
+    "exemplo": {
+      "contexto": "Você quer que o Cowork monte um resumo de um projeto de cliente que você já está tocando essa semana. A regra de ouro: use material real, não arquivo de brincadeira. O Cowork só é bom na medida do contexto que você dá.",
+      "comandos": [
+        "Work in a project → escolha a pasta do cliente (ou copie o conteúdo pra uma pasta nova se não quiser apontar pra pasta viva)",
+        "Customize → ligue um conector: Google Drive ou Gmail",
+        "Prompt: 'Lê tudo que tem nessa pasta e me escreve um brief: o que tem aqui, como os documentos se relacionam, qualquer insight inesperado e o que mais você acha relevante.'"
+      ],
+      "explicacao": "Depois confira o brief contra o que você já sabe do cliente. O que ele pegou que você teria deixado passar? O que errou? Esse atrito é justamente o que mostra a diferença entre conversar com o Claude e DELEGAR pra ele — ele lê os arquivos sozinho e grava a saída de volta na pasta, sem você ficar copiando e colando."
+    },
+    "dicas": [
+      "Pasta pequena e específica. Você sempre adiciona outra depois se precisar. Dar acesso a tudo de uma vez não acelera nada e só aumenta o ruído.",
+      "Pra ferramenta sem conector (dashboard interno, portal de fornecedor, web app atrás de login), o Claude in Chrome é a ponte. 'Sem conector' não quer dizer 'fora de alcance'.",
+      "Antes de liberar acesso extra a um conector ou site, pergunte: quanto eu confio nessa fonte? O default já é conservador por um motivo.",
+      "Conector de nuvem não substitui a pasta local. Pra construir e iterar um documento de verdade, a pasta local continua sendo o lugar mais confiável."
+    ],
+    "erros_comuns": [
+      "Apontar pra pasta inteira de Documentos 'pra garantir'. Isso dilui o contexto e não ajuda — escolha o menor escopo que resolve a tarefa.",
+      "Achar que o conector do Google Drive vai editar seus arquivos como a pasta local. A maioria é só leitura e busca; confira a descrição de cada conector ao ligar.",
+      "Pular direto pro 'Act without asking' antes de confiar no fluxo. Comece pausando em cada ação até entender o comportamento.",
+      "Testar com arquivos de mentira. O valor do Cowork está no contexto real; arquivo de brincadeira não mostra do que ele é capaz."
+    ],
+    "takeaway": "O setup do Cowork são três decisões — qual pasta, quais conectores, quanto controle — e o modelo de permissão é o que te deixa entregar um trabalho de verdade sabendo que nada vai acontecer pelas suas costas. É aí que 'delegar' deixa de ser conversa."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "03-what-claude-cowork-can-do-for-you",
+    "titulo": "O que o Claude Cowork resolve de verdade no seu dia",
+    "resumo": "Cowork brilha em três tipos de tarefa: as que têm muitas etapas, as que mexem em arquivos reais da sua máquina e as que cruzam várias ferramentas. Reconhecer esse formato é o que separa quem economiza horas de quem só conversa com um chatbot.",
+    "duracao_leitura": "8 min",
+    "conceitos": [
+      {
+        "termo": "Tarefa multi-etapa",
+        "definicao": "Trabalho que normalmente você quebraria em vários prompts: buscar contexto, comparar fontes, rascunhar e formatar. No Cowork você entrega o arco inteiro de uma vez e ele executa a sequência sozinho."
+      },
+      {
+        "termo": "Tarefa baseada em arquivo",
+        "definicao": "O objetivo é um entregável real (DOCX, planilha, PDF, deck) salvo no formato certo. Cowork lê os arquivos que já existem na sua pasta, edita e grava de volta — diferente do chat, que só cospe um texto novo."
+      },
+      {
+        "termo": "Tarefa multi-ferramenta",
+        "definicao": "O trabalho atravessa os sistemas onde você já opera (e-mail, CRM, planilhas, agenda). Via conectores, o Cowork planeja a sequência entre essas ferramentas e roda tudo como uma única delegação."
+      },
+      {
+        "termo": "Tarefa agendada (/schedule)",
+        "definicao": "Você configura uma tarefa uma vez e o Claude a repete numa cadência (diária, semanal, etc.). O caminho mais limpo é fazer a tarefa uma vez, validar o output e só então transformar aquele processo em recorrente."
+      },
+      {
+        "termo": "Dispatch",
+        "definicao": "Disparar uma tarefa de Cowork pelo celular. O trabalho roda na sua máquina (mesmos arquivos, conectores e permissões) e você recebe um push quando termina. Está em research preview, hoje em planos Pro e Max."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Fechamento de mês de uma agência: relatório de performance pro cliente, que sempre toma a tarde inteira juntando número de planilha com print de plataforma.",
+      "explicacao": "Esse caso encaixa nos três padrões ao mesmo tempo: tem várias etapas, produz um arquivo real e cruza ferramentas. Em vez de você abrir cada aba e copiar e colar, descreve o entregável uma vez e o Cowork monta. Depois de validar o resultado do primeiro mês, vire isso em tarefa agendada pra rodar todo dia 1.",
+      "comandos": [
+        "Pega as planilhas de mídia da pasta /clientes/drfarol/maio, cruza com as métricas do CRM e monta o relatório no meu template padrão de DOCX, com os gráficos de leads por semana",
+        "/schedule",
+        "Roda esse mesmo relatório todo dia 1 do mês e me avisa quando o rascunho estiver pronto pra revisão"
+      ]
+    },
+    "dicas": [
+      "Antes de delegar, pergunte: tem várias etapas? mexe em arquivo? cruza ferramentas? Se marcar pelo menos um, é trabalho de Cowork, não de chat.",
+      "Não comece pelo /schedule. Faça a tarefa manualmente uma vez, confira o output e só então agende — você agenda um processo que já sabe que funciona.",
+      "Use o Dispatch pra disparar do celular aquelas tarefas que você lembra na fila do café, mas a máquina precisa estar ligada e com o Cowork aberto pra rodar.",
+      "Aponte o Cowork pra arquivos e pastas reais. O ganho está em ele editar o que já existe, não em recriar do zero."
+    ],
+    "erros_comuns": [
+      "Tratar o Cowork como chatbox de resposta curta. Pra pergunta de uma linha, o chat normal resolve; Cowork é pra entregar o arco completo de uma tarefa.",
+      "Esperar tarefa agendada ou Dispatch rodar com a máquina dormindo ou desligada. Só executa com o computador ligado e o Cowork aberto — se não, ele segura e roda quando você voltar.",
+      "Pedir um entregável sem indicar o template ou os arquivos de origem, e depois reclamar que o formato saiu genérico. Aponte a fonte real."
+    ],
+    "takeaway": "Se a tarefa tem muitas etapas, mexe em arquivos reais ou cruza ferramentas, ela é candidata a delegação — e o /schedule e o Dispatch decidem o quando e o onde. O julgamento continua seu: o Claude planeja e executa, você aprova o que vai pra fora.",
+    "passos": [
+      "Olhe sua semana e identifique uma tarefa que bata em pelo menos um dos três padrões (multi-etapa, arquivo, multi-ferramenta).",
+      "Descreva o entregável pro Cowork apontando os arquivos e o formato de saída que você quer.",
+      "Confira o resultado antes de confiar no processo.",
+      "Se for algo que se repete, rode /schedule e transforme aquele mesmo processo em recorrente.",
+      "Pro que você lembra longe da mesa, deixe o Dispatch disparar do celular."
+    ]
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "04-hand-claude-cowork-your-first-task",
+    "titulo": "Sua primeira tarefa no Cowork: delegar de verdade",
+    "resumo": "Delegar uma tarefa pro Cowork não é mandar prompt num chatbot: é briefar um colega que vai sumir, executar e voltar com algo pronto. Quanto melhor o briefing inicial, menos retrabalho depois.",
+    "duracao_leitura": "6 min",
+    "conceitos": [
+      {
+        "termo": "Delegação (o D de Delegation no 4D)",
+        "definicao": "É o ato de passar a tarefa de ponta a ponta, não de pedir uma resposta. No Cowork você aponta a pasta, liga os conectores certos e descreve o resultado que quer. A regra mental: trate como se estivesse briefando alguém que vai trabalhar offline e só volta com a entrega pronta."
+      },
+      {
+        "termo": "Briefing de 3 camadas (entrega, insumos, nuance)",
+        "definicao": "Um bom prompt de Cowork responde três coisas: QUAL é o artefato final (um brief de 1 página, um slide, uma planilha), DE ONDE vem o contexto (qual pasta, qual canal, qual período) e O QUE só você sabe (regras de negócio, exceções, premissas). É a diferença entre delegação e adivinhação."
+      },
+      {
+        "termo": "Perguntas de esclarecimento",
+        "definicao": "Antes de começar, o Cowork costuma devolver uma ou duas perguntas pra fechar lacunas de contexto. No chat o contexto chega turno a turno; aqui ele precisa fechar tudo antes de mergulhar. Não é fricção, é o sistema evitando produzir a coisa errada com confiança."
+      },
+      {
+        "termo": "Correção de rota (steering)",
+        "definicao": "Você não precisa esperar o Cowork terminar pra consertar. Enquanto ele executa, você acompanha o plano e o progresso e pode interromper pra redirecionar — fonte errada, formato errado, tom errado. Ele retoma de onde estava, sem recomeçar do zero."
+      },
+      {
+        "termo": "Discernimento na revisão (o D de Discernment)",
+        "definicao": "A entrega é o arquivo, não o chat. No fim, você revisa como revisaria o rascunho de um colega novo: bate com o objetivo real? Os números conferem com a fonte? Tem algum nome, data ou citação que você não consegue rastrear até um insumo? Confiança não dispensa conferência."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você precisa de um memorando competitivo do Q3 pra reunião de liderança. Os PDFs das calls de analistas, o memo do trimestre passado e as notas de posicionamento estão numa pasta. Em vez de abrir cinco abas e escrever do zero, você delega pro Cowork.",
+      "comandos": [
+        "Aponte o Cowork pra pasta /memos-competitivos e ligue o conector do Drive onde estão as notas de posicionamento.",
+        "Prompt: 'Escreve o memo competitivo do Q3 pra reunião de liderança. Entrega: documento de 2 páginas no formato do template do Q2. Insumos: os 3 PDFs das calls de analistas e o memo do Q2 que estão nesta pasta. Cruza as mudanças de preço de cada concorrente contra as nossas notas de posicionamento. Nuance: ignore o concorrente X, que saiu do nosso segmento em abril.'",
+        "Responda as perguntas de esclarecimento (ex.: 'Inclui projeção de receita?' → clica na opção que serve ou responde com suas palavras).",
+        "Acompanhe o plano. Se ele começar a puxar a fonte errada, interrompe: 'Use o template do Q3, não o do Q2.'",
+        "Quando terminar, abra o arquivo na pasta e confira os números contra os PDFs originais."
+      ],
+      "explicacao": "Repare no ritmo: o trabalho pesado de contexto acontece ANTES, num briefing único, em vez de se arrastar por cinco rodadas de 'na verdade, inclui também...'. Você troca mais esforço na largada por muito menos retrabalho no fim. E a revisão final é sua — o Cowork entrega o rascunho, mas o discernimento de aprovar ou ajustar continua com quem conhece o negócio."
+    },
+    "passos": [
+      "Aponte o Cowork pra pasta onde mora o contexto da tarefa e ligue os conectores relevantes (Drive, Slack, etc.).",
+      "Escreva o prompt nas 3 camadas: nomeie a ENTREGA (formato e tamanho), os INSUMOS (de onde puxar) e a NUANCE (o que só você sabe).",
+      "Responda as perguntas de esclarecimento de forma específica — clique na opção que serve ou escreva sua resposta.",
+      "Acompanhe o plano e o progresso enquanto ele executa; se drifar, interrompa e redirecione em vez de esperar o fim.",
+      "Revise a entrega com discernimento: bate com o objetivo, os fatos conferem, nada parece inventado.",
+      "Se estiver quase certo, diga o que mudar em vez de recomeçar. Se estiver errado no essencial, faltou um insumo essencial — aponte o contexto que faltou e peça o ajuste."
+    ],
+    "dicas": [
+      "Especifique formato e tamanho da entrega no prompt. 'Um slide' ou 'lista rankeada com nota por item' economiza um regenerate inteiro.",
+      "Deixou uma camada vazia (entrega, insumo ou nuance)? O Cowork normalmente vai te perguntar — então é melhor já entregar de bandeja.",
+      "Quando o rascunho estiver 80% certo, edite por instrução, não por recomeço. O Cowork lembra da conversa e edita mais rápido do que gera do zero.",
+      "Pra checar fatos, peça primeiro pro Cowork listar de quais documentos ele puxou — depois confira você mesmo nas fontes.",
+      "A primeira tarefa é a que mais ensina. Escolha algo real, não um teste de brincadeira, e preste atenção em quais lacunas geraram perguntas."
+    ],
+    "erros_comuns": [
+      "Tratar o Cowork como chatbot e mandar um prompt vago esperando refinar turno a turno — aqui o contexto precisa estar fechado antes, não depois.",
+      "Esperar a execução terminar pra só então 'regenerar'. Instinto de chat. O custo de redirecionar no meio é baixo; aproveite.",
+      "Aprovar a entrega sem rastrear os números até a fonte. Uma data, nome ou citação que você não consegue ligar a um insumo é um sinal de alerta, não um detalhe.",
+      "Recomeçar do zero quando o rascunho está quase certo, em vez de pedir o ajuste pontual.",
+      "Não ligar os conectores que guardam o contexto — o Cowork só é tão bom quanto as fontes pra onde você aponta."
+    ],
+    "takeaway": "Delegar bem é briefar, não promptar: nomeie a entrega, os insumos e a nuance que só você sabe, responda as perguntas com precisão, corrija a rota no meio e revise o arquivo final com discernimento. O esforço vai pra largada — e o retrabalho some."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "05-get-better-results-faster",
+    "titulo": "As 4 camadas que fazem o Claude trabalhar melhor com o tempo",
+    "resumo": "A diferença entre um assistente genérico e um que parece da sua equipe é contexto que persiste. Esta aula mostra as quatro camadas — instruções globais, projetos, skills e plugins — que fazem cada nova entrega sair melhor e mais rápida que a anterior.",
+    "duracao_leitura": "5 minutos",
+    "conceitos": [
+      {
+        "termo": "Instruções globais",
+        "definicao": "O nível mais alto de contexto: quem você é, seu cargo, seus formatos preferidos, seu tom. Vale para toda conversa, então o Claude já começa calibrado sem você ter que repetir 'sou consultor de IA, responde em português, seja direto' toda vez."
+      },
+      {
+        "termo": "Projetos",
+        "definicao": "Um espaço dedicado a um fluxo de trabalho específico. Concentra arquivos, histórico e decisões de um cliente ou frente. Dentro dele o Claude age como alguém que já está no time daquela conta — não precisa de briefing do zero."
+      },
+      {
+        "termo": "Skills",
+        "definicao": "Um processo repetível embalado em instruções + arquivos que o Claude carrega só quando a tarefa bate. É a sua maneira de fazer aquilo: seu template, seus passos, seu padrão de qualidade. Aqui isso aparece como /autentique, /clickup, /ghl, /carrossel."
+      },
+      {
+        "termo": "Plugins",
+        "definicao": "A camada de especialização do cargo ou da área. Junta workflows, conectores (MCP) e know-how que transformam o Claude de generalista em especialista da sua função. É o que você empacota e compartilha com o time quando o processo já está maduro."
+      },
+      {
+        "termo": "Contexto que compounda",
+        "definicao": "O princípio que liga tudo: cada camada guarda algo que o Claude leva pra próxima tarefa. O esforço de configurar uma vez não se gasta — ele rende em toda interação seguinte, e as camadas somam."
+      }
+    ],
+    "dicas": [
+      "Não tente montar as quatro camadas no dia 1. Comece usando de verdade e deixe a necessidade aparecer — ela aparece sozinha.",
+      "Quando você se pegar repetindo a mesma explicação pela terceira vez (o mesmo formato de relatório, o mesmo passo a passo), pare: isso é o sinal de que virou candidato a skill.",
+      "Use instruções globais só pro que vale pra TODA conversa (idioma, tom, seu papel). Contexto de um cliente específico vai pra um projeto, não pro global — senão vira poluição.",
+      "Trate projeto como a pasta do cliente: jogue os arquivos, o histórico e as decisões lá dentro uma vez, e pare de re-explicar o contexto a cada chat.",
+      "Só vire um workflow em plugin quando o processo já estiver redondo e valer a pena compartilhar. Padronizar cedo demais congela um processo que ainda está mudando."
+    ],
+    "exemplo": {
+      "contexto": "Na prática, com o jeito que eu uso aqui na operação: atender o Dr. Farol Itu (cliente automotivo). Repare como cada camada tira um pedaço de trabalho repetido da sua mão.",
+      "explicacao": "Instrução global resolve o universal (português, anti-hype, direto) pra eu nunca mais pedir. O projeto do Dr. Farol guarda os IDs de Meta e GHL, o histórico de campanha e as decisões — entro no chat e o contexto já está lá. A skill /relatorio-marketing executa o relatório no MEU padrão de 10 seções, sempre igual. E o plugin junta os conectores (Meta Ads, GHL) com o workflow inteiro, virando o 'especialista de tráfego' que eu compartilho com o time. Quatro camadas independentes que somam.",
+      "comandos": [
+        "Instrução global: \"sou consultor de IA, responde em pt-BR, tom direto e anti-hype\"",
+        "Projeto \"Dr. Farol Itu\": IDs Meta + GHL, histórico de campanha, decisões",
+        "Skill: /relatorio-marketing → relatório no padrão de 10 seções",
+        "Plugin: conectores Meta Ads + GHL + workflow de tráfego empacotados pro time"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que precisa configurar tudo antes de começar a trabalhar. É o contrário: você trabalha primeiro e descobre o que vale virar camada.",
+      "Jogar contexto de cliente específico nas instruções globais. Isso suja toda conversa com informação que só serve pra um caso — o lugar certo é um projeto.",
+      "Virar skill cedo demais, congelando um processo que ainda está em ajuste e depois tendo que refazer.",
+      "Confundir as camadas: skill é 'COMO fazer um processo'; plugin é 'a expertise da função inteira, com conectores, pra compartilhar'. Não é a mesma coisa."
+    ],
+    "takeaway": "Resultado melhor e mais rápido não vem de um prompt mais esperto — vem de contexto que persiste. Instruções globais, projetos, skills e plugins são quatro formas independentes do Claude aprender o seu jeito de trabalhar, e elas compõem: quanto mais ele sabe, mais sai da sua mão.",
+    "passos": [
+      "Use o Claude no dia a dia primeiro, sem montar nenhuma estrutura.",
+      "Identifique o que se repete em TODA conversa (idioma, tom, seu papel) e transforme em instruções globais.",
+      "Mapeie suas frentes recorrentes (cada cliente, cada produto) e abra um projeto pra cada uma, jogando arquivos e histórico dentro.",
+      "Observe qual explicação de processo você repete demais e transforme nela na sua primeira skill.",
+      "Quando um workflow amadurecer e valer compartilhar, empacote como plugin com os conectores que ele precisa."
+    ]
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "06-standing-context-global-instructions-and-projects",
+    "titulo": "Contexto permanente: instruções globais e projetos no Cowork",
+    "duracao_leitura": "7 min",
+    "resumo": "No Cowork, o contexto que sobrevive de uma tarefa pra outra é o que VOCÊ configura: instruções globais valem pra toda sessão, e projetos isolam um fluxo de trabalho com memória própria. Configurar isso uma vez é o que separa um assistente genérico de um que já chega sabendo como você opera.",
+    "conceitos": [
+      {
+        "termo": "Instruções globais",
+        "definicao": "Um briefing fixo que você escreve uma vez nas configurações e que o Claude lê no início de TODA sessão de Cowork — chat, tarefa agendada, qualquer coisa. É onde mora quem você é, seu jargão e como você quer o output entregue."
+      },
+      {
+        "termo": "Projeto",
+        "definicao": "Um espaço de trabalho amarrado a um fluxo específico (um cliente, um entregável recorrente, um lançamento). Junta instruções próprias, tarefas agendadas, pastas/links de contexto e — o pulo do gato — memória que o Claude constrói sozinho a partir das conversas dentro dele."
+      },
+      {
+        "termo": "Memória de projeto",
+        "definicao": "O que o Claude aprende automaticamente conversando dentro de um projeto. Você não escreve essa parte: ela acumula. A próxima tarefa já abre sabendo as últimas decisões e o que ficou em aberto."
+      },
+      {
+        "termo": "Contexto permanente (standing context)",
+        "definicao": "Tudo que persiste entre sessões sem você precisar repetir. No Cowork são duas camadas: instruções globais (sobre VOCÊ) e projetos (sobre O QUE você está fazendo)."
+      },
+      {
+        "termo": "Working directory do projeto",
+        "definicao": "Quando você cria um projeto a partir de uma pasta existente do seu computador, essa pasta vira o diretório de trabalho — o Claude lê e opera direto ali, sem upload manual."
+      }
+    ],
+    "dicas": [
+      "Não tente escrever a instrução global perfeita no dia 1. O método que funciona: toda vez que você se pegar corrigindo a mesma coisa ('responde direto, sem enrolação', 'sempre em pt-BR'), aquela correção vira candidata a instrução global.",
+      "Separe as camadas na cabeça: instrução global é sobre VOCÊ (cargo, jargão, formato preferido). Projeto é sobre O TRABALHO (esse cliente, esse relatório mensal). Misturar as duas é o erro mais comum.",
+      "Use projeto pra qualquer coisa que se repete em ciclos: relatório mensal de tráfego de um cliente, prep de reunião semanal, follow-up de uma conta. Cada novo ciclo é uma conversa nova dentro do MESMO projeto, e ela já nasce sabendo do ciclo anterior.",
+      "Coloque o jargão e as siglas que você usa na instrução global. Se 'o deck do QBR' ou 'a fatura do C6' é óbvio pra você, ensine isso uma vez e pare de explicar toda sessão.",
+      "Aponte o projeto pra pasta onde os materiais JÁ vivem em vez de subir arquivo na mão. Menos atrito, e o Claude trabalha com a versão atual dos arquivos."
+    ],
+    "exemplo": {
+      "contexto": "Eu rodo várias contas de cliente ao mesmo tempo. Sem contexto permanente, toda sessão começava do zero — eu reexplicando quem eu sou e o que cada cliente faz. A correção foi montar as duas camadas.",
+      "explicacao": "A camada global é meu briefing pessoal, escrito uma vez. A camada de projeto isola um cliente, e a memória dele acumula sozinha. Quando abro uma tarefa nova daquele cliente, ela já chega com o histórico — não preciso colar nada.",
+      "comandos": [
+        "Instrução global (Configurações → Cowork): 'Sou consultor de IA e CTO. Trabalho com tráfego pago (Meta/Google) e automação pra PMEs no Brasil. Entrego relatórios, contratos e LPs. Quero respostas em pt-BR, diretas, com a recomendação na frente e o contexto resumido em um parágrafo. Prefiro revisar o preview em .md antes de gerar o arquivo final.'",
+        "Novo projeto 'Cliente X' apontado pra pasta ~/clientes/cliente-x (vira o working directory)",
+        "Instrução do projeto: 'Conta de automotivo. Foco em geração de lead via WhatsApp. Reportar CPL e atribuição todo mês.'",
+        "Tarefa agendada dentro do projeto: puxar os números toda primeira segunda do mês"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que a memória do Cowork funciona igual à do Chat (que aprende sozinha do nada). No Cowork, fora de um projeto, cada sessão começa praticamente do zero — o que persiste é o que VOCÊ configurou.",
+      "Jogar tudo na instrução global. Detalhe de um cliente específico não pertence ao briefing que vale pra toda sessão — isso polui o contexto de todos os outros trabalhos. Vai pro projeto daquele cliente.",
+      "Esperar que a transição de um projeto do Chat pro Cowork seja bidirecional. Ela é de mão única: o que você muda no Cowork depois NÃO volta pro Chat.",
+      "Criar um projeto e nunca dar instrução nem contexto pra ele. Aí ele vira só uma pasta — você perde justamente o ganho da memória acumulada."
+    ],
+    "passos": [
+      "Abra Configurações → Cowork e escreva um primeiro rascunho de instruções globais. Poucas frases: quem você é, seu jargão, como quer o output. Salve sem perfeccionismo.",
+      "Escolha UM fluxo recorrente que você está tocando agora (uma conta de cliente, um entregável mensal, um projeto em andamento).",
+      "Crie um projeto pra ele: clique em Projetos na barra lateral e em Novo projeto.",
+      "Escolha a origem: do zero, a partir de uma pasta do seu computador, ou migrando de um projeto do Chat.",
+      "Dê uma instrução curta ao projeto e aponte o contexto (a pasta ou os links). Pronto — as próximas conversas ali já acumulam memória."
+    ],
+    "takeaway": "Configure as duas camadas uma vez — instrução global pra quem você é, projeto pra cada fluxo de trabalho — e o Claude para de começar do zero a cada sessão. É a diferença entre um assistente genérico e um que já chega sabendo o jogo."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "07-skills-teach-claude-cowork-your-way",
+    "titulo": "Skills: ensina o Claude Cowork a trabalhar do seu jeito",
+    "resumo": "Skill é uma pasta de instruções e recursos que ensina o Claude a executar um processo recorrente do jeito certo, toda vez. Você codifica uma vez o que hoje precisa re-explicar sempre.",
+    "duracao_leitura": "8 minutos",
+    "conceitos": [
+      {
+        "termo": "Skill",
+        "definicao": "Uma pasta com um arquivo SKILL.md e, opcionalmente, recursos de apoio. É um manual operacional que o Claude carrega quando a tarefa bate com o que a skill faz. Pense nela como o onboarding de um processo: você escreve uma vez como a coisa tem que ser feita, e o Claude passa a seguir."
+      },
+      {
+        "termo": "SKILL.md",
+        "definicao": "O coração da skill. Um arquivo com um cabeçalho (nome + descrição) e o corpo com as instruções: o que faz, quando disparar e como executar passo a passo. A descrição é o que o Claude usa pra decidir, sozinho, se aquela skill serve pra tarefa atual."
+      },
+      {
+        "termo": "Carregamento automático (progressive disclosure)",
+        "definicao": "Você não precisa chamar a skill pelo nome. O Claude lê as descrições das skills instaladas, percebe quando uma encaixa na tarefa e carrega só nesse momento. Isso economiza contexto: o conteúdo pesado só entra quando é relevante. Você também pode ser explícito ('usa a skill de relatório') quando quiser forçar."
+      },
+      {
+        "termo": "Recursos de apoio (assets, references, scripts)",
+        "definicao": "Arquivos opcionais que a skill carrega junto. Assets são matéria-prima (logo, template de slide, fonte). References são exemplos de trabalho bom (um relatório passado, um guia de estilo) pro Claude calibrar o nível. Scripts são códigos pequenos pras partes que têm que sair idênticas toda vez (um cálculo, uma formatação)."
+      },
+      {
+        "termo": "Trigger (gatilho)",
+        "definicao": "A condição que faz a skill ativar. Boa parte do trabalho de uma skill bem feita está em descrever com precisão QUANDO ela serve. Trigger vago = a skill nunca dispara ou dispara na hora errada. Trigger específico = o Claude acerta sozinho."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Toda segunda você monta o mesmo relatório de fechamento de campanha pro cliente, sempre na mesma ordem de seções e com o mesmo critério de 'o que é resultado relevante'. Uma skill mata essa repetição.",
+      "comandos": [
+        "Quero criar uma skill pro relatório semanal de campanha que eu sempre refaço. Me pergunta o que você precisa saber.",
+        "Dispara quando eu mandar os CSVs de Meta Ads e disser 'fecha a semana do cliente X'.",
+        "Adiciona um passo que sinaliza qualquer conjunto de anúncios com CPA acima de R$80 — isso sempre importa.",
+        "Fecha a semana da Fazenda das Pedras com esses dados."
+      ],
+      "explicacao": "O jeito mais rápido de criar uma skill é pedir pro próprio Claude. Você descreve o processo, ele faz perguntas (o que faz, quando dispara, como é um bom resultado, que arquivos usar) e devolve a pasta pronta com o SKILL.md e o que mais for preciso. Depois de instalada, ela aparece em Customize, e qualquer ajuste é só pedir em linguagem natural — o Claude edita a skill no lugar. Repare que você não 'programa' nada: descreve o processo como descreveria pra um colega novo."
+    },
+    "passos": [
+      "Escolha UM processo que você repete e cansou de re-explicar: um relatório, um formato fixo, um checklist.",
+      "Abra uma conversa nova no Cowork e peça pro Claude construir a skill com você — descreva o processo e deixe ele te entrevistar.",
+      "Seja específico no gatilho: descreva exatamente quando a skill deve disparar, com as palavras que você usa de verdade.",
+      "Aponte exemplos reais — um template seu, um output passado que ficou bom. References valem mais que descrição quando o padrão é difícil de explicar em texto.",
+      "Use scripts só pras partes que têm que sair idênticas toda vez (um cálculo, uma conversão). O resto, deixe o Claude redigir.",
+      "Instale, rode uma vez de verdade e corrija pedindo em linguagem natural. Skill boa se ajusta no uso, não no nascimento."
+    ],
+    "erros_comuns": [
+      "Escrever a skill com gatilho vago ('relatórios em geral') — aí ela nunca dispara na hora certa. Seja cirúrgico no QUANDO.",
+      "Empacotar tudo numa skill gigante. Skill é um processo, não um manual da empresa inteira. Uma skill = uma tarefa repetível.",
+      "Achar que toda skill precisa de script e template. A maioria útil é só um SKILL.md com instruções. Inclua só o que o processo exige.",
+      "Descrever o padrão por escrito quando seria mais fácil mostrar. Se você tem dois outputs bons, jogue como references — o Claude calibra olhando.",
+      "Tratar a skill como algo fixo. Ela é editável a qualquer momento; o valor aparece quando você refina com base no que saiu errado."
+    ],
+    "dicas": [
+      "Comece pelo processo mais chato e mais repetido — o que dá maior retorno por unidade de esforço.",
+      "Teste o gatilho de propósito: rode uma tarefa parecida mas diferente e veja se a skill NÃO dispara. Se disparar errado, a descrição está larga demais.",
+      "Skills funcionam dentro de qualquer conversa, inclusive dentro de projetos. Uma skill de variância aparece sempre que variância for a tarefa, no projeto certo ou na sessão solta.",
+      "Versione mentalmente: cada correção que você manda ('adiciona o passo X') é a skill ficando mais parecida com como seu time realmente trabalha."
+    ],
+    "takeaway": "Skill é como você para de re-explicar o mesmo processo. Codifica uma vez o jeito certo de fazer, e o Claude passa a executar com a consistência de um colega treinado — toda vez, sem você precisar repetir."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "08-plugins-encode-your-team-s-expertise",
+    "titulo": "Plugins: empacote o jeito do seu time trabalhar",
+    "duracao_leitura": "10 min",
+    "resumo": "Um plugin junta várias skills, mais os conectores e subagents de que elas dependem, num pacote único que qualquer pessoa instala. É o que tira o método do time da cabeça de uma pessoa e transforma em algo que viaja com a instalação.",
+    "conceitos": [
+      {
+        "termo": "Plugin",
+        "definicao": "Um pacote que reúne várias skills relacionadas, junto com os conectores e subagents de que elas precisam, organizado em torno de um trabalho real do time. Se a skill é uma receita, o plugin é o livro de receitas inteiro de uma cozinha."
+      },
+      {
+        "termo": "Skill",
+        "definicao": "A unidade dentro do plugin: uma instrução documentada de como o Claude deve executar uma tarefa específica do seu jeito. Um plugin costuma ter de três a cinco skills."
+      },
+      {
+        "termo": "Conector",
+        "definicao": "A ponte para um sistema externo (Slack, BigQuery, Box, M365, GHL). O plugin declara de quais conectores depende; na instalação você aprova o acesso e as skills passam a poder ler e escrever nessas ferramentas."
+      },
+      {
+        "termo": "Subagent",
+        "definicao": "Um ajudante que uma skill dispara para resolver uma parte do trabalho em contexto próprio — ex.: um subagent de pesquisa para a etapa de levantamento e outro de redação para a etapa de escrita. Mantém o trabalho organizado e isolado."
+      },
+      {
+        "termo": "Plugin de processo (fim-a-fim)",
+        "definicao": "Formato em que as skills são etapas sequenciais de um mesmo fluxo. Ex.: fechamento mensal = puxar números, montar a tabela de variação, escrever o memo. Roda como um processo só."
+      },
+      {
+        "termo": "Plugin de toolkit",
+        "definicao": "Formato em que as skills são independentes entre si — só as tarefas que o time mais usa, juntas num pacote. Ex.: financeiro com análise de variação, modelagem, memo de investimento e relatório trimestral."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Numa agência, o fluxo de 'preparar relatório de campanha' sempre seguia o mesmo roteiro na minha cabeça: puxar os números do Meta Ads, cruzar com as conversas do CRM, montar a leitura e formatar o documento. Toda vez que alguém novo entrava, era eu explicando de novo. Empacotar isso num plugin de processo resolveu: as quatro etapas viraram quatro skills, com os conectores certos declarados.",
+      "comandos": [
+        "/setup-cowork",
+        "Customize → Plugins → [nome do plugin] → Customize"
+      ],
+      "explicacao": "Rodei /setup-cowork numa conversa nova; o Claude perguntou sobre o tipo de trabalho e sugeriu um plugin pronto do marketplace. Instalei direto do chat, aprovei os conectores e testei ali mesmo. Depois entrei em Customize para ajustar com nossos templates reais — subi três relatórios antigos e pedi para a skill de formatação copiar nosso padrão de seções. O plugin se ajustou no lugar. Agora qualquer pessoa do time instala uma coisa só e entrega no nosso formato, não num genérico."
+    },
+    "passos": [
+      "Abra uma conversa nova no Cowork e rode /setup-cowork — o Claude faz uma entrevista curta sobre seu trabalho e sugere o plugin que mais encaixa.",
+      "Ou vá direto em Customize → Plugins, procure o plugin do seu papel (financeiro, jurídico, vendas, marketing, suporte, produto) e clique em Install.",
+      "Aprove os conectores que o plugin pede. As skills ficam disponíveis na hora.",
+      "Teste com um trabalho real, pequeno e de baixo risco, antes de confiar no fluxo inteiro.",
+      "Volte em Customize → Plugins → [nome] → Customize e suba seus templates, definições e exemplos reais para o Claude adaptar o plugin ao seu contexto.",
+      "Não achou nada que encaixe? Construa o seu: comece com uma skill para a tarefa mais repetitiva e vá somando. Com três ou quatro skills e os conectores certos, já é um plugin que vale compartilhar."
+    ],
+    "erros_comuns": [
+      "Achar que plugin é uma skill maior. Não é — é um pacote de skills mais os conectores e subagents que elas usam, montado em torno de um workflow.",
+      "Instalar do marketplace e usar como se fosse a versão final. O plugin de prateleira é um bom padrão, mas usa um fluxo genérico; sem customizar com seus templates ele entrega no jeito de qualquer um, não no seu.",
+      "Tentar construir um plugin gigante do zero. Comece pequeno, com uma skill, e deixe ele crescer.",
+      "Esquecer de aprovar (ou de revisar) os conectores. Sem o acesso certo a skill não roda; com acesso demais você abre mais do que precisa.",
+      "Sair do circuito. O plugin executa o seu workflow, mas o resultado continua sendo seu para revisar antes de mandar."
+    ],
+    "dicas": [
+      "Antes de construir qualquer coisa, cheque o diretório da sua organização em Customize → Plugins — seu admin pode já ter publicado o que você precisa.",
+      "Pense em plugin por workflow, não por ferramenta: 'preparação de renovação do nosso CS', 'pesquisa de equity do fundo', 'ciclo mensal de board do CFO'. Se você consegue nomear o trabalho, dá para empacotar.",
+      "Use o formato de processo quando as etapas são sequenciais e dependentes; use o de toolkit quando são tarefas soltas que o time só repete muito.",
+      "Customize alimentando o Claude com exemplos reais (NDAs red-lined, relatórios antigos, planilhas-modelo). Quanto mais perto do trabalho de verdade, mais alavancagem o plugin gera."
+    ],
+    "takeaway": "Plugin é o método do time saindo da cabeça de uma pessoa e virando algo instalável: a expertise viaja com a instalação, não com quem foi embora. Instale um pronto, ajuste com seus exemplos reais, e o resultado continua sendo seu para revisar."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "09-claude-in-chrome",
+    "titulo": "Claude in Chrome: quando o trabalho mora dentro do navegador",
+    "resumo": "Conectores resolvem ferramentas com API. Claude in Chrome resolve o resto: tudo que só existe atrás de um login, num dashboard interno ou num portal sem integração. Ele lê, clica e navega na sua própria sessão e devolve o resultado pro Cowork montar o entregável.",
+    "duracao_leitura": "8 minutos",
+    "conceitos": [
+      {
+        "termo": "Claude in Chrome",
+        "definicao": "Extensão que dá ao Claude olhos e mãos dentro do seu navegador. Ele enxerga a página que você enxerga, lê tabelas, preenche campos, clica em botões e navega entre abas, operando dentro da sessão em que você já está logado."
+      },
+      {
+        "termo": "Conector vs. navegador",
+        "definicao": "Conector (MCP) é o caminho limpo quando a ferramenta tem API: Drive, Slack, Gmail. Claude in Chrome é o plano B universal pra tudo que NÃO tem conector. Se vive numa tela de browser, vira acionável, mesmo sendo sistema interno feito em casa."
+      },
+      {
+        "termo": "Handoff Chrome <-> Cowork",
+        "definicao": "Divisão de trabalho dentro de uma conversa só: o Claude in Chrome coleta dados e executa ações na web, passa o resultado pro Cowork, que cruza com outras fontes (Drive, Slack) e produz o documento final. Duas superfícies, uma delegação."
+      },
+      {
+        "termo": "Aprovação por ação sensível",
+        "definicao": "Por padrão o Claude pede sua confirmação antes de ações de risco (enviar, comprar, submeter, deletar). Você aprova ou nega cada uma. O controle é seu, ação por ação, não um cheque em branco."
+      },
+      {
+        "termo": "Sessão autenticada",
+        "definicao": "O Claude não faz login por você nem digita sua senha. Ele trabalha dentro da sessão que VOCÊ já abriu autenticado. Você loga uma vez no navegador; ele opera a partir dali, com exatamente os acessos que você tem."
+      }
+    ],
+    "dicas": [
+      "Use Chrome só quando NÃO houver conector. Se a ferramenta tem MCP (Drive, Slack, Gmail), prefira o conector: é mais rápido e estável que clicar em tela.",
+      "Logue antes de mandar. Deixe a aba do sistema aberta e autenticada antes de pedir. O Claude entra na sua sessão, não cria uma nova.",
+      "Filtre na fonte. Aplique o filtro de status ou o período direto no dashboard antes do handoff. Quanto mais limpo o dado que sai do navegador, melhor o entregável que volta no Cowork.",
+      "Em sites sensíveis, estreite o escopo. Aponte a aba certa, peça a tarefa específica e revise cada ação antes de aprovar. Claude vê tudo que você vê na web aberta.",
+      "Termine no entregável. O ganho real não é só 'ler a tela' — é coletar na web, cruzar com Drive/Slack e sair com um documento pronto, sem copia-e-cola."
+    ],
+    "passos": [
+      "Identifique uma tarefa sua que mora num sistema de browser sem conector: dashboard de BI, portal de fornecedor, CRM atrás do SSO, ferramenta interna.",
+      "Abra esse sistema numa aba e faça login. Deixe na tela/filtro que interessa.",
+      "No Cowork, descreva a tarefa inteira de ponta a ponta: o que abrir, o que extrair, com o que cruzar e qual o formato do entregável.",
+      "Acompanhe o Claude navegar. Aprove as ações sensíveis quando ele pedir.",
+      "Receba o resultado: ele traz os dados da web, busca o contexto de apoio nos conectores e monta o documento no Cowork."
+    ],
+    "exemplo": {
+      "contexto": "Cliente automotivo meu (Dr. Farol Itu) onde o painel de agendamentos do sistema da oficina não tem API — vive atrás de login. Toda segunda eu perdia 40 minutos exportando e montando um resumo de no-shows da semana.",
+      "comandos": [
+        "Abra o painel de agendamentos da oficina no Chrome, filtre os agendamentos da última semana com status 'não compareceu', extraia nome, telefone e serviço de cada um.",
+        "Cruze cada contato com a conversa dele no nosso CRM e me diga se já houve tentativa de reagendamento.",
+        "Monte uma planilha com os no-shows priorizados por valor do serviço e uma lista de quem ainda não foi contatado."
+      ],
+      "explicacao": "O Claude in Chrome navega no sistema da oficina dentro da minha sessão logada, puxa os no-shows, passa pro Cowork, que bate com o histórico do CRM e devolve a planilha priorizada. Eu reviso as ações sensíveis e aprovo. O que era trabalho braçal de segunda virou uma delegação só."
+    },
+    "erros_comuns": [
+      "Usar Chrome pra ferramenta que JÁ tem conector. Clicar em tela quando existe API é mais lento e mais frágil — use o MCP.",
+      "Esperar que o Claude faça login por você. Ele não digita senha nem passa por 2FA; você precisa estar autenticado antes.",
+      "Despejar a tela inteira sem filtrar. Dado bruto e poluído na entrada vira entregável confuso na saída.",
+      "Aprovar ações sensíveis no automático. Em portais com compra, envio ou submissão, leia antes de clicar 'aprovar'.",
+      "Parar no 'ler a tela'. Quem só extrai e não pede o cruzamento + entregável joga fora metade do valor da combinação Chrome + Cowork."
+    ],
+    "takeaway": "Sempre que você pensar 'eu daria esse contexto pro Claude, mas ele só existe atrás de um login', a resposta é Claude in Chrome: ele opera na sua sessão e devolve pro Cowork transformar em entregável."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "10-claude-for-microsoft-365",
+    "titulo": "Claude dentro do Microsoft 365: parar de copiar e colar",
+    "duracao_leitura": "6 min",
+    "resumo": "O Claude entra como add-in dentro do Word, Excel, PowerPoint e Outlook e opera direto no arquivo que você já tem aberto. O ganho real não é \"ter IA no Office\", é carregar contexto de um app pro outro numa conversa só.",
+    "conceitos": [
+      {
+        "termo": "Add-in (Claude no Office)",
+        "definicao": "Painel do Claude que roda dentro do próprio aplicativo do Microsoft 365. Ele enxerga e mexe no documento, na planilha ou no e-mail que está aberto na sua frente — não é um chat separado em outra aba."
+      },
+      {
+        "termo": "Contexto cross-app",
+        "definicao": "A capacidade de uma mesma conversa puxar o que foi feito num app e levar pro próximo. A análise do Excel vira o slide do PowerPoint; o memorando do Word vira a resposta no Outlook, sem você reexplicar nada."
+      },
+      {
+        "termo": "Edição in-place",
+        "definicao": "O Claude altera o arquivo onde ele está — escreve numa célula, ajusta um parágrafo com controle de alterações, gera um gráfico nativo editável. Diferente de gerar texto no chat e você colar manualmente depois."
+      },
+      {
+        "termo": "M365 vs. Cowork",
+        "definicao": "Duas superfícies pra dois momentos. Cowork monta o entregável puxando de muitas fontes (Salesforce, Slack, vinte arquivos). O add-in M365 refina e lapida o arquivo que já está na sua mão e leva o contexto adiante."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Chega um briefing de cliente no Outlook e você precisa entregar um memorando, um modelo de números e um deck pro comitê — tudo coerente entre si.",
+      "comandos": [
+        "No Outlook: \"Abre esse briefing no Word e começa o memorando no template da empresa\" — o Word abre com o anexo carregado e o Claude já sabendo o que o cliente pediu",
+        "No Word: \"Monta o modelo de mercado por trás da opção 2 no Excel\" — a planilha nasce com as premissas que vieram do briefing, em abas com fórmulas que você consegue auditar",
+        "No Excel: \"Transforma isso no deck do comitê usando o template do cliente\" — o PowerPoint gera os slides no slide master, com gráficos nativos editáveis e os números atualizados",
+        "De volta ao Outlook: \"Acha 30 minutos com o time antes de quinta\" — o convite fica pronto, esperando você clicar em enviar"
+      ],
+      "explicacao": "Repare que em nenhum passo você copiou e colou nada. O contexto do briefing atravessou quatro aplicativos numa só conversa. Esse é o ponto inteiro do Claude no M365 — não é a IA dentro do Office, é o handoff entre os apps sem perder o fio."
+    },
+    "passos": [
+      "Instale o add-in do Claude no app que você mais usa (Word, Excel ou PowerPoint têm um listing; o Outlook é um beta separado). Se o TI gerencia os add-ins, peça liberação antes",
+      "Abra um arquivo REAL que você precisa entregar essa semana — não um sandbox vazio",
+      "Faça UM movimento dentro do app: depure uma fórmula com #REF!, reescreva um parágrafo com controle de alterações, ou gere um slide a partir de um trecho do Word",
+      "Sinta a diferença pro fluxo chat-cola: o Claude está operando o documento que você está olhando, não te devolvendo texto pra você transplantar",
+      "Quando precisar puxar muitas fontes pra montar um entregável do zero, troque pro Cowork. Quando estiver lapidando o arquivo na mão, fique no add-in"
+    ],
+    "dicas": [
+      "No Excel, peça o trabalho ancorado em células específicas: \"compara os realizados da aba Q3 com o plano e escreve o comentário de variação na coluna F\". Ele cita de volta as células, dá pra conferir",
+      "No PowerPoint, deixe ele ler seu slide master, fontes e paleta ANTES de gerar. Os gráficos saem nativos e editáveis, não imagem colada que você não consegue mexer",
+      "Regra de bolso: muitas fontes virando um entregável = Cowork. Um arquivo na sua mão sendo lapidado = add-in M365. Quase todo trabalho de verdade usa os dois, e o handoff é limpo",
+      "O 4D continua valendo aqui: trabalho dentro do Office é o momento de Discernment (revisar o que ele mexeu) e Diligence (controle de alterações é seu amigo — aceite as mudanças olhando, não no automático)"
+    ],
+    "erros_comuns": [
+      "Achar que \"Claude no Office\" é só um chatbot embutido. O valor está em ele mexer no arquivo e em carregar contexto entre apps — se você ainda está copiando e colando, está usando errado",
+      "Usar o add-in pra montar um entregável que puxa de vinte fontes externas. Isso é trabalho de Cowork; o add-in é pra refinar o arquivo aberto",
+      "Aceitar fórmula, modelo ou número sem auditar. Ele cita as células e mostra as abas justamente pra você conferir — não pule esse passo em trabalho que vai pro cliente",
+      "Esquecer que o Outlook é um listing/beta separado dos outros três apps na hora de instalar"
+    ],
+    "takeaway": "O Claude no Microsoft 365 não é IA no Office — é o fim do copia-e-cola: ele opera o arquivo aberto e carrega o contexto de um app pro outro numa conversa só. Add-in pra lapidar o que está na sua mão, Cowork pra montar do zero a partir de muitas fontes."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "11-best-practices-for-working-safely",
+    "titulo": "Trabalhando com segurança: como dar autonomia ao Claude sem quebrar nada",
+    "duracao_leitura": "8 min",
+    "resumo": "No Cowork o Claude age sozinho em arquivos, apps e conectores — então a segurança não é só o que ele evita, é o que você prepara antes. Pasta dedicada, prompt sem ambiguidade e três checagens no momento da execução.",
+    "conceitos": [
+      {
+        "termo": "Pasta-fronteira (working folder)",
+        "definicao": "A pasta que você aponta pro Cowork define o que ele consegue ler, escrever e (com sua confirmação) apagar. É a sua principal barreira física: tudo que está fora dela não é alcançável."
+      },
+      {
+        "termo": "Verbo destrutivo",
+        "definicao": "Palavra de comando com mais de uma leitura possível — 'limpar', 'remover', 'atualizar', 'arrumar'. O risco não é o Claude desobedecer, é ele obedecer a interpretação errada de forma irreversível."
+      },
+      {
+        "termo": "Modo Ask (pedir antes de agir)",
+        "definicao": "Modo de permissão em que o Claude para e pede sua confirmação antes de mandar, postar, compartilhar ou apagar. É o piso de segurança que vem ligado por padrão."
+      },
+      {
+        "termo": "Scope creep (desvio de escopo)",
+        "definicao": "Quando o agente começa a tocar em arquivos, sites ou contas que você não citou no pedido. É o sinal mais comum de que algo saiu do trilho e a hora de parar a tarefa."
+      },
+      {
+        "termo": "Diligence (do framework AI Fluency 4D)",
+        "definicao": "A disciplina de revisar o plano e o resultado do agente antes de confiar. Em Cowork vira hábito concreto: ler o que ele propôs no painel de progresso antes de deixar rodar."
+      }
+    ],
+    "dicas": [
+      "Crie uma pasta só pro trabalho e mova (ou copie) pra dentro o que o Claude precisa. Nunca aponte ele pra Documentos, Downloads ou Área de Trabalho inteira — é dar a chave do armário todo pra resolver uma gaveta.",
+      "Faça backup do que é insubstituível ANTES de começar. Contrato que você não consegue reemitir, entrega antiga de cliente — uma cópia num lugar que o Cowork não alcança (nuvem, drive desconectado). O confirmar errado custa o arquivo.",
+      "Teste workflow novo numa cópia primeiro. Se é uma tarefa agendada que roda toda sexta, a primeira rodada vai contra dados duplicados. Só aponta pro real depois de ver o comportamento.",
+      "Nomeie os limites no prompt: 'só os 3 arquivos mais recentes', 'só contratos fechados no Q3', 'só rascunho, não envia pra ninguém'. Limite explícito te dá uma linha clara pra detectar desvio.",
+      "Em tarefa destrutiva, seja literal: em vez de 'corta essa seção', escreva 'remove a seção do rascunho mas mantém o arquivo'. Se a leitura errada for irreversível, soletre o que você quer.",
+      "Leia a confirmação quando ela aparecer. A maioria dos acidentes não é falha do guard-rail — é gente clicando em OK numa caixa que não era bem a ação pretendida. O diálogo existe porque a ação importa."
+    ],
+    "passos": [
+      "Monte o ambiente: crie uma pasta dedicada, mova o necessário pra dentro e aponte o Cowork ali. Faça backup do que for irreplaceável fora do alcance dele.",
+      "Escreva o prompt com limites explícitos e troque verbos ambíguos por instruções literais sobre o que pode e o que não pode ser apagado/enviado.",
+      "Quando a tarefa arrancar, leia o plano no painel de progresso: a ordem faz sentido? as fontes são as certas? Redirecione antes de deixar seguir.",
+      "Durante a execução, fique de olho em desvio de escopo — arquivos ou contas que você não citou. 'Tá estranho' é sinal real: pare a tarefa.",
+      "Aprove as confirmações com atenção, lendo cada uma. Mantenha o modo Ask pra qualquer coisa que envie, poste ou compartilhe.",
+      "Pra tarefas agendadas que rodam sem você olhando, comece pedindo rascunho pra sua revisão — só libere o envio automático depois de confiar no comportamento."
+    ],
+    "exemplo": {
+      "contexto": "Você quer que o Cowork organize a pasta de um cliente toda sexta. A versão perigosa: 'Limpa os arquivos do último trimestre, arquiva o que tá velho e avisa cada cliente no Slack que a pasta foi arrumada' — apontado pra ~/Documentos inteira, no modo automático, com conector do Slack ligado.",
+      "explicacao": "O perigo aqui não é o Claude falhar — é ele acertar a interpretação errada. 'Limpa' pode virar deletar. A pasta é ampla demais (alcança tudo). E ele posta no Slack do cliente sem você ver. A versão segura aponta pra uma pasta dedicada, troca 'limpa' por 'move pra subpasta _arquivo, sem deletar nada', e segura o Slack em rascunho pra você revisar antes.",
+      "comandos": [
+        "# Perigoso (escopo amplo + verbo ambíguo + envio automático)",
+        "Limpa os arquivos do último trimestre e avisa cada cliente no Slack",
+        "",
+        "# Seguro (fronteira estreita + verbo literal + rascunho)",
+        "Na pasta ~/clientes/acme: move arquivos anteriores a abril/2026 pra subpasta _arquivo.",
+        "Não deletes nada. Não envies nada — só prepara um rascunho da mensagem do Slack pra eu revisar."
+      ]
+    },
+    "erros_comuns": [
+      "Apontar o Claude pra uma pasta enorme 'pra facilitar' — você acabou de expandir tudo que pode dar errado.",
+      "Confiar que o 'pede antes de apagar' te protege e clicar em OK no automático. O guard-rail funcionou; você que não leu.",
+      "Usar verbos de duplo sentido ('atualiza', 'corta', 'limpa') em ação irreversível e descobrir a interpretação errada depois.",
+      "Colocar uma tarefa pra rodar agendada e mandar de cara em produção, sem nunca ter testado numa cópia.",
+      "Usar o Cowork pra workflow que precisa de trilha de auditoria — a atividade dele não entra em audit log, Compliance API nem export de dados.",
+      "Deixar o Cowork dar o passo final (mandar o doc jurídico, postar o anúncio público). Ele prepara; quem publica é você."
+    ],
+    "takeaway": "A segurança no Cowork mora antes da tarefa rodar: pasta-fronteira estreita, prompt sem verbo ambíguo e backup do que é insubstituível. Os guard-rails do Claude são o piso — o teto é o que você prepara. E o passo final que importa de verdade, você é quem dá."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "12-validating-skills-for-plugins",
+    "titulo": "Validando skills antes de soltar pro time: o eval sem frescura",
+    "resumo": "Uma skill que você vai distribuir num plugin é um mini-produto que outras pessoas vão usar do jeito delas. Eval é o test drive: você roda um caso real, compara com e sem a skill, e diz o que ajustar — no olho, sem código.",
+    "duracao_leitura": "8 min",
+    "conceitos": [
+      {
+        "termo": "Eval (avaliação)",
+        "definicao": "Um teste prático da sua skill: você manda um pedido realista, olha o que sai e julga se está bom o bastante pra colocar seu nome. Não tem script de teste nem nota automática — é o seu critério humano decidindo se passou."
+      },
+      {
+        "termo": "Baseline (saída sem a skill)",
+        "definicao": "A mesma resposta gerada SEM a skill ativa. Serve de ponto de comparação. A pergunta certa não é 'ficou ok?', e sim 'ficou melhor do que o Claude já faria sozinho?'. Se a skill não bate o baseline, ela não está justificando existir."
+      },
+      {
+        "termo": "Edge case (caso de borda)",
+        "definicao": "A situação incomum mas real — input bagunçado, pedido fora do padrão, contexto que falta. É onde skills quebram, porque foram desenhadas pro caminho feliz. O dono nem percebe; quem recebe a skill é que tropeça."
+      },
+      {
+        "termo": "Loop de iteração",
+        "definicao": "Você dá feedback em português → o Claude reescreve a skill (instruções, exemplos, regras) → você roda os mesmos prompts de novo. Repete até os casos que importam passarem. Não é um portão único; é um ciclo curto, geralmente 1 ou 2 voltas."
+      },
+      {
+        "termo": "Barra de envio (shipping bar)",
+        "definicao": "O critério pra liberar uma skill não é 'eval perfeito'. É: os casos que você se importa passam de forma claramente melhor que o baseline, E você nomeou os casos que ainda não cobre. Honestidade sobre o que falta vale mais que falsa perfeição."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você criou uma skill 'recap-de-reuniao' que transforma notas soltas num resumo padronizado. Funciona lindamente pra você. Antes de empacotar num plugin pro time, você roda um eval com o skill-creator. Ele monta dois ou três prompts realistas e, pra cada um, gera a versão com a skill e a versão sem (o baseline), lado a lado.",
+      "explicacao": "O segredo é variar o tipo de caso, não repetir o caminho feliz. Prompt 1: reunião limpa, notas organizadas (caso típico). Prompt 2: notas bagunçadas, metade colada do Slack (input sujo — aqui a skill costuma inventar dono de tarefa, e você quer ver se ela admite 'dono indefinido' em vez de chutar). Prompt 3: recap pro diretor que só lê as 3 primeiras linhas (estilo vs. substância — testa se a regra de formato sobrevive sob pressão). Você lê cada par, escolhe qual mandaria de verdade, e escreve UMA linha de feedback específica. 'Tom formal demais' o Claude conserta; 'não ficou legal' não diz nada. Muda uma coisa por vez, roda de novo, vê se pegou.",
+      "comandos": [
+        "Crie uma skill de recap de reunião e rode um eval antes de eu compartilhar com o time",
+        "Pro caso de notas bagunçadas: prefiro a versão com skill, mas ela inventou um dono de tarefa — faça ela marcar 'dono indefinido' quando a nota não disser quem é",
+        "Rode os mesmos três prompts de novo pra eu ver se o ajuste pegou"
+      ]
+    },
+    "passos": [
+      "Deixe o skill-creator propor 2-3 prompts realistas — varie os casos: um típico, um com input sujo, um que estressa o formato.",
+      "Pra cada prompt, leia o par lado a lado: versão COM skill e versão SEM (baseline).",
+      "Decida qual você mandaria de verdade. Se for a da skill, anote o que a deixou melhor pra ela manter isso.",
+      "Se não for, escreva UMA linha de feedback específica e acionável — diga exatamente o que está faltando ou errado.",
+      "Submeta o feedback. O Claude reescreve a skill com base no que você disse.",
+      "Rode os mesmos prompts de novo. Mude uma coisa por vez pra saber o que realmente moveu o ponteiro.",
+      "Pare quando os casos que importam passam claramente melhor que o baseline — e anote os casos que você ainda não cobre."
+    ],
+    "erros_comuns": [
+      "Achar que eval exige código ou test script. Não exige. É você lendo duas saídas e escolhendo qual enviaria.",
+      "Testar só o caminho feliz — o pedido perfeito, o input limpo. As skills quebram nas bordas; é lá que o eval tem que apertar.",
+      "Dar feedback vago tipo 'não ficou bom'. O Claude precisa de algo concreto: 'pulou o resumo executivo', 'tom formal demais', 'inventou um responsável'.",
+      "Mudar três coisas de uma vez e não saber qual ajuste funcionou. Uma alteração por rodada.",
+      "Esquecer de comparar com o baseline. Se a skill não bate o que o Claude já faz sozinho, ela não está agregando — está só adicionando peso.",
+      "Esperar 'eval perfeito' pra liberar. A barra é passar nos casos que importam e ser honesto sobre os que ainda não cobre."
+    ],
+    "dicas": [
+      "Você já se beneficia de um privilégio invisível: sabe contornar os defeitos da sua própria skill. Quem recebe ela não sabe. O eval existe pra fechar esse gap.",
+      "Compare sempre contra o baseline. A pergunta não é 'tá bom?', é 'tá melhor do que sem a skill?'. Se não estiver, corte ou reformule.",
+      "Feedback específico é o conserto. Quanto mais cirúrgica a sua frase, mais certeiro o Claude reescreve a skill.",
+      "Eval é loop, não portão. Maioria das skills fica pronta em 1 ou 2 voltas. Se já estiver ótimo na primeira passada, acabou — não invente cerimônia.",
+      "Quando passar a skill adiante, deixe escrito quais casos ela NÃO cobre ainda. Isso vale mais pro time do que fingir que está perfeita."
+    ],
+    "takeaway": "Eval não é burocracia nem prova de fogo — é o test drive antes da skill sair da sua mesa. Roda um caso real, compara com o baseline, dá uma linha de feedback específica, repete. A barra pra soltar não é perfeição: é passar nos casos que importam e ser honesto sobre os que ainda não cobre."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "13-share-what-you-build-with-your-team",
+    "titulo": "Compartilhe o que você construiu com seu time",
+    "resumo": "Uma skill que funciona no seu laptop só vira ativo da empresa quando vira plugin distribuído. Aqui é como você empacota, entrega pra quem publica e mantém isso vivo sem virar lixo digital.",
+    "duracao_leitura": "7 minutos",
+    "conceitos": [
+      {
+        "termo": "Plugin",
+        "definicao": "Um pacote que junta uma ou mais skills (mais comandos e config) num único bloco instalável. É a unidade de distribuição: você não compartilha skills soltas pro time, você empacota num plugin e distribui o plugin."
+      },
+      {
+        "termo": "Marketplace privado da organização",
+        "definicao": "O catálogo interno de plugins aprovados pela empresa, gerenciado por um admin. É o caminho recomendado pra distribuir em escala: o teammate vê seus plugins no mesmo lugar que os públicos da Anthropic, com etiqueta de que vieram da sua empresa."
+      },
+      {
+        "termo": "Nível de instalação",
+        "definicao": "Como o plugin chega pra cada pessoa quando o admin publica. Os modos: Disponível (aparece no diretório, instala quem quer), Instalado por padrão (já vem ligado, dá pra desligar), Obrigatório (fica ligado e travado) e Oculto (existe mas não aparece no diretório, pra rollout controlado)."
+      },
+      {
+        "termo": "Hand-off de distribuição",
+        "definicao": "O ato de entregar o plugin pronto pra quem opera o marketplace (líder, enablement ou TI) decidir como ele aterrissa. Você não publica sozinho num ambiente Enterprise: você passa o bastão pra quem tem a chave."
+      },
+      {
+        "termo": "Owner do plugin",
+        "definicao": "A pessoa nomeada responsável por revisar mudanças, rodar os evals depois de cada edição e decidir quando atualizar ou aposentar o plugin. Plugin compartilhado sem dono é plugin que apodrece em silêncio."
+      }
+    ],
+    "passos": [
+      "Confirme que as skills já passaram por eval e provaram valor em mais de um caso de uso antes de pensar em distribuir",
+      "Empacote essas skills num plugin (você viu como na lição sobre construir plugins)",
+      "Descubra quem opera o marketplace privado da sua organização — líder de time, enablement ou TI",
+      "Faça o hand-off: entregue o plugin pra essa pessoa dizendo pra quem serve e como deve aterrissar (Disponível, Instalado por padrão ou Obrigatório)",
+      "Se o marketplace ainda não estiver ligado, exporte a pasta do plugin e passe direto pro colega como solução manual provisória",
+      "Nomeie um owner e estabeleça um ritmo de revisão (trimestral é um bom começo) pra manter o plugin vivo"
+    ],
+    "exemplo": {
+      "contexto": "Você criou uma skill de preparação de renovação de contas que puxa o histórico do cliente, sinaliza riscos de churn e monta o roteiro da call. Roda redondo no seu laptop há semanas e dois colegas de CS já pediram acesso.",
+      "explicacao": "O salto de 'minha skill' pra 'plugin do time' não é técnico, é organizacional. Você empacota, nomeia de forma específica pra não colidir com outras skills, e entrega pra quem publica decidir o nível de instalação. Repare que o nome genérico mata: 'prep-renovacao' vai brigar com cinco outras skills de prep no diretório; 'cs-renovacao-contas-enterprise' não.",
+      "comandos": [
+        "# Nomeie de forma específica e à prova de colisão",
+        "cs-renovacao-contas-enterprise   # bom",
+        "prep-cliente                     # ruim, colide com tudo",
+        "# Hand-off em uma linha pro dono do marketplace:",
+        "# 'Time montou um plugin de Cowork pra renovação de CS — o marketplace tá ligado e quem publica?'"
+      ]
+    },
+    "dicas": [
+      "Não distribua nada que não tenha passado por eval — o loop de eval é o portão antes de empurrar pra todo mundo, não uma formalidade",
+      "Nome específico é segurança: skill bem nomeada não some no meio de homônimos no diretório da empresa",
+      "Reserve o nível 'Obrigatório' pra coisa de compliance ou onde todo mundo PRECISA rodar igual — usar isso por padrão irrita o time",
+      "Se o marketplace ainda não existe, o caminho real não é técnico: é descobrir QUEM administra o Claude na sua organização e perguntar",
+      "Conecte o plugin a um repo GitHub quando possível — as atualizações sincronizam sozinhas e você não fica reempacotando na mão"
+    ],
+    "erros_comuns": [
+      "Achar que você mesmo publica no marketplace em ambiente Enterprise — quase sempre é um hand-off pra admin, não um botão seu",
+      "Distribuir uma skill que só funcionou pra você, sem ter validado em outros casos de uso ou rodado eval",
+      "Nomear de forma genérica e ver a skill se perder no meio de homônimos no diretório da empresa",
+      "Compartilhar e esquecer: sem owner e sem ritmo de revisão, o plugin vira lixo que ninguém usa mas todo mundo tem instalado",
+      "Marcar como Obrigatório o que devia ser apenas Disponível, tirando a escolha do time sem necessidade"
+    ],
+    "takeaway": "Compartilhar não é técnico, é um hand-off: empacote o que já passou por eval, nomeie de forma específica, entregue pra quem opera o marketplace e ponha um dono responsável. O objetivo é uma skill que nasceu num laptop virar algo que o colega instala e roda."
+  },
+  {
+    "curso": "introduction-to-claude-cowork",
+    "slug": "14-wrap-up-and-next-steps",
+    "titulo": "Fechamento: o que fazer na segunda-feira de manhã",
+    "resumo": "Curso terminou, mas curso assistido não muda nada — o que muda é você delegar uma tarefa real ainda esta semana. Aqui está o caminho mais curto entre \"vi tudo\" e \"uso de verdade\".",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Cowork como delegação, não chat",
+        "definicao": "A ideia central do curso inteiro: você não está conversando com um assistente, está entregando uma tarefa de ponta a ponta e recebendo um resultado pronto pra usar. Todo o resto (projetos, skills, plugins) existe pra essa delegação dar certo sem você ficar babá."
+      },
+      {
+        "termo": "Memória de trabalho",
+        "definicao": "O combo de instruções globais + projetos que carrega contexto sobre você, seu time e como vocês trabalham. Sem isso o Cowork acerta no genérico e erra no específico. Com isso, ele para de perguntar o óbvio e já entrega no seu padrão."
+      },
+      {
+        "termo": "Superfície de trabalho",
+        "definicao": "Onde o Cowork roda: navegador (Claude no Chrome) ou dentro do Office (Word, Excel, PowerPoint, Outlook via Claude no M365). A regra prática é levar a IA pra onde seu trabalho já mora, em vez de exportar/importar arquivo o dia todo."
+      },
+      {
+        "termo": "Cadência (tarefa agendada)",
+        "definicao": "Transformar um entregável recorrente — relatório de segunda, resumo de reunião, follow-up — numa tarefa que dispara sozinha no horário certo. É a diferença entre 'eu lembro de pedir' e 'já chega pronto'."
+      },
+      {
+        "termo": "Workflow compartilhado",
+        "definicao": "Um caso de uso ou skill que você validou e entrega pro time como infraestrutura. Deixa de ser truque pessoal e vira algo que qualquer pessoa do time executa com o mesmo resultado."
+      }
+    ],
+    "dicas": [
+      "Escolha UMA ação pra esta semana, não cinco. Curso assistido sem aplicação some da memória em três dias. Uma tarefa real fica.",
+      "Comece pela memória: escreva um bloco curto de instruções globais (quem você é, o que faz, no que se importa) ou crie um projeto pra um fluxo que você já toca. É o investimento de maior retorno e o mais barato de fazer.",
+      "Pegue um entregável que você já produz toda semana e coloque numa cadência. Você não precisa inventar trabalho novo — automatize o chato que já existe.",
+      "Instale o plugin mais próximo da sua função e rode contra o trabalho REAL desta semana, não contra um exemplo de teste. Plugin testado em dado fake mente sobre o quanto serve.",
+      "Quando algo funcionar bem, compartilhe com o time. O maior gargalo de adoção de IA não é técnico, é alguém mostrar 'olha, deu certo aqui' pra destravar os outros."
+    ],
+    "exemplo": {
+      "contexto": "Você é consultor/gestor e toda segunda monta um resumo de performance da semana anterior pra mandar pro cliente. Hoje você abre planilhas, copia número, escreve no e-mail. Vamos delegar isso de ponta a ponta.",
+      "comandos": [
+        "1. Instruções globais: 'Sou consultor de marketing. Escrevo direto, sem jargão. Cliente quer saber o que mudou, por quê, e o próximo passo — nessa ordem. Nunca invento número: se faltar dado, sinalizo.'",
+        "2. Projeto 'Relatório Semanal Cliente X': suba o template do e-mail, a planilha de métricas e o relatório da semana passada como referência de tom.",
+        "3. Tarefa agendada toda segunda 8h: 'Leia a planilha de métricas, compare com a semana anterior, escreva o resumo no meu padrão e deixe um rascunho no Outlook pra eu revisar.'"
+      ],
+      "explicacao": "Repare na divisão de trabalho: as instruções globais cuidam do TOM, o projeto cuida do CONTEXTO (template, histórico, dados), e a tarefa agendada cuida da CADÊNCIA. Você revisa em vez de produzir do zero. Isso é Diligence na prática — a IA faz o rascunho, você assina embaixo. E é exatamente o 4D do AI Fluency em ação: você delegou (Delegation), descreveu bem o que queria (Description), vai julgar o resultado antes de mandar (Discernment) e ficou responsável pela revisão final (Diligence)."
+    },
+    "passos": [
+      "Olhe sua semana e escolha UMA tarefa recorrente e chata que você já faz — não invente trabalho novo.",
+      "Monte a memória mínima pra essa tarefa: instruções globais curtas (tom e regras) + um projeto com o contexto (arquivos, template, exemplo anterior).",
+      "Delegue a tarefa uma vez, na unha, e revise o resultado com olho crítico. Ajuste as instruções onde ele errou seu padrão.",
+      "Quando o resultado estiver bom, coloque numa cadência (tarefa agendada) ou instale o plugin da sua função pra escalar.",
+      "Compartilhe o que funcionou com uma pessoa do time. Documentar e passar adiante é o que transforma truque pessoal em processo."
+    ],
+    "erros_comuns": [
+      "Achar que terminar o curso é o resultado. O resultado é a primeira tarefa real delegada. Sem isso, você só consumiu conteúdo.",
+      "Tentar automatizar tudo de uma vez. Cinco workflows pela metade rendem menos que um workflow que você confia e usa todo dia.",
+      "Pular a etapa de memória e reclamar que a saída veio genérica. Genérico é o sintoma de contexto faltando — a culpa quase sempre é do briefing, não do modelo.",
+      "Testar plugin/skill só em exemplo de demonstração. Em dado de mentira tudo funciona; o teste honesto é contra o seu trabalho real da semana.",
+      "Delegar e confiar cego. Autonomia não tira a sua responsabilidade — você ainda valida o que sai antes de mandar pro cliente ou pro time."
+    ],
+    "takeaway": "Curso não muda operação — tarefa delegada muda. Escolha um entregável chato que você já faz toda semana, dê a ele memória mínima (instruções + projeto), delegue uma vez, revise, e bote numa cadência. Uma coisa funcionando de verdade vale mais que cinco ideias na gaveta."
+  }
+]

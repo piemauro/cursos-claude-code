@@ -1,30 +1,30 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react'
-import { CURSO } from '../data/estrutura.js'
+import { OFICIAL } from '../data/catalogo.js'
 import { Reveal, PageWrap, Badge } from '../components/Bits.jsx'
 
 export default function Sobre() {
-  const o = CURSO.creditoOficial
   return (
     <PageWrap>
       <section className="mx-auto max-w-3xl px-5 pt-16 pb-20">
         <Reveal>
           <Badge>Sobre</Badge>
-          <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight">Por que este curso existe</h1>
+          <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight">Por que estes cursos existem</h1>
           <p className="mt-5 text-lg text-fog leading-relaxed">
-            A maioria do conteúdo de IA fica preso no palco — promessa bonita, zero operação. Este curso é o oposto:
-            uma trilha curta e objetiva pra você sair usando o Claude Code de verdade no seu dia a dia de código.
+            A maioria do conteúdo de IA fica preso no palco — promessa bonita, zero operação. Aqui é o oposto:
+            trilhas curtas e objetivas pra você sair usando o Claude de verdade no seu dia a dia.
           </p>
         </Reveal>
 
         <Reveal delay={0.05} className="mt-10">
           <h2 className="text-xl font-bold">Como estudar</h2>
           <p className="mt-3 text-fog leading-relaxed">
-            Siga a trilha na ordem ou pule pro módulo que te interessa. Cada aula tem conceitos-chave, passo a passo,
-            um exemplo de terminal e os erros comuns que economizam seu tempo. Leitura rápida, aplicação imediata.
+            Escolha o curso que faz sentido pro seu momento e siga na ordem, ou pule pra aula que te interessa.
+            Cada aula tem conceitos-chave, passo a passo, exemplos e os erros comuns que economizam seu tempo.
+            Leitura rápida, aplicação imediata.
           </p>
-          <Link to="/aula/boas-vindas" className="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand text-ink font-semibold hover:brightness-110 transition">
-            Começar do zero <ArrowRight size={18} />
+          <Link to="/" className="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand text-ink font-semibold hover:brightness-110 transition">
+            Ver os cursos <ArrowRight size={18} />
           </Link>
         </Reveal>
 
@@ -34,9 +34,9 @@ export default function Sobre() {
             <div>
               <h3 className="font-semibold">Crédito e originalidade</h3>
               <p className="mt-2 text-sm text-fog leading-relaxed">
-                {o.nota} O material oficial, completo e gratuito, é da <span className="text-cloud">{o.autor}</span>:{' '}
-                <a href={o.url} target="_blank" rel="noreferrer" className="text-brand hover:underline inline-flex items-center gap-0.5">{o.nome} <ExternalLink size={11} /></a>.
-                Recomendo fortemente fazer o curso oficial também.
+                {OFICIAL.nota} Todo o material oficial — completo e gratuito — é da Anthropic:{' '}
+                <a href={OFICIAL.base} target="_blank" rel="noreferrer" className="text-brand hover:underline inline-flex items-center gap-0.5">anthropic.skilljar.com <ExternalLink size={11} /></a>.
+                Recomendo fortemente fazer os cursos oficiais também.
               </p>
             </div>
           </div>

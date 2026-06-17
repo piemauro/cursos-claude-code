@@ -1,0 +1,15 @@
+name = "cursos-piemauro"
+main = "worker.js"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+[[routes]]
+pattern = "piemauro.com.br/cursos"
+zone_name = "piemauro.com.br"
+
+[[routes]]
+pattern = "piemauro.com.br/cursos/*"
+zone_name = "piemauro.com.br"

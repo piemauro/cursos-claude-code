@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
-import Modulo from './pages/Modulo.jsx'
+import Curso from './pages/Curso.jsx'
 import Aula from './pages/Aula.jsx'
 import Sobre from './pages/Sobre.jsx'
 
@@ -24,9 +24,9 @@ export default function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="/modulo/:id" element={<Modulo />} />
-            <Route path="/aula/:slug" element={<Aula />} />
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/:cursoSlug" element={<Curso />} />
+            <Route path="/:cursoSlug/:aulaSlug" element={<Aula />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </AnimatePresence>

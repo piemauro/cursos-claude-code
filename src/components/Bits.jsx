@@ -1,7 +1,16 @@
 import { motion } from 'framer-motion'
-import { Compass, Wrench, Plug, Flag, Terminal } from 'lucide-react'
+import { Compass, Wrench, Plug, Flag, Terminal, Sparkles, Code, Boxes, Users } from 'lucide-react'
 
-export const ICONS = { Compass, Wrench, Plug, Flag, Terminal }
+export const ICONS = { Compass, Wrench, Plug, Flag, Terminal, Sparkles, Code, Boxes, Users }
+
+// classes por accent (texto/bg/borda) — mantém identidade mas diferencia cursos
+export const ACCENT = {
+  brand:  { text: 'text-brand',   bg: 'bg-brand/12',   border: 'border-brand/25',   dot: 'bg-brand' },
+  blue:   { text: 'text-brand-2', bg: 'bg-brand-2/12', border: 'border-brand-2/25', dot: 'bg-brand-2' },
+  violet: { text: 'text-brand-3', bg: 'bg-brand-3/12', border: 'border-brand-3/25', dot: 'bg-brand-3' },
+  amber:  { text: 'text-amber',   bg: 'bg-amber/12',   border: 'border-amber/25',   dot: 'bg-amber' },
+}
+export const accentOf = (a) => ACCENT[a] || ACCENT.brand
 
 export function Reveal({ children, delay = 0, y = 16, className = '' }) {
   return (

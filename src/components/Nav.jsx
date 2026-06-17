@@ -19,8 +19,8 @@ export default function Nav() {
           <span className="font-semibold tracking-tight">Claude Code <span className="text-fog font-normal">na Prática</span></span>
         </Link>
         <div className="hidden md:flex items-center gap-7 text-sm">
-          <Link to="/" className="text-fog hover:text-cloud transition">Início</Link>
-          <Link to="/aula/boas-vindas" className="text-fog hover:text-cloud transition">Começar</Link>
+          <Link to="/" className="text-fog hover:text-cloud transition">Cursos</Link>
+          <Link to="/claude-code" className="text-fog hover:text-cloud transition">Claude Code</Link>
           <Link to="/sobre" className="text-fog hover:text-cloud transition">Sobre</Link>
           <a href="https://piemauro.com.br" target="_blank" rel="noreferrer" className="px-3.5 py-1.5 rounded-lg bg-cloud text-ink font-medium hover:bg-white transition">piemauro.com.br</a>
         </div>
@@ -28,8 +28,8 @@ export default function Nav() {
       </nav>
       {open && (
         <div className="md:hidden border-t border-line bg-ink/95 backdrop-blur px-5 py-4 flex flex-col gap-3 text-sm">
-          <Link to="/" className="text-fog">Início</Link>
-          <Link to="/aula/boas-vindas" className="text-fog">Começar</Link>
+          <Link to="/" className="text-fog">Cursos</Link>
+          <Link to="/claude-code" className="text-fog">Claude Code</Link>
           <Link to="/sobre" className="text-fog">Sobre</Link>
           <a href="https://piemauro.com.br" target="_blank" rel="noreferrer" className="text-brand">piemauro.com.br ↗</a>
         </div>
