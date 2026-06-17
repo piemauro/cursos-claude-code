@@ -15,10 +15,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-5 pt-20 pb-14 md:pt-28 md:pb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <Badge><Sparkles size={12} /> Cursos gratuitos · em português</Badge>
-            <h1 className="mt-5 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+            <h1 className="mt-5 text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.03em] leading-[1.03]">
               Aprenda <span className="gradient-text">IA aplicada</span><br />que opera resultado.
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-fog leading-relaxed">
+            <p className="mt-6 max-w-2xl text-lg lg:text-xl text-fog leading-relaxed">
               Uma trilha de cursos práticos e objetivos sobre Claude — do primeiro chat ao código, à API e à fluência em IA.
               Sem hype: o que a ferramenta faz de verdade e como botar pra operar.
             </p>
@@ -37,7 +37,7 @@ export default function Home() {
                 <div key={l} className="flex items-center gap-2.5">
                   <I size={18} className="text-brand" />
                   <div className="leading-none">
-                    <Counter to={n} className="text-2xl font-bold text-white" />
+                    <Counter to={n} className="text-2xl font-bold text-heading" />
                     <div className="text-xs text-fog mt-1">{l}</div>
                   </div>
                 </div>

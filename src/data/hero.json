@@ -1,0 +1,232 @@
+{
+  "claude-code/boas-vindas": {
+    "scene": "spark",
+    "labels": [
+      "lê",
+      "edita",
+      "roda",
+      "commita"
+    ],
+    "legenda": "O agente que vive no seu terminal e mexe no código de verdade"
+  },
+  "claude-code/assistente-de-codigo": {
+    "scene": "loop",
+    "labels": [
+      "reúne contexto",
+      "planeja",
+      "age",
+      "observa"
+    ],
+    "legenda": "O loop do agente: reunir contexto, planejar, agir e observar — repetindo."
+  },
+  "claude-code/tour-claude-code": {
+    "scene": "loop",
+    "labels": [
+      "lê",
+      "roda",
+      "mede",
+      "corrige"
+    ],
+    "legenda": "O loop agêntico: encadeia ferramentas e verifica o próprio trabalho até fechar."
+  },
+  "claude-code/instalacao-setup": {
+    "scene": "terminal",
+    "labels": [
+      "instala",
+      "loga",
+      "pasta certa",
+      "claude"
+    ],
+    "legenda": "Um comando no terminal, login e o claude rodando na pasta do projeto"
+  },
+  "claude-code/preparando-projeto": {
+    "scene": "terminal",
+    "labels": [
+      "abre na raiz",
+      "/init",
+      "CLAUDE.md",
+      ".env"
+    ],
+    "legenda": "Preparar o terreno antes do primeiro prompt: raiz, /init e CLAUDE.md."
+  },
+  "claude-code/dando-contexto": {
+    "scene": "layers",
+    "labels": [
+      "/init",
+      "CLAUDE.md",
+      "@arquivo",
+      "/memory"
+    ],
+    "legenda": "As camadas de contexto que guiam o Claude no seu projeto"
+  },
+  "claude-code/fazendo-alteracoes": {
+    "scene": "loop",
+    "labels": [
+      "mostra",
+      "planeja",
+      "edita",
+      "commita"
+    ],
+    "legenda": "O ciclo de alterar código: mostrar com print, regular esforço e commitar."
+  },
+  "claude-code/controlando-contexto": {
+    "scene": "layers",
+    "labels": [
+      "interromper",
+      "rewind",
+      "compactar",
+      "limpar"
+    ],
+    "legenda": "A janela de contexto sendo podada e limpa pra manter o Claude no trilho"
+  },
+  "claude-code/comandos-customizados": {
+    "scene": "terminal",
+    "labels": [
+      "/deploy",
+      "/testes",
+      "/commit",
+      "$ARGUMENTS"
+    ],
+    "legenda": "Fluxos repetidos viram um atalho /comando no terminal"
+  },
+  "claude-code/servidores-mcp": {
+    "scene": "connect",
+    "labels": [
+      "navegador",
+      "banco",
+      "API",
+      "GitHub"
+    ],
+    "legenda": "O Claude no centro plugado em ferramentas externas via MCP."
+  },
+  "claude-code/integracao-github": {
+    "scene": "network",
+    "labels": [
+      "@claude",
+      "revisa PR",
+      "executa",
+      "responde"
+    ],
+    "legenda": "Claude vira membro do time no repo: responde menções e revisa PRs sozinho"
+  },
+  "claude-code/introducao-hooks": {
+    "scene": "pipeline",
+    "labels": [
+      "PreToolUse",
+      "ferramenta",
+      "PostToolUse",
+      "formata"
+    ],
+    "legenda": "A chamada da ferramenta passa pelo hook antes e depois de rodar."
+  },
+  "claude-code/definindo-hooks": {
+    "scene": "pipeline",
+    "labels": [
+      "intercepta",
+      "bloqueia",
+      "exit 2",
+      "libera"
+    ],
+    "legenda": "Hook entra antes da ferramenta, lê o JSON e bloqueia ou libera a ação."
+  },
+  "claude-code/implementando-hook": {
+    "scene": "pipeline",
+    "labels": [
+      "intercepta",
+      "checa",
+      "bloqueia",
+      "libera"
+    ],
+    "legenda": "Hook PreToolUse intercepta a tool e decide bloquear ou liberar pelo exit code."
+  },
+  "claude-code/pegadinhas-hooks": {
+    "scene": "pipeline",
+    "labels": [
+      "evento",
+      "hook",
+      "script",
+      "bloqueia"
+    ],
+    "legenda": "Evento dispara o hook que roda o script e pode bloquear a ação."
+  },
+  "claude-code/hooks-uteis": {
+    "scene": "pipeline",
+    "labels": [
+      "edita",
+      "dispara",
+      "valida",
+      "corrige"
+    ],
+    "legenda": "Hook valida cada edição e devolve o erro pro Claude consertar na hora."
+  },
+  "claude-code/mais-um-hook": {
+    "scene": "pipeline",
+    "labels": [
+      "SessionStart",
+      "UserPrompt",
+      "Stop",
+      "SessionEnd"
+    ],
+    "legenda": "Eventos de hook disparando ao longo do ciclo de vida da sessão"
+  },
+  "claude-code/sdk-claude-code": {
+    "scene": "pipeline",
+    "labels": [
+      "script",
+      "query()",
+      "agente",
+      "resultado"
+    ],
+    "legenda": "O agente entra como bloco que pensa dentro do seu pipeline de codigo"
+  },
+  "claude-code/resumo-proximos-passos": {
+    "scene": "spark",
+    "labels": [
+      "CLAUDE.md",
+      "/comando",
+      "hooks",
+      "MCP"
+    ],
+    "legenda": "Tudo do curso vira um plano: escolha uma coisa e rode hoje no projeto real."
+  },
+  "claude-101/01-what-is-claude": {
+    "scene": "spark",
+    "labels": [
+      "LLM",
+      "contexto",
+      "tokens",
+      "parceiro"
+    ],
+    "legenda": "O núcleo de IA da Anthropic e seus fundamentos"
+  },
+  "claude-101/02-your-first-conversation-with-claude": {
+    "scene": "loop",
+    "labels": [
+      "peça",
+      "leia",
+      "ajuste",
+      "repita"
+    ],
+    "legenda": "A conversa vira ciclo curto: você pede, lê, corrige o rumo e repete."
+  },
+  "claude-101/03-getting-better-results": {
+    "scene": "loop",
+    "labels": [
+      "contexto",
+      "rascunho",
+      "refina",
+      "confere"
+    ],
+    "legenda": "Trate o 1º output como rascunho: dê contexto, refine e confira a fonte."
+  },
+  "claude-101/04-claude-desktop-app-chat-cowork-code": {
+    "scene": "delegate",
+    "labels": [
+      "Chat",
+      "Cowork",
+      "Code",
+      "entrega"
+    ],
+    "legenda": "Você dá o objetivo, o Claude executa e devolve o entregável pronto"
+  }
+}

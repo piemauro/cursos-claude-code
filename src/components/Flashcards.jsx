@@ -43,7 +43,7 @@ export default function Flashcards({ conceitos = [] }) {
               <span className={`text-xs uppercase tracking-wide mb-2 ${virou ? 'text-brand' : 'text-fog'}`}>
                 {virou ? 'definição' : 'conceito'}
               </span>
-              <p className={virou ? 'text-cloud leading-relaxed' : 'text-2xl font-bold text-white'}>
+              <p className={virou ? 'text-cloud leading-relaxed' : 'text-2xl font-bold text-heading'}>
                 {virou ? card.definicao : card.termo}
               </p>
               {!virou && (

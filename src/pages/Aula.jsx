@@ -1,9 +1,10 @@
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Clock, Lightbulb, AlertTriangle, ListChecks, BookOpen, Quote, ExternalLink, Layers, HelpCircle } from 'lucide-react'
-import { getCurso, getAula, getVizinhas, getQuiz, OFICIAL } from '../lib/cursos.js'
+import { getCurso, getAula, getVizinhas, getQuiz, getHero, OFICIAL } from '../lib/cursos.js'
 import { Reveal, PageWrap, Badge, CodeBlock, accentOf } from '../components/Bits.jsx'
 import Flashcards from '../components/Flashcards.jsx'
 import Quiz from '../components/Quiz.jsx'
+import AnimatedHero from '../components/AnimatedHero.jsx'
 
 function Section({ icon: Icon, title, children, tone = 'brand' }) {
   const c = { brand: 'text-brand', amber: 'text-amber', fog: 'text-fog' }[tone]
@@ -21,6 +22,7 @@ export default function Aula() {
   const a = getAula(cursoSlug, aulaSlug)
   const { anterior, proxima, indice, total } = getVizinhas(cursoSlug, aulaSlug)
   const quiz = getQuiz(cursoSlug, aulaSlug)
+  const hero = getHero(cursoSlug, aulaSlug, a)
   if (!curso || !a) return <PageWrap><div className="mx-auto max-w-3xl px-5 py-24 text-center text-fog">Aula não encontrada. <Link to="/" className="text-brand">Início</Link></div></PageWrap>
   const ac = accentOf(curso.accent)
   const pct = total ? Math.round(((indice + 1) / total) * 100) : 0
@@ -42,6 +44,10 @@ export default function Aula() {
           <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight leading-tight">{a.titulo}</h1>
           {a.resumo && <p className="mt-4 text-lg text-fog leading-relaxed">{a.resumo}</p>}
         </header>
+
+        <div className="mt-6">
+          <AnimatedHero scene={hero.scene} labels={hero.labels} legenda={hero.legenda} accent={curso.accent} />
+        </div>
 
         {a.takeaway && (
           <Reveal className="mt-8">

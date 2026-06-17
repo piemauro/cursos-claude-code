@@ -9,7 +9,18 @@
     <meta property="og:title" content="Claude Code na Prática — Curso gratuito" />
     <meta property="og:description" content="Domine o Claude Code do setup ao SDK. Direto ao ponto, com a operação no centro." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0a0a0b" />
+    <meta name="theme-color" content="#ffffff" />
+    <script>
+      // tema: claro nativo por padrão; respeita escolha salva. Setado antes do paint (sem flash).
+      (function () {
+        try {
+          var t = localStorage.getItem('tema') || 'light';
+          document.documentElement.setAttribute('data-theme', t);
+          var m = document.querySelector('meta[name=theme-color]');
+          if (m) m.setAttribute('content', t === 'dark' ? '#0a0a0b' : '#ffffff');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Terminal, Menu, X } from 'lucide-react'
+import ThemeToggle from './ThemeToggle.jsx'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -18,13 +19,17 @@ export default function Nav() {
           </span>
           <span className="font-semibold tracking-tight">Claude Code <span className="text-fog font-normal">na Prática</span></span>
         </Link>
-        <div className="hidden md:flex items-center gap-7 text-sm">
+        <div className="hidden md:flex items-center gap-6 text-sm">
           <Link to="/" className="text-fog hover:text-cloud transition">Cursos</Link>
           <Link to="/claude-code" className="text-fog hover:text-cloud transition">Claude Code</Link>
           <Link to="/sobre" className="text-fog hover:text-cloud transition">Sobre</Link>
-          <a href="https://piemauro.com.br" target="_blank" rel="noreferrer" className="px-3.5 py-1.5 rounded-lg bg-cloud text-ink font-medium hover:bg-white transition">piemauro.com.br</a>
+          <ThemeToggle />
+          <a href="https://piemauro.com.br" target="_blank" rel="noreferrer" className="px-3.5 py-1.5 rounded-lg bg-cloud text-ink font-medium hover:opacity-90 transition">piemauro.com.br</a>
         </div>
-        <button className="md:hidden text-cloud" onClick={() => setOpen(!open)} aria-label="menu">{open ? <X /> : <Menu />}</button>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button className="text-cloud" onClick={() => setOpen(!open)} aria-label="menu">{open ? <X /> : <Menu />}</button>
+        </div>
       </nav>
       {open && (
         <div className="md:hidden border-t border-line bg-ink/95 backdrop-blur px-5 py-4 flex flex-col gap-3 text-sm">
