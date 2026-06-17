@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
 import Home from './pages/Home.jsx'
 import Curso from './pages/Curso.jsx'
 import Aula from './pages/Aula.jsx'
@@ -18,6 +19,7 @@ export default function App() {
   const location = useLocation()
   return (
     <div className="min-h-screen flex flex-col bg-ink bg-grid">
+      <ScrollProgress />
       <Nav />
       <ScrollTop />
       <main className="flex-1">

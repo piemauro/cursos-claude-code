@@ -1,8 +1,13 @@
 import { CATALOGO, OFICIAL } from '../data/catalogo.js'
+import QUIZZES from '../data/quizzes.json'
 
 const BY_SLUG = Object.fromEntries(CATALOGO.map((c) => [c.slug, c]))
 
 export { OFICIAL }
+
+export function getQuiz(cursoSlug, aulaSlug) {
+  return QUIZZES[`${cursoSlug}/${aulaSlug}`] || null
+}
 
 export function getCatalogo() {
   return CATALOGO.map((c) => ({

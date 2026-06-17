@@ -1,5 +1,22 @@
-import { motion } from 'framer-motion'
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import { Compass, Wrench, Plug, Flag, Terminal, Sparkles, Code, Boxes, Users } from 'lucide-react'
+
+// Contador que sobe de 0 ao alvo quando entra na viewport.
+export function Counter({ to = 0, className = '' }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const mv = useMotionValue(0)
+  const rounded = useTransform(mv, (v) => Math.round(v))
+  const out = useRef(null)
+  useEffect(() => {
+    if (!inView) return
+    const controls = animate(mv, to, { duration: 1.1, ease: [0.22, 1, 0.36, 1] })
+    const unsub = rounded.on('change', (v) => { if (out.current) out.current.textContent = String(v) })
+    return () => { controls.stop(); unsub() }
+  }, [inView, to])
+  return <span ref={ref} className={className}><span ref={out}>0</span></span>
+}
 
 export const ICONS = { Compass, Wrench, Plug, Flag, Terminal, Sparkles, Code, Boxes, Users }
 

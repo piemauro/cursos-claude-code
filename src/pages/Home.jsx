@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles, BookOpen, Layers } from 'lucide-react'
 import { getCatalogo, totals } from '../lib/cursos.js'
-import { Reveal, PageWrap, Badge, ICONS, accentOf } from '../components/Bits.jsx'
+import { Reveal, PageWrap, Badge, ICONS, accentOf, Counter } from '../components/Bits.jsx'
 
 export default function Home() {
   const cursos = getCatalogo()
@@ -28,10 +28,20 @@ export default function Home() {
               </Link>
               <a href="#cursos" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-line text-cloud hover:border-fog transition">Ver todos os cursos</a>
             </div>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-fog">
-              <span className="inline-flex items-center gap-2"><BookOpen size={15} className="text-brand" /> {t.cursos} cursos</span>
-              <span className="inline-flex items-center gap-2"><Layers size={15} className="text-brand" /> {t.aulas} aulas objetivas</span>
-              <span className="inline-flex items-center gap-2"><Sparkles size={15} className="text-brand" /> 100% gratuito</span>
+            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+              {[
+                { n: t.cursos, l: 'cursos', I: BookOpen },
+                { n: t.aulas, l: 'aulas', I: Layers },
+                { n: t.aulas, l: 'mini-quizzes', I: Sparkles },
+              ].map(({ n, l, I }) => (
+                <div key={l} className="flex items-center gap-2.5">
+                  <I size={18} className="text-brand" />
+                  <div className="leading-none">
+                    <Counter to={n} className="text-2xl font-bold text-white" />
+                    <div className="text-xs text-fog mt-1">{l}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>

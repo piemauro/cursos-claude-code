@@ -1,0 +1,2995 @@
+{
+  "claude-code/boas-vindas": [
+    {
+      "pergunta": "O que melhor descreve o que o Claude Code faz, segundo a aula?",
+      "opcoes": [
+        "Um chat de IA que gera código pronto para você copiar e colar no editor",
+        "Um agente no terminal que lê e edita arquivos, roda comandos e faz commits no seu projeto",
+        "Um autocomplete de IDE que sugere a próxima linha enquanto você digita",
+        "Um serviço em nuvem que reescreve seu repositório sem que você veja o resultado"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define o Claude Code como um agente que opera no terminal e age de fato no projeto (lê, edita, roda comandos e commita), não um chat que só devolve código."
+    },
+    {
+      "pergunta": "Qual é a diferença central entre o Claude Code e um autocomplete de IDE?",
+      "opcoes": [
+        "O autocomplete entende várias linguagens e o Claude Code só entende uma",
+        "O Claude Code recebe uma tarefa inteira e executa os passos sozinho, enquanto o autocomplete só sugere a próxima linha",
+        "O Claude Code só funciona dentro do VS Code, enquanto o autocomplete roda em qualquer editor",
+        "Os dois fazem a mesma coisa, mas o Claude Code é mais rápido a digitar"
+      ],
+      "correta": 1,
+      "explicacao": "A aula contrasta o agente — que recebe uma tarefa completa e investiga, altera, testa e mostra o resultado — com o autocomplete, que apenas sugere a linha seguinte."
+    },
+    {
+      "pergunta": "Para que serve o arquivo CLAUDE.md no projeto?",
+      "opcoes": [
+        "É a memória do projeto: guarda regras, comandos e convenções que o Claude lê automaticamente a cada sessão",
+        "É um log que registra todos os comandos que o Claude já executou",
+        "É o arquivo que concede ao Claude autonomia total para editar sem pedir aprovação",
+        "É um relatório gerado no fim da sessão com o resumo das alterações feitas"
+      ],
+      "correta": 0,
+      "explicacao": "O CLAUDE.md é descrito como a memória do projeto, onde você escreve regras, comandos e convenções que o Claude lê em toda sessão para seguir o padrão da casa."
+    }
+  ],
+  "claude-code/assistente-de-codigo": [
+    {
+      "pergunta": "Segundo a aula, o que um modelo de linguagem (LLM) sozinho consegue fazer?",
+      "opcoes": [
+        "Ler arquivos e editar o código do projeto por conta própria",
+        "Apenas receber texto e devolver texto, sem agir no computador",
+        "Executar comandos no terminal automaticamente quando precisa",
+        "Indexar o repositório inteiro para depois responder"
+      ],
+      "correta": 1,
+      "explicacao": "A aula deixa claro que sozinho o LLM só recebe texto e devolve texto; toda ação vem da camada que o envolve, não do modelo."
+    },
+    {
+      "pergunta": "Qual mecanismo transforma um gerador de texto em um agente que age no seu projeto?",
+      "opcoes": [
+        "A indexação prévia de todo o código em um servidor",
+        "O loop de planejamento puramente interno do modelo",
+        "O tool use, que ensina o modelo a pedir ações e devolve o resultado pra ele continuar",
+        "A quantidade de parâmetros do modelo de linguagem"
+      ],
+      "correta": 2,
+      "explicacao": "O tool use é o truque que faz o assistente executar a ação pedida pelo modelo e devolver o resultado, transformando o gerador de texto em agente."
+    },
+    {
+      "pergunta": "Quando o assistente erra, onde a aula diz que normalmente está o problema?",
+      "opcoes": [
+        "Na fase de reunir o contexto certo, não na de escrever o código",
+        "Na limitação do modelo em gerar código de qualidade",
+        "Na velocidade de execução das ferramentas",
+        "No tamanho do codebase ser grande demais"
+      ],
+      "correta": 0,
+      "explicacao": "A aula afirma que na maioria das vezes o erro está na etapa de reunir contexto, por isso vale dar o arquivo, o erro completo e o caminho exato."
+    }
+  ],
+  "claude-code/tour-claude-code": [
+    {
+      "pergunta": "Segundo a aula, o que realmente impressiona no Claude Code resolvendo uma tarefa de ponta a ponta?",
+      "opcoes": [
+        "A qualidade estética e a elegância do código que ele escreve",
+        "A capacidade de encadear ferramentas e verificar o próprio trabalho até a tarefa fechar",
+        "A velocidade com que cospe uma única resposta completa sem rodar nada",
+        "O fato de ele nunca precisar rodar comandos no terminal"
+      ],
+      "correta": 1,
+      "explicacao": "O takeaway da aula é explícito: o valor está em encadear ferramentas (ler, rodar, medir, corrigir) e checar o resultado, não na beleza do código."
+    },
+    {
+      "pergunta": "O que caracteriza o \"loop agêntico\" descrito na aula?",
+      "opcoes": [
+        "Repetir o mesmo comando várias vezes até ele funcionar por acaso",
+        "Gerar uma resposta única e final sem olhar nenhuma saída",
+        "Agir, observar o resultado e decidir o próximo passo, ajustando o plano",
+        "Pedir confirmação humana antes de cada caractere digitado"
+      ],
+      "correta": 2,
+      "explicacao": "O loop agêntico é o ciclo agir → observar resultado → decidir o próximo passo, justamente o que diferencia o agente de um autocomplete."
+    },
+    {
+      "pergunta": "Você quer que o Claude Code controle um navegador e tire screenshots para iterar. Qual o caminho indicado pela aula?",
+      "opcoes": [
+        "Plugar um servidor MCP, como o Playwright, que dá ações novas ao agente",
+        "Reescrever as ferramentas nativas do Claude Code na mão",
+        "Esperar, pois o Claude Code já vem com navegador nas ferramentas nativas",
+        "Fazer uma gambiarra no terminal para simular o navegador"
+      ],
+      "correta": 0,
+      "explicacao": "A aula recomenda adicionar capacidades externas via MCP (ex: Playwright), que dá ações novas ao agente sem reescrever nada."
+    }
+  ],
+  "claude-code/instalacao-setup": [
+    {
+      "pergunta": "Segundo a aula, qual é o erro de setup mais comum que faz parecer que \"o Claude não entende meu código\"?",
+      "opcoes": [
+        "Esquecer de colar a chave de API manualmente no terminal",
+        "Abrir o claude numa pasta errada, fora do projeto",
+        "Não ter instalado o Homebrew antes do comando curl",
+        "Usar o tema escuro em vez do tema claro"
+      ],
+      "correta": 1,
+      "explicacao": "O Claude Code só enxerga a pasta de onde foi aberto e o que está abaixo dela, então abrir na pasta errada faz ele não ver o código."
+    },
+    {
+      "pergunta": "Como funciona a autenticação na primeira vez que você roda o claude?",
+      "opcoes": [
+        "Você cola manualmente uma chave de API num arquivo de config",
+        "Ele exige obrigatoriamente uma conta corporativa na Amazon Bedrock",
+        "Ele abre o navegador para você logar com sua conta Anthropic",
+        "Você digita usuário e senha direto no terminal, sem navegador"
+      ],
+      "correta": 2,
+      "explicacao": "Na primeira execução o claude abre o navegador para login com a conta Anthropic, sem precisar colar chave manualmente."
+    },
+    {
+      "pergunta": "Por que a aula recomenda rodar /init no primeiro uso de um projeto?",
+      "opcoes": [
+        "Ele varre o repositório e gera um CLAUDE.md com o contexto da stack, melhorando as respostas",
+        "Ele reinstala o Claude Code dentro daquele repositório específico",
+        "Ele troca o provedor da API direta para Amazon Bedrock automaticamente",
+        "Ele é obrigatório para concluir a autenticação com a conta Anthropic"
+      ],
+      "correta": 0,
+      "explicacao": "O /init varre o repositório e cria um CLAUDE.md com o contexto da stack, o que melhora bastante as respostas dali em diante."
+    }
+  ],
+  "claude-code/preparando-projeto": [
+    {
+      "pergunta": "Por que a aula recomenda abrir o Claude Code na raiz do projeto, e não dentro de uma subpasta?",
+      "opcoes": [
+        "Porque só na raiz o comando claude consegue ser instalado",
+        "Porque abrir na raiz dá ao agente o contexto completo dos arquivos do projeto",
+        "Porque subpastas não podem conter um arquivo CLAUDE.md",
+        "Porque a raiz é a única pasta que o git versiona"
+      ],
+      "correta": 1,
+      "explicacao": "O diretório de trabalho é a partir de onde o Claude enxerga e edita arquivos, então abrir na raiz garante contexto completo do projeto."
+    },
+    {
+      "pergunta": "Segundo a aula, o que o comando /init faz e como você deve tratar o resultado?",
+      "opcoes": [
+        "Instala as dependências e roda o build do projeto automaticamente",
+        "Cria as variáveis de ambiente .env com os segredos do projeto",
+        "Gera um CLAUDE.md inicial varrendo o repo, que serve como rascunho a ser revisado",
+        "Apaga o CLAUDE.md antigo e bloqueia edições manuais futuras"
+      ],
+      "correta": 2,
+      "explicacao": "O /init varre o repositório e gera um CLAUDE.md inicial, mas a aula frisa que é um rascunho — ponto de partida, não verdade absoluta."
+    },
+    {
+      "pergunta": "Na aula, qual é a atitude recomendada quando o Claude erra a mesma coisa duas vezes?",
+      "opcoes": [
+        "Registrar a regra de correção no CLAUDE.md, tratando-o como código vivo",
+        "Repetir a correção no chat toda vez que o erro aparecer",
+        "Rodar /init de novo para regenerar o arquivo do zero",
+        "Mover os arquivos problemáticos para fora da raiz do projeto"
+      ],
+      "correta": 0,
+      "explicacao": "A aula trata o CLAUDE.md como código vivo: o erro recorrente vira uma regra escrita no arquivo, não uma correção repetida no chat."
+    }
+  ],
+  "claude-code/dando-contexto": [
+    {
+      "pergunta": "Segundo a aula, qual é a ideia central da gestão de contexto no Claude Code?",
+      "opcoes": [
+        "Despejar o repositório inteiro garante que o Claude nunca erre",
+        "Existe uma quantidade ideal de informação por tarefa; seu papel é apontar pro que importa",
+        "Quanto mais arquivos abertos na conversa, melhor a qualidade da resposta",
+        "O Claude precisa carregar todo o projeto na memória antes de qualquer tarefa"
+      ],
+      "correta": 1,
+      "explicacao": "A aula diz que pouco contexto faz ele chutar e contexto demais/irrelevante derruba a qualidade, então o trabalho é apontar pro que importa."
+    },
+    {
+      "pergunta": "Por que o CLAUDE.md é descrito como um ponto de alavancagem, e não um detalhe de setup?",
+      "opcoes": [
+        "Porque ele só é lido quando você roda /init novamente",
+        "Porque substitui a necessidade de usar o atalho @ no projeto",
+        "Porque seu conteúdo entra em toda requisição, funcionando como um system prompt persistente",
+        "Porque ele fica fora do git e nunca é compartilhado com o time"
+      ],
+      "correta": 2,
+      "explicacao": "O CLAUDE.md entra em toda requisição como um system prompt persistente, por isso quem dá o contexto certo manda no resultado."
+    },
+    {
+      "pergunta": "Quando a aula recomenda usar o atalho @ em vez de deixar o Claude buscar sozinho?",
+      "opcoes": [
+        "Quando você JÁ sabe onde está a resposta, pois é mais rápido e barato que a busca semântica",
+        "Apenas dentro do /init, nunca no prompt comum",
+        "Somente quando o arquivo não existe ainda no repositório",
+        "Quando você quer que o Claude ignore o conteúdo do arquivo"
+      ],
+      "correta": 0,
+      "explicacao": "A dica é usar @ para apontar arquivos quando você já sabe onde está a resposta, evitando a busca semântica mais lenta e cara."
+    }
+  ],
+  "claude-code/fazendo-alteracoes": [
+    {
+      "pergunta": "Você quer mudar a aparência de um botão específico na tela. Segundo a aula, qual a forma mais eficiente de apontar o que mexer?",
+      "opcoes": [
+        "Colar um screenshot da tela com Ctrl+V para mostrar exatamente a área",
+        "Escrever um parágrafo bem detalhado descrevendo o botão",
+        "Ativar o plan mode para ele varrer todos os arquivos visuais",
+        "Subir o effort para max para ele adivinhar qual botão é"
+      ],
+      "correta": 0,
+      "explicacao": "A aula recomenda colar um print com Ctrl+V para mudanças visuais, pois mostrar a tela mata a ambiguidade e elimina idas e vindas de descrição."
+    },
+    {
+      "pergunta": "Qual a diferença entre quando usar plan mode e quando usar effort/ultrathink?",
+      "opcoes": [
+        "Plan mode é grátis e effort sempre queima token",
+        "Plan mode só serve no Mac e ultrathink só no Windows",
+        "Plan mode resolve largura (muitos arquivos) e effort/ultrathink resolve profundidade (lógica complicada)",
+        "São a mesma coisa, só muda o atalho de teclado"
+      ],
+      "correta": 2,
+      "explicacao": "A aula separa largura (plan mode, para entender o codebase e mexer em vários arquivos) de profundidade (effort/ultrathink, para lógica e bugs cabeludos)."
+    },
+    {
+      "pergunta": "Você tem um bug pontual e cabeludo em uma função, mas não quer mudar o esforço da sessão inteira. O que a aula recomenda?",
+      "opcoes": [
+        "Rodar /effort max, que afeta só aquele prompt",
+        "Jogar a palavra ultrathink dentro daquele prompt específico",
+        "Ativar plan mode com Shift+Tab para ele pensar mais",
+        "Colar um screenshot do código com Ctrl+V"
+      ],
+      "correta": 1,
+      "explicacao": "ultrathink é uma palavra-chave dentro de um prompt específico que pede raciocínio extra só naquela vez, sem mexer no effort da sessão."
+    }
+  ],
+  "claude-code/controlando-contexto": [
+    {
+      "pergunta": "Você acabou de passar por uma sessão longa e chata de debug sobre um pacote que faltava. Agora quer começar uma tarefa relacionada, mas o Claude já entendeu bem o projeto. Qual o melhor caminho?",
+      "opcoes": [
+        "Dar /clear para zerar tudo e recomeçar do zero, perdendo o entendimento do projeto",
+        "Fazer rewind (Esc Esc) para descartar o ruído do debug, mantendo o que foi útil",
+        "Apertar Esc uma vez para interromper a resposta atual",
+        "Escrever a correção no CLAUDE.md antes de continuar"
+      ],
+      "correta": 1,
+      "explicacao": "O rewind permite voltar a um ponto anterior, mantendo o que foi útil (o Claude já entender o código) e descartando o ruído da sessão de debug."
+    },
+    {
+      "pergunta": "Qual a diferença prática entre usar /compact e /clear?",
+      "opcoes": [
+        "/compact apaga a conversa antiga permanentemente; /clear apenas a esconde",
+        "Ambos fazem a mesma coisa, mas /clear é mais rápido",
+        "/compact resume preservando o aprendizado para tarefas relacionadas; /clear zera o contexto para mudar de assunto de vez",
+        "/compact grava regras permanentes; /clear interrompe a resposta atual"
+      ],
+      "correta": 2,
+      "explicacao": "/compact resume a conversa preservando o aprendizado para uma tarefa relacionada, enquanto /clear zera o contexto para mudar totalmente de assunto."
+    },
+    {
+      "pergunta": "O Claude erra a mesma coisa toda sessão. Segundo a aula, onde isso deve ser corrigido?",
+      "opcoes": [
+        "No CLAUDE.md, transformando o erro recorrente em regra permanente",
+        "Repetindo a correção na conversa toda vez que o erro aparece",
+        "Apertando Esc duas vezes para fazer rewind a cada erro",
+        "Dando /clear sempre que o erro se repete"
+      ],
+      "correta": 0,
+      "explicacao": "Erro que se repete não se corrige na conversa, e sim no CLAUDE.md (via /memory), virando regra permanente que para de se repetir nas próximas sessões."
+    }
+  ],
+  "claude-code/comandos-customizados": [
+    {
+      "pergunta": "Você quer que um comando customizado fique disponível só pra você, em qualquer projeto que abrir, sem subir pro repositório do time. Onde deve salvar o arquivo?",
+      "opcoes": [
+        "Em ~/.claude/commands/",
+        "Em .claude/commands/ na raiz do projeto",
+        "Dentro do CLAUDE.md do projeto",
+        "Em qualquer pasta, contanto que o arquivo termine em .md"
+      ],
+      "correta": 0,
+      "explicacao": "Comandos em ~/.claude/commands/ são pessoais, te acompanham em qualquer pasta e não vão pro git do projeto.",
+      "explicacao_pos": ""
+    },
+    {
+      "pergunta": "Qual a diferença prática entre um comando customizado e o CLAUDE.md?",
+      "opcoes": [
+        "O comando é escrito em código de terminal e o CLAUDE.md em Markdown",
+        "O CLAUDE.md só funciona com $ARGUMENTS e o comando não aceita parâmetros",
+        "O CLAUDE.md é contexto sempre presente; o comando é um fluxo disparado sob demanda",
+        "Não há diferença: ambos rodam automaticamente a cada mensagem"
+      ],
+      "correta": 2,
+      "explicacao": "O CLAUDE.md carrega regras do projeto o tempo todo, enquanto o comando só é acionado quando você o dispara com a barra.",
+      "explicacao_pos": ""
+    },
+    {
+      "pergunta": "Para que serve o placeholder $ARGUMENTS dentro de um comando?",
+      "opcoes": [
+        "Define a pasta onde o comando será salvo",
+        "Injeta no prompt o texto digitado após o /comando, deixando-o parametrizável",
+        "Lista automaticamente todos os arquivos do projeto",
+        "Versiona o comando no git ao ser executado"
+      ],
+      "correta": 1,
+      "explicacao": "$ARGUMENTS recebe o que você digita depois do comando, tornando-o genérico — um /testes serve pra qualquer arquivo.",
+      "explicacao_pos": ""
+    }
+  ],
+  "claude-code/servidores-mcp": [
+    {
+      "pergunta": "Qual é a diferença prática que o MCP traz pro Claude Code?",
+      "opcoes": [
+        "Faz o Claude ler e escrever arquivos mais rápido",
+        "Permite que o Claude opere ferramentas externas (banco, navegador, APIs), não só ler e escrever código",
+        "Substitui a necessidade de escrever código no projeto",
+        "Aumenta o tamanho da janela de contexto do Claude"
+      ],
+      "correta": 1,
+      "explicacao": "O MCP pluga ferramentas externas no Claude, fazendo ele agir no mundo real do projeto em vez de apenas manipular arquivos."
+    },
+    {
+      "pergunta": "Você precisa que o time inteiro use o mesmo servidor MCP no projeto. Qual escopo de instalação é o mais indicado?",
+      "opcoes": [
+        "Escopo project, versionado no .mcp.json",
+        "Escopo local, que vale só na sua máquina",
+        "Escopo user, que vale pra todos os seus projetos",
+        "Qualquer escopo, pois o registro é sempre compartilhado"
+      ],
+      "correta": 0,
+      "explicacao": "O escopo project grava o servidor no .mcp.json versionado, valendo para o time todo."
+    },
+    {
+      "pergunta": "Sobre liberar permissão com 'mcp__servidor' inteiro no allow, o que é verdade?",
+      "opcoes": [
+        "É obrigatório, pois tools individuais não podem ser liberadas",
+        "É inofensivo, já que o Claude pede confirmação a cada chamada",
+        "Abre TODAS as tools daquele servidor de uma vez, o que exige cautela em servidores que escrevem em banco ou mandam mensagem",
+        "Só funciona para servidores remotos conectados por URL"
+      ],
+      "correta": 2,
+      "explicacao": "Liberar o servidor inteiro libera todas as suas tools, então em servidores que escrevem ou enviam dados convém pensar duas vezes."
+    }
+  ],
+  "claude-code/integracao-github": [
+    {
+      "pergunta": "O que o comando /install-github-app faz na prática quando você o roda dentro do Claude Code?",
+      "opcoes": [
+        "Instala o app no GitHub, configura a chave de API e abre um PR já com os arquivos de workflow prontos",
+        "Exige que você escreva o YAML dos Actions manualmente antes de prosseguir",
+        "Apenas adiciona o Claude como colaborador do repositório, sem criar nenhum workflow",
+        "Substitui o terminal local pelo GitHub Actions, desativando o uso do Claude no terminal"
+      ],
+      "correta": 0,
+      "explicacao": "O comando é o caminho rápido oficial: instala o app, configura a API e abre um PR com os workflows prontos, sem montar YAML na mão."
+    },
+    {
+      "pergunta": "Por que no GitHub Action é preciso listar explicitamente cada ferramenta em allowed_tools, diferente do terminal?",
+      "opcoes": [
+        "Porque o CI roda mais rápido e precisa pular a etapa de leitura de permissões",
+        "Porque no CI não existe o atalho de aprovar permissão na hora, então cada ferramenta liberada deve ser declarada — incluindo cada tool de um MCP",
+        "Porque allowed_tools só aceita uma única ferramenta por workflow",
+        "Porque o GitHub bloqueia qualquer ferramenta por padrão, mesmo a leitura de arquivos do próprio repo"
+      ],
+      "correta": 1,
+      "explicacao": "No CI não há aprovação interativa, então cada ferramenta — e cada tool de um servidor MCP — precisa ser listada uma por uma."
+    },
+    {
+      "pergunta": "Como a aula recomenda tratar o workflow de review automático de PR?",
+      "opcoes": [
+        "Como substituto do revisor humano, já que ele nunca esquece de olhar o diff",
+        "Como ferramenta que só deve ser ativada depois de customizar bastante os workflows padrão",
+        "Como um Action que dispara a cada menção @claude, e não na abertura do PR",
+        "Como uma segunda camada que pega o que cansaço e pressa deixam passar, sem substituir o humano"
+      ],
+      "correta": 3,
+      "explicacao": "A aula trata o review automático como camada adicional que complementa, mas não substitui, a revisão humana."
+    }
+  ],
+  "claude-code/introducao-hooks": [
+    {
+      "pergunta": "Por que um PreToolUse consegue bloquear uma ação enquanto um PostToolUse não consegue?",
+      "opcoes": [
+        "Porque o PreToolUse roda antes da ferramenta, podendo vetar e devolver erro, enquanto o PostToolUse roda depois, com a ação já feita",
+        "Porque o PreToolUse usa IA pra avaliar a ação e o PostToolUse é apenas um script burro",
+        "Porque o PostToolUse só funciona em leituras e o PreToolUse funciona em escritas",
+        "Porque o PreToolUse roda no settings global e o PostToolUse só no settings local"
+      ],
+      "correta": 0,
+      "explicacao": "O PreToolUse acontece antes da ferramenta executar, então tem poder de veto; o PostToolUse roda depois, quando a ação já aconteceu e só dá pra reagir."
+    },
+    {
+      "pergunta": "Um colega quer que toda edição em arquivo .ts dispare o Prettier automaticamente, sem depender de ninguém lembrar. Qual a configuração correta?",
+      "opcoes": [
+        "Um hook PreToolUse, porque a formatação precisa acontecer antes de salvar",
+        "Pedir ao Claude no prompt pra sempre rodar o Prettier após editar",
+        "Um hook PostToolUse com matcher casando edição, rodando o Prettier no arquivo recém-editado",
+        "Um matcher 'Read', já que o Prettier precisa ler o arquivo primeiro"
+      ],
+      "correta": 2,
+      "explicacao": "Formatar após a edição é exatamente o caso do PostToolUse, que reage à ação já feita rodando o Prettier no arquivo editado; é o hook de maior retorno e menor risco."
+    },
+    {
+      "pergunta": "Você criou um hook só pra seu fluxo pessoal e não quer encher o PR do time com ele. Onde ele deve morar?",
+      "opcoes": [
+        ".claude/settings.json, que é versionado e vai pro time",
+        "~/.claude/settings.json, o global que vale pra tudo",
+        ".claude/settings.local.json, que é só seu e fica fora do git",
+        "Diretamente no matcher do hook, sem precisar de arquivo de settings"
+      ],
+      "correta": 2,
+      "explicacao": "O .claude/settings.local.json é pessoal e fica fora do git, então não aparece no PR dos outros; regra de time iria no .claude/settings.json versionado."
+    }
+  ],
+  "claude-code/definindo-hooks": [
+    {
+      "pergunta": "Você quer que o Claude Code NUNCA consiga ler o arquivo .env. Qual a abordagem que a aula recomenda?",
+      "opcoes": [
+        "Escrever no CLAUDE.md a instrução de nunca abrir o .env",
+        "Registrar um hook PreToolUse que bloqueia a ação, cobrindo Read e também Grep",
+        "Registrar um hook PostToolUse que apaga o conteúdo depois que o Claude lê",
+        "Criar um matcher só para a ferramenta Read, já que é ela que lê arquivos"
+      ],
+      "correta": 1,
+      "explicacao": "Só o PreToolUse bloqueia antes da ação, e o matcher precisa cobrir Read e Grep porque o Grep também lê conteúdo."
+    },
+    {
+      "pergunta": "Um hook devolve exit code 2 dentro de um PreToolUse. O que acontece?",
+      "opcoes": [
+        "A ação é liberada normalmente e o stdout vira log",
+        "A ferramenta já rodou, então o exit 2 apenas reverte o efeito",
+        "A ação é bloqueada e o texto do stderr volta como explicação pro Claude",
+        "O Claude ignora o código e tenta a ferramenta de novo automaticamente"
+      ],
+      "correta": 2,
+      "explicacao": "Saída 2 num PreToolUse bloqueia a ação, e o que você escreve no stderr volta como explicação para o Claude se reorientar."
+    },
+    {
+      "pergunta": "Como o hook recebe as informações da ferramenta que está prestes a rodar (tool_name, tool_input etc.)?",
+      "opcoes": [
+        "Por um JSON enviado pelo Claude na entrada padrão (stdin)",
+        "Por argumentos de linha de comando passados ao script",
+        "Por variáveis de ambiente definidas no settings.json",
+        "Lendo diretamente o arquivo de log da sessão do Claude Code"
+      ],
+      "correta": 0,
+      "explicacao": "A cada execução o Claude manda pelo stdin um JSON com session_id, hook_event_name, tool_name e tool_input para o script decidir o que fazer."
+    }
+  ],
+  "claude-code/implementando-hook": [
+    {
+      "pergunta": "No hook PreToolUse implementado na aula, qual exit code o script precisa retornar para abortar a chamada da tool Read e devolver o motivo ao Claude?",
+      "opcoes": [
+        "Exit code 0",
+        "Exit code 1",
+        "Exit code 2",
+        "Qualquer exit code diferente de 0"
+      ],
+      "correta": 2,
+      "explicacao": "Só o exit code 2 bloqueia a tool e devolve o stderr ao Claude; 0 libera e qualquer outro código não bloqueia.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "Por onde o hook recebe o contexto da tool e por onde ele devolve a mensagem que o Claude lê de volta?",
+      "opcoes": [
+        "Recebe o JSON no stdin e escreve a mensagem no stderr",
+        "Recebe os argumentos por variáveis de ambiente e responde no stdout",
+        "Recebe tudo via argumentos de linha de comando e responde no stdin",
+        "Recebe e responde sempre pelo stdout"
+      ],
+      "correta": 0,
+      "explicacao": "O Claude Code joga o contexto da tool como JSON no stdin do script, e o que é escrito no stderr é a mensagem que o Claude lê de volta.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "Segundo a aula, qual a vantagem de usar permissions.deny (ex: 'Read(**/.env)') em vez de um hook para bloquear o .env?",
+      "opcoes": [
+        "É mais rápido porque roda dentro do modelo, sem processo externo",
+        "Bloqueia de forma uniforme entre tools sem você reimplementar a checagem para cada tool",
+        "Não exige reiniciar o Claude Code depois de configurar",
+        "Permite escrever uma mensagem customizada de erro para o Claude"
+      ],
+      "correta": 1,
+      "explicacao": "Diferente do hook, permissions.deny bloqueia o acesso de forma uniforme entre tools e não depende de você reimplementar a checagem para cada uma.",
+      "explicacao_extra": ""
+    }
+  ],
+  "claude-code/pegadinhas-hooks": [
+    {
+      "pergunta": "Por que a aula recomenda usar caminho ABSOLUTO nos comandos de hook em vez de relativo?",
+      "opcoes": [
+        "Porque caminho relativo é mais lento para o Claude resolver em runtime",
+        "Porque o relativo depende do diretório onde o processo roda e quebra silenciosamente quando o Claude executa o comando de outro diretório",
+        "Porque caminho absoluto é obrigatório no settings.json e relativo gera erro de sintaxe",
+        "Porque caminho relativo só funciona em hooks de Bash, não em hooks de edição de arquivo"
+      ],
+      "correta": 1,
+      "explicacao": "O relativo depende do diretório de execução, então parece funcionar nos testes mas quebra quando o Claude roda o comando de outro diretório."
+    },
+    {
+      "pergunta": "Qual é a forma correta de compartilhar hooks com o time sem quebrar na máquina do colega?",
+      "opcoes": [
+        "Versionar o settings.local.json com seu caminho absoluto e pedir pro time editar à mão",
+        "Usar só caminhos relativos no settings.json para funcionar em qualquer máquina",
+        "Versionar um settings.example.json com placeholder ($PWD) e um script de setup que gera o settings.local.json com o caminho real",
+        "Comitar o settings.local.json e remover ele do .gitignore"
+      ],
+      "correta": 2,
+      "explicacao": "Versionar um example com placeholder e um script de setup gera o caminho absoluto real na máquina de cada um, mantendo o time rodando igual."
+    },
+    {
+      "pergunta": "O que significa um hook retornar código de saída diferente de zero?",
+      "opcoes": [
+        "Bloqueia a ação que disparou o hook (ex: barrar edição em arquivo proibido)",
+        "Faz o Claude reexecutar o hook automaticamente até retornar zero",
+        "Apenas registra um aviso, mas a ação continua normalmente",
+        "Move o hook do settings.json para o settings.local.json"
+      ],
+      "correta": 0,
+      "explicacao": "Código de saída diferente de zero bloqueia a ação, o que pode ser usado de propósito para barrar operações proibidas."
+    }
+  ],
+  "claude-code/hooks-uteis": [
+    {
+      "pergunta": "Qual a diferença prática entre um hook PostToolUse e o PreToolUse?",
+      "opcoes": [
+        "PostToolUse roda depois da ferramenta para validar o resultado; PreToolUse roda antes e pode bloquear a ação",
+        "PostToolUse roda no servidor e PreToolUse roda na sua máquina local",
+        "PostToolUse é configurado no CLAUDE.md e PreToolUse no settings.json",
+        "PreToolUse valida typecheck e lint; PostToolUse só registra logs do que aconteceu"
+      ],
+      "correta": 0,
+      "explicacao": "PostToolUse dispara depois do uso da ferramenta para validar o resultado, enquanto PreToolUse roda antes e pode impedir a ação antes de qualquer dano."
+    },
+    {
+      "pergunta": "Por que o exit code 2 é descrito como 'o canal de comunicação do hook com o Claude'?",
+      "opcoes": [
+        "Porque 2 é o número de tentativas que o Claude tem para corrigir o erro",
+        "Porque ele faz o hook rodar duas vezes para confirmar o problema",
+        "Porque ao sair com código 2 o que foi impresso no stderr volta pro Claude como sinal de que algo precisa ser corrigido",
+        "Porque o código 2 envia o feedback direto pro CLAUDE.md do projeto"
+      ],
+      "correta": 2,
+      "explicacao": "Sair com exit code 2 faz o stderr do hook retornar ao Claude como sinal de erro a corrigir, enquanto exit 0 indica que está tudo certo."
+    },
+    {
+      "pergunta": "Segundo a aula, qual a relação entre um hook e o CLAUDE.md?",
+      "opcoes": [
+        "O hook substitui o CLAUDE.md, tornando as instruções escritas desnecessárias",
+        "Eles se combinam: o CLAUDE.md instrui/convence, enquanto o hook obriga e garante quando o Claude esquece",
+        "O CLAUDE.md é mais confiável porque o Claude sempre lembra de segui-lo",
+        "São incompatíveis: usar hook desativa a leitura do CLAUDE.md"
+      ],
+      "correta": 1,
+      "explicacao": "Instrução convence e hook obriga: o CLAUDE.md pede o comportamento e o hook garante a validação de forma determinística quando o Claude esquece."
+    }
+  ],
+  "claude-code/mais-um-hook": [
+    {
+      "pergunta": "Você quer rodar lint e testes automaticamente toda vez que o Claude termina de responder e 'devolve a bola' pra você. Qual evento de hook usar?",
+      "opcoes": [
+        "UserPromptSubmit",
+        "Stop",
+        "SessionStart",
+        "PreCompact"
+      ],
+      "correta": 1,
+      "explicacao": "O evento Stop dispara exatamente quando o Claude termina de responder à sua mensagem, ideal pra rodar lint ou testes nesse momento."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é o jeito recomendado de descobrir o formato do JSON que chega no seu hook antes de escrever a lógica?",
+      "opcoes": [
+        "Ligar um hook de log de uma linha que só despeja o stdin num arquivo e olhar o JSON real",
+        "Consultar a documentação, já que o payload é igual pra todos os eventos",
+        "Adivinhar o formato a partir do nome do evento e ajustar depois debugando",
+        "Rodar o hook sem stdin pra ver a mensagem de erro do parser"
+      ],
+      "correta": 0,
+      "explicacao": "A aula recomenda ligar um hook de log descartável (ex: jq . > hook-log.json) pra ver o JSON real, em vez de adivinhar, porque o formato muda conforme o evento e a ferramenta."
+    },
+    {
+      "pergunta": "Você quer salvar parte do histórico da conversa antes que o contexto seja encolhido. Em qual evento o hook deve ser pendurado?",
+      "opcoes": [
+        "SessionEnd",
+        "Notification",
+        "Stop",
+        "PreCompact"
+      ],
+      "correta": 3,
+      "explicacao": "PreCompact roda antes de o contexto ser compactado, sendo o momento certo pra salvar algo do histórico antes dele encolher."
+    }
+  ],
+  "claude-code/sdk-claude-code": [
+    {
+      "pergunta": "Qual é a melhor descrição do que o Agent SDK entrega?",
+      "opcoes": [
+        "Uma forma de conversar com o modelo Claude via API, sem ferramentas, só texto",
+        "O mesmo Claude Code do terminal (mesmo agent loop e ferramentas), chamável de dentro de um script TS ou Python",
+        "Um chatbot pronto para colar no seu site, sem precisar de código",
+        "Uma versão mais limitada do CLI, que só funciona em Python"
+      ],
+      "correta": 1,
+      "explicacao": "O SDK expõe o próprio Claude Code (mesmo agent loop e ferramentas como Read, Edit, Bash) como código, controlável por programa em vez de digitação no terminal."
+    },
+    {
+      "pergunta": "Por que, ao rodar o SDK pela primeira vez, ele geralmente não sai editando arquivos sozinho?",
+      "opcoes": [
+        "Porque a função query() não suporta edição de arquivos",
+        "Porque editar arquivos exige uma licença paga separada",
+        "Porque o padrão é read-only por segurança; para escrever é preciso liberar explicitamente (ex: allowedTools com 'Edit')",
+        "Porque o SDK só funciona em modo de visualização até reiniciar o terminal"
+      ],
+      "correta": 2,
+      "explicacao": "Diferente do CLI interativo, o SDK tende a só ler/buscar por padrão e exige liberar a escrita explicitamente via allowedTools ou ajuste de permissões."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é o uso mais forte do SDK e como ele se combina com hooks?",
+      "opcoes": [
+        "Virar um bloco de inteligência dentro de um pipeline; o hook dispara no evento e o SDK traz o julgamento",
+        "Substituir o terminal para você digitar prompts mais rápido",
+        "Servir só como alternativa quando você prefere uma linguagem em vez de outra",
+        "Aplicar regras fixas de validação que o hook sozinho não consegue executar"
+      ],
+      "correta": 0,
+      "explicacao": "O SDK brilha como peça de um fluxo (CI, cron, endpoint) trazendo julgamento; na dobradinha, o hook dispara no evento e o SDK traz a inteligência."
+    }
+  ],
+  "claude-code/resumo-proximos-passos": [
+    {
+      "pergunta": "Segundo a aula, qual é o melhor primeiro passo pra sair do 'assisti o curso' e começar a usar o Claude Code no trabalho real?",
+      "opcoes": [
+        "Plugar de uma vez 10 MCPs pra cobrir todas as integrações possíveis",
+        "Escolher UMA coisa (provavelmente um bom CLAUDE.md) e implementar hoje no projeto real",
+        "Decorar todos os comandos e conceitos vistos no curso antes de aplicar qualquer um",
+        "Esperar a próxima atualização semanal da homepage antes de mexer no projeto"
+      ],
+      "correta": 1,
+      "explicacao": "A aula recomenda não tentar lembrar tudo e implementar uma única coisa hoje no projeto real, sendo um bom CLAUDE.md o candidato natural."
+    },
+    {
+      "pergunta": "De acordo com a aula, qual é o jeito recomendado de começar a usar hooks?",
+      "opcoes": [
+        "Pelo básico e chato: rodar o formatador e o lint depois de cada edição",
+        "Configurando primeiro automações por evento do GitHub, como abrir PRs",
+        "Pedindo ao modelo, por boa vontade, que rode os testes quando achar necessário",
+        "Substituindo o CLAUDE.md por gatilhos no settings.json"
+      ],
+      "correta": 0,
+      "explicacao": "A dica é começar os hooks pelo básico — formatador e lint após cada edição — o que já elimina metade dos 'erros bobos'."
+    },
+    {
+      "pergunta": "Qual o critério da aula pra transformar um prompt em slash command customizado?",
+      "opcoes": [
+        "Quando o prompt for longo demais pra digitar de uma vez",
+        "Apenas quando envolver acesso a ferramentas externas via MCP",
+        "Somente quando o time inteiro pedir formalmente aquele atalho",
+        "Todo prompt que você já digitou duas vezes vira atalho versionado no repo"
+      ],
+      "correta": 3,
+      "explicacao": "A aula diz: se você repetiu um prompt duas vezes, ele deve virar um /comando versionado no repo pro time usar."
+    }
+  ],
+  "claude-101/01-what-is-claude": [
+    {
+      "pergunta": "Segundo a aula, qual é a forma mais correta de enxergar o Claude no seu trabalho?",
+      "opcoes": [
+        "Um buscador mais inteligente, parecido com o Google",
+        "Um parceiro de trabalho que você dirige dando papel, contexto e formato",
+        "Uma caixinha de respostas que entrega tudo pronto sem precisar de instrução",
+        "Um chatbot genérico cujo resultado independe de como você pergunta"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define o Claude como parceiro de trabalho que você delega, e o resultado é proporcional ao papel, contexto e formato que você dá."
+    },
+    {
+      "pergunta": "Você precisa que o Claude resolva um problema de estratégia que exige análise passo a passo. O que a aula recomenda?",
+      "opcoes": [
+        "Ativar o raciocínio estendido, mesmo custando mais tempo/token, porque o problema pede análise",
+        "Usar sempre o Haiku, já que ele é rápido e barato para qualquer tarefa",
+        "Ativar o raciocínio estendido em toda pergunta para garantir qualidade",
+        "Reduzir a janela de contexto para o modelo focar melhor"
+      ],
+      "correta": 0,
+      "explicacao": "O extended thinking faz o modelo pensar passo a passo e vale justamente para problemas que exigem análise, ainda que custe mais tempo/token."
+    },
+    {
+      "pergunta": "Sobre a janela de contexto e os tokens, o que a aula afirma?",
+      "opcoes": [
+        "Tokens medem só o custo da API, não o limite de contexto da conversa",
+        "A janela de contexto é medida em palavras, e quanto menor, melhor o raciocínio",
+        "Um token equivale exatamente a uma palavra em português",
+        "A janela é medida em tokens (cerca de 200K no padrão, até 1M em planos pagos), permitindo colar documento, código ou planilha inteiros"
+      ],
+      "correta": 3,
+      "explicacao": "A aula diz que a janela de contexto é medida em tokens, gira em 200K no padrão e chega a 1M em planos pagos, deixando você jogar material inteiro de uma vez."
+    }
+  ],
+  "claude-101/02-your-first-conversation-with-claude": [
+    {
+      "pergunta": "Segundo a aula, o que mais separa um resultado genérico de um resultado realmente útil com o Claude?",
+      "opcoes": [
+        "A quantidade de contexto que você fornece (quem você é, pra quem é e qual o objetivo)",
+        "Usar palavras mais sofisticadas e técnicas na pergunta",
+        "Escolher o modelo mais caro e potente disponível",
+        "Escrever a pergunta o mais curta e direta possível"
+      ],
+      "correta": 0,
+      "explicacao": "A aula afirma que a diferença não está no Claude, e sim no quanto de contexto você dá."
+    },
+    {
+      "pergunta": "A aula descreve um bom prompt como um briefing de 3 camadas. Quais são elas?",
+      "opcoes": [
+        "Pergunta, resposta e correção",
+        "Cenário (papel, objetivo, restrições), tarefa (ação concreta) e regras (formato, tom, tamanho)",
+        "Introdução, desenvolvimento e conclusão",
+        "Delegation, Description e Diligence"
+      ],
+      "correta": 1,
+      "explicacao": "O prompt como briefing de 3 camadas cobre cenário, tarefa e regras."
+    },
+    {
+      "pergunta": "Qual é a postura recomendada pela aula sobre como conduzir a conversa com o Claude?",
+      "opcoes": [
+        "Tratar como uma busca: digitar a pergunta certa e esperar a resposta pronta",
+        "Acertar o prompt perfeito de primeira para não perder tempo",
+        "Trabalhar em ciclos curtos: pedido pequeno, leitura da resposta e ajuste de rumo",
+        "Mandar todos os pedidos de uma vez para resolver tudo num único prompt"
+      ],
+      "correta": 2,
+      "explicacao": "O valor vem do vai-e-volta iterativo, pensando em ciclos curtos em vez de acertar tudo de primeira."
+    }
+  ],
+  "claude-101/03-getting-better-results": [
+    {
+      "pergunta": "O Claude devolveu uma resposta genérica, com cara de blog post. Segundo a aula, qual é a causa mais provável?",
+      "opcoes": [
+        "O modelo é fraco e você precisa de um modelo mais caro",
+        "Faltou contexto no prompt: público, seu papel e restrições ficaram só na sua cabeça",
+        "O Claude está com a busca na web desligada",
+        "É uma alucinação do modelo"
+      ],
+      "correta": 1,
+      "explicacao": "A aula afirma que resposta genérica é quase sempre culpa de prompt sem contexto, não do modelo — a informação que faltou estava na sua cabeça."
+    },
+    {
+      "pergunta": "Como a aula recomenda encarar o primeiro output do Claude?",
+      "opcoes": [
+        "Como a entrega final, se o prompt foi bem escrito",
+        "Como rascunho, que você lê, aponta o que serve e refina iterando",
+        "Como prova de que o prompt precisa ser reescrito do zero",
+        "Como algo a descartar se não vier perfeito de primeira"
+      ],
+      "correta": 1,
+      "explicacao": "A iteração é tratar o primeiro output como rascunho e refinar conversando, em vez de buscar o prompt perfeito de uma vez."
+    },
+    {
+      "pergunta": "Para uma tarefa séria com fato específico, número ou dado jurídico, o que a aula manda fazer?",
+      "opcoes": [
+        "Ligar a busca na web e pedir a fonte, porque confiança no texto não garante acerto",
+        "Confiar, já que o Claude fala com segurança",
+        "Refazer o prompt até a resposta soar mais convincente",
+        "Rodar um eval para medir o tom da resposta"
+      ],
+      "correta": 0,
+      "explicacao": "A aula alerta que o Claude pode alucinar com confiança em fatos específicos, então em trabalho de alto risco você liga a busca e confere a fonte."
+    }
+  ],
+  "claude-101/04-claude-desktop-app-chat-cowork-code": [
+    {
+      "pergunta": "Você precisa que o Claude leia uma pasta de relatórios que você liberou, cruze as fontes e entregue um documento pronto, sem editar nenhum código de projeto. Qual modo é o ideal?",
+      "opcoes": [
+        "Chat, porque é o modo que faz pesquisa e brainstorm",
+        "Cowork, modo agêntico que executa em sandbox nas pastas liberadas e entrega o documento",
+        "Code, porque só ele consegue ler arquivos do seu computador",
+        "Ask, o nível de autonomia que gera entregáveis automaticamente"
+      ],
+      "correta": 1,
+      "explicacao": "Cowork é o modo agêntico de fôlego que roda em sandbox nas pastas liberadas e entrega um documento pronto, sem precisar de acesso total a um projeto de código."
+    },
+    {
+      "pergunta": "Qual é a diferença prática entre Cowork e Code, já que ambos rodam no mesmo motor (Claude Code) por baixo?",
+      "opcoes": [
+        "Cowork é mais lento porque usa subagents e o Code não",
+        "Cowork só funciona com a máquina ligada e o Code roda sempre na nuvem",
+        "O nível de acesso: Cowork fica preso às pastas que você libera, enquanto o Code tem acesso total ao projeto (filesystem, terminal, dev tools)",
+        "Code é só pra conversa rápida e Cowork é pra construir software"
+      ],
+      "correta": 2,
+      "explicacao": "Os dois usam o mesmo motor; a diferença prática é o acesso — Cowork fica limitado às pastas liberadas e o Code tem acesso total ao projeto."
+    },
+    {
+      "pergunta": "Dentro do modo Code, qual descrição corresponde corretamente aos três níveis de autonomia Ask, Code e Plan?",
+      "opcoes": [
+        "Ask propõe cada mudança e espera seu OK; Code aplica edições sozinho mas confirma antes de rodar comando; Plan escreve o plano inteiro antes de tocar em qualquer arquivo",
+        "Ask escreve o plano antes; Code só conversa; Plan aplica tudo sem confirmar",
+        "Ask roda comandos automaticamente; Code pede OK em cada edição; Plan reverte mudanças via git",
+        "Ask e Code são iguais; Plan é o único que edita arquivos de fato"
+      ],
+      "correta": 0,
+      "explicacao": "Ask propõe e espera OK, Code edita sozinho mas confirma antes de rodar comando, e Plan escreve o plano completo antes de tocar nos arquivos."
+    }
+  ],
+  "claude-101/05-introduction-to-projects": [
+    {
+      "pergunta": "Qual é a principal vantagem de usar um Project no Claude em vez de chats avulsos?",
+      "opcoes": [
+        "O contexto (instruções e arquivos) é configurado uma vez e vale para toda conversa dentro do project",
+        "Cada nova conversa começa do zero, sem nenhum contexto carregado",
+        "As respostas ficam mais rápidas porque o Claude usa um modelo diferente",
+        "Você precisa reanexar os arquivos a cada pergunta para garantir precisão"
+      ],
+      "correta": 0,
+      "explicacao": "O project fixa instruções e base de arquivos uma vez, evitando reexplicar o briefing e recolar material a cada conversa."
+    },
+    {
+      "pergunta": "O que são as 'instruções do projeto'?",
+      "opcoes": [
+        "Um comando que precisa ser digitado no início de cada nova conversa",
+        "Uma configuração disponível apenas via API, não na interface do Claude",
+        "Um texto fixo que define papel, tom, regras e processo válidos para TODA conversa do project, funcionando como um system prompt seu",
+        "Os nomes dos arquivos que você sobe para a base de conhecimento"
+      ],
+      "correta": 2,
+      "explicacao": "As instruções valem para todas as conversas do project e funcionam como um system prompt próprio, sem precisar de API."
+    },
+    {
+      "pergunta": "Segundo a aula, o que acontece quando o conteúdo da base de conhecimento ultrapassa a janela de contexto?",
+      "opcoes": [
+        "O Claude entra em modo RAG e passa a buscar só os trechos relevantes para cada pergunta, em vez de carregar tudo",
+        "O project para de funcionar até você apagar arquivos manualmente",
+        "Você precisa dividir a base em vários projects menores na mão",
+        "O Claude ignora os arquivos mais antigos e usa apenas o último que foi subido"
+      ],
+      "correta": 0,
+      "explicacao": "Quando a base não cabe no contexto, o Claude passa a recuperar (RAG) só os trechos relevantes, ampliando a capacidade sem gestão manual."
+    }
+  ],
+  "claude-101/06-creating-with-artifacts": [
+    {
+      "pergunta": "Segundo a aula, quando o Claude decide automaticamente transformar uma resposta em artifact?",
+      "opcoes": [
+        "Sempre que a resposta tiver qualquer trecho de código, não importa o tamanho",
+        "Quando o conteúdo é grande (acima de ~15 linhas), se sustenta sozinho e você vai querer editar, reaproveitar ou baixar depois",
+        "Apenas quando você usa explicitamente a palavra 'artifact' no pedido",
+        "Somente quando o conteúdo precisa do contexto da conversa em volta para fazer sentido"
+      ],
+      "correta": 1,
+      "explicacao": "O critério automático combina tamanho (acima de ~15 linhas), conteúdo autônomo e intenção de editar/reaproveitar/baixar."
+    },
+    {
+      "pergunta": "O que acontece com seu chat e seus dados quando você usa o 'publish' de um artifact?",
+      "opcoes": [
+        "O chat inteiro vira público e fica indexado na busca do Google",
+        "Só a versão escolhida vira pública, o chat continua privado, qualquer um abre sem conta e o link não aparece na busca do Google",
+        "O artifact só pode ser aberto por quem também tem conta no Claude",
+        "A publicação é permanente e não pode ser desfeita"
+      ],
+      "correta": 1,
+      "explicacao": "Publicar expõe apenas a versão escolhida com link aberto, mantendo o chat privado, fora do Google e com opção de despublicar."
+    },
+    {
+      "pergunta": "Por que a aula recomenda fazer iteração incremental (uma mudança de cada vez) ao ajustar um artifact?",
+      "opcoes": [
+        "Você enxerga o efeito de cada alteração e pega problema cedo, antes de virar bola de neve",
+        "Porque o Claude não consegue processar mais de uma instrução por mensagem",
+        "Para economizar o limite de mensagens da sua conta",
+        "Porque cada mudança gera um link público diferente"
+      ],
+      "correta": 0,
+      "explicacao": "Pedir uma mudança por vez deixa visível o que cada alteração fez, permitindo detectar problemas antes que se acumulem."
+    }
+  ],
+  "claude-101/07-working-with-skills": [
+    {
+      "pergunta": "Qual a diferença central entre um Project e uma Skill, segundo a aula?",
+      "opcoes": [
+        "Project executa o processo passo a passo; Skill apenas guarda dados de referência",
+        "Project guarda conhecimento (o QUE); Skill executa processo (o COMO)",
+        "Project e Skill são a mesma coisa, só muda o nome dependendo do plano",
+        "Project roda no sandbox de código; Skill nunca acessa arquivos"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define que o Project guarda conhecimento (o QUE) enquanto a Skill executa o processo (o COMO), e os dois se completam."
+    },
+    {
+      "pergunta": "O que significa o 'carregamento sob demanda' (progressive disclosure) das Skills?",
+      "opcoes": [
+        "O Claude carrega o conteúdo completo de todas as Skills no contexto o tempo todo",
+        "O Claude lê só nome e descrição de cada Skill e abre o conteúdo completo apenas quando o pedido bate com uma",
+        "As Skills só funcionam se você digitar o comando exato no início da conversa",
+        "O Claude precisa que você cole o passo a passo de novo a cada nova conversa"
+      ],
+      "correta": 1,
+      "explicacao": "No progressive disclosure o Claude lê apenas nome e descrição e só abre o conteúdo completo da Skill quando o pedido corresponde a ela, economizando contexto."
+    },
+    {
+      "pergunta": "Segundo as dicas da aula, qual é o melhor candidato a virar uma Skill?",
+      "opcoes": [
+        "Uma tarefa única que você faz uma vez por ano",
+        "Um processo que você JÁ repete toda semana",
+        "Qualquer pergunta isolada que um bom prompt resolveria",
+        "Uma ideia nova que você ainda nem testou na prática"
+      ],
+      "correta": 1,
+      "explicacao": "A aula recomenda começar pela tarefa chata que você repete toda semana, pois boa Skill nasce de processo que você já repete."
+    }
+  ],
+  "claude-101/08-connecting-your-tools": [
+    {
+      "pergunta": "O que é o MCP (Model Context Protocol) e qual seu papel nos conectores?",
+      "opcoes": [
+        "Um conector específico do Claude para acessar o Gmail e o Drive",
+        "O padrão aberto que permite qualquer app falar a mesma língua com o modelo, fazendo os conectores funcionarem",
+        "Um mecanismo de senha que substitui o OAuth nos serviços em nuvem",
+        "Uma extensão desktop que só roda no app Claude Desktop"
+      ],
+      "correta": 1,
+      "explicacao": "O MCP é o padrão aberto (a 'tomada universal') que faz os conectores funcionarem, permitindo que qualquer app se plugue ao modelo falando a mesma língua."
+    },
+    {
+      "pergunta": "Qual a diferença entre um conector web e uma extensão desktop?",
+      "opcoes": [
+        "O conector web roda local na máquina e a extensão desktop acessa serviços na nuvem",
+        "Ambos acessam só serviços na nuvem, mudando apenas o visual",
+        "O conector web liga o Claude a serviços na nuvem via OAuth, e a extensão desktop roda local alcançando arquivos e apps nativos da máquina",
+        "A extensão desktop dispensa qualquer permissão, enquanto o web exige senha"
+      ],
+      "correta": 2,
+      "explicacao": "O conector web conecta serviços na nuvem via OAuth, enquanto a extensão desktop roda localmente e alcança o file system e apps nativos da máquina."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é a melhor forma de começar a usar conectores?",
+      "opcoes": [
+        "Conectar UMA ferramenta primeiro, a que mais te faz copiar e colar contexto hoje, e testar com um pedido pequeno e verificável",
+        "Conectar todas as ferramentas de uma vez para já ganhar produtividade máxima",
+        "Entregar sua senha direto ao Claude para acelerar o login nos serviços",
+        "Confiar de imediato em workflows que cruzam várias fontes antes de testar"
+      ],
+      "correta": 0,
+      "explicacao": "A aula recomenda começar por uma única ferramenta (a que mais gera copia-e-cola) e testar com um pedido pequeno e verificável antes de confiar em workflows complexos."
+    }
+  ],
+  "claude-101/09-enterprise-search": [
+    {
+      "pergunta": "Você tem o Enterprise Search ligado e pergunta sobre uma decisão registrada num canal restrito do Slack ao qual você não tem acesso. O que acontece?",
+      "opcoes": [
+        "O Claude responde com base nesse canal, pois conectores ignoram permissões internas",
+        "O Claude não enxerga esse canal, porque só acessa o que você já poderia abrir na ferramenta original",
+        "O Claude pede ao admin para liberar o canal automaticamente",
+        "O Claude responde, mas omite o link da fonte por ser conteúdo restrito"
+      ],
+      "correta": 1,
+      "explicacao": "As permissões são herdadas: o Claude só enxerga o que você já teria acesso na ferramenta de origem, sem criar atalho para dado restrito."
+    },
+    {
+      "pergunta": "O admin (Owner) já ligou o Enterprise Search e escolheu os conectores padrão para a organização inteira, mas você ainda não consegue buscar nada. Qual a causa mais provável?",
+      "opcoes": [
+        "O recurso só funciona no plano Free, e você está no Team",
+        "Falta o admin reiniciar o Project pré-montado",
+        "Você ainda não fez a segunda etapa: autenticar com a sua própria conta",
+        "Os conectores precisam de aprovação manual do suporte da Anthropic"
+      ],
+      "correta": 2,
+      "explicacao": "O setup tem duas etapas: além do admin configurar, cada pessoa precisa autenticar com a própria conta, senão não busca nada."
+    },
+    {
+      "pergunta": "Para qual tarefa o Enterprise Search é a melhor escolha, segundo a aula?",
+      "opcoes": [
+        "Resumir as decisões da liderança da semana cruzando Slack, Drive e e-mail",
+        "Abrir um documento específico que você já sabe exatamente onde está",
+        "Garantir que a resposta nunca precise ser conferida na fonte",
+        "Funcionar nos planos Free e Pro sem precisar de admin"
+      ],
+      "correta": 0,
+      "explicacao": "Ele brilha em perguntas que cruzam várias fontes, não para abrir um arquivo específico cujo local você já conhece."
+    }
+  ],
+  "claude-101/10-research-mode-for-deep-dives": [
+    {
+      "pergunta": "Qual situação é o caso de uso CERTO para o modo Research, em vez de uma busca normal?",
+      "opcoes": [
+        "Saber a cotação do dólar agora",
+        "Cruzar várias fontes para um relatório que tomaria horas de investigação",
+        "Pegar um fato pontual rápido",
+        "Reescrever um parágrafo de texto"
+      ],
+      "correta": 1,
+      "explicacao": "Research troca uma resposta por uma investigação agêntica; ele se justifica quando o trabalho exige cruzar fontes e tomaria horas, não para fatos pontuais."
+    },
+    {
+      "pergunta": "O que diferencia a busca agêntica (multi-step) do Research de uma busca comum?",
+      "opcoes": [
+        "Ele lê o resultado, identifica buracos e dispara novas buscas em cima do anterior, conduzindo o caminho",
+        "Ele roda uma única query mais rápida e poderosa",
+        "Ele só busca no seu conteúdo interno, nunca na web",
+        "Ele entrega uma colagem de links sem planejamento"
+      ],
+      "correta": 0,
+      "explicacao": "Na busca multi-step o Claude encadeia buscas: lê o que achou, segue pistas e refaz a busca sobre o resultado anterior, enquanto você só define o objetivo."
+    },
+    {
+      "pergunta": "Por que as citações verificáveis do relatório importam, segundo a aula?",
+      "opcoes": [
+        "São apenas um enfeite visual do relatório",
+        "Substituem a necessidade de extended thinking",
+        "Permitem auditar cada afirmação na fonte antes de tratar o relatório como verdade",
+        "Servem para deixar o Research mais rápido"
+      ],
+      "correta": 2,
+      "explicacao": "Cada afirmação aponta pra fonte justamente para você auditar antes de mandar pro cliente ou diretoria — sem citação, é palpite com cara de dado."
+    }
+  ],
+  "claude-101/11-claude-in-action-use-cases-by-role": [
+    {
+      "pergunta": "Segundo a aula, qual é o melhor ponto de entrada para começar a usar o Claude no seu trabalho?",
+      "opcoes": [
+        "A tarefa mais complexa e estratégica, onde o ganho é maior",
+        "Uma tarefa repetível que você refaz toda semana, com alto volume e baixo risco",
+        "Qualquer tarefa, desde que você delegue 'fazer seu trabalho' inteiro",
+        "Uma tarefa nova que você nunca fez, para o Claude descobrir o processo"
+      ],
+      "correta": 1,
+      "explicacao": "A aula recomenda começar por uma tarefa repetível (alto volume, baixo risco) porque o ganho de tempo aparece já na primeira semana."
+    },
+    {
+      "pergunta": "Por que a aula insiste em conferir SEMPRE a saída do Claude em finanças e jurídico?",
+      "opcoes": [
+        "Porque é a competência do Discernimento: número e cláusula você confere, o Claude só acelera o rascunho",
+        "Porque o Claude não consegue ler números nem cláusulas",
+        "Porque nessas áreas o Claude não deve ser usado de jeito nenhum",
+        "Porque conferir a saída é opcional, mas fica mais bonito no relatório"
+      ],
+      "correta": 0,
+      "explicacao": "A aula liga isso ao Discernimento (3ª competência do 4D): em finanças e jurídico a conferência é obrigatória, pois o Claude acelera o rascunho mas não assina embaixo."
+    },
+    {
+      "pergunta": "O que caracteriza um BOM caso de uso por função, segundo a aula?",
+      "opcoes": [
+        "Um pedido genérico do tipo 'me ajuda com vendas'",
+        "A ideia de delegar a função inteira para o Claude executar sozinho",
+        "Um par concreto problema+solução específico, recortado e amarrado ao seu papel",
+        "Uma tarefa mágica que o Claude faz sem você precisar definir nada"
+      ],
+      "correta": 2,
+      "explicacao": "A aula define caso de uso como um par concreto e específico de problema+solução amarrado ao seu papel — não um pedido genérico nem delegar a função toda."
+    }
+  ],
+  "claude-101/12-other-ways-to-work-with-claude": [
+    {
+      "pergunta": "Qual é a diferença central entre usar o Claude no chat do Claude.ai e usar o Claude Code no terminal?",
+      "opcoes": [
+        "O Claude Code usa um modelo de IA mais inteligente do que o chat web",
+        "O Claude Code opera o ambiente de verdade — lê o repositório, roda comandos, edita arquivos e cria commits — em vez de só devolver um trecho pra você colar",
+        "O Claude Code só funciona offline, sem precisar de conexão",
+        "O chat do Claude.ai não consegue gerar código, só o Claude Code"
+      ],
+      "correta": 1,
+      "explicacao": "Claude Code é agêntico: ele executa no ambiente (lê o repo, roda testes, faz commit), enquanto o chat genérico só devolve texto pra você copiar."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é o real ganho de produtividade de levar o Claude pra dentro de Excel, Slack, navegador ou terminal?",
+      "opcoes": [
+        "Reduzir o atrito: cada superfície já entrega ao Claude o contexto que está ali (código, thread, planilha, aba) sem você reexplicar tudo no chat",
+        "Ter acesso a versões beta exclusivas do modelo em cada ferramenta",
+        "Pagar menos por usar o Claude fora do site oficial",
+        "Garantir que o Claude funcione sem precisar de permissões ou supervisão"
+      ],
+      "correta": 0,
+      "explicacao": "O ganho não é 'mais um app', e sim cortar o copia-e-cola: cada ambiente dá ao Claude o contexto que já existe ali, evitando reexplicar tudo."
+    },
+    {
+      "pergunta": "Como a aula recomenda tratar o Claude for Chrome, e por quê?",
+      "opcoes": [
+        "Como ferramenta finalizada, podendo aprovar qualquer ação automaticamente",
+        "Como substituto do Claude Code para edição de repositórios",
+        "Como um estagiário em treinamento que precisa de supervisão, pois está em research preview — confira ações sensíveis antes de aprovar",
+        "Como uma extensão que só funciona em sites desconhecidos para testar segurança"
+      ],
+      "correta": 2,
+      "explicacao": "Por estar em research preview, o Claude for Chrome exige supervisão: use em sites confiáveis e confira ações de risco antes de aprovar."
+    }
+  ],
+  "claude-101/13-what-s-next": [
+    {
+      "pergunta": "Segundo a aula, o que de fato gera fluência no uso do Claude depois de terminar o curso?",
+      "opcoes": [
+        "Reassistir todas as aulas até decorar cada recurso",
+        "Repetir o uso em um problema real da sua semana",
+        "Memorizar o framework das 4 competências",
+        "Acumular o máximo de conectores e Skills configurados"
+      ],
+      "correta": 1,
+      "explicacao": "A aula afirma que fluência não vem de assistir, mas de repetição em um problema real, onde nasce a intuição de quando o Claude ajuda.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "No framework das 4 competências (4D), o que significa a Diligência?",
+      "opcoes": [
+        "Saber pedir com contexto suficiente para o Claude",
+        "Escolher quais tarefas valem a pena delegar ao Claude",
+        "Assumir a responsabilidade pelo resultado, já que quem assina é você e não a IA",
+        "Avaliar criticamente se a resposta do Claude está correta"
+      ],
+      "correta": 2,
+      "explicacao": "A aula define Diligência como a responsabilidade pelo resultado: você assina embaixo, não a IA.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "Qual é a recomendação central da aula sobre como começar a aplicar o Claude no dia a dia?",
+      "opcoes": [
+        "Escolher UMA tarefa recorrente e chata da semana e resolvê-la de ponta a ponta",
+        "Usar o Claude em todas as tarefas possíveis ao mesmo tempo",
+        "Migrar imediatamente para Claude Code e a API antes de usar o claude.ai",
+        "Construir uma Skill antes de testar qualquer prompt"
+      ],
+      "correta": 0,
+      "explicacao": "A aula propõe a tarefa-âncora: resolver UMA tarefa recorrente e chata por completo, gerando ROI visível antes de generalizar.",
+      "explicacao_extra": ""
+    }
+  ],
+  "claude-code-101/01-what-is-claude-code": [
+    {
+      "pergunta": "O que melhor distingue o Claude Code de um chat de IA comum?",
+      "opcoes": [
+        "Ele usa um modelo de linguagem maior e mais rápido que o do chat",
+        "Ele lê o projeto, edita arquivos e roda comandos em vez de só devolver texto pra copiar",
+        "Ele responde em português brasileiro com mais qualidade técnica",
+        "Ele guarda o histórico de todas as suas conversas anteriores permanentemente"
+      ],
+      "correta": 1,
+      "explicacao": "O diferencial central é que o Claude Code age dentro do projeto (lê, edita, executa), não apenas devolve texto pra você copiar e colar."
+    },
+    {
+      "pergunta": "Por que descrever o Claude Code como um 'agente' é mais preciso do que chamá-lo de chatbot?",
+      "opcoes": [
+        "Porque ele observa o ambiente, age, lê o resultado e repete em loop até cumprir o objetivo",
+        "Porque ele dá uma única resposta final mais completa e bem formatada",
+        "Porque ele foi treinado especificamente em código e não em texto comum",
+        "Porque ele funciona offline sem precisar de conexão com a internet"
+      ],
+      "correta": 0,
+      "explicacao": "Um agente é um modelo em loop com ferramentas: observa, age e reavalia repetidamente, ao contrário do chatbot que dá uma resposta única."
+    },
+    {
+      "pergunta": "Sabendo que a janela de contexto é grande mas finita, qual é a melhor forma de pedir uma tarefa ao Claude Code?",
+      "opcoes": [
+        "Pedir pra ele carregar e ler o repositório inteiro antes de começar qualquer coisa",
+        "Dividir a tarefa em mensagens curtíssimas pra não estourar a memória do modelo",
+        "Apontar o caminho e os arquivos que importam, em vez de mandar 'ler o projeto todo'",
+        "Colar todo o código relevante diretamente no prompt para garantir que ele veja tudo"
+      ],
+      "correta": 2,
+      "explicacao": "Como o contexto não comporta o repositório inteiro, o ideal é apontar o caminho certo e deixar o agente ser seletivo (grep, abrir só o que importa)."
+    }
+  ],
+  "claude-code-101/02-how-claude-code-works": [
+    {
+      "pergunta": "O que define o \"loop agêntico\" como o motor do Claude Code?",
+      "opcoes": [
+        "Ele gera a primeira resposta plausível e encerra imediatamente para economizar contexto",
+        "Ele lê o pedido, reúne contexto, executa uma ação, olha o resultado e repete até a tarefa estar de fato resolvida",
+        "Ele pergunta ao usuário a cada palavra antes de continuar a conversa",
+        "Ele apenas conversa sobre o código, sem nunca executar comandos ou editar arquivos"
+      ],
+      "correta": 1,
+      "explicacao": "O loop agêntico é o ciclo de pensar, agir e conferir que repete até a tarefa estar realmente resolvida, e não até a primeira resposta plausível."
+    },
+    {
+      "pergunta": "Por que tratar a janela de contexto como recurso escasso é metade do jogo?",
+      "opcoes": [
+        "Porque ela é o campo de visão finito do modelo e, quando enche, o agente começa a esquecer o começo da sessão",
+        "Porque quanto maior a janela, mais lento o agente responde a cada comando",
+        "Porque a janela só guarda a conversa, ignorando arquivos e saídas de comando",
+        "Porque o modelo cobra mais caro por sessões curtas do que por sessões longas"
+      ],
+      "correta": 0,
+      "explicacao": "A janela de contexto é finita e, ao encher, vira gargalo e faz o agente esquecer o início da sessão — por isso sessões enxutas rendem mais."
+    },
+    {
+      "pergunta": "Qual é a principal característica do Plan mode?",
+      "opcoes": [
+        "Edita arquivos sem pedir aprovação, mas ainda confirma comandos antes de rodar",
+        "Pula todas as permissões para ganhar velocidade máxima na execução",
+        "Funciona em modo só-leitura: investiga o projeto e devolve um plano para você aprovar antes de mudar qualquer linha",
+        "Força a compactação da conversa antiga sempre que a janela está quase cheia"
+      ],
+      "correta": 2,
+      "explicacao": "O Plan mode é só-leitura: o agente investiga e apresenta um plano para aprovação antes de tocar em qualquer código."
+    }
+  ],
+  "claude-code-101/03-installing-claude-code": [
+    {
+      "pergunta": "Por que a aula recomenda o instalador oficial (via curl/script) em vez de instalar pelo Homebrew (brew) ou winget?",
+      "opcoes": [
+        "Porque brew e winget não conseguem instalar o Claude Code em nenhuma plataforma",
+        "Porque o instalador oficial se atualiza sozinho, enquanto brew/winget congelam a versão e exigem update manual",
+        "Porque só o instalador oficial permite autenticar com conta Claude",
+        "Porque brew e winget instalam uma versão paga, e o oficial é gratuito"
+      ],
+      "correta": 1,
+      "explicacao": "O instalador oficial tem auto-update, e brew/winget congelam a versão deixando a atualização por sua conta — algo que pesa numa ferramenta que muda toda semana."
+    },
+    {
+      "pergunta": "Você abriu o terminal e rodou 'claude' dentro da pasta /projetos/site. O que o agente consegue enxergar?",
+      "opcoes": [
+        "Apenas o arquivo que você abrir explicitamente, nada mais",
+        "Toda a sua máquina, já que ele tem acesso total ao sistema",
+        "A pasta /projetos/site e tudo dentro dela (subpastas inclusas), mas nada acima dela",
+        "Somente os arquivos da pasta, sem incluir as subpastas"
+      ],
+      "correta": 2,
+      "explicacao": "O diretório de trabalho define o que o agente vê: a pasta onde você rodou 'claude' e todo o seu conteúdo recursivo, e nada acima dela — é o controle de acesso mais básico."
+    },
+    {
+      "pergunta": "Para qual cenário a aula indica a versão web (claude.ai/code) como a melhor escolha?",
+      "opcoes": [
+        "Mexer em um repositório do GitHub remotamente, sem montar o ambiente local na máquina",
+        "Ter diffs visuais acoplados ao editor de código que você já está usando",
+        "Deixar o agente trabalhando em background enquanto você faz outra coisa na mesma máquina",
+        "Estar na ponta e receber as novidades do Claude Code antes de todos os outros ambientes"
+      ],
+      "correta": 0,
+      "explicacao": "O modo web roda no navegador sobre um repo do GitHub num ambiente na nuvem, ideal para um ajuste rápido sem ter o ambiente montado localmente."
+    }
+  ],
+  "claude-code-101/04-your-first-prompt": [
+    {
+      "pergunta": "No Auto-accept mode, o que acontece quando o Claude quer editar um arquivo e quando quer rodar um comando de terminal?",
+      "opcoes": [
+        "As edições de arquivo são aplicadas sem perguntar, mas comandos de terminal ainda pedem confirmação",
+        "Tanto edições quanto comandos de terminal são aplicados sem pedir confirmação",
+        "As edições pedem confirmação, mas os comandos de terminal rodam automaticamente",
+        "Tudo fica em modo só-leitura até você aprovar o plano"
+      ],
+      "correta": 0,
+      "explicacao": "No Auto-accept as edições de arquivo entram sozinhas, mas comandos de terminal continuam exigindo sua confirmação."
+    },
+    {
+      "pergunta": "Você vai fazer uma refatoração que toca vários arquivos e não quer ser pego de surpresa. Qual abordagem a aula recomenda?",
+      "opcoes": [
+        "Ativar o Auto-accept mode para que tudo seja aplicado rápido",
+        "Escrever um prompt vago e ir ajustando conforme o Claude erra",
+        "Entrar em Plan Mode antes, revisar o plano só-leitura e só depois aprovar a execução",
+        "Confiar no Approval mode e aprovar cada passo sem ler o plano geral"
+      ],
+      "correta": 2,
+      "explicacao": "O Plan Mode é só-leitura e devolve um plano detalhado antes de tocar em qualquer arquivo, evitando estragos silenciosos em mudanças grandes."
+    },
+    {
+      "pergunta": "Segundo a aula, qual prompt é um bom 'briefing' em vez de um desejo vago?",
+      "opcoes": [
+        "Pesquisa como resolver bugs de login e me explica",
+        "O login está aceitando e-mail inválido; quero validação no front e mensagem de erro clara, sem mexer no backend",
+        "Arruma o login pra mim",
+        "Deixa o login funcionando direito"
+      ],
+      "correta": 1,
+      "explicacao": "Um prompt bom diz o QUÊ e o CRITÉRIO de pronto com contexto e restrições, como tratar a tarefa como briefing para um dev júnior."
+    }
+  ],
+  "claude-code-101/05-the-explore-plan-code-commit-workflow": [
+    {
+      "pergunta": "Qual é a ordem correta do ciclo de trabalho ensinado na aula?",
+      "opcoes": [
+        "Codar, explorar, planejar e commitar",
+        "Explorar, planejar, codar e commitar",
+        "Planejar, codar, commitar e explorar",
+        "Pedir código, revisar, planejar e commitar"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define o ritmo como explorar o repositório, planejar o ataque, executar (codar) e só então commitar."
+    },
+    {
+      "pergunta": "Por que o Plan Mode é considerado 'o lugar mais barato pra corrigir rota'?",
+      "opcoes": [
+        "Porque ele é somente-leitura e devolve um plano sem ainda ter escrito código pra desfazer",
+        "Porque ele commita automaticamente as correções no repositório",
+        "Porque ele edita os arquivos mais rápido que o modo normal",
+        "Porque ele dispensa a fase de execução por completo"
+      ],
+      "correta": 0,
+      "explicacao": "No Plan Mode o Claude investiga e propõe um plano sem tocar em arquivos, então ajustar antes de qualquer código é o ponto mais barato pra corrigir rota."
+    },
+    {
+      "pergunta": "Qual a vantagem de usar um subagente revisor antes de commitar?",
+      "opcoes": [
+        "Ele acelera o auto-accept das edições do agente principal",
+        "Ele substitui a necessidade de definir critério de sucesso",
+        "Ele escreve o código mais rápido por ter mais contexto",
+        "Ele tem contexto limpo e não carrega o viés da sessão, pegando erros que o autor não enxerga"
+      ],
+      "correta": 3,
+      "explicacao": "Por não ter vivido a sessão inteira, o subagente revisor não carrega o viés do agente principal e detecta problemas que o 'autor' do código não vê."
+    }
+  ],
+  "claude-code-101/06-context-management": [
+    {
+      "pergunta": "Você está no meio de uma tarefa longa e o contexto está quase cheio, mas precisa CONTINUAR exatamente a mesma tarefa sem perder o fio. Qual comando faz sentido?",
+      "opcoes": [
+        "/clear, porque zera tudo e libera o máximo de espaço",
+        "/compact, porque condensa o histórico e mantém um resumo do que você estava fazendo",
+        "/context, porque resume a sessão automaticamente para você",
+        "Nenhum: basta esperar, já que o contexto nunca enche de verdade"
+      ],
+      "correta": 1,
+      "explicacao": "O /compact dispara a compactação na mão e segue mantendo um resumo, ideal para continuar a MESMA tarefa com o contexto pesado."
+    },
+    {
+      "pergunta": "Qual é a diferença central entre /compact e /clear?",
+      "opcoes": [
+        "/compact apaga tudo sem deixar resumo; /clear guarda um resumo do que você estava fazendo",
+        "Os dois fazem a mesma coisa, só mudam o nome do comando",
+        "/compact mantém um resumo e continua a sessão; /clear zera o contexto sem guardar memória nenhuma",
+        "/compact só funciona em subagents e /clear só no agente principal"
+      ],
+      "correta": 2,
+      "explicacao": "O /compact condensa mas preserva um resumo para seguir na mesma tarefa, enquanto o /clear é um reset limpo que não guarda memória do que veio antes."
+    },
+    {
+      "pergunta": "Por que usar um subagent para uma investigação grande (ex: 'entenda como funciona a autenticação no projeto inteiro') ajuda a gerenciar contexto?",
+      "opcoes": [
+        "Porque o subagent tem janela de contexto própria e separada, então a leitura pesada acontece nele e devolve só a resposta, mantendo o seu contexto limpo",
+        "Porque o subagent aumenta o tamanho da sua janela de contexto principal",
+        "Porque o subagent grava tudo no CLAUDE.md automaticamente",
+        "Porque o subagent desativa a compactação durante a investigação"
+      ],
+      "correta": 0,
+      "explicacao": "O subagent tem contexto próprio onde acontece o trabalho sujo de ler muitos arquivos, devolvendo apenas a resposta e poupando o contexto do agente principal."
+    }
+  ],
+  "claude-code-101/07-code-review": [
+    {
+      "pergunta": "Por que o revisor deve ser um subagente separado, e não o mesmo agente que escreveu o código?",
+      "opcoes": [
+        "Porque ele tem uma janela de contexto própria e olhar limpo, sem viés de quem escreveu o código",
+        "Porque dois agentes rodam mais rápido e dividem o trabalho de escrever o código",
+        "Porque o agente principal não tem permissão para rodar git diff",
+        "Porque só um subagente consegue abrir o Pull Request no GitHub"
+      ],
+      "correta": 0,
+      "explicacao": "O autor já está convencido de que o código está certo; um agente fresco, sem memória de tê-lo escrito, enxerga o que o principal não veria."
+    },
+    {
+      "pergunta": "Qual deve ser o acesso do subagente revisor às ferramentas?",
+      "opcoes": [
+        "Acesso total, inclusive editar arquivos, para já corrigir o que encontrar",
+        "Acesso a push e abertura de PR, mas não a leitura de arquivos",
+        "Apenas ferramentas de leitura, como ler arquivo, rodar git diff e grep",
+        "Nenhum acesso a ferramentas; ele só lê a mensagem de commit"
+      ],
+      "correta": 2,
+      "explicacao": "Um revisor read-only aponta os problemas sem escondê-los corrigindo; revisor que edita vira mais um autor e deixa de revisar."
+    },
+    {
+      "pergunta": "Segundo a aula, como você deve tratar o resultado do review feito pelo Claude?",
+      "opcoes": [
+        "Como veredito final: tudo que ele apontar deve ser corrigido antes do push",
+        "Como insumo a ser filtrado com discernimento, já que ele acha coisa real mas também levanta falso-positivo",
+        "Como irrelevante, porque o review humano do time é o único que importa",
+        "Como definitivo apenas quando o link cai automático no Slack via MCP"
+      ],
+      "correta": 1,
+      "explicacao": "O review do Claude mistura achados reais e falsos-positivos, então sua função é o discernimento, não obedecer cegamente à lista."
+    }
+  ],
+  "claude-code-101/08-the-claude-md-file": [
+    {
+      "pergunta": "Qual a diferença entre o CLAUDE.md do projeto e o de usuário (~/.claude)?",
+      "opcoes": [
+        "O do projeto é versionado junto com o código e vale pro time inteiro; o de usuário fica na sua config e só vale pra você, em todos os seus projetos",
+        "O do projeto vale só pra você; o de usuário é compartilhado com o time",
+        "São idênticos, mudando apenas a extensão do arquivo",
+        "O de usuário sobrescreve totalmente o do projeto e desativa as regras do repositório"
+      ],
+      "correta": 0,
+      "explicacao": "O CLAUDE.md do projeto é versionado e compartilhado com o time, enquanto o de usuário fica em ~/.claude e vale só pra você em todos os seus projetos."
+    },
+    {
+      "pergunta": "Para que serve a referência com @ dentro do CLAUDE.md?",
+      "opcoes": [
+        "Para marcar membros do time que devem revisar o arquivo",
+        "Para apontar pra outros arquivos (README, schema, guia de estilo) sem copiar tudo, mantendo o CLAUDE.md enxuto",
+        "Para forçar o Claude a ignorar aquele trecho do arquivo",
+        "Para criar variáveis de ambiente que o Claude usa nos comandos"
+      ],
+      "correta": 1,
+      "explicacao": "O @caminho/arquivo referencia outros arquivos sob demanda em vez de colar a documentação inteira, mantendo o CLAUDE.md principal curto."
+    },
+    {
+      "pergunta": "Segundo a aula, qual deve ser o critério para uma linha existir no CLAUDE.md?",
+      "opcoes": [
+        "Deve descrever desejos e intenções de qualidade, como 'capriche no código'",
+        "Deve documentar de forma completa e bonita toda a arquitetura do projeto",
+        "Cada linha deveria evitar uma correção que você já teve que fazer na mão; se não evita nada, corta",
+        "Deve ser gerada exclusivamente pelo /init e nunca editada depois"
+      ],
+      "correta": 2,
+      "explicacao": "A aula define o CLAUDE.md como a lista do que você está cansado de repetir: cada linha deve evitar uma correção real, escrevendo regra e não desejo."
+    }
+  ],
+  "claude-code-101/09-subagents": [
+    {
+      "pergunta": "Qual é o principal ganho de usar um subagent para uma investigação pesada de codebase?",
+      "opcoes": [
+        "Ele faz a exploração ruidosa no contexto dele e devolve só o sumário, mantendo seu contexto principal limpo",
+        "Ele torna o modelo principal mais rápido por usar uma versão menor do Claude",
+        "Ele aumenta o tamanho da janela de contexto do agente principal",
+        "Ele salva automaticamente todos os arquivos lidos no contexto principal para consulta futura"
+      ],
+      "correta": 0,
+      "explicacao": "O subagent isola a exploração numa janela separada e retorna apenas a conclusão, preservando o contexto principal."
+    },
+    {
+      "pergunta": "Por que a descrição de um subagent deve ser tratada como uma interface pública bem escrita?",
+      "opcoes": [
+        "Porque ela define quais ferramentas o agente pode usar",
+        "Porque é por ela que o Claude principal decide acionar o agente sozinho; descrição vaga leva a chamadas erradas ou nenhuma",
+        "Porque ela aparece para o usuário final como documentação do produto",
+        "Porque ela determina o tamanho da janela de contexto que o agente recebe"
+      ],
+      "correta": 1,
+      "explicacao": "O Claude principal usa a descrição para decidir quando acionar o subagent, então uma descrição vaga faz o agente ser chamado na hora errada ou nunca."
+    },
+    {
+      "pergunta": "Como um subagent é definido na prática, segundo a aula?",
+      "opcoes": [
+        "Por uma chamada de API com parâmetros de configuração em JSON",
+        "Por um plugin compilado que precisa ser instalado no Claude Code",
+        "Por um arquivo .md com cabeçalho YAML (frontmatter) e um prompt de sistema, versionável no repo",
+        "Por um comando interativo que gera o agente apenas em memória na sessão atual"
+      ],
+      "correta": 2,
+      "explicacao": "Um subagent é só um arquivo Markdown com frontmatter YAML (nome, descrição, ferramentas) e um prompt de sistema, podendo ser versionado em .claude/agents."
+    }
+  ],
+  "claude-code-101/10-skills": [
+    {
+      "pergunta": "Segundo a aula, qual é o fator que mais determina se uma skill vai funcionar de verdade?",
+      "opcoes": [
+        "Um passo a passo muito detalhado e bem formatado no corpo do SKILL.md",
+        "Uma description afiada que faz o Claude carregar a skill na hora certa",
+        "A quantidade de arquivos de apoio anexados à pasta da skill",
+        "Colocar a skill sempre no diretório pessoal em vez do projeto"
+      ],
+      "correta": 1,
+      "explicacao": "A aula é explícita: o segredo não está no passo a passo bonito, mas numa description que dispara a skill no momento certo — 'description fraca, skill morta'."
+    },
+    {
+      "pergunta": "Como funciona o progressive disclosure das skills no Claude Code?",
+      "opcoes": [
+        "Todo o conteúdo de todas as skills fica carregado no contexto o tempo todo",
+        "O Claude carrega as skills em ordem alfabética conforme o contexto cresce",
+        "O Claude só vê name + description sempre; o corpo completo entra só quando a skill é acionada",
+        "As skills só carregam se o usuário digitar manualmente um comando de barra"
+      ],
+      "correta": 2,
+      "explicacao": "Progressive disclosure mantém só name + description visíveis o tempo todo (custo baixo), e o corpo do SKILL.md entra no contexto apenas quando a skill é de fato acionada."
+    },
+    {
+      "pergunta": "Na distinção feita na aula, o que diferencia uma Skill de um MCP e de um subagente?",
+      "opcoes": [
+        "Skill é procedimento (como fazer); MCP é conexão (ferramentas externas); subagente é isolamento (contexto separado)",
+        "Skill é conexão com sistemas externos; MCP é o procedimento; subagente é o frontmatter",
+        "Skill, MCP e subagente são nomes diferentes para a mesma pasta com SKILL.md",
+        "Skill roda em contexto isolado; MCP versiona o código; subagente descreve o gatilho"
+      ],
+      "correta": 0,
+      "explicacao": "A aula define Skill como PROCEDIMENTO, MCP como CONEXÃO (ferramentas novas) e subagente como ISOLAMENTO (contexto separado), e skills frequentemente orquestram MCPs e subagentes."
+    }
+  ],
+  "claude-code-101/11-mcp": [
+    {
+      "pergunta": "Segundo a aula, qual a melhor analogia pra entender o que o MCP é?",
+      "opcoes": [
+        "Um banco de dados central onde o Claude guarda todo o contexto",
+        "Uma tomada padrão: qualquer ferramenta compatível pluga e fala a mesma língua",
+        "Um modelo de IA mais potente que roda dentro do Claude Code",
+        "Um servidor remoto que hospeda os seus projetos na nuvem"
+      ],
+      "correta": 1,
+      "explicacao": "A aula descreve o MCP como o 'padrão de tomada' — uma interface comum em que toda ferramenta compatível se conecta da mesma forma."
+    },
+    {
+      "pergunta": "Por que a aula recomenda ativar só os MCP servers que você usa de verdade?",
+      "opcoes": [
+        "Porque cada server carregado injeta as definições das suas tools na janela de contexto, mesmo sem você usar",
+        "Porque cada server ligado deixa o Claude Code mais lento pra iniciar",
+        "Porque servers demais geram conflito e quebram as integrações entre si",
+        "Porque cada server cobra uma taxa extra por uso"
+      ],
+      "correta": 0,
+      "explicacao": "A aula explica que todo server carregado consome contexto com as definições das tools, sobrando menos espaço pro trabalho real."
+    },
+    {
+      "pergunta": "Quando o repositório tem um arquivo .mcp.json commitado, qual é o escopo do server?",
+      "opcoes": [
+        "Local: disponível só pra você e só naquele projeto",
+        "User: disponível pra você em todos os seus projetos",
+        "Project: vale pro time inteiro do repositório, sem ninguém configurar na mão",
+        "Remoto: hospedado pelo fornecedor e acessado pela rede"
+      ],
+      "correta": 2,
+      "explicacao": "O escopo project é justamente o server commitado no .mcp.json, que fica disponível pra todo o time do repositório com o mesmo setup."
+    }
+  ],
+  "claude-code-101/12-hooks": [
+    {
+      "pergunta": "O que diferencia fundamentalmente um hook de uma instrução escrita no CLAUDE.md?",
+      "opcoes": [
+        "O hook é determinístico e roda sempre, enquanto a instrução é uma sugestão que o modelo pode ou não seguir",
+        "O hook só funciona em projetos com git, enquanto o CLAUDE.md funciona em qualquer pasta",
+        "O hook é mais lento porém mais seguro que a instrução do CLAUDE.md",
+        "O hook precisa ser pedido pelo usuário a cada execução, já a instrução roda sozinha"
+      ],
+      "correta": 0,
+      "explicacao": "O hook é uma regra mecânica que roda 10 em 10 vezes, enquanto a instrução no CLAUDE.md é apenas sugestão que o modelo decide se segue."
+    },
+    {
+      "pergunta": "Num hook de PreToolUse, o que acontece quando o comando retorna exit code 2?",
+      "opcoes": [
+        "A ação passa normalmente, como se fosse exit code 0",
+        "Apenas um erro é exibido pra você, mas a ação não é travada",
+        "A ação é bloqueada e a mensagem do stderr volta pro Claude entender o motivo e se ajustar",
+        "O hook é desativado para as próximas execuções da sessão"
+      ],
+      "correta": 2,
+      "explicacao": "No PreToolUse, exit code 2 bloqueia a ação e devolve a mensagem do stderr pro Claude entender o motivo e se ajustar."
+    },
+    {
+      "pergunta": "Para que serve o matcher em um hook?",
+      "opcoes": [
+        "Define em qual evento do ciclo de vida o hook engata, como PreToolUse ou Stop",
+        "Filtra para QUAIS ferramentas o hook vale, ex.: 'Edit|Write' só dispara em edição de arquivo",
+        "Determina o exit code que o hook vai retornar ao final",
+        "Decide se o hook fica salvo no projeto ou no perfil do usuário"
+      ],
+      "correta": 1,
+      "explicacao": "O matcher é o filtro que diz para quais ferramentas o hook vale, como 'Edit|Write' disparar só ao mexer em arquivo."
+    }
+  ],
+  "claude-platform-101/01-what-is-the-claude-developer-platform": [
+    {
+      "pergunta": "Qual a diferença essencial entre usar o Claude Developer Platform e \"o chat\" do Claude no navegador?",
+      "opcoes": [
+        "No Platform você conversa com um modelo mais inteligente, enquanto o chat usa um modelo limitado",
+        "No Platform seu sistema manda requisições estruturadas por código e o Claude vira um componente do seu produto, em vez de você só digitar numa janela",
+        "O Platform é só a versão paga do chat, com as mesmas funcionalidades de conversa",
+        "O chat permite programar, e o Platform serve apenas para administrar custos"
+      ],
+      "correta": 1,
+      "explicacao": "O Platform é o acesso por código (API/SDK/CLI/Console) que transforma o Claude de 'ferramenta que eu uso' em 'componente que roda dentro do meu produto'."
+    },
+    {
+      "pergunta": "Na arquitetura de três camadas do Platform, o que você usa e quando?",
+      "opcoes": [
+        "Primitivos pra construir, infraestrutura pra escalar, controle pra operar",
+        "Console pra construir, API pra escalar, SDK pra operar",
+        "Infraestrutura pra começar, primitivos pra escalar, evals pra construir",
+        "Controle pra construir, primitivos pra operar, dashboards pra escalar"
+      ],
+      "correta": 0,
+      "explicacao": "A aula resume: construa com primitivos, escale na infraestrutura, opere com controle — subindo de camada só quando a dor de escala aparece."
+    },
+    {
+      "pergunta": "Por que separar o system prompt das messages te dá mais controle?",
+      "opcoes": [
+        "Porque o system prompt é processado por um modelo diferente das messages",
+        "Porque as messages definem o papel e o tom, e o system prompt guarda o histórico da conversa",
+        "Porque o system prompt fixa papel, tom e regras enquanto as messages carregam a conversa, então você muda a instrução sem mexer no conteúdo e vice-versa",
+        "Porque o system prompt elimina a necessidade de definir modelo e teto de tokens"
+      ],
+      "correta": 2,
+      "explicacao": "O system prompt fica fixo (papel, tom, regras) e as messages são a conversa, permitindo alterar um sem afetar o outro."
+    }
+  ],
+  "claude-platform-101/02-your-first-api-call": [
+    {
+      "pergunta": "O que o parâmetro max_tokens controla numa chamada messages.create?",
+      "opcoes": [
+        "O tamanho máximo do prompt que você envia ao Claude",
+        "O limite máximo de tokens que a RESPOSTA pode ter",
+        "A quantidade total de tokens cobrados por mês na conta",
+        "O número de mensagens que o array messages pode conter"
+      ],
+      "correta": 1,
+      "explicacao": "max_tokens é o teto de SAÍDA (a resposta), funcionando como freio de custo, e não o tamanho do input."
+    },
+    {
+      "pergunta": "Por que você sempre itera e checa o type de cada item ao ler a resposta do Claude?",
+      "opcoes": [
+        "Porque a resposta vem como um array de content blocks (texto, raciocínio, ferramenta), não uma string solta",
+        "Porque o SDK retorna a resposta em pedaços que precisam ser concatenados por ordem de tempo",
+        "Porque cada token vem como um bloco separado e precisa ser remontado",
+        "Porque o system prompt aparece como o primeiro bloco e deve ser descartado"
+      ],
+      "correta": 0,
+      "explicacao": "A resposta é um array de content blocks de tipos diferentes, então você itera e verifica o type de cada bloco."
+    },
+    {
+      "pergunta": "Qual é a forma correta de tratar a API key, segundo a aula?",
+      "opcoes": [
+        "Pode ficar hardcoded no código desde que o repositório seja privado",
+        "Deve ser commitada no Git para o time inteiro ter acesso fácil",
+        "Basta apagá-la do arquivo antes de cada commit manualmente",
+        "Nunca vai pro Git: use .env.local + .gitignore e, se vazar, revogue e gere outra"
+      ],
+      "correta": 3,
+      "explicacao": "A chave é como senha: nunca entra no Git (use .env.local + .gitignore) e, se vazar, deve ser revogada e regerada."
+    }
+  ],
+  "claude-platform-101/03-choosing-the-right-model": [
+    {
+      "pergunta": "Segundo a aula, qual é a definição prática de 'modelo certo'?",
+      "opcoes": [
+        "O modelo mais inteligente disponível, independente do preço",
+        "O mais barato cujo output você entregaria sem pedir desculpa",
+        "O que tem o maior limite de tokens de contexto",
+        "O modelo mais novo lançado pela família Claude"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define modelo certo como o mais barato cujo resultado você toparia entregar pro cliente, descoberto medindo e não chutando."
+    },
+    {
+      "pergunta": "Qual é a estratégia recomendada para escolher entre os tiers Haiku, Sonnet e Opus?",
+      "opcoes": [
+        "Começar pelo Opus e só descer se o custo apertar",
+        "Usar sempre Sonnet por ser o meio-termo seguro",
+        "Testar no Haiku primeiro e subir os tiers só quando a qualidade não segurar",
+        "Escolher um único modelo fixo para o sistema inteiro"
+      ],
+      "correta": 2,
+      "explicacao": "A lógica bottom-up manda testar no Haiku, subir pro Sonnet se não segurar e chegar no Opus só quando a tarefa realmente pede."
+    },
+    {
+      "pergunta": "Para que serve olhar o campo response.usage em homologação?",
+      "opcoes": [
+        "Conectar a qualidade percebida com o custo real antes de subir pra produção",
+        "Aumentar a inteligência do modelo na resposta",
+        "Definir automaticamente qual tier será usado",
+        "Medir a latência de cada chamada da API"
+      ],
+      "correta": 0,
+      "explicacao": "O response.usage traz a contagem de tokens de input e output, que vira a conta do mês e liga qualidade percebida a custo real."
+    }
+  ],
+  "claude-platform-101/04-the-agent-loop-explained": [
+    {
+      "pergunta": "No loop do agente, quem realmente executa uma ferramenta quando o Claude pede para usá-la?",
+      "opcoes": [
+        "O próprio Claude executa a ferramenta internamente e devolve o resultado pronto",
+        "O seu código: o Claude apenas declara que quer chamar a ferramenta X com certos argumentos",
+        "A API da Anthropic executa automaticamente toda ferramenta declarada no input_schema",
+        "O input_schema executa a ferramenta assim que o Claude preenche os argumentos"
+      ],
+      "correta": 1,
+      "explicacao": "O Claude só declara o pedido de tool use; quem executa de verdade é o seu código."
+    },
+    {
+      "pergunta": "O que o campo stop_reason com valor 'tool_use' indica e o que você deve fazer?",
+      "opcoes": [
+        "Que o Claude terminou; você lê o texto e sai do loop",
+        "Que houve um erro na ferramenta; você deve abortar o loop",
+        "Que o Claude quer chamar uma ferramenta; você roda a ferramenta e continua o loop",
+        "Que o tool_use_id está faltando; você deve reenviar a mensagem"
+      ],
+      "correta": 2,
+      "explicacao": "'tool_use' significa que o Claude quer uma ferramenta, então você executa e continua; é 'end_turn' que encerra o loop."
+    },
+    {
+      "pergunta": "Por que cada tool_result precisa carregar o tool_use_id correspondente?",
+      "opcoes": [
+        "Para amarrar o resultado ao pedido certo, essencial quando há várias ferramentas no mesmo turno",
+        "Para definir o input_schema da próxima ferramenta a ser chamada",
+        "Para informar à API que o stop_reason deve virar end_turn",
+        "Para autenticar a chamada e permitir o uso de agentes gerenciados"
+      ],
+      "correta": 0,
+      "explicacao": "O tool_use_id liga o resultado ao pedido específico do Claude, o que é crítico quando há múltiplas ferramentas num mesmo turno."
+    }
+  ],
+  "claude-platform-101/05-what-is-tool-use": [
+    {
+      "pergunta": "No tool use, quem de fato executa a função que o Claude pediu?",
+      "opcoes": [
+        "A própria API da Anthropic, que roda a função nos servidores dela",
+        "O modelo Claude, que executa o código internamente e devolve o resultado",
+        "O seu código, que recebe o pedido do Claude e roda a função de verdade",
+        "O input_schema, que dispara a execução automaticamente"
+      ],
+      "correta": 2,
+      "explicacao": "O Claude apenas decide qual função chamar e com quais argumentos; quem executa é sempre o seu código.",
+      "resposta": null
+    },
+    {
+      "pergunta": "Quais são os três campos que compõem a definição (schema) de uma tool enviada no array tools?",
+      "opcoes": [
+        "name, description e input_schema",
+        "id, prompt e output",
+        "name, stop_reason e tool_result",
+        "function, args e result"
+      ],
+      "correta": 0,
+      "explicacao": "A definição de tool é um schema JSON com name (identificador), description (texto que o Claude lê pra decidir) e input_schema (parâmetros esperados).",
+      "resposta": null
+    },
+    {
+      "pergunta": "O que significa receber stop_reason: tool_use na resposta da API?",
+      "opcoes": [
+        "O modelo terminou e já entregou a resposta final ao usuário",
+        "Ocorreu um erro e a execução da ferramenta foi cancelada",
+        "O Claude parou porque quer chamar uma ferramenta, e é o gatilho pro seu loop executar a função e devolver o resultado",
+        "O SDK assumiu o controle e não exige mais nenhuma ação sua"
+      ],
+      "correta": 2,
+      "explicacao": "stop_reason: tool_use sinaliza que o modelo parou para pedir uma ferramenta, disparando o passo do agent loop em que seu código executa e devolve o tool_result.",
+      "resposta": null
+    }
+  ],
+  "claude-platform-101/06-what-is-thinking": [
+    {
+      "pergunta": "Nos modelos Opus mais novos, como o Claude decide o quanto raciocinar quando o thinking está ligado?",
+      "opcoes": [
+        "Você precisa definir manualmente um orçamento de tokens de raciocínio em cada chamada",
+        "Você só liga o thinking e o próprio modelo decide na hora se vale pensar e o quanto",
+        "O raciocínio é sempre fixo no nível máximo, sem como ajustar",
+        "É preciso treinar o modelo antes para que ele aprenda a dosar o raciocínio"
+      ],
+      "correta": 1,
+      "explicacao": "O thinking adaptativo dispensa orçamento de tokens: você só liga e o modelo dosa sozinho se e quanto pensar."
+    },
+    {
+      "pergunta": "Onde o parâmetro effort deve ser colocado, e o que ele controla?",
+      "opcoes": [
+        "Colado no bloco de thinking, e controla quantas ferramentas o Claude pode chamar",
+        "Dentro do output_config, e controla a profundidade do raciocínio",
+        "No topo do prompt, e controla a latência máxima permitida",
+        "Junto ao bloco de thinking, e controla o tamanho da resposta final"
+      ],
+      "correta": 1,
+      "explicacao": "O effort vai dentro do output_config (não colado no bloco de thinking) e controla a profundidade do raciocínio (low, medium, high, xhigh, max)."
+    },
+    {
+      "pergunta": "Segundo a aula, em qual situação faz mais sentido LIGAR o thinking?",
+      "opcoes": [
+        "Em tarefas de extração de dados e código boilerplate, para garantir precisão",
+        "Em qualquer chamada, já que pensar é de graça e nunca atrapalha",
+        "Em problemas com etapas, comparações ou trade-offs, onde um júnior precisaria rascunhar",
+        "Apenas quando você quer respostas mais curtas e rápidas"
+      ],
+      "correta": 2,
+      "explicacao": "Thinking paga a conta em problemas com etapas, comparações e trade-offs; em extração e boilerplate vira só custo de tokens e latência."
+    }
+  ],
+  "claude-platform-101/07-built-in-tools": [
+    {
+      "pergunta": "Qual a diferença central entre uma server tool e uma tool customizada na hora de pegar o resultado?",
+      "opcoes": [
+        "Na server tool a Anthropic executa por baixo e a saída já volta na mesma resposta, sem agent loop",
+        "Na server tool você ainda precisa rodar o ciclo de tool_use, executar e reenviar o resultado",
+        "A server tool sempre exige que você cheque o stop_reason antes de receber a saída",
+        "A tool customizada já vem com o resultado embutido e a server tool exige loop manual"
+      ],
+      "correta": 0,
+      "explicacao": "Server tools rodam na infraestrutura da Anthropic, então a saída já chega dentro da mesma resposta, eliminando o agent loop."
+    },
+    {
+      "pergunta": "Você precisa de um cálculo que tem que estar exato (média, desvio, parse de CSV). Qual ferramenta a aula recomenda e por quê?",
+      "opcoes": [
+        "web_search, porque busca a fórmula correta na web com citações",
+        "web_fetch, porque puxa o dado direto da URL de origem",
+        "code_execution, porque o modelo escreve Python e o sandbox roda de verdade, devolvendo o stdout",
+        "memory, porque guarda o resultado do cálculo entre sessões"
+      ],
+      "correta": 2,
+      "explicacao": "code_execution faz o modelo escrever Python que roda num sandbox real, sendo mais confiável que pedir pro modelo calcular de cabeça."
+    },
+    {
+      "pergunta": "Por que a aula insiste em fazer switch no b.type ao iterar o content da resposta?",
+      "opcoes": [
+        "Porque o content sempre vem como um único bloco de text que precisa ser dividido manualmente",
+        "Porque server tools trazem blocos novos (server_tool_use e o resultado) que você perde se só olhar pro text",
+        "Porque sem o switch a Anthropic não consegue executar a server tool no servidor dela",
+        "Porque o b.type define qual versão datada da ferramenta será chamada"
+      ],
+      "correta": 1,
+      "explicacao": "Server tools adicionam blocos como server_tool_use e o bloco de resultado; olhar só pro text faz você perder a chamada e a saída da ferramenta."
+    }
+  ],
+  "claude-platform-101/08-skills": [
+    {
+      "pergunta": "Qual a diferença central entre uma Skill e uma tool, segundo a aula?",
+      "opcoes": [
+        "Tool é o COMO você quer a tarefa feita; Skill é o QUE o Claude pode executar",
+        "Tool é o QUE o Claude pode fazer (ação externa); Skill é o COMO você quer que ele faça (procedimento e formato)",
+        "Skill e tool são sinônimos — só muda o nome dependendo se está no Claude Code ou na API",
+        "Skill executa ações externas como mandar e-mail; tool é apenas um playbook de instruções"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define tool como a ação externa que o Claude pode executar e Skill como o playbook que descreve como ele deve fazer."
+    },
+    {
+      "pergunta": "Por que a 'progressive disclosure' (carga progressiva) permite ter dezenas de Skills disponíveis sem inchar o contexto?",
+      "opcoes": [
+        "No início só o nome e a descrição entram no contexto; o conteúdo completo só carrega quando o Claude julga a Skill relevante",
+        "Todas as Skills são carregadas comprimidas e descomprimidas só na resposta final",
+        "O Claude carrega todas as Skills, mas apaga as não usadas ao terminar a tarefa",
+        "Apenas a Skill mais recente em version 'latest' é carregada por vez"
+      ],
+      "correta": 0,
+      "explicacao": "Na carga progressiva só nome e descrição entram de início, e o conteúdo completo do SKILL.md só é carregado quando a Skill é considerada relevante."
+    },
+    {
+      "pergunta": "Por que a aula afirma que 'description boa é tudo' ao criar uma Skill?",
+      "opcoes": [
+        "Porque a descrição substitui o conteúdo do SKILL.md durante a execução",
+        "Porque a descrição define a version que será fixada em produção",
+        "Porque, como só nome e descrição carregam no início, é a descrição que faz o Claude decidir acionar ou ignorar a Skill",
+        "Porque a API só aceita Skills que tenham uma descrição preenchida no container.skills"
+      ],
+      "correta": 2,
+      "explicacao": "Como apenas nome e descrição entram no contexto inicialmente, é a descrição que determina se o Claude aciona a Skill na hora certa."
+    }
+  ],
+  "claude-platform-101/09-mcp": [
+    {
+      "pergunta": "Qual é o principal benefício de usar MCP em vez de codar sua própria integração com a API de um serviço terceiro como Slack ou GitHub?",
+      "opcoes": [
+        "O MCP roda a integração mais rápido por usar conexão local",
+        "Quem mantém a integração quando a API muda passa a ser o dono do serviço, não você",
+        "O MCP criptografa automaticamente todas as suas credenciais",
+        "O MCP elimina a necessidade de autenticação no serviço"
+      ],
+      "correta": 1,
+      "explicacao": "O ponto central da aula é terceirizar a manutenção: o serviço publica e mantém o servidor MCP, então quando a API muda quem atualiza é o dono dele.",
+      "pergunta2": ""
+    },
+    {
+      "pergunta": "Como o Claude sabe quais ferramentas um servidor MCP oferece e quais são seus schemas?",
+      "opcoes": [
+        "Você precisa escrever manualmente a definição de cada tool no seu código",
+        "O Claude faz introspecção (discovery): consulta o servidor e descobre sozinho as tools e schemas",
+        "O servidor envia um e-mail com a documentação das ferramentas",
+        "Você copia os schemas do catálogo modelcontextprotocol.io para o seu projeto"
+      ],
+      "correta": 1,
+      "explicacao": "Por introspecção o Claude consulta o servidor MCP e lê o cardápio de tools e schemas na hora, sem você escrever nenhuma definição.",
+      "pergunta2": ""
+    },
+    {
+      "pergunta": "Segundo a aula, qual é o critério para escolher entre Tools, Skills e MCP?",
+      "opcoes": [
+        "A posse do código: Tools são seus sistemas, Skills são seu processo/procedimento, MCP são sistemas dos outros",
+        "O volume de dados: MCP para grandes volumes, Tools para pequenos",
+        "A linguagem de programação usada em cada caso",
+        "A velocidade: MCP é sempre mais rápido que Tools e Skills"
+      ],
+      "correta": 0,
+      "explicacao": "A aula define a escolha pela posse do código: Tools = seus sistemas (você mantém), Skills = seu processo, MCP = sistema dos outros mantido por eles.",
+      "pergunta2": ""
+    }
+  ],
+  "claude-platform-101/10-context-management": [
+    {
+      "pergunta": "Seu agente em produção está com a fatura alta porque um system prompt de 4k tokens é reenviado a cada chamada, 100x por hora. Qual padrão de context management ataca diretamente esse problema?",
+      "opcoes": [
+        "Prompt caching",
+        "Server-side compaction",
+        "Memory tool",
+        "Just-in-time context"
+      ],
+      "correta": 0,
+      "explicacao": "Caching reaproveita as partes estáveis da request (como o system prompt) a uma fração do custo, sendo o padrão certo para reduzir custo de reprocessamento repetido."
+    },
+    {
+      "pergunta": "Qual afirmação descreve corretamente o server-side compaction da API?",
+      "opcoes": [
+        "É uma escolha de arquitetura sua, sem nenhum parâmetro na API",
+        "Persiste o contexto entre sessões diferentes do agente",
+        "Resume turnos antigos automaticamente quando o input cruza um limite, ativado pelo parâmetro context_management",
+        "Reaproveita partes estáveis da request marcadas por você"
+      ],
+      "correta": 2,
+      "explicacao": "Compaction é um recurso da API que condensa turnos antigos automaticamente ao cruzar um limite, ativado via parâmetro context_management."
+    },
+    {
+      "pergunta": "Por que ter uma janela de contexto grande (200k ou 1M) não significa que você pode despejar tudo nela?",
+      "opcoes": [
+        "Porque janelas grandes desativam o prompt caching automaticamente",
+        "Porque a memory tool para de funcionar acima de 200k tokens",
+        "Porque a API rejeita qualquer request acima de 200k tokens mesmo na janela de 1M",
+        "Porque quanto mais entulho no contexto, pior a qualidade da resposta — o modelo se perde no ruído"
+      ],
+      "correta": 3,
+      "explicacao": "A aula destaca que excesso de contexto degrada a qualidade da resposta, pois o modelo se perde no meio do ruído, independentemente do tamanho da janela."
+    }
+  ],
+  "claude-platform-101/11-what-are-managed-agents": [
+    {
+      "pergunta": "O que, na prática, Managed Agents tira das suas costas?",
+      "opcoes": [
+        "A responsabilidade de definir o que o agente faz e o que é 'pronto'",
+        "A necessidade de operar o servidor que roda o agent loop",
+        "A escrita da rubrica de qualidade do resultado",
+        "A escolha de quais ferramentas o agente pode usar"
+      ],
+      "correta": 1,
+      "explicacao": "Managed Agents roda o loop na infra da Anthropic, então o que sai das suas costas é operar o servidor de execução — você continua dono da definição e do critério de 'pronto'."
+    },
+    {
+      "pergunta": "Qual a função do memory store no fluxo de um agente?",
+      "opcoes": [
+        "Instalar pacotes e definir o que pode acessar a rede antes da sessão começar",
+        "Dar nota ao resultado final comparando com uma rubrica",
+        "Ser lido antes de começar e escrito depois de terminar, mantendo estado entre rodadas",
+        "Isolar cada sessão em seu próprio container para rodarem em paralelo"
+      ],
+      "correta": 2,
+      "explicacao": "O memory store é lido ANTES e escrito DEPOIS de cada execução, transformando um agente amnésico num que sabe o que mudou desde a última rodada."
+    },
+    {
+      "pergunta": "Segundo a aula, quando vale a pena usar Managed Agents?",
+      "opcoes": [
+        "Quando a tarefa é stateful, recorrente e paralela",
+        "Quando você quer evitar ter que pensar no critério de sucesso",
+        "Sempre que precisar de um agente mais inteligente que o seu",
+        "Apenas quando há um único agente rodando de forma serial"
+      ],
+      "correta": 0,
+      "explicacao": "A aula recomenda usar quando a tarefa for stateful, recorrente e paralela — e alerta explicitamente para não usar como desculpa para não definir o critério de sucesso."
+    }
+  ],
+  "claude-platform-101/12-building-your-first-managed-agent": [
+    {
+      "pergunta": "O que define um managed agent em relação a um agent loop tradicional?",
+      "opcoes": [
+        "O loop do agente roda na infraestrutura da Anthropic; você só manda e lê eventos",
+        "Você continua escrevendo o while loop, mas a Anthropic hospeda o modelo",
+        "É um modelo mais rápido que dispensa system prompt e ferramentas",
+        "Exige acesso especial liberado pelo suporte da Anthropic para ser ativado"
+      ],
+      "correta": 0,
+      "explicacao": "No managed agent o agent loop executa dentro da infra da Anthropic e você apenas envia e consome eventos, em vez de escrever o while loop e tratar stop_reason na mão."
+    },
+    {
+      "pergunta": "Qual a diferença entre o Agent (primitivo) e a Session?",
+      "opcoes": [
+        "O Agent é o sandbox de execução e a Session é o conjunto de ferramentas",
+        "Agent e Session são a mesma coisa, só nomes diferentes para o mesmo objeto",
+        "O Agent é a persona reutilizável (modelo, prompt, tools) e a Session é uma execução única dele",
+        "A Session é reutilizável em N tarefas e o Agent é recriado a cada execução"
+      ],
+      "correta": 2,
+      "explicacao": "O Agent é a definição reutilizável (modelo + system prompt + tools), criada uma vez, enquanto a Session é uma execução única desse Agent dentro de um Environment."
+    },
+    {
+      "pergunta": "Por que você deve abrir o stream ANTES de mandar a mensagem de kickoff?",
+      "opcoes": [
+        "Porque o kickoff só é aceito depois que o sandbox termina de inicializar",
+        "Porque o stream não guarda histórico e só entrega eventos que acontecem depois de aberto",
+        "Porque o stream precisa autenticar a sessão usando a mensagem de kickoff",
+        "Porque mandar a kickoff primeiro duplica os eventos iniciais no consumidor"
+      ],
+      "correta": 1,
+      "explicacao": "O stream não tem histórico: ele só entrega o que acontece após ser aberto, então mandar a kickoff antes faz você perder os primeiros eventos."
+    }
+  ],
+  "claude-platform-101/13-building-with-claude-code": [
+    {
+      "pergunta": "Segundo a aula, o que diferencia o Claude Code de um chat comum que devolve snippets de código?",
+      "opcoes": [
+        "Ele lê seus arquivos, edita o código, roda comandos e lê os erros pra se corrigir dentro do projeto",
+        "Ele gera trechos mais longos de código pra você copiar e colar no terminal",
+        "Ele só funciona quando você ativa manualmente a skill /claude-api a cada uso",
+        "Ele substitui o terminal por uma interface gráfica de chat"
+      ],
+      "correta": 0,
+      "explicacao": "O Claude Code é um agente que mexe no projeto de verdade — lê arquivos, edita, roda comandos e usa os erros pra se corrigir, em vez de só cuspir snippet pra copiar."
+    },
+    {
+      "pergunta": "Na abordagem 'stub-first' descrita na aula, qual é o papel de cada parte?",
+      "opcoes": [
+        "O agente define as assinaturas e você implementa o corpo das funções",
+        "Você e o agente escrevem o corpo das funções juntos, em par",
+        "Você escreve as assinaturas (o contrato) e o agente preenche a implementação respeitando os tipos",
+        "A skill /claude-api gera tanto as assinaturas quanto a implementação automaticamente"
+      ],
+      "correta": 2,
+      "explicacao": "No stub-first você decide a forma escrevendo só as assinaturas/tipos, e esse esqueleto vira o contrato que o agente preenche fazendo o trabalho braçal."
+    },
+    {
+      "pergunta": "A aula diz que um bom prompt tem três âncoras. Quais são elas?",
+      "opcoes": [
+        "Modelo + temperatura + número de tokens",
+        "Arquivo + padrão + estado final",
+        "Tool + runner + resultado",
+        "Resumo + conceitos + takeaway"
+      ],
+      "correta": 1,
+      "explicacao": "Segundo a aula, prompt bom = arquivo + padrão + estado final; sem essas três âncoras o agente vira adivinhação e você gasta mais tempo corrigindo."
+    }
+  ],
+  "claude-cowork/02-setting-up-claude-cowork": [
+    {
+      "pergunta": "Qual é a principal diferença entre a pasta de trabalho do Cowork e o upload de arquivos no Chat?",
+      "opcoes": [
+        "Na pasta do Cowork o Claude tem leitura E escrita, salvando resultados de volta no disco; no Chat ele só lê o upload e não grava nada",
+        "A pasta do Cowork é só leitura, enquanto no Chat o Claude pode editar os arquivos enviados",
+        "Ambos funcionam igual, mas a pasta do Cowork aceita mais formatos de arquivo",
+        "A pasta do Cowork roda na nuvem, enquanto o upload do Chat fica no seu computador"
+      ],
+      "correta": 0,
+      "explicacao": "A pasta de trabalho é o único lugar com leitura E escrita real no disco, ao contrário do Chat, que só lê o upload sem gravar nada."
+    },
+    {
+      "pergunta": "Você precisa que o Claude construa e itere um documento de verdade. Por que um conector de nuvem (Google Drive, M365) não substitui a pasta local nessa tarefa?",
+      "opcoes": [
+        "Porque conectores de nuvem são mais lentos que a pasta local",
+        "Porque conectores de nuvem exigem o modo 'Act without asking'",
+        "Porque a maioria dos conectores de nuvem é só leitura e busca — não criam nem editam arquivos como a pasta local",
+        "Porque conectores de nuvem não conseguem ler arquivos docx ou xlsx"
+      ],
+      "correta": 2,
+      "explicacao": "A maioria dos conectores de nuvem é só leitura e busca, então não criam nem editam arquivos; pra construir e iterar um documento, a pasta local é o lugar confiável."
+    },
+    {
+      "pergunta": "No modo 'Act without asking', o que acontece quando o Claude vai deletar um arquivo permanentemente?",
+      "opcoes": [
+        "Ele deleta direto, pois nesse modo executa tudo sem pausar pra aprovação",
+        "Ele SEMPRE pergunta antes, porque o guardrail de exclusão é fixo nos dois modos e não tem como pular",
+        "Ele move o arquivo pra lixeira sem avisar, mas não apaga de vez",
+        "Ele só pergunta se o arquivo estiver fora da pasta de trabalho"
+      ],
+      "correta": 1,
+      "explicacao": "O guardrail de exclusão vale nos dois modos: o Claude sempre pergunta antes de deletar permanentemente, e esse prompt não pode ser pulado."
+    }
+  ],
+  "claude-cowork/05-get-better-results-faster": [
+    {
+      "pergunta": "Segundo a aula, o que realmente faz o Claude entregar resultados melhores e mais rápidos com o tempo?",
+      "opcoes": [
+        "Prompts cada vez mais elaborados e espertos",
+        "Contexto que persiste entre as conversas",
+        "Usar sempre o modelo mais novo disponível",
+        "Repetir o seu papel e tom no início de cada chat"
+      ],
+      "correta": 1,
+      "explicacao": "A aula afirma que resultado melhor e mais rápido não vem de um prompt mais esperto, mas de contexto que persiste."
+    },
+    {
+      "pergunta": "Você atende um cliente específico e quer que o Claude pare de pedir briefing do zero a cada chat. Onde esse contexto deve viver?",
+      "opcoes": [
+        "Em um projeto dedicado àquele cliente",
+        "Nas instruções globais",
+        "Em um plugin compartilhado com o time",
+        "Em uma skill como /clickup"
+      ],
+      "correta": 0,
+      "explicacao": "Contexto de um cliente específico vai para um projeto — usar o global pra isso vira poluição, segundo a aula."
+    },
+    {
+      "pergunta": "Qual sinal a aula aponta como indicação de que uma tarefa virou candidata a skill?",
+      "opcoes": [
+        "Quando o cliente pede um novo formato de relatório",
+        "Quando o processo já está maduro e vale compartilhar com o time",
+        "Quando você se pega repetindo a mesma explicação pela terceira vez",
+        "Quando você precisa conectar um MCP à sua função"
+      ],
+      "correta": 2,
+      "explicacao": "A aula diz que repetir o mesmo formato ou passo a passo pela terceira vez é o sinal de que aquilo virou candidato a skill."
+    }
+  ],
+  "claude-cowork/07-skills-teach-claude-cowork-your-way": [
+    {
+      "pergunta": "Como o Claude decide, sozinho, se deve usar uma skill para a tarefa atual?",
+      "opcoes": [
+        "Lendo a descrição da skill no cabeçalho do SKILL.md e vendo se ela encaixa na tarefa",
+        "Carregando todo o conteúdo de todas as skills instaladas no início da conversa",
+        "Esperando você sempre chamar a skill pelo nome explicitamente",
+        "Executando os scripts de apoio para testar qual skill se aplica"
+      ],
+      "correta": 0,
+      "explicacao": "O carregamento automático (progressive disclosure) faz o Claude ler as descrições das skills e ativar só a que encaixa, sem carregar tudo de antemão.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "Na lição, qual é a diferença entre 'references' e 'scripts' dentro dos recursos de apoio de uma skill?",
+      "opcoes": [
+        "References são a logo e o template; scripts são exemplos de relatórios passados",
+        "References são exemplos de trabalho bom pro Claude calibrar o nível; scripts são códigos pequenos pras partes que têm que sair idênticas toda vez",
+        "References e scripts são a mesma coisa, só nomes diferentes para matéria-prima",
+        "References disparam a skill; scripts descrevem quando ela serve"
+      ],
+      "correta": 1,
+      "explicacao": "References servem de calibragem (exemplos de trabalho bom), enquanto scripts garantem que partes mecânicas saiam idênticas sempre.",
+      "explicacao_extra": ""
+    },
+    {
+      "pergunta": "Por que a lição recomenda testar o gatilho de propósito, rodando uma tarefa parecida mas diferente?",
+      "opcoes": [
+        "Para confirmar que a skill carrega mais rápido em tarefas novas",
+        "Para forçar o Claude a memorizar o nome da skill",
+        "Para verificar se a skill NÃO dispara quando não deve — se disparar errado, a descrição está larga demais",
+        "Para garantir que os scripts de apoio rodem em qualquer contexto"
+      ],
+      "correta": 2,
+      "explicacao": "Um trigger bem feito ativa só na hora certa; se a skill dispara numa tarefa parecida mas diferente, a descrição está larga demais e precisa ser estreitada.",
+      "explicacao_extra": ""
+    }
+  ],
+  "claude-cowork/01-what-is-claude-cowork": [
+    {
+      "pergunta": "Qual é a diferença central entre o Chat e o Cowork descrita na aula?",
+      "opcoes": [
+        "No Chat você delega entregáveis prontos; no Cowork você itera resposta por resposta",
+        "No Chat você pergunta e itera resposta por resposta; no Cowork você delega um pedaço inteiro de trabalho que volta concluído",
+        "Ambos fazem a mesma coisa, mas o Cowork é mais rápido",
+        "O Chat trabalha nos seus arquivos locais e o Cowork só responde perguntas"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define que no Chat você pergunta e itera, enquanto no Cowork você delega um trabalho inteiro que retorna finalizado."
+    },
+    {
+      "pergunta": "Segundo a aula, como o Cowork age em relação ao seu ambiente de trabalho?",
+      "opcoes": [
+        "Apenas sugere passos para você executar manualmente em cada ferramenta",
+        "Trabalha isolado em um ambiente próprio, sem tocar nos seus arquivos",
+        "Lê e escreve nos seus arquivos locais, puxa contexto de apps conectados e, via Claude no Chrome, atua em páginas atrás de login",
+        "Só funciona com o Gmail e o Slack, sem acesso a arquivos"
+      ],
+      "correta": 2,
+      "explicacao": "A aula diz que o Cowork age onde o trabalho mora: arquivos locais, apps conectados e páginas atrás de login via Claude no Chrome."
+    },
+    {
+      "pergunta": "Como a aula resume a diferença entre os três modos Chat, Code e Cowork?",
+      "opcoes": [
+        "Chat é pra pensar com o Claude, Code é pra construir software e Cowork é pra delegar trabalho pro Claude",
+        "Chat é pra delegar, Code é pra perguntar e Cowork é pra rascunhar",
+        "Os três são iguais, mudando apenas o nome conforme o app",
+        "Chat é pra software, Code é pra delegar arquivos e Cowork é pra tirar dúvidas"
+      ],
+      "correta": 0,
+      "explicacao": "O takeaway da aula é exatamente: Chat pra pensar, Code pra construir software e Cowork pra delegar trabalho."
+    }
+  ],
+  "claude-cowork/03-what-claude-cowork-can-do-for-you": [
+    {
+      "pergunta": "Segundo a aula, quais são os três tipos de tarefa em que o Cowork mais brilha?",
+      "opcoes": [
+        "Tarefas multi-etapa, baseadas em arquivo e multi-ferramenta",
+        "Tarefas de tradução, resumo e brainstorm rápido",
+        "Tarefas de código, design e edição de vídeo",
+        "Tarefas de pesquisa na web, chat livre e geração de imagens"
+      ],
+      "correta": 0,
+      "explicacao": "A aula define os candidatos a delegação como tarefas com muitas etapas, que mexem em arquivos reais ou que cruzam várias ferramentas."
+    },
+    {
+      "pergunta": "O que diferencia uma tarefa baseada em arquivo no Cowork de uma conversa de chat comum?",
+      "opcoes": [
+        "O chat salva em DOCX e o Cowork só mostra texto na tela",
+        "O Cowork lê os arquivos que já existem na pasta, edita e grava de volta, enquanto o chat só cospe um texto novo",
+        "Ambos produzem o mesmo entregável, mudando apenas a velocidade",
+        "O Cowork só consegue criar arquivos do zero, nunca editar os existentes"
+      ],
+      "correta": 1,
+      "explicacao": "O ganho do Cowork está em editar arquivos reais já existentes e gravá-los no formato certo, ao contrário do chat que apenas gera texto novo."
+    },
+    {
+      "pergunta": "Qual é a recomendação da aula sobre o uso do /schedule?",
+      "opcoes": [
+        "Agende toda tarefa logo de cara para economizar tempo",
+        "Use /schedule apenas para tarefas que cruzam ferramentas",
+        "O /schedule substitui a necessidade de validar o output",
+        "Faça a tarefa manualmente uma vez, valide o output e só então transforme em recorrente"
+      ],
+      "correta": 3,
+      "explicacao": "A aula orienta a não começar pelo /schedule: primeiro execute e valide o processo, depois agende algo que já se sabe que funciona."
+    }
+  ],
+  "claude-cowork/04-hand-claude-cowork-your-first-task": [
+    {
+      "pergunta": "Segundo a aula, o que diferencia delegar uma tarefa pro Cowork de simplesmente mandar um prompt num chatbot?",
+      "opcoes": [
+        "Você passa a tarefa de ponta a ponta para receber uma entrega pronta, como se briefasse um colega que trabalha offline e só volta com o resultado",
+        "Você escreve prompts mais longos e detalhados para forçar respostas melhores",
+        "Você usa comandos técnicos específicos em vez de linguagem natural",
+        "Você precisa ficar acompanhando turno a turno cada resposta antes de continuar"
+      ],
+      "correta": 0,
+      "explicacao": "Delegar é passar a tarefa de ponta a ponta e receber a entrega pronta, não pedir uma resposta turno a turno."
+    },
+    {
+      "pergunta": "Quais são as três camadas de um bom briefing de Cowork?",
+      "opcoes": [
+        "Objetivo, prazo e orçamento da tarefa",
+        "Tom de voz, público-alvo e canal de publicação",
+        "A entrega (artefato final), os insumos (de onde vem o contexto) e a nuance (o que só você sabe)",
+        "O modelo de IA, os conectores e o formato de saída"
+      ],
+      "correta": 2,
+      "explicacao": "O briefing de 3 camadas responde qual é o artefato final, de onde vem o contexto e o que só você sabe."
+    },
+    {
+      "pergunta": "Quando o rascunho do Cowork está cerca de 80% certo, qual é a abordagem recomendada na aula?",
+      "opcoes": [
+        "Recomeçar a tarefa do zero com um prompt mais preciso",
+        "Editar por instrução, já que o Cowork lembra da conversa e edita mais rápido do que gera do zero",
+        "Esperar ele terminar tudo antes de qualquer correção",
+        "Pedir várias regenerações até acertar por tentativa e erro"
+      ],
+      "correta": 1,
+      "explicacao": "Com o rascunho 80% pronto, edite por instrução, pois o Cowork lembra da conversa e edita mais rápido do que recomeçar."
+    }
+  ],
+  "claude-cowork/06-standing-context-global-instructions-and-projects": [
+    {
+      "pergunta": "No Cowork, qual a diferença entre instruções globais e projetos?",
+      "opcoes": [
+        "Instruções globais valem só pra chat; projetos valem só pra tarefas agendadas",
+        "Instruções globais são sobre VOCÊ e valem pra toda sessão; projetos isolam um fluxo de trabalho específico com memória própria",
+        "Instruções globais mudam a cada sessão; projetos são fixos e imutáveis",
+        "Não há diferença real: as duas guardam exatamente o mesmo tipo de informação"
+      ],
+      "correta": 1,
+      "explicacao": "Instrução global é a camada sobre quem você é e vale pra toda sessão; projeto é a camada sobre o trabalho, isolando um fluxo com memória própria."
+    },
+    {
+      "pergunta": "O que caracteriza a memória de projeto no Cowork?",
+      "opcoes": [
+        "É um arquivo que você escreve manualmente toda vez que abre o projeto",
+        "É o mesmo que as instruções globais, só renomeado dentro do projeto",
+        "É o que o Claude aprende automaticamente nas conversas dentro do projeto e acumula sozinho",
+        "É uma cópia das pastas do seu computador subida na mão"
+      ],
+      "correta": 2,
+      "explicacao": "A memória de projeto acumula automaticamente: o Claude aprende com as conversas dentro do projeto, sem você escrever essa parte."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é o melhor método pra construir uma boa instrução global?",
+      "opcoes": [
+        "Toda vez que você se pegar corrigindo a mesma coisa, transformar aquela correção em candidata a instrução global",
+        "Escrever a instrução global perfeita logo no dia 1, antes de usar o Cowork",
+        "Misturar dados do cliente atual junto com seu cargo e jargão num único bloco",
+        "Subir todos os arquivos do seu computador manualmente a cada nova sessão"
+      ],
+      "correta": 0,
+      "explicacao": "O método que funciona é iterativo: cada correção repetida que você faz vira candidata a virar instrução global."
+    }
+  ],
+  "claude-cowork/08-plugins-encode-your-team-s-expertise": [
+    {
+      "pergunta": "Segundo a aula, o que é um plugin?",
+      "opcoes": [
+        "Uma única skill documentada que ensina o Claude a fazer uma tarefa específica",
+        "Um pacote que reúne várias skills relacionadas, junto com os conectores e subagents de que precisam",
+        "Uma ponte de conexão para um sistema externo como Slack ou BigQuery",
+        "Um ajudante que uma skill dispara para resolver parte do trabalho em contexto próprio"
+      ],
+      "correta": 1,
+      "explicacao": "O plugin empacota várias skills mais os conectores e subagents de que elas dependem, organizado em torno de um trabalho real do time."
+    },
+    {
+      "pergunta": "Quando usar o formato de plugin de processo (fim-a-fim) em vez do formato de toolkit?",
+      "opcoes": [
+        "Quando as skills são independentes entre si e o time só as repete muito",
+        "Quando as etapas são sequenciais e dependentes, formando um mesmo fluxo",
+        "Quando o plugin depende de muitos conectores externos diferentes",
+        "Quando se quer empacotar por ferramenta, e não por workflow"
+      ],
+      "correta": 1,
+      "explicacao": "O formato de processo serve para etapas sequenciais e dependentes; o de toolkit é para tarefas soltas e independentes."
+    },
+    {
+      "pergunta": "Qual é a melhor forma de customizar um plugin para gerar mais alavancagem, segundo a aula?",
+      "opcoes": [
+        "Adicionar o máximo de conectores possível na instalação",
+        "Aumentar o número de skills para muito além de três a cinco",
+        "Alimentar o Claude com exemplos reais, como NDAs red-lined e relatórios antigos",
+        "Substituir os subagents por um único agente central"
+      ],
+      "correta": 2,
+      "explicacao": "Quanto mais perto do trabalho de verdade forem os exemplos reais fornecidos, mais alavancagem o plugin gera."
+    }
+  ],
+  "claude-cowork/09-claude-in-chrome": [
+    {
+      "pergunta": "Quando devo preferir um conector (MCP) em vez do Claude in Chrome?",
+      "opcoes": [
+        "Quando a ferramenta tem API, como Drive, Slack ou Gmail",
+        "Quando o sistema só existe atrás de um login interno",
+        "Quando preciso clicar em botões e preencher campos na tela",
+        "Quando o dashboard não tem nenhuma integração disponível"
+      ],
+      "correta": 0,
+      "explicacao": "Se a ferramenta tem MCP (Drive, Slack, Gmail), o conector é mais rápido e estável que clicar em tela; o Chrome é o plano B pra quem não tem conector."
+    },
+    {
+      "pergunta": "Como o Claude in Chrome lida com a autenticação dos sistemas que acessa?",
+      "opcoes": [
+        "Cria uma nova sessão e faz login automaticamente por você",
+        "Digita sua senha salva para entrar no sistema sozinho",
+        "Opera dentro da sessão que você já abriu autenticado, com os seus acessos",
+        "Pede credenciais novas a cada ação executada na web"
+      ],
+      "correta": 2,
+      "explicacao": "Ele não faz login nem digita senha: trabalha dentro da sessão que você já abriu, com exatamente os acessos que você tem."
+    },
+    {
+      "pergunta": "O que caracteriza o handoff entre Claude in Chrome e Cowork?",
+      "opcoes": [
+        "São duas conversas separadas que depois são mescladas manualmente",
+        "O Cowork coleta os dados na web e o Chrome só formata o documento",
+        "Cada ação sensível dispara um pedido de aprovação ao usuário",
+        "O Chrome coleta e age na web, e o Cowork cruza com outras fontes e produz o entregável final"
+      ],
+      "correta": 3,
+      "explicacao": "É uma divisão de trabalho numa só conversa: o Chrome executa na web e passa o resultado pro Cowork montar o documento cruzando com Drive, Slack etc."
+    }
+  ],
+  "claude-cowork/10-claude-for-microsoft-365": [
+    {
+      "pergunta": "Segundo a aula, qual e o ganho REAL do Claude dentro do Microsoft 365?",
+      "opcoes": [
+        "Ter um chatbot de IA disponivel em outra aba do navegador",
+        "Carregar o contexto de um app pro outro numa conversa so, acabando com o copia-e-cola",
+        "Substituir totalmente o Word, Excel e PowerPoint por uma ferramenta unica",
+        "Gerar texto no chat para voce colar manualmente no documento"
+      ],
+      "correta": 1,
+      "explicacao": "O valor nao e 'IA no Office', e levar o contexto de um app pro outro na mesma conversa, eliminando o copia-e-cola."
+    },
+    {
+      "pergunta": "O que diferencia a 'edicao in-place' do Claude no add-in M365?",
+      "opcoes": [
+        "Ele cria um arquivo novo a cada alteracao para preservar o original",
+        "Ele apenas sugere mudancas em um chat separado para voce aplicar",
+        "Ele altera o proprio arquivo aberto, escrevendo em celulas e gerando graficos nativos editaveis",
+        "Ele exporta o resultado em PDF para revisao posterior"
+      ],
+      "correta": 2,
+      "explicacao": "Edicao in-place significa que o Claude mexe no arquivo onde esta, com graficos nativos editaveis, em vez de gerar texto pra voce colar."
+    },
+    {
+      "pergunta": "Pela regra de bolso da aula, quando usar Cowork e quando usar o add-in M365?",
+      "opcoes": [
+        "Cowork para muitas fontes virando um entregavel; add-in M365 para lapidar um arquivo que ja esta na sua mao",
+        "Add-in M365 para montar do zero; Cowork apenas para revisar arquivos prontos",
+        "Cowork so para Excel e add-in M365 so para PowerPoint",
+        "Os dois fazem o mesmo, a escolha e indiferente"
+      ],
+      "correta": 0,
+      "explicacao": "Muitas fontes virando um entregavel = Cowork; um arquivo na sua mao sendo lapidado = add-in M365, com handoff limpo entre eles."
+    }
+  ],
+  "claude-cowork/11-best-practices-for-working-safely": [
+    {
+      "pergunta": "Segundo a aula, qual é a principal barreira física de segurança no Cowork?",
+      "opcoes": [
+        "O Modo Ask, que pede confirmação antes de cada ação",
+        "A pasta-fronteira (working folder) que você aponta pro Cowork",
+        "O backup na nuvem feito antes da tarefa",
+        "A revisão do painel de progresso durante a execução"
+      ],
+      "correta": 1,
+      "explicacao": "A pasta-fronteira define o que o Claude consegue ler, escrever e apagar; tudo fora dela não é alcançável."
+    },
+    {
+      "pergunta": "Por que verbos como 'limpar', 'remover' ou 'atualizar' são considerados arriscados num prompt?",
+      "opcoes": [
+        "Porque o Claude tende a ignorar esses comandos",
+        "Porque eles desativam o Modo Ask automaticamente",
+        "Porque têm mais de uma leitura possível e podem ser obedecidos da forma errada de modo irreversível",
+        "Porque exigem sempre uma pasta-fronteira maior"
+      ],
+      "correta": 2,
+      "explicacao": "O risco do verbo destrutivo não é desobediência, é o Claude obedecer a interpretação errada de forma irreversível."
+    },
+    {
+      "pergunta": "O que a aula descreve como 'scope creep' (desvio de escopo)?",
+      "opcoes": [
+        "Quando o agente começa a tocar em arquivos, sites ou contas que você não citou no pedido",
+        "Quando o Claude demora demais para concluir a tarefa",
+        "Quando o backup é feito no lugar errado",
+        "Quando o Modo Ask pede confirmações em excesso"
+      ],
+      "correta": 0,
+      "explicacao": "Scope creep é o agente atuar fora do que foi pedido, o sinal mais comum de parar a tarefa."
+    }
+  ],
+  "claude-cowork/12-validating-skills-for-plugins": [
+    {
+      "pergunta": "Ao avaliar uma skill, qual é a pergunta certa a se fazer sobre o resultado?",
+      "opcoes": [
+        "Ficou ok o suficiente para usar?",
+        "Ficou melhor do que o Claude já faria sozinho, sem a skill?",
+        "O resultado está perfeito e sem nenhuma falha?",
+        "A skill rodou sem dar erro técnico?"
+      ],
+      "correta": 1,
+      "explicacao": "O baseline (saída sem a skill) é o ponto de comparação: a skill só se justifica se bater o que o Claude já faria sozinho."
+    },
+    {
+      "pergunta": "Qual é a barra correta para liberar (shippar) uma skill pro time?",
+      "opcoes": [
+        "Os casos que importam passam melhor que o baseline E você nomeou os que ainda não cobre",
+        "O eval precisa estar perfeito, cobrindo todos os casos possíveis",
+        "Basta a skill funcionar no caminho feliz, sem se preocupar com edge cases",
+        "É preciso ter um script de teste automático com nota mínima aprovada"
+      ],
+      "correta": 0,
+      "explicacao": "A barra não é perfeição: é passar nos casos que importam de forma melhor que o baseline e ser honesto sobre o que ainda falta."
+    },
+    {
+      "pergunta": "Por que o dono de uma skill costuma ter um 'privilégio invisível' que o eval precisa fechar?",
+      "opcoes": [
+        "Ele tem acesso a ferramentas de teste que os outros não têm",
+        "Ele recebe a skill antes do time, com mais tempo para ajustar",
+        "Ele sabe contornar os defeitos da própria skill, mas quem recebe não sabe",
+        "Ele escreveu a documentação e por isso entende melhor o código"
+      ],
+      "correta": 2,
+      "explicacao": "O dono sabe driblar os defeitos da própria skill; o eval existe justamente para fechar esse gap com quem vai receber a skill."
+    }
+  ],
+  "claude-cowork/13-share-what-you-build-with-your-team": [
+    {
+      "pergunta": "Segundo a aula, qual é a unidade de distribuição usada para compartilhar trabalho com o time?",
+      "opcoes": [
+        "Skills soltas enviadas individualmente para cada colega",
+        "Um plugin que empacota uma ou mais skills num bloco instalável",
+        "Um repositório GitHub clonado manualmente por cada pessoa",
+        "Um arquivo de configuração exportado do laptop"
+      ],
+      "correta": 1,
+      "explicacao": "A aula diz que você não compartilha skills soltas: empacota num plugin e distribui o plugin."
+    },
+    {
+      "pergunta": "Por que a aula chama o compartilhamento de 'hand-off de distribuição'?",
+      "opcoes": [
+        "Porque você publica sozinho direto no marketplace Enterprise",
+        "Porque o processo é puramente técnico e automatizado",
+        "Porque você entrega o plugin pronto para quem opera o marketplace decidir como ele aterrissa",
+        "Porque o plugin precisa ser reescrito antes de cada entrega"
+      ],
+      "correta": 2,
+      "explicacao": "Num ambiente Enterprise você passa o bastão para quem tem a chave do marketplace, em vez de publicar sozinho."
+    },
+    {
+      "pergunta": "Qual é o papel do 'owner' de um plugin segundo a aula?",
+      "opcoes": [
+        "A pessoa que revisa mudanças, roda os evals após edições e decide quando atualizar ou aposentar o plugin",
+        "O admin que gerencia o marketplace privado da organização",
+        "O colega que instala o plugin pela primeira vez",
+        "O desenvolvedor original que criou a skill no laptop"
+      ],
+      "correta": 0,
+      "explicacao": "Plugin compartilhado sem dono apodrece em silêncio; o owner é o responsável por revisar, rodar evals e decidir atualizar ou aposentar."
+    }
+  ],
+  "claude-cowork/14-wrap-up-and-next-steps": [
+    {
+      "pergunta": "Segundo o fechamento, o que de fato muda a sua operação depois do curso?",
+      "opcoes": [
+        "Ter assistido a todas as aulas com atenção",
+        "Delegar uma tarefa real ainda esta semana",
+        "Anotar cinco ideias de uso para o futuro",
+        "Conhecer todos os plugins disponíveis"
+      ],
+      "correta": 1,
+      "explicacao": "O takeaway é claro: curso assistido não muda nada, quem muda a operação é a tarefa delegada de verdade."
+    },
+    {
+      "pergunta": "Qual é a ideia central que define o Cowork ao longo de todo o curso?",
+      "opcoes": [
+        "É um chat onde você conversa com um assistente",
+        "É uma ferramenta de exportar e importar arquivos",
+        "É delegar uma tarefa de ponta a ponta e receber um resultado pronto",
+        "É um banco de ideias para usar depois"
+      ],
+      "correta": 2,
+      "explicacao": "O Cowork é delegação, não chat: você entrega a tarefa inteira e recebe um resultado pronto pra usar."
+    },
+    {
+      "pergunta": "O que a aula define como 'memória de trabalho' do Cowork?",
+      "opcoes": [
+        "O combo de instruções globais mais projetos que carrega contexto sobre você e o time",
+        "A superfície onde o Cowork roda, como navegador ou Office",
+        "Uma tarefa agendada que dispara sozinha no horário certo",
+        "Um workflow validado e compartilhado com o time"
+      ],
+      "correta": 0,
+      "explicacao": "Memória de trabalho é o combo de instruções globais + projetos, que evita o Cowork acertar só no genérico e errar no específico."
+    }
+  ],
+  "ai-fluency/01-introduction-to-ai-fluency": [
+    {
+      "pergunta": "Segundo a aula, o que melhor define fluência em IA?",
+      "opcoes": [
+        "Decorar uma lista de prompts mágicos que sempre funcionam",
+        "Saber colaborar com a IA de forma eficaz, eficiente, ética e segura",
+        "Conhecer os detalhes técnicos de como um modelo de linguagem é treinado",
+        "Usar sempre o modelo mais novo e potente disponível no mês"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define fluência como habilidade de colaboração eficaz, eficiente, ética e segura, não como um truque de prompt."
+    },
+    {
+      "pergunta": "Quais são as quatro competências do framework dos 4Ds?",
+      "opcoes": [
+        "Delegation, Description, Decision e Deployment",
+        "Design, Description, Discernment e Diligence",
+        "Delegation, Description, Discernment e Diligence",
+        "Delegation, Detection, Discernment e Documentation"
+      ],
+      "correta": 2,
+      "explicacao": "Os 4Ds são Delegation (delegar), Description (descrever), Discernment (discernir) e Diligence (ser diligente)."
+    },
+    {
+      "pergunta": "Por que a aula afirma que o framework dos 4Ds é uma habilidade durável?",
+      "opcoes": [
+        "Porque ele sobrevive à troca de modelo, enquanto prompts específicos envelhecem em meses",
+        "Porque ele funciona apenas com o Claude, que é estável ao longo do tempo",
+        "Porque exige decorar prompts que nunca mudam",
+        "Porque substitui a necessidade de verificar as respostas da IA"
+      ],
+      "correta": 0,
+      "explicacao": "Saber delegar, descrever, discernir e ser diligente continua valendo mesmo quando o modelo muda, ao contrário de prompts específicos."
+    }
+  ],
+  "ai-fluency/02-why-do-we-need-ai-fluency": [
+    {
+      "pergunta": "Segundo a aula, o que é fluência em IA?",
+      "opcoes": [
+        "Decorar uma coleção de prompts mágicos que sempre funcionam",
+        "Uma competência operacional de colaborar com a IA gerando resultado real, sabendo o que delegar e quando desconfiar",
+        "Conhecer todos os detalhes técnicos de como os modelos de IA funcionam por dentro",
+        "Conseguir gerar textos bem escritos e bonitos rapidamente"
+      ],
+      "correta": 1,
+      "explicacao": "Fluência é uma competência operacional, não um truque: saber o que delegar, como descrever, quando desconfiar e como conferir."
+    },
+    {
+      "pergunta": "Qual modo de uso descreve um vai-e-volta em que você e a IA pensam juntos e o resultado é melhor do que cada um faria sozinho?",
+      "opcoes": [
+        "Aumento (Augmentation)",
+        "Automação",
+        "Agência (Agency)",
+        "Delegação"
+      ],
+      "correta": 0,
+      "explicacao": "No aumento você e a IA pensam juntos, ela puxa ângulos que você não viu e você corrige o rumo."
+    },
+    {
+      "pergunta": "Quais são os quatro filtros para avaliar qualquer uso de IA que se sustenta?",
+      "opcoes": [
+        "Rápido, barato, criativo e escalável",
+        "Claro, completo, correto e conciso",
+        "Automação, aumento, agência e autonomia",
+        "Efetivo, eficiente, ético e seguro"
+      ],
+      "correta": 3,
+      "explicacao": "Os quatro filtros são efetivo, eficiente, ético e seguro; se um falha, não foi fluência, foi sorte ou prejuízo."
+    }
+  ],
+  "ai-fluency/03-the-4d-framework": [
+    {
+      "pergunta": "Segundo a aula, quando a IA te decepciona, em quais dos 4 Ds está o furo em 90% das vezes?",
+      "opcoes": [
+        "Discernimento ou Diligência",
+        "Delegação ou Descrição",
+        "Augmentação ou Agência",
+        "Automação ou Discernimento"
+      ],
+      "correta": 1,
+      "explicacao": "A aula diz que 90% das vezes o problema está em Delegação (pediu o que não devia) ou Descrição (briefou mal)."
+    },
+    {
+      "pergunta": "O que caracteriza a competência de Discernimento (Discernment)?",
+      "opcoes": [
+        "Decidir antes do chat o que vale automatizar e o que fazer na mão",
+        "Comunicar contexto, objetivo e formato de saída com clareza",
+        "Olhar o que a IA produziu com ceticismo, avaliando produto, processo e comportamento",
+        "Assumir responsabilidade e transparência sobre o que sai com seu nome"
+      ],
+      "correta": 2,
+      "explicacao": "Discernimento é avaliar o resultado com ceticismo profissional nos três eixos: produto, processo e comportamento."
+    },
+    {
+      "pergunta": "Na forma de trabalho chamada Agência, quais Ds se tornam os mais pesados?",
+      "opcoes": [
+        "Delegação e Diligência",
+        "Descrição e Discernimento",
+        "Discernimento e Diligência",
+        "Delegação e Descrição"
+      ],
+      "correta": 0,
+      "explicacao": "Na Agência a IA age sozinha em seu nome, então Delegação (setup) e Diligência (verificação) ganham mais peso."
+    }
+  ],
+  "ai-fluency/04-generative-ai-fundamentals": [
+    {
+      "pergunta": "Qual a diferença prática entre um modelo de classificação e a IA generativa, segundo a aula?",
+      "opcoes": [
+        "A classificação cria conteúdo novo e a generativa apenas separa dados existentes",
+        "A classificação rotula ou separa dados (ex: spam ou não), enquanto a generativa produz conteúdo inédito (ex: escreve o e-mail)",
+        "Ambas produzem conteúdo inédito, mudando só a velocidade de resposta",
+        "A generativa só funciona com texto, e a classificação só com imagens"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define que classificação rotula dados existentes ('isso é spam ou não') e a generativa cria conteúdo inédito (escreve o e-mail)."
+    },
+    {
+      "pergunta": "De acordo com a aula, o que de fato o Claude faz ao gerar uma resposta?",
+      "opcoes": [
+        "Busca a resposta correta num banco de dados de fatos verificados",
+        "Prevê o próximo pedaço de texto provável, uma previsão encadeada de cada vez",
+        "Consulta sempre a internet em tempo real antes de responder",
+        "Recupera de memória permanente tudo que já foi conversado"
+      ],
+      "correta": 1,
+      "explicacao": "A aula reforça que o Claude não busca respostas: ele prevê texto provável em sequências de previsões encadeadas, uma de cada vez."
+    },
+    {
+      "pergunta": "Como a aula descreve a janela de contexto do Claude?",
+      "opcoes": [
+        "Uma memória permanente que guarda todas as conversas para sempre",
+        "O corte de conhecimento que limita até que data o modelo conhece fatos",
+        "O ajuste com feedback humano que torna o modelo útil e seguro",
+        "A quantidade de texto que o modelo enxerga de uma vez; grande, mas não infinita, e o que sai dela é esquecido"
+      ],
+      "correta": 3,
+      "explicacao": "A aula define a janela de contexto como o texto visível de uma vez (até 1 milhão de tokens em alguns modelos), que não é infinita nem memória permanente."
+    }
+  ],
+  "ai-fluency/05-capabilities-limitations": [
+    {
+      "pergunta": "Por que o modelo não consegue responder sobre uma notícia da semana ou o preço de algo hoje, sem ajuda externa?",
+      "opcoes": [
+        "Porque a janela de contexto é pequena demais para essas perguntas",
+        "Porque ele só conhece o mundo até a data de corte do treinamento (knowledge cutoff)",
+        "Porque ele se recusa a responder perguntas sobre fatos atuais por segurança",
+        "Porque alucinação só acontece em perguntas sobre o futuro"
+      ],
+      "correta": 1,
+      "explicacao": "O knowledge cutoff é a data em que o modelo parou de treinar, então sem uma ferramenta de busca ele não sabe nada posterior a ela."
+    },
+    {
+      "pergunta": "Segundo a aula, qual a melhor forma de lidar com um cálculo exato ou lógica pesada?",
+      "opcoes": [
+        "Pedir para o Claude rodar código em vez de responder de cabeça",
+        "Confiar na resposta direta, pois matemática é o ponto forte do modelo",
+        "Aumentar a janela de contexto para caber mais números",
+        "Repetir a pergunta várias vezes até as respostas baterem"
+      ],
+      "correta": 0,
+      "explicacao": "Contagem e matemática exata são o calcanhar do modelo, então delegar a parte exata a uma ferramenta (código) aumenta muito a precisão."
+    },
+    {
+      "pergunta": "O que é uma alucinação, conforme descrito na aula?",
+      "opcoes": [
+        "Um erro raro de digitação que o modelo corrige sozinho",
+        "Uma falha que só ocorre quando a janela de contexto enche",
+        "Conteúdo plausível mas falso gerado com total confiança, como uma citação inexistente",
+        "Uma limitação que desaparece ao recomeçar o chat"
+      ],
+      "correta": 2,
+      "explicacao": "Alucinação é gerar algo plausível porém falso (citações, funções de API ou números inventados) com confiança, e some quando você dá a fonte."
+    }
+  ],
+  "ai-fluency/06-a-closer-look-at-delegation": [
+    {
+      "pergunta": "Segundo a aula, o que é delegação na prática?",
+      "opcoes": [
+        "Automatizar o máximo de tarefas possível, deixando a IA tocar tudo sozinha",
+        "A decisão consciente sobre o que você faz, o que faz junto com a IA e o que a IA faz sozinha",
+        "Escolher sempre a ferramenta de IA mais nova e popular do mercado",
+        "Escrever prompts longos e detalhados para a IA não errar"
+      ],
+      "correta": 1,
+      "explicacao": "Delegar é distribuir o trabalho de forma deliberada entre você, a colaboração e a IA, não automatizar tudo."
+    },
+    {
+      "pergunta": "Por que a 'consciência do problema' é importante antes de chamar a IA?",
+      "opcoes": [
+        "Porque quanto mais cedo você abre o chat, mais rápido a IA aprende seu estilo",
+        "Porque é ela que define qual modo de colaboração a IA vai usar automaticamente",
+        "Porque se você não sabe descrever um resultado bom, a IA também não vai saber entregar",
+        "Porque ela substitui a necessidade de conhecer as ferramentas de IA"
+      ],
+      "correta": 2,
+      "explicacao": "Sem saber descrever onde quer chegar e o que é um resultado bom, a IA não tem como entregar o resultado certo."
+    },
+    {
+      "pergunta": "De acordo com a aula, o que deve ficar com você e o que pode ir para a IA na distribuição de tarefas?",
+      "opcoes": [
+        "Julgamento, contexto de negócio e responsabilidade ficam com você; volume, rascunho e reformatação vão pra IA",
+        "Tudo que é criativo fica com você; tudo que é técnico vai pra IA",
+        "As decisões de baixo risco ficam com você; as de alto risco vão pra IA",
+        "O planejamento vai pra IA; a execução fica com você"
+      ],
+      "correta": 0,
+      "explicacao": "Você segura julgamento, contexto e responsabilidade, enquanto volume, rascunho, varredura e reformatação vão pra IA."
+    }
+  ],
+  "ai-fluency/07-project-planning-and-delegation": [
+    {
+      "pergunta": "Segundo a aula, por onde um bom projeto com IA deve começar?",
+      "opcoes": [
+        "Pedindo ao Claude que execute a primeira tarefa o quanto antes",
+        "Pela visão do resultado e pela decisão consciente de quem faz o quê",
+        "Por uma lista de ferramentas e prompts prontos pra colar",
+        "Delegando tudo para a IA e revisando só no final"
+      ],
+      "correta": 1,
+      "explicacao": "A aula afirma que projeto bom não começa pedindo execução, mas pela visão e pela decisão consciente de quem faz cada parte."
+    },
+    {
+      "pergunta": "O que a aula chama de 'visão do resultado'?",
+      "opcoes": [
+        "Quebrar o projeto em tarefas menores e executáveis",
+        "Salvar o plano num lugar fixo pra revisitar depois",
+        "Definir o que é 'pronto e bom' e por que o projeto importa antes de quebrar em tarefas",
+        "Deixar o Claude escolher sozinho o alvo do projeto"
+      ],
+      "correta": 2,
+      "explicacao": "Visão do resultado é saber o que é 'pronto e bom' e por que importa; sem isso o Claude otimiza pro alvo errado."
+    },
+    {
+      "pergunta": "Na análise de delegação por tarefa, qual é o 'default' recomendado pela aula?",
+      "opcoes": [
+        "Decisão consciente, perguntando sempre onde VOCÊ é insubstituível",
+        "A IA faz tudo, e o humano só revisa",
+        "O humano faz tudo o que exige qualquer julgamento",
+        "Sempre colaborar em todas as tarefas, sem exceção"
+      ],
+      "correta": 0,
+      "explicacao": "A aula diz que o default não é 'IA faz tudo', e sim decisão consciente, perguntando onde o humano é insubstituível."
+    }
+  ],
+  "ai-fluency/08-a-closer-look-at-description": [
+    {
+      "pergunta": "Na aula, qual é a definição de Description, a 2ª das 4D?",
+      "opcoes": [
+        "A competência de articular sua intenção pra IA, montando o briefing que transforma um pedido vago em resultado utilizável",
+        "A habilidade de delegar tarefas inteiras para a IA sem supervisão",
+        "A capacidade de julgar se a resposta da IA está correta ou não",
+        "A prática de verificar e revisar tudo que a IA produz antes de usar"
+      ],
+      "correta": 0,
+      "explicacao": "Description é a competência de comunicar com clareza sua intenção, montando o briefing que vira um resultado utilizável."
+    },
+    {
+      "pergunta": "Segundo a aula, qual tipo de descrição trata do COMO a IA deve chegar ao resultado (passos, ordem e método)?",
+      "opcoes": [
+        "Product Description",
+        "Performance Description",
+        "Process Description",
+        "Partner Description"
+      ],
+      "correta": 2,
+      "explicacao": "Process Description descreve o caminho — os passos, a ordem e o método — como pedir 3 ângulos antes de escrever."
+    },
+    {
+      "pergunta": "Por que a aula diz que a IA é um 'parceiro interativo, não um banco de dados'?",
+      "opcoes": [
+        "Porque ela armazena todas as conversas anteriores num banco para consultar depois",
+        "Porque ela infere a partir do que você deu, e preenche o que você não disse com um palpite estatístico genérico",
+        "Porque ela sempre adivinha corretamente o contexto que faltou no seu pedido",
+        "Porque ela busca uma resposta pronta e exata para cada pergunta feita"
+      ],
+      "correta": 1,
+      "explicacao": "A IA não consulta resposta pronta nem adivinha contexto: ela infere do que você deu e usa um palpite genérico como default para o resto."
+    }
+  ],
+  "ai-fluency/09-effective-prompting-techniques": [
+    {
+      "pergunta": "Segundo a aula, por que mostrar um ou dois exemplos (few-shot) costuma funcionar melhor do que descrever o formato em vários parágrafos?",
+      "opcoes": [
+        "Porque o modelo copia o padrão do exemplo melhor do que segue uma descrição abstrata",
+        "Porque exemplos consomem menos tokens do que descrições longas",
+        "Porque o modelo ignora qualquer instrução que não venha em forma de exemplo",
+        "Porque exemplos ativam um modo de raciocínio passo a passo no modelo"
+      ],
+      "correta": 0,
+      "explicacao": "A aula afirma que o modelo copia o padrão do exemplo melhor do que segue uma descrição abstrata."
+    },
+    {
+      "pergunta": "Quando a resposta do Claude vem errada, qual é, segundo a aula, a causa quase sempre presente?",
+      "opcoes": [
+        "O modelo está sobrecarregado e precisa de um prompt mais curto",
+        "Falta de instrução, não uma limitação do modelo",
+        "O tom escolhido foi inadequado para a tarefa",
+        "Ausência de exemplos few-shot no prompt"
+      ],
+      "correta": 1,
+      "explicacao": "A aula diz que o problema quase sempre é instrução faltando, não o modelo: pergunte o que você sabe que ele não sabe."
+    },
+    {
+      "pergunta": "O que a aula descreve como a \"arma secreta\" para melhorar um prompt?",
+      "opcoes": [
+        "Adicionar sempre uma restrição de formato JSON",
+        "Definir um papel e um tom logo na primeira linha",
+        "Pedir pro próprio Claude apontar onde o prompt está ambíguo",
+        "Repetir o pedido várias vezes até a resposta convergir"
+      ],
+      "correta": 2,
+      "explicacao": "A aula chama de arma secreta pedir ao próprio Claude que aponte os buracos e ambiguidades do seu prompt."
+    }
+  ],
+  "ai-fluency/10-a-closer-look-at-discernment": [
+    {
+      "pergunta": "Qual das três camadas de discernimento avalia o caminho e o raciocínio que a IA usou para chegar à resposta?",
+      "opcoes": [
+        "Discernimento de Produto",
+        "Discernimento de Processo",
+        "Discernimento de Performance",
+        "Discernimento de Descrição"
+      ],
+      "correta": 1,
+      "explicacao": "O Discernimento de Processo avalia o caminho percorrido, checando se o raciocínio fecha ou se houve premissa errada ou etapa pulada."
+    },
+    {
+      "pergunta": "Por que o seu conhecimento da área (vantagem de domínio) importa tanto para o discernimento?",
+      "opcoes": [
+        "Porque ele faz a IA responder mais rápido",
+        "Porque dispensa a necessidade de checar a saída da IA",
+        "Porque é o que te permite farejar o erro; fora do seu domínio você não sabe se a resposta linda está certa",
+        "Porque garante que a IA nunca alucine sobre o assunto"
+      ],
+      "correta": 2,
+      "explicacao": "Num assunto que você domina você percebe o erro na hora; fora dele, não há como saber se a resposta confiante está correta."
+    },
+    {
+      "pergunta": "Segundo a aula, como o discernimento deve ser usado dentro do loop com a Descrição?",
+      "opcoes": [
+        "Como combustível de feedback: apontar o que está errado e por quê, e mandar a IA refazer",
+        "Como julgamento mudo, apenas aprovando ou rejeitando a entrega",
+        "Como forma de aceitar a primeira resposta para economizar tempo",
+        "Como substituto da descrição, eliminando a necessidade de explicar o pedido"
+      ],
+      "correta": 0,
+      "explicacao": "Discernimento sem feedback é só reclamação; é o loop de apontar a falha e pedir refação que aperta o resultado."
+    }
+  ],
+  "ai-fluency/11-the-description-discernment-loop": [
+    {
+      "pergunta": "Segundo a aula, onde acontece o trabalho real de colaborar com a IA?",
+      "opcoes": [
+        "No prompt inicial perfeito, escrito antes de começar",
+        "No ciclo de descrever, discernir, refinar e repetir até ficar bom",
+        "Na escolha do modelo mais avançado disponível",
+        "Em descartar o resultado e recomeçar do zero a cada erro"
+      ],
+      "correta": 1,
+      "explicacao": "A aula define o loop Descrição-Discernimento como o ciclo iterativo onde o trabalho real acontece, não no primeiro prompt."
+    },
+    {
+      "pergunta": "Quais são as três camadas usadas tanto na Descrição quanto no Discernimento?",
+      "opcoes": [
+        "Prompt, Contexto e Memória",
+        "Entrada, Processamento e Saída",
+        "Produto, Processo e Performance",
+        "Tom, Formato e Tamanho"
+      ],
+      "correta": 2,
+      "explicacao": "As três camadas são Produto (o resultado), Processo (como o Claude pensa) e Performance (como ele se comporta com você)."
+    },
+    {
+      "pergunta": "O que a aula recomenda quando o resultado não converge em 2-3 voltas?",
+      "opcoes": [
+        "Trocar de estratégia, pedindo ao Claude explicar o raciocínio (Processo) antes de produzir",
+        "Insistir no mesmo prompt mais algumas vezes até dar certo",
+        "Trocar imediatamente por um modelo melhor",
+        "Aceitar o melhor resultado obtido até ali e seguir em frente"
+      ],
+      "correta": 0,
+      "explicacao": "A aula sugere mudar a estratégia e pedir o raciocínio antes da saída, pois o erro costuma estar no caminho, não na saída."
+    }
+  ],
+  "ai-fluency/12-a-closer-look-at-diligence": [
+    {
+      "pergunta": "O que diferencia a competência Diligence das outras três (Delegation, Description e Discernment) no framework 4D?",
+      "opcoes": [
+        "Ela trata de responsabilidade, não de fazer a IA produzir com mais eficiência",
+        "Ela é a única que exige conhecimento técnico de programação",
+        "Ela cuida de escolher o melhor modelo de IA para cada tarefa de escrita",
+        "Ela substitui as outras três quando o trabalho é acadêmico"
+      ],
+      "correta": 0,
+      "explicacao": "As outras três fazem a IA produzir melhor, enquanto Diligence faz você produzir com responsabilidade."
+    },
+    {
+      "pergunta": "Jogar dados de cliente num chatbot aleatório sem ler a política de retenção é uma falha de qual tipo de diligência?",
+      "opcoes": [
+        "Transparency Diligence",
+        "Deployment Diligence",
+        "Creation Diligence",
+        "Declaração de diligência"
+      ],
+      "correta": 2,
+      "explicacao": "Creation Diligence é o cuidado ao escolher e operar a IA, incluindo quais dados e sob quais termos."
+    },
+    {
+      "pergunta": "Segundo a aula, qual é a postura correta em relação à Transparency Diligence?",
+      "opcoes": [
+        "Confessar publicamente o uso de IA em absolutamente todo trabalho",
+        "Nunca revelar o uso de IA para não perder credibilidade",
+        "Calibrar a divulgação ao contexto e à expectativa de quem recebe o trabalho",
+        "Divulgar o uso apenas quando o cliente perguntar diretamente"
+      ],
+      "correta": 2,
+      "explicacao": "Transparency Diligence não é confissão pública obrigatória, mas calibrar a divulgação ao contexto e ao público."
+    }
+  ],
+  "ai-fluency/13-conclusion": [
+    {
+      "pergunta": "Segundo a aula, como os 4D (Delegação, Descrição, Discernimento, Diligência) realmente funcionam no trabalho real?",
+      "opcoes": [
+        "Como uma lista de etapas executada uma vez por projeto, em ordem fixa",
+        "Como um ciclo que gira em loop a cada interação, sem ordem rígida",
+        "Como um diploma que comprova fluência ao final do curso",
+        "Como quatro fases separadas que nunca se repetem"
+      ],
+      "correta": 1,
+      "explicacao": "A aula diz que os 4D giram em loop a cada interação e que tratá-los como lista de etapas perde o ponto."
+    },
+    {
+      "pergunta": "O que a aula afirma sobre como a fluência em IA é construída?",
+      "opcoes": [
+        "Assistindo às aulas do curso com atenção até o final",
+        "Lendo um bom livro de gramática sobre IA",
+        "Repetindo conversas reais resolvendo problemas de verdade com o Claude",
+        "Decorando a definição de cada um dos quatro D"
+      ],
+      "correta": 2,
+      "explicacao": "A aula compara fluência a falar inglês: ela aparece depois de N conversas reais resolvendo problemas, não assistindo aula."
+    },
+    {
+      "pergunta": "No modo de trabalho Agência (mais autonomia, tool use / MCP), quais dos 4D ganham mais peso?",
+      "opcoes": [
+        "Discernimento e Diligência, porque você revisa menos de perto",
+        "Delegação e Descrição, porque você precisa explicar mais",
+        "Nenhum, porque os 4D não se aplicam à Agência",
+        "Apenas Descrição, porque o prompt fica mais longo"
+      ],
+      "correta": 0,
+      "explicacao": "A aula afirma que em Agência você revisa menos de perto, então Discernimento e Diligência pesam mais."
+    }
+  ],
+  "ai-fluency/15-additional-activities": [
+    {
+      "pergunta": "Segundo a aula, qual deve ser o objetivo ao usar jogos como charadas e vinte perguntas com o Claude?",
+      "opcoes": [
+        "Vencer o jogo o mais rápido possível para medir desempenho",
+        "Observar como o Claude raciocina e praticar guiá-lo sem entregar a resposta",
+        "Memorizar respostas prontas para reusar no trabalho",
+        "Substituir as tarefas reais de trabalho por exercícios artificiais"
+      ],
+      "correta": 1,
+      "explicacao": "A aula afirma que nos jogos o objetivo NÃO é vencer, e sim observar como o Claude raciocina e praticar guiá-lo."
+    },
+    {
+      "pergunta": "Quais são os três tipos de Discernment apresentados na aula?",
+      "opcoes": [
+        "Delegation, Description e Diligence",
+        "Clareza, Precisão e Avaliação",
+        "Product, Process e Performance",
+        "Plano, Biblioteca e Treino"
+      ],
+      "correta": 2,
+      "explicacao": "A aula define os três tipos de Discernment como Product (resultado), Process (caminho) e Performance (comunicação/colaboração)."
+    },
+    {
+      "pergunta": "Qual é a recomendação da aula sobre por onde começar a treinar as 4 competências?",
+      "opcoes": [
+        "Escolher 1 competência e forçá-la por duas semanas antes de trocar",
+        "Treinar as 4 competências simultaneamente para ganhar tempo",
+        "Treinar apenas Discernment, pois as outras vêm sozinhas",
+        "Esperar surgir uma tarefa que exija todas de uma vez"
+      ],
+      "correta": 0,
+      "explicacao": "A dica orienta não treinar as 4 de uma vez: escolha 1, force por duas semanas e depois troque, pois foco gera progresso visível."
+    }
+  ]
+}

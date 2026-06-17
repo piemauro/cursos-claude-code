@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Clock, Lightbulb, AlertTriangle, ListChecks, BookOpen, Quote, ExternalLink } from 'lucide-react'
-import { getCurso, getAula, getVizinhas, OFICIAL } from '../lib/cursos.js'
+import { ArrowLeft, ArrowRight, Clock, Lightbulb, AlertTriangle, ListChecks, BookOpen, Quote, ExternalLink, Layers, HelpCircle } from 'lucide-react'
+import { getCurso, getAula, getVizinhas, getQuiz, OFICIAL } from '../lib/cursos.js'
 import { Reveal, PageWrap, Badge, CodeBlock, accentOf } from '../components/Bits.jsx'
+import Flashcards from '../components/Flashcards.jsx'
+import Quiz from '../components/Quiz.jsx'
 
 function Section({ icon: Icon, title, children, tone = 'brand' }) {
   const c = { brand: 'text-brand', amber: 'text-amber', fog: 'text-fog' }[tone]
@@ -18,6 +20,7 @@ export default function Aula() {
   const curso = getCurso(cursoSlug)
   const a = getAula(cursoSlug, aulaSlug)
   const { anterior, proxima, indice, total } = getVizinhas(cursoSlug, aulaSlug)
+  const quiz = getQuiz(cursoSlug, aulaSlug)
   if (!curso || !a) return <PageWrap><div className="mx-auto max-w-3xl px-5 py-24 text-center text-fog">Aula não encontrada. <Link to="/" className="text-brand">Início</Link></div></PageWrap>
   const ac = accentOf(curso.accent)
   const pct = total ? Math.round(((indice + 1) / total) * 100) : 0
@@ -100,6 +103,20 @@ export default function Aula() {
                 <li key={i} className="flex gap-3"><AlertTriangle size={15} className="text-amber shrink-0 mt-1" /><span className="text-fog leading-relaxed">{e}</span></li>
               ))}
             </ul>
+          </Section>
+        )}
+
+        {a.conceitos?.length > 0 && (
+          <Section icon={Layers} title="Flashcards">
+            <p className="text-sm text-fog -mt-1 mb-1">Revise os conceitos. Toque pra virar a carta.</p>
+            <Flashcards conceitos={a.conceitos} />
+          </Section>
+        )}
+
+        {quiz?.length > 0 && (
+          <Section icon={HelpCircle} title="Valide o que você aprendeu">
+            <p className="text-sm text-fog -mt-1 mb-3">Mini-quiz rápido — sem consultar. Veja se fixou.</p>
+            <Quiz quiz={quiz} />
           </Section>
         )}
 
