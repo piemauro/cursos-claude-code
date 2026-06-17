@@ -1,0 +1,1266 @@
+[
+  {
+    "slug": "boas-vindas",
+    "titulo": "Boas-vindas: por que Claude Code",
+    "modulo": "Fundamentos",
+    "duracao_leitura": "4 min",
+    "resumo": "Claude Code é o agente de codificação da Anthropic que roda direto no seu terminal e age no seu projeto: lê arquivos, edita código, roda comandos e abre PRs. Esta aula explica o que ele é de verdade e por que vale a pena tirar do hype e botar pra operar.",
+    "conceitos": [
+      {
+        "termo": "Claude Code",
+        "definicao": "CLI oficial da Anthropic que coloca o Claude dentro do seu terminal como um agente: ele lê e edita arquivos, executa comandos, roda testes e faz commits — não é um chat que cospe código pra você colar à mão."
+      },
+      {
+        "termo": "Agente vs. autocomplete",
+        "definicao": "Diferente de um autocomplete de IDE que sugere a próxima linha, o Claude Code recebe uma tarefa inteira (ex: 'arruma esse bug') e executa os passos sozinho — investiga, altera vários arquivos, testa e te mostra o resultado."
+      },
+      {
+        "termo": "Terminal como interface",
+        "definicao": "Rodar no terminal significa que ele vive onde seu trabalho já acontece: git, npm, docker, ssh. Sem trocar de janela, sem lock-in de editor — funciona no VS Code, no Vim ou num servidor remoto via SSH."
+      },
+      {
+        "termo": "CLAUDE.md",
+        "definicao": "Arquivo de memória do projeto. Você escreve nele as regras, comandos e convenções do seu código, e o Claude Code lê automaticamente em toda sessão. É o que faz ele parar de chutar e começar a seguir o padrão da casa."
+      },
+      {
+        "termo": "Permissão e controle",
+        "definicao": "Por padrão ele pede aprovação antes de editar arquivos ou rodar comandos. Você decide o nível de autonomia — do 'pergunta tudo' ao modo mais solto — então nada acontece nas suas costas."
+      }
+    ],
+    "dicas": [
+      "Antes de qualquer prompt fancy, rode `/init` na raiz do projeto: ele gera um CLAUDE.md inicial mapeando sua stack e seus comandos. É o maior salto de qualidade com o menor esforço.",
+      "Comece com tarefas chatas e de baixo risco (escrever testes, refatorar um util, atualizar README). Você aprende o ritmo da ferramenta sem arriscar o que importa.",
+      "Pense em escopo pequeno por sessão. 'Implementa o login inteiro' rende menos que três pedidos encadeados e revisados — você no controle do volante."
+    ],
+    "exemplo": {
+      "contexto": "Você clonou um projeto Node que nunca viu e precisa corrigir um endpoint que retorna 500. Em vez de abrir 15 arquivos no escuro, você deixa o Claude Code investigar e propor a correção.",
+      "explicacao": "Repare que você não colou código nem explicou a arquitetura. O `/init` deu contexto do projeto via CLAUDE.md, e o agente fez o ciclo completo: leu, achou a causa, editou e validou — pedindo sua aprovação antes de mexer nos arquivos. Seu papel virou revisor, não datilógrafo.",
+      "comandos": [
+        "claude",
+        "/init",
+        "> o endpoint POST /api/pedidos tá retornando 500 quando o carrinho vem vazio. investiga e corrige",
+        "> roda os testes pra confirmar que não quebrou nada"
+      ]
+    },
+    "erros_comuns": [
+      "Tratar como ChatGPT no navegador: pedir um trecho de código pra colar à mão. O ponto do Claude Code é justamente ele agir no projeto — deixe ele editar e rodar.",
+      "Pular o CLAUDE.md e depois reclamar que ele não segue seu padrão. Sem memória de projeto, todo agente chuta. Cinco minutos escrevendo as regras economizam horas de correção.",
+      "Dar tarefa gigante e vaga e esperar mágica. Quanto mais difuso o pedido, mais ele se perde. Escopo claro e curto vence.",
+      "Aprovar tudo no automático sem ler o diff. A ferramenta é boa, mas você é o engenheiro responsável — revise antes de aceitar."
+    ],
+    "takeaway": "Claude Code não é mais um chat de IA: é um agente que opera no seu terminal e mexe no seu código de verdade — e quem comanda continua sendo você.",
+    "passos": [
+      "Instale e abra o Claude Code na raiz do seu projeto rodando `claude` no terminal.",
+      "Rode `/init` para gerar o CLAUDE.md e dar contexto da stack e dos comandos ao agente.",
+      "Faça um primeiro pedido pequeno e de baixo risco (ex: escrever um teste) para sentir o fluxo de aprovação.",
+      "Leia o diff que ele propõe, aprove ou ajuste, e deixe ele rodar a validação.",
+      "Edite o CLAUDE.md com qualquer regra que ele tenha furado — assim a próxima sessão já começa melhor."
+    ]
+  },
+  {
+    "slug": "assistente-de-codigo",
+    "titulo": "O que é um assistente de código",
+    "modulo": "Fundamentos",
+    "resumo": "Um assistente de código não \"escreve código\" por mágica: é um modelo de linguagem orquestrado pra ler arquivos, rodar comandos e editar seu projeto. Entender esse mecanismo é o que separa quem brinca de quem opera.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Assistente de código",
+        "definicao": "Sistema que usa um modelo de linguagem (LLM) como cérebro, mas adiciona ao redor dele a capacidade de agir no seu computador: ler arquivos, executar comandos no terminal, editar código. O Claude Code é exatamente isso rodando no seu terminal."
+      },
+      {
+        "termo": "Modelo de linguagem (LLM)",
+        "definicao": "Sozinho, um LLM só faz uma coisa: recebe texto e devolve texto. Ele não lê arquivos nem roda comandos por conta própria. Toda a 'ação' vem da camada que o envolve, não do modelo em si."
+      },
+      {
+        "termo": "Tool use (uso de ferramentas)",
+        "definicao": "O truque que transforma um gerador de texto em um agente. O assistente ensina o modelo a pedir ações num formato específico ('quero ler o arquivo X'), executa essa ação por ele e devolve o resultado pro modelo continuar o raciocínio."
+      },
+      {
+        "termo": "Loop de agente",
+        "definicao": "O ciclo que o Claude Code roda na prática: reunir contexto → planejar → agir → observar o resultado → repetir. É o mesmo caminho que um dev humano percorre ao caçar um bug, só que automatizado."
+      },
+      {
+        "termo": "Extensibilidade",
+        "definicao": "Como o motor é tool use, dá pra plugar ferramentas novas sem reescrever nada: comandos via CLAUDE.md, integrações externas via MCP, automações via hooks no settings.json. O Claude adapta o uso à medida que você adiciona capacidade."
+      },
+      {
+        "termo": "Busca sem indexação",
+        "definicao": "Em vez de mandar seu repositório inteiro pra um servidor pra ser indexado, o Claude Code navega o código sob demanda com as próprias ferramentas (grep, leitura de arquivo). Menos código saindo da sua máquina, mais controle."
+      }
+    ],
+    "dicas": [
+      "Pare de pensar 'a IA escreveu o código' e comece a pensar 'a IA leu o contexto certo antes de escrever'. 80% da qualidade do resultado vem do contexto que ela conseguiu reunir, não do modelo.",
+      "Se o assistente errou, na maioria das vezes o problema foi na fase de reunir contexto, não na de escrever. Dê o arquivo, o erro completo, o caminho exato — você está alimentando a primeira etapa do loop.",
+      "Tool use forte é o motivo de o Claude Code ser extensível. Use isso a seu favor: configure CLAUDE.md, conecte MCP e hooks em vez de ficar repetindo instrução manual a cada sessão.",
+      "Como ele busca sob demanda em vez de indexar tudo, você roda em codebase grande sem subir o projeto inteiro pra lugar nenhum — bom pra cliente que tem paranoia (justa) com código saindo da máquina."
+    ],
+    "takeaway": "O modelo é o cérebro; as ferramentas são as mãos. Quem entende essa separação para de tratar o Claude Code como uma caixa de mágica e começa a operá-lo como uma ferramenta de verdade.",
+    "passos": [
+      "Mande uma tarefa real, não um pedido vago: 'corrija o erro X no arquivo Y' funciona melhor que 'arruma o bug'.",
+      "Observe o Claude reunir contexto — ele vai ler arquivos, dar grep, às vezes rodar um comando pra entender o estado. Deixe ele trabalhar.",
+      "Veja o plano que ele propõe antes de aprovar mudanças. É aqui que você corrige o rumo se ele entendeu errado.",
+      "Deixe ele agir: editar arquivos e rodar testes. O resultado do teste volta pro loop e ele se autocorrige.",
+      "Quando perceber que repete a mesma instrução toda sessão, mova isso pro CLAUDE.md — assim vira contexto permanente em vez de digitação manual."
+    ],
+    "exemplo": {
+      "contexto": "Você está num projeto Node e o deploy quebrou com 'TypeError: cannot read property id of undefined' em routes/webhook.js. Em vez de você abrir o arquivo, achar a linha, entender o fluxo e corrigir na mão, você joga a tarefa pro Claude Code.",
+      "explicacao": "Repare no loop: o Claude não 'adivinhou' a correção. Ele primeiro REUNIU contexto (leu o arquivo, deu grep pra entender de onde vem o payload), PLANEJOU (adicionar uma checagem antes de acessar .id) e AGIU (editou o arquivo e rodou o teste). O resultado do teste voltou pra ele, fechando o ciclo. Nenhuma dessas etapas é 'o modelo escrevendo texto bonito' — são ferramentas sendo chamadas. O modelo só decidiu QUAIS chamar e em que ordem.",
+      "comandos": [
+        "claude",
+        "# dentro da sessão, você digita:",
+        "> o deploy quebrou com TypeError em routes/webhook.js, investiga e corrige",
+        "# o Claude então, por conta própria:",
+        "# 1. lê routes/webhook.js",
+        "# 2. roda grep pra rastrear de onde vem o objeto sem 'id'",
+        "# 3. propõe o patch com a checagem de undefined",
+        "# 4. roda 'npm test' pra confirmar que parou de quebrar"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que o modelo de linguagem 'lê seus arquivos' sozinho. Ele não lê — quem lê é a camada do Claude Code via tool use, e depois entrega o conteúdo pro modelo. Confundir isso leva a expectativas erradas sobre o que ele 'sabe'.",
+      "Dar contexto pela metade ('arruma esse erro') e culpar o modelo quando ele chuta. Você sabotou a primeira etapa do loop — reunir contexto — e ele teve que adivinhar.",
+      "Tratar todo assistente de código como igual. O diferencial do Claude Code não é só o modelo gerar texto: é o quão bem os modelos Claude decidem usar e combinar ferramentas. É isso que sustenta tarefas complexas e a extensibilidade via MCP e hooks.",
+      "Subir o codebase inteiro pra algum serviço de indexação por hábito. O Claude Code busca sob demanda; você não precisa expor o projeto todo pra ele funcionar."
+    ]
+  },
+  {
+    "slug": "tour-claude-code",
+    "titulo": "Claude Code em ação: um tour",
+    "modulo": "Fundamentos",
+    "duracao_leitura": "4 min",
+    "resumo": "Antes de configurar nada, vale ver o Claude Code resolvendo problemas de verdade. O ponto não é o modelo escrever código bonito: é como ele encadeia ferramentas (ler, rodar, medir, corrigir) pra fechar uma tarefa de ponta a ponta.",
+    "conceitos": [
+      {
+        "termo": "Ferramentas nativas (built-in tools)",
+        "definicao": "O conjunto de ações que o Claude Code já vem sabendo usar sem você configurar nada: ler e escrever arquivos, rodar comandos no terminal, buscar texto no projeto, listar diretórios. É a base de tudo."
+      },
+      {
+        "termo": "Encadeamento de ferramentas",
+        "definicao": "A habilidade do agente de combinar várias ações em sequência pra resolver um problema multi-etapa. Ex: roda benchmark, lê o resultado, escreve um script de profiling, identifica o gargalo, corrige e roda de novo pra confirmar."
+      },
+      {
+        "termo": "Loop agêntico",
+        "definicao": "O ciclo agir → observar resultado → decidir o próximo passo. É o que separa o Claude Code de um autocomplete: ele olha a saída de cada comando e ajusta o plano em vez de cuspir uma resposta única."
+      },
+      {
+        "termo": "MCP (Model Context Protocol)",
+        "definicao": "O padrão pra plugar ferramentas externas no Claude Code. Você adiciona um servidor MCP (ex: Playwright pra controlar navegador) e o agente ganha ações novas além das nativas, sem você reescrever nada."
+      },
+      {
+        "termo": "Integração com GitHub Actions",
+        "definicao": "Você roda o Claude Code dentro de um workflow do GitHub, disparado por eventos como abrir um PR ou ser mencionado num comentário. Ali ele revisa diffs e comenta automaticamente, com acesso a ações específicas do GitHub."
+      },
+      {
+        "termo": "To-do interno",
+        "definicao": "Em tarefas grandes o Claude Code monta uma lista de passos e vai marcando o progresso. Serve pra ele (e pra você) não perder o fio em trabalhos de muitas etapas."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você herdou um repositório de relatórios em Python que ninguém documentou e está lento. Quer entender o gargalo sem ler 3 mil linhas na mão.",
+      "explicacao": "Em vez de pedir 'otimize o código', você dá uma tarefa fechada com etapas verificáveis: rodar, medir, achar o pior caso, corrigir, confirmar. O Claude Code vai ler os arquivos, executar o profiler, ler a saída e só então mexer no código — e você consegue auditar cada passo no terminal antes de aceitar a mudança.",
+      "comandos": [
+        "claude",
+        "> rode o gerador de relatórios com o profiler do python (cProfile) e me mostre as 5 funções que mais consomem tempo",
+        "> escreva um script isolado que reproduz só a função mais lenta, pra a gente medir antes e depois",
+        "> proponha a otimização, rode de novo e me prove o ganho com os números do antes/depois"
+      ]
+    },
+    "passos": [
+      "Abra o terminal na raiz do projeto e rode `claude` pra iniciar a sessão.",
+      "Dê uma tarefa com etapas verificáveis, não um pedido vago. 'Rode, meça, ache o gargalo, corrija e confirme' rende muito mais que 'otimize isso'.",
+      "Acompanhe o loop: deixe o agente rodar comandos e ler a própria saída antes de decidir o próximo passo. É aí que está o valor.",
+      "Quando a tarefa pedir uma capacidade que ele não tem (controlar navegador, por exemplo), adicione um servidor MCP com `claude mcp add` e peça pra ele usar.",
+      "Pra automação recorrente (revisão de PR), leve isso pro GitHub Actions e deixe rodando nos eventos do repositório."
+    ],
+    "dicas": [
+      "Tarefa com critério de sucesso mensurável (número, teste passando, screenshot) sempre rende mais que pedido subjetivo — o agente tem como saber se acertou.",
+      "Ferramenta nova entra por MCP, não por gambiarra. Precisa que ele abra um navegador e tire screenshot? Plugue o Playwright MCP e peça pra iterar olhando o resultado.",
+      "Deixe ele rodar os comandos de leitura e teste sozinho, mas revise o diff antes de aceitar qualquer escrita em arquivo. Confiança não é cheque em branco.",
+      "A integração com GitHub Actions é onde o Claude Code vira operação de equipe: revisão automática de PR pega problema antes do deploy, não depois."
+    ],
+    "erros_comuns": [
+      "Achar que é autocomplete glorificado. O diferencial não é gerar código, é o loop de rodar-observar-corrigir. Quem só pede 'escreve a função X' usa 10% da ferramenta.",
+      "Pedido vago tipo 'melhora isso'. Sem critério de sucesso, o agente chuta e você não tem como validar. Dê a métrica.",
+      "Esperar que ele já saiba controlar navegador, banco ou API externa por padrão. Capacidade nova precisa de MCP — sem isso ele só tem as ferramentas nativas.",
+      "Aceitar a revisão automática de PR como veredito final. Ela é um par de olhos a mais que pega coisa como vazamento de PII num diff de uma linha — não substitui o seu julgamento."
+    ],
+    "takeaway": "O Claude Code não impressiona por escrever código — impressiona por encadear ferramentas e verificar o próprio trabalho até a tarefa fechar."
+  },
+  {
+    "slug": "instalacao-setup",
+    "titulo": "Instalação e setup: do zero ao primeiro `claude` rodando",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "4 min",
+    "resumo": "Instalar o Claude Code leva menos de 2 minutos: um comando no terminal, escolher tema, logar com sua conta e pronto. O segredo não é instalar — é abrir a ferramenta dentro da pasta certa do seu projeto.",
+    "conceitos": [
+      {
+        "termo": "CLI da Anthropic",
+        "definicao": "Claude Code é uma ferramenta de linha de comando (roda no terminal), não um app de janela. Você conversa com ele dentro da pasta do seu projeto e ele lê, escreve e edita arquivos ali mesmo."
+      },
+      {
+        "termo": "Instalador único",
+        "definicao": "Um comando curl (Mac/Linux/WSL) ou irm (Windows PowerShell) baixa e instala tudo. No Mac você também pode usar Homebrew com brew install --cask claude-code se preferir gerenciar por lá."
+      },
+      {
+        "termo": "Autenticação",
+        "definicao": "Na primeira vez que você roda claude, ele abre o navegador pra você logar com sua conta Anthropic (plano Claude ou créditos de API). É o que libera o uso — sem chave manual colada em lugar nenhum."
+      },
+      {
+        "termo": "Diretório de trabalho",
+        "definicao": "O Claude Code enxerga a pasta de onde você o abriu e tudo abaixo dela. Abrir na pasta errada é o erro de setup mais comum: ele não vê seu código."
+      },
+      {
+        "termo": "Provedores corporativos",
+        "definicao": "Dá pra rodar o Claude Code apontando pra Amazon Bedrock, Google Vertex AI ou Microsoft Foundry em vez da API direta — útil quando a empresa exige que tudo passe pela nuvem dela."
+      }
+    ],
+    "passos": [
+      "Abra o terminal do seu sistema (Terminal no Mac, ou Windows Terminal/PowerShell no Windows).",
+      "Cole o instalador: no Mac/Linux/WSL use `curl -fsSL https://claude.ai/install.sh | bash`; no Windows PowerShell use `irm https://claude.ai/install.ps1 | iex`.",
+      "Feche e reabra o terminal pra ele reconhecer o comando novo (no Mac, se der \"command not found\", reabra ou rode `source ~/.zshrc`).",
+      "Entre na pasta de um projeto seu de verdade: `cd ~/projetos/meu-app`. Não rode no Desktop nem na pasta raiz da sua casa.",
+      "Digite `claude` e dê enter. Escolha o tema de cores e faça login no navegador quando ele pedir.",
+      "Pronto: você está dentro do Claude Code. Peça algo simples pra testar, tipo \"me explica a estrutura desse projeto\"."
+    ],
+    "dicas": [
+      "Instale uma vez, use em todo projeto. O comando `claude` fica disponível em qualquer pasta — não precisa reinstalar por repositório.",
+      "Sempre confira onde você está antes de abrir. Rode `pwd` (Mac/Linux) pra ver o caminho. Abrir na pasta errada é o que faz parecer que \"o Claude não entende meu código\".",
+      "Rode `/init` logo no primeiro uso de um projeto. Ele varre o repositório e gera um CLAUDE.md com o contexto da stack — isso melhora absurdamente as respostas dali pra frente.",
+      "Se você é de empresa com política de nuvem fechada, não brigue com TI: o Claude Code aceita Bedrock, Vertex ou Foundry. Resolva isso no setup e ganhe o time inteiro.",
+      "Mantenha atualizado. O Claude Code se atualiza sozinho na maioria das instalações; se travar em algo, reinstalar com o mesmo comando costuma resolver."
+    ],
+    "takeaway": "Instalar é 1 comando; o que separa quem usa de quem reclama é abrir o `claude` dentro da pasta certa do projeto.",
+    "exemplo": {
+      "contexto": "Você acabou de instalar e quer testar num projeto real — digamos um app que já existe no seu computador, não um \"hello world\".",
+      "explicacao": "Abrir dentro da pasta do projeto e rodar /init faz o Claude Code mapear sozinho a stack, scripts e convenções antes de você pedir qualquer coisa. A partir daí ele responde com contexto, não no escuro.",
+      "comandos": [
+        "cd ~/projetos/painel-vendas",
+        "claude",
+        "/init"
+      ]
+    },
+    "erros_comuns": [
+      "Rodar `claude` na pasta errada (Desktop, home) e achar que a ferramenta é burra — ela só não está vendo seu código.",
+      "Esperar uma janela/app abrir. É terminal puro. Se você fechou o terminal, fechou a sessão.",
+      "Tentar colar chave de API manualmente. O login é pelo navegador no primeiro `claude`; não precisa caçar token.",
+      "Ver \"command not found\" e desistir. Quase sempre é só reabrir o terminal pro PATH atualizar.",
+      "Pular o /init e ficar repetindo contexto em todo prompt. Gere o CLAUDE.md uma vez e pare de explicar a mesma coisa."
+    ]
+  },
+  {
+    "slug": "preparando-projeto",
+    "titulo": "Preparando seu projeto",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "4 min",
+    "resumo": "Antes de pedir qualquer coisa pro Claude Code, vale 10 minutos arrumando o terreno: um projeto que roda, um CLAUDE.md honesto e o agente apontado pra pasta certa. É isso que separa \"uau\" de \"ele inventou um monte de coisa errada\".",
+    "conceitos": [
+      {
+        "termo": "Diretório de trabalho",
+        "definicao": "A pasta onde você roda o comando `claude`. O Claude Code enxerga e edita arquivos a partir dali. Abrir na raiz do projeto (e não dentro de uma subpasta) é o que dá contexto completo pro agente."
+      },
+      {
+        "termo": "CLAUDE.md",
+        "definicao": "Arquivo de memória do projeto, lido automaticamente em toda sessão. É onde você escreve stack, comandos, convenções e o que NÃO fazer. Pensa nele como o onboarding que você daria pra um dev novo no primeiro dia."
+      },
+      {
+        "termo": "/init",
+        "definicao": "Comando que varre seu repositório e gera um CLAUDE.md inicial sozinho, mapeando estrutura, dependências e scripts. Ótimo ponto de partida — mas é rascunho, não verdade absoluta."
+      },
+      {
+        "termo": "Projeto que roda",
+        "definicao": "Pré-requisito mais subestimado: dependências instaladas, banco/serviços de pó, build passando. Se você não consegue rodar, o Claude também não consegue validar o que escreveu."
+      },
+      {
+        "termo": ".env e segredos",
+        "definicao": "Chaves de API e credenciais ficam em variáveis de ambiente fora do versionamento. O agente edita código, não precisa (nem deve) ter seus segredos chumbados em arquivo rastreado pelo git."
+      }
+    ],
+    "passos": [
+      "Garanta que o projeto roda na sua máquina ANTES do Claude entrar: clone, instale dependências (`npm install`, `pip install`, etc.), suba banco/serviços e rode o build ou os testes uma vez na mão.",
+      "Abra o terminal na RAIZ do projeto e rode `claude`. Não abra dentro de `src/` ou de uma subpasta — você corta o contexto pela metade.",
+      "Rode `/init` para gerar um CLAUDE.md base. Deixe ele varrer o repo e propor a primeira versão.",
+      "Leia e CORRIJA o CLAUDE.md gerado: ajuste os comandos reais (test, lint, dev), aponte as pastas que importam e escreva os 'não faça' do seu projeto.",
+      "Coloque chaves de API e credenciais no `.env` (e confirme que `.env` está no `.gitignore`). Use um `.env.example` pra documentar o que é necessário sem vazar valor.",
+      "Faça um pedido pequeno de teste (ex: 'explique a arquitetura desse projeto') só pra confirmar que o agente está lendo os arquivos certos antes de partir pra cima de tarefas reais."
+    ],
+    "exemplo": {
+      "contexto": "Você acabou de clonar um app Next.js com Prisma + SQLite que vai usar como cobaia pra aprender Claude Code. Quer deixar tudo pronto antes de pedir a primeira alteração.",
+      "explicacao": "A sequência é sempre a mesma: primeiro o projeto sobe na sua mão (instala, prepara o banco, roda o dev), depois você entra com o Claude na raiz e gera o CLAUDE.md com /init. O segredo da API vai pro .env — sem ele o app ainda roda em modo fake, mas com ele você testa o fluxo completo. Só então você começa a conversar com o agente.",
+      "comandos": [
+        "npm install",
+        "npx prisma migrate dev",
+        "npm run dev",
+        "cp .env.example .env   # e cole sua chave da Anthropic no lugar do placeholder",
+        "claude",
+        "/init"
+      ]
+    },
+    "dicas": [
+      "CLAUDE.md vale ouro no campo dos 'não faça': 'não rode migrations em prod', 'não mexa em /legacy', 'use pnpm, não npm'. Regra escrita uma vez economiza dez correções depois.",
+      "Trate o CLAUDE.md como código vivo: toda vez que o Claude errar a mesma coisa duas vezes, a correção não é repetir no chat — é registrar a regra no arquivo.",
+      "Pra aprender, qualquer repo seu serve. Você não precisa do projeto de exemplo do curso — use um projeto real e pequeno seu, o aprendizado gruda mais.",
+      "Se o repo for gigante, abrir na raiz ainda é certo, mas seja específico no pedido (aponte arquivos/pastas). Contexto amplo + pedido focado é a combinação que funciona."
+    ],
+    "erros_comuns": [
+      "Abrir o `claude` dentro de uma subpasta e reclamar que ele 'não acha' arquivos que estão um nível acima.",
+      "Aceitar o CLAUDE.md do /init sem ler. Ele chuta comandos e às vezes erra o gerenciador de pacotes ou o script de teste — e aí o agente erra junto a sessão inteira.",
+      "Tentar usar o Claude num projeto que você mesmo não consegue rodar. Sem build/teste verde, ninguém valida o que foi escrito — nem você, nem ele.",
+      "Deixar chave de API hardcoded no código ou comitar o .env. Segredo é variável de ambiente, ponto.",
+      "Pedir tarefa grande logo de cara sem um pedido de sanidade antes. Dois minutos confirmando que ele lê o projeto certo evitam meia hora de retrabalho."
+    ],
+    "takeaway": "Dez minutos preparando o terreno — projeto rodando, CLAUDE.md honesto, agente na raiz — valem mais que qualquer prompt mágico depois."
+  },
+  {
+    "slug": "dando-contexto",
+    "titulo": "Dando contexto ao Claude",
+    "modulo": "Mãos à obra",
+    "resumo": "Claude Code não precisa do seu projeto inteiro na cabeça — precisa da informação certa. Esta aula mostra como guiar o contexto com CLAUDE.md, /init e o atalho @ pra ele acertar mais e enrolar menos.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Gestão de contexto",
+        "definicao": "A ideia central de trabalhar com Claude Code: existe uma quantidade ideal de informação pra cada tarefa. Pouco contexto e ele chuta; contexto demais e irrelevante e a qualidade da resposta cai. Seu trabalho é apontar pro que importa, não despejar o repositório inteiro."
+      },
+      {
+        "termo": "/init",
+        "definicao": "Comando que roda na primeira vez que você abre o Claude num projeto. Ele varre o codebase, entende a arquitetura, os comandos principais e os arquivos críticos, e escreve um resumo num arquivo CLAUDE.md na raiz."
+      },
+      {
+        "termo": "CLAUDE.md",
+        "definicao": "Arquivo de memória do projeto. O conteúdo dele entra em toda requisição que você manda — funciona como um system prompt persistente. Serve pra dois fins: explicar o codebase pro Claude e dar instruções de comportamento (convenções, estilo, o que não fazer)."
+      },
+      {
+        "termo": "Hierarquia de CLAUDE.md",
+        "definicao": "São três níveis que se somam: o de projeto (CLAUDE.md, versionado no git e compartilhado com o time), o pessoal (CLAUDE.local.md, fora do git, só seu) e o global (~/.claude/CLAUDE.md, aplicado em todos os projetos da sua máquina)."
+      },
+      {
+        "termo": "Menção com @",
+        "definicao": "Digite @ seguido do caminho pra injetar o conteúdo de um arquivo direto na conversa, sem o Claude precisar caçar e ler. Funciona tanto no prompt quanto dentro do próprio CLAUDE.md, onde o arquivo passa a ser carregado em toda requisição."
+      },
+      {
+        "termo": "/memory",
+        "definicao": "Comando que abre seus arquivos CLAUDE.md pra edição de dentro do Claude Code. Atalho prático pra ajustar uma instrução na hora, sem sair pro editor. As mudanças valem a partir da próxima mensagem."
+      }
+    ],
+    "dicas": [
+      "Rode /init no primeiro dia de qualquer projeto novo. É o investimento de contexto com melhor retorno: 30 segundos de varredura economizam horas de Claude se perdendo no codebase.",
+      "Trate o CLAUDE.md como código: revise o que o /init gerou, corte o que estiver genérico demais e versione no git. Um CLAUDE.md ruim atrapalha tanto quanto um bom ajuda.",
+      "Coloque seus comandos reais no CLAUDE.md — como roda o dev, como roda os testes, como faz deploy. Isso evita o Claude inventar `npm test` quando o seu projeto usa `pnpm test:unit`.",
+      "Use @ pra apontar arquivos quando você JÁ sabe onde está a resposta. É mais rápido e barato que deixar o Claude fazer busca semântica no repositório.",
+      "Se já existe um AGENTS.md no repo (de outra ferramenta), não duplique: ponha `@AGENTS.md` na primeira linha do CLAUDE.md e adicione as instruções específicas do Claude abaixo.",
+      "Instruções de comportamento são o ouro do CLAUDE.md. 'Use comentários só em lógica complexa', 'sempre português nos commits', 'nunca crie arquivo .md de resumo' — isso corrige manias que se repetiriam em toda sessão."
+    ],
+    "exemplo": {
+      "contexto": "Você abriu o Claude Code num SaaS em Next.js + Prisma que herdou de outro dev. Ninguém te explicou nada. Em vez de sair pedindo 'me explica o projeto' e gastar tokens caçando, você monta o contexto certo.",
+      "explicacao": "O /init dá a base, você refina o CLAUDE.md com seus comandos e convenções reais, e amarra o schema do banco com @ pra que toda pergunta sobre dados seja respondida na hora, sem o Claude reler o arquivo. A partir daí, todo prompt já nasce com o contexto certo.",
+      "comandos": [
+        "claude",
+        "/init",
+        "/memory",
+        "# no CLAUDE.md, abaixo do que o /init gerou:",
+        "## Comandos",
+        "Dev: pnpm dev (porta 3000). Testes: pnpm test:unit. Deploy: pnpm deploy:staging",
+        "## Convenções",
+        "Use comentários só em lógica não óbvia. Commits em português. Nunca crie arquivos .md de resumo.",
+        "O schema do banco está em @prisma/schema.prisma — consulte sempre que precisar entender a estrutura de dados.",
+        "# depois, no chat do dia a dia:",
+        "Como funciona o fluxo de login? @lib/auth.ts"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que mais contexto é sempre melhor. Encher o CLAUDE.md de parágrafos genéricos ou colar arquivos gigantes só dilui o sinal e piora as respostas.",
+      "Rodar /init e nunca mais olhar o arquivo. O resumo automático é um rascunho, não a verdade final — sem revisão, ele carrega imprecisões pra todas as sessões.",
+      "Commitar instruções pessoais no CLAUDE.md de projeto. Suas preferências de fluxo vão no CLAUDE.local.md ou no global; o de projeto é do time.",
+      "Pedir 'me explica como X funciona' quando você já sabe o arquivo. Deixar o Claude buscar do zero é mais lento e mais caro que um simples @caminho/do/arquivo.",
+      "Esquecer que o CLAUDE.md entra em TODA requisição. Texto morto ali dentro custa token em cada mensagem, a sessão inteira."
+    ],
+    "passos": [
+      "Abra o terminal na raiz do projeto e rode `claude`.",
+      "Rode `/init` e deixe o Claude varrer o codebase e escrever o CLAUDE.md inicial.",
+      "Abra o CLAUDE.md, leia o que ele gerou e corrija/enxugue: tire o genérico, confirme arquitetura e comandos.",
+      "Adicione suas convenções de comportamento (estilo de código, idioma de commit, o que nunca fazer) — direto no editor ou via `/memory`.",
+      "Amarre os arquivos centrais com @ dentro do CLAUDE.md (schema, config principal, contrato de API) pra carregá-los automaticamente.",
+      "Separe o que é pessoal (CLAUDE.local.md) do que é do time (CLAUDE.md versionado) e do que vale pra tudo (~/.claude/CLAUDE.md).",
+      "No dia a dia, use @arquivo nos prompts sempre que já souber onde está a resposta."
+    ],
+    "takeaway": "Quem dá o contexto certo manda no resultado — o CLAUDE.md é o seu ponto de alavancagem, não um detalhe de setup."
+  },
+  {
+    "slug": "fazendo-alteracoes",
+    "titulo": "Fazendo alterações no código",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "5 min",
+    "resumo": "Alterar código existente é o trabalho do dia a dia. Aqui você aprende a apontar exatamente o que quer mudar com screenshot, e a regular o esforço do Claude (plan mode pra largura, effort/ultrathink pra profundidade) sem queimar token à toa.",
+    "conceitos": [
+      {
+        "termo": "Screenshot como referência (Ctrl+V)",
+        "definicao": "Cola uma imagem direto no Claude Code com Ctrl+V (não Cmd+V, mesmo no Mac). Em vez de descrever em texto qual botão ou área você quer mexer, você mostra. Mata ambiguidade na hora."
+      },
+      {
+        "termo": "Plan mode",
+        "definicao": "Modo onde o Claude lê mais arquivos, monta um plano detalhado e espera sua aprovação antes de tocar em qualquer linha. Ativa com Shift+Tab (duas vezes, ou uma se já está em auto-accept) ou /plan. Ideal pra tarefa que pega vários arquivos."
+      },
+      {
+        "termo": "Effort level (/effort)",
+        "definicao": "Controla o quanto o Claude raciocina antes de responder, da sessão inteira. low é rápido e barato; max pensa o máximo em problema difícil. Rode /effort pra ver o nível atual e ajustar. O padrão depende do modelo e do plano."
+      },
+      {
+        "termo": "ultrathink",
+        "definicao": "Palavra-chave que você joga dentro de um prompt específico pra pedir raciocínio extra só naquela vez, sem mexer no effort da sessão. Bom pra um problema pontual mais cabeludo."
+      },
+      {
+        "termo": "Largura vs. profundidade",
+        "definicao": "Plan mode resolve largura (entender o codebase, mexer em muitos arquivos). Effort/ultrathink resolve profundidade (lógica complicada, bug chato, algoritmo). Os dois somam, e os dois custam token."
+      },
+      {
+        "termo": "Claude como assistente de Git",
+        "definicao": "Depois de mudar o código, peça pra ele dar stage e commit. Ele escreve uma mensagem de commit descritiva sozinha, fechando o ciclo da alteração."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você tem uma landing page React de cliente e quer dois ajustes: centralizar um texto que está torto e trocar um label técnico por algo amigável. O segundo é mais difícil porque o termo aparece espalhado pelo código.",
+      "comandos": [
+        "# 1) Tire um print da área torta, cole com Ctrl+V e peça:",
+        "# \"Centraliza esse texto placeholder no painel\"",
+        "# 2) Pro ajuste mais pesado, entre em plan mode (Shift+Tab 2x) e mande:",
+        "# \"ultrathink: troca o label 'string replace editor' por uma mensagem amigável tipo 'Criando arquivo X', e trate também os casos de editar e deletar\"",
+        "/effort",
+        "claude \"revisa o plano e me mostra antes de aplicar\""
+      ],
+      "explicacao": "O print resolve o ajuste simples em segundos, sem você precisar descrever coordenadas. No ajuste difícil, plan mode faz o Claude varrer o projeto e achar todos os lugares do label antes de mexer, e o ultrathink dá fôlego de raciocínio pra ele cobrir os casos de borda (criar, editar, deletar). Você aprova o plano e só então ele escreve o código."
+    },
+    "passos": [
+      "Tire um print da parte exata da tela que você quer mudar (botão, texto, painel).",
+      "Cole no Claude Code com Ctrl+V (não Cmd+V) e descreva a mudança em uma frase.",
+      "Se a tarefa pega vários arquivos, ative o plan mode (Shift+Tab 2x ou /plan).",
+      "Leia o plano. Se quiser editar antes de aprovar, abra no seu editor com Ctrl+G, ajuste e devolva.",
+      "Pra lógica difícil ou bug chato, suba o effort com /effort, ou jogue ultrathink no prompt daquela vez.",
+      "Aprove, deixe o Claude implementar e teste no navegador/app.",
+      "Peça pra ele dar stage e commit das mudanças com uma mensagem descritiva."
+    ],
+    "dicas": [
+      "Print vale mais que parágrafo: pra mudança visual, mostrar a tela elimina dez idas e vindas de descrição.",
+      "No Mac é Ctrl+V pra colar imagem, fácil de esquecer porque o reflexo é Cmd+V.",
+      "Ctrl+O expande o raciocínio do Claude quando você quer ver como ele chegou na decisão.",
+      "Ctrl+G abre o plano no seu editor: edite o plano direto e o Claude segue a versão que você devolver.",
+      "Não deixe effort no máximo e plan mode ligado o tempo todo por preguiça. Os dois queimam token. Use sob demanda."
+    ],
+    "erros_comuns": [
+      "Descrever em texto uma mudança visual que um print resolveria na hora, gerando idas e vindas.",
+      "Usar Cmd+V no Mac pra colar imagem e achar que o Claude 'não recebeu' o screenshot.",
+      "Mandar tarefa que pega o codebase inteiro sem plan mode e ver o Claude mexer no lugar errado por falta de contexto.",
+      "Deixar plan mode + effort max ligados sempre e estranhar a conta de token subir.",
+      "Aprovar o plano sem ler. Plan mode existe justamente pra você redirecionar antes de o código ser escrito."
+    ],
+    "takeaway": "Mostre o que quer com um print e regule o esforço pela tarefa: plan mode pra largura, ultrathink pra profundidade. Ferramenta certa, token na conta certa."
+  },
+  {
+    "slug": "controlando-contexto",
+    "titulo": "Controlando o contexto: mantenha o Claude no trilho",
+    "modulo": "Mãos à obra",
+    "resumo": "O contexto da conversa é o recurso mais escasso e mais mal usado do Claude Code. Saber interromper, voltar atrás, compactar e limpar é o que separa quem só conversa de quem produz de verdade.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Janela de contexto",
+        "definicao": "A memória de trabalho da sessão. Tudo que você e o Claude trocaram fica ali, e o que está dentro influencia diretamente a qualidade da próxima resposta. Lixo dentro, lixo fora."
+      },
+      {
+        "termo": "Interromper (Esc)",
+        "definicao": "Aperta Esc e o Claude para no meio da resposta. Serve pra cortar quando ele pega o caminho errado ou tenta resolver coisa demais de uma vez, sem precisar esperar terminar pra corrigir."
+      },
+      {
+        "termo": "Rewind (Esc Esc ou /rewind)",
+        "definicao": "Aperta Esc duas vezes pra ver o histórico das suas mensagens e voltar a um ponto anterior. Você mantém o que foi útil (o Claude já entender o código) e descarta o ruído (uma sessão de debug que não interessa mais)."
+      },
+      {
+        "termo": "/compact",
+        "definicao": "Resume a conversa inteira preservando o aprendizado importante. Ideal quando o Claude já entendeu o projeto e você vai pra uma tarefa relacionada, mas o histórico já está longo demais."
+      },
+      {
+        "termo": "/clear",
+        "definicao": "Zera o contexto e começa do zero. Use ao trocar pra uma tarefa totalmente diferente. A conversa antiga não some da sessão: dá pra voltar nela com /resume."
+      },
+      {
+        "termo": "/memory e CLAUDE.md",
+        "definicao": "Onde você grava correções permanentes. Quando o Claude erra a mesma coisa toda sessão, você escreve a regra certa no CLAUDE.md e o erro para de se repetir nas próximas conversas."
+      }
+    ],
+    "dicas": [
+      "Esc é seu botão de freio. Não espere o Claude terminar uma resposta que já tá errada — corte na primeira frase suspeita e redirecione.",
+      "Depois de uma sessão chata de debug, faça rewind antes da próxima tarefa. Aquele monte de ida e volta sobre um pacote que faltava só atrapalha o que vem depois.",
+      "Erro que se repete não se corrige na conversa, se corrige no CLAUDE.md. Esc + /memory transforma um erro recorrente em regra permanente.",
+      "Use /compact pra mudar de função dentro da mesma feature, e /clear pra mudar de assunto de vez. São ferramentas diferentes pra momentos diferentes.",
+      "Conversa longa não é sinal de produtividade. Quanto mais limpo o contexto, mais focado o Claude fica."
+    ],
+    "erros_comuns": [
+      "Deixar o Claude terminar uma resposta inteira que já estava errada, em vez de apertar Esc no começo.",
+      "Tocar uma conversa de duas horas sem nunca compactar nem limpar — o contexto vira um depósito de ruído e a qualidade despenca.",
+      "Usar /clear quando devia usar /compact e perder todo o entendimento que o Claude tinha do código.",
+      "Corrigir o mesmo erro manualmente toda sessão em vez de gravar a regra no CLAUDE.md de uma vez.",
+      "Achar que /clear apaga a conversa pra sempre — ela continua acessível via /resume."
+    ],
+    "exemplo": {
+      "contexto": "Você pede pro Claude escrever testes pra um arquivo auth.ts com quatro funções. No meio do primeiro teste ele trava porque faltava instalar um pacote, e gasta vários minutos debugando isso. Os testes passam, mas agora o histórico está cheio de conversa sobre esse pacote — coisa que não tem nada a ver com a próxima função que você quer testar.",
+      "explicacao": "Em vez de continuar com o histórico poluído, você dá rewind até a mensagem onde pediu o primeiro teste e edita pra pedir o teste da próxima função. Resultado: o Claude mantém o entendimento do auth.ts (não precisa reler o arquivo) mas perde todo o ruído do debug. Ele continua focado. Quando termina as quatro funções e quer partir pra outro arquivo do projeto, aí sim você dá /compact pra carregar o aprendizado de como testar aquele padrão, ou /clear se for um assunto sem relação nenhuma.",
+      "comandos": [
+        "claude",
+        "# pede os testes, Claude trava num pacote faltando e debuga",
+        "# Esc Esc para abrir o rewind e voltar à mensagem original",
+        "/rewind",
+        "# erro recorrente? grava a regra de uma vez:",
+        "/memory",
+        "# /compact ao mudar pra tarefa relacionada",
+        "/compact",
+        "# /clear ao começar algo totalmente diferente",
+        "/clear"
+      ]
+    },
+    "passos": [
+      "Apertou em algo errado ou amplo demais? Esc na hora pra interromper e redirecionar.",
+      "Erro que você já viu antes nesse projeto? Esc, depois /memory (ou edite o CLAUDE.md) pra gravar a correção definitiva.",
+      "Histórico ficou cheio de ruído de debug? Esc Esc ou /rewind pra voltar a um ponto limpo mantendo o contexto útil.",
+      "Vai pra uma tarefa relacionada mas a conversa já tá longa? /compact pra resumir preservando o aprendizado.",
+      "Vai pra um assunto totalmente diferente? /clear pra zerar — e /resume se precisar voltar depois."
+    ],
+    "takeaway": "Quem controla o contexto controla a qualidade — o Claude é tão bom quanto o que você deixa dentro da janela."
+  },
+  {
+    "slug": "comandos-customizados",
+    "titulo": "Comandos customizados: transforme fluxos repetidos em um único atalho",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "4 min",
+    "resumo": "Comandos customizados são arquivos Markdown na pasta .claude/commands/ que viram atalhos /seunome dentro do Claude Code. Você escreve o passo a passo uma vez e dispara o fluxo inteiro com um comando, sem repetir prompt.",
+    "conceitos": [
+      {
+        "termo": "Comando customizado",
+        "definicao": "Um prompt reutilizável que você salva como arquivo .md numa pasta específica do projeto. O nome do arquivo vira o comando: deploy.md cria o /deploy."
+      },
+      {
+        "termo": ".claude/commands/",
+        "definicao": "A pasta onde o Claude Code procura seus comandos. Fica versionada junto com o projeto, então o time inteiro herda os mesmos atalhos ao clonar o repo."
+      },
+      {
+        "termo": "$ARGUMENTS",
+        "definicao": "Placeholder que você coloca dentro do comando. O que você digitar depois de /comando é injetado nesse ponto do prompt, deixando o comando parametrizável."
+      },
+      {
+        "termo": "Comando vs CLAUDE.md",
+        "definicao": "O CLAUDE.md é contexto sempre presente (regras do projeto). O comando é um fluxo que você dispara sob demanda, só quando precisa daquela tarefa."
+      },
+      {
+        "termo": "Comando de projeto vs pessoal",
+        "definicao": "Em .claude/commands/ o comando é do projeto (vai pro git). Em ~/.claude/commands/ é pessoal e te acompanha em qualquer pasta, sem subir pro repo."
+      }
+    ],
+    "passos": [
+      "Na raiz do projeto, crie a pasta .claude/commands/ se ainda não existir.",
+      "Crie um arquivo Markdown com o nome do comando que você quer, ex: revisao-pr.md vira /revisao-pr.",
+      "Escreva dentro do arquivo o passo a passo em linguagem natural, como se estivesse instruindo um dev júnior cuidadoso.",
+      "Salve. O Claude Code reconhece o comando na hora, não precisa reiniciar a sessão.",
+      "Digite / no Claude Code para ver o comando aparecer na lista, e dispare.",
+      "Se quiser parametrizar, coloque $ARGUMENTS onde o input do usuário deve entrar e passe o valor: /comando o-que-vai-no-arguments."
+    ],
+    "exemplo": {
+      "contexto": "No fechamento de uma sprint eu sempre rodo a mesma sequência antes de abrir PR: lint, testes, conferir se quebrei tipo, e checar se atualizei o CHANGELOG. Em vez de digitar isso toda vez, virou o comando /pre-pr.",
+      "explicacao": "O arquivo .claude/commands/pre-pr.md contém o roteiro abaixo. Quando rodo /pre-pr, o Claude executa os passos na ordem e só me devolve um resumo do que passou e do que precisa de atenção. O time todo usa o mesmo comando porque ele está versionado no repo. Para um comando com argumento, criei /testes que recebe um caminho: o $ARGUMENTS recebe o arquivo, e o resto do prompt fixa minhas convenções de teste, então o resultado sai padronizado independente de quem rodou.",
+      "comandos": [
+        "mkdir -p .claude/commands",
+        "# .claude/commands/pre-pr.md:",
+        "Rode o lint e corrija o que for trivial. Rode a suíte de testes.",
+        "Confira se há erro de tipo. Verifique se o CHANGELOG.md foi atualizado com a mudança desta branch.",
+        "Não faça commit. Me devolva um resumo curto do que passou e do que travou.",
+        "# uso:",
+        "/pre-pr",
+        "# comando com argumento — .claude/commands/testes.md:",
+        "Escreva testes para: $ARGUMENTS",
+        "Use a mesma stack e padrão de pasta dos testes já existentes no projeto.",
+        "# uso:",
+        "/testes src/hooks/use-auth.ts"
+      ]
+    },
+    "dicas": [
+      "Escreva o comando como instrução de processo, não como código. O valor está em capturar a sequência de passos e suas convenções, não em decorar comandos de terminal.",
+      "Comece pelo que você já repete há semanas. Se você digita o mesmo prompt três vezes por dia, é candidato a virar comando.",
+      "Versione os comandos do projeto no git: quando alguém clona o repo, herda os atalhos do time de graça e todo mundo segue o mesmo processo.",
+      "Use ~/.claude/commands/ para comandos pessoais que te acompanham em qualquer projeto, como um /commit no seu padrão de mensagem.",
+      "$ARGUMENTS deixa o comando genérico. Um /testes serve pra qualquer arquivo; você não precisa de um comando por feature."
+    ],
+    "erros_comuns": [
+      "Achar que precisa reiniciar o Claude Code depois de criar o arquivo. Não precisa: ele detecta o comando na hora.",
+      "Colocar o arquivo no lugar errado. Tem que ser dentro de .claude/commands/ (projeto) ou ~/.claude/commands/ (pessoal), senão o comando não aparece.",
+      "Transformar tudo em comando cedo demais. Comando é pra fluxo já estabilizado e repetido. Se o processo ainda muda toda semana, deixe como prompt solto até assentar.",
+      "Escrever o comando vago demais ('faça o deploy'). Quanto mais explícito o passo a passo e as convenções, mais consistente o resultado entre execuções e entre pessoas."
+    ],
+    "takeaway": "Todo prompt que você digita pela terceira vez deveria ser um comando: escreva o processo uma vez, dispare com uma barra para sempre."
+  },
+  {
+    "slug": "servidores-mcp",
+    "titulo": "Servidores MCP: dando braços e pernas pro Claude Code",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "5 min",
+    "resumo": "MCP é o jeito de plugar ferramentas externas no Claude Code — banco de dados, navegador, sua API, o que for. Em vez de só ler e escrever arquivo, o Claude passa a agir no mundo real do seu projeto.",
+    "conceitos": [
+      {
+        "termo": "MCP (Model Context Protocol)",
+        "definicao": "Protocolo aberto que padroniza como o Claude Code conversa com ferramentas externas. Pense num soquete universal: qualquer servidor que fale MCP vira uma extensão de capacidade do Claude, sem você escrever cola pra cada integração."
+      },
+      {
+        "termo": "Servidor MCP",
+        "definicao": "O programa que expõe as ferramentas. Pode rodar local na sua máquina (um processo que o Claude sobe via comando) ou remoto (um endpoint HTTP/SSE que você conecta por URL). Cada servidor entrega um conjunto de tools que o Claude passa a poder chamar."
+      },
+      {
+        "termo": "Tool exposta",
+        "definicao": "Cada ação concreta que o servidor disponibiliza — abrir navegador, rodar query, ler issue do GitHub. No Claude Code elas aparecem com o prefixo mcp__nomedoservidor__nomedatool, e é esse nome que você usa pra liberar permissão."
+      },
+      {
+        "termo": "Escopo de instalação",
+        "definicao": "Onde o servidor fica registrado: local (só seu projeto, na sua máquina), project (versionado no .mcp.json, vale pro time todo) ou user (vale pra todos os seus projetos). Escolher o escopo certo evita vazar credencial ou poluir projeto dos outros."
+      },
+      {
+        "termo": "Playwright MCP",
+        "definicao": "Servidor popular que dá ao Claude o controle de um navegador de verdade. Com ele o Claude abre sua app, clica, lê o DOM e enxerga o resultado visual — não só o código. É o exemplo clássico de ganho de capacidade real."
+      }
+    ],
+    "passos": [
+      "Escolha a ferramenta que falta: o gargalo do seu fluxo costuma indicar o servidor (testar UI -> Playwright; consultar dados -> Postgres; mexer em issues -> GitHub).",
+      "Adicione pelo terminal, fora do Claude: claude mcp add playwright npx @playwright/mcp@latest. O primeiro argumento é o apelido, o resto é o comando que sobe o servidor.",
+      "Confirme que registrou: claude mcp list mostra os servidores ativos e o status da conexão. Dentro do Claude, /mcp também lista as tools disponíveis.",
+      "Use de verdade uma vez e aprove as permissões conforme o Claude pede — assim você vê exatamente quais tools ele quer.",
+      "Cansou dos pop-ups? Libere o servidor de uma vez no .claude/settings.local.json, adicionando mcp__playwright no array allow (atenção aos dois underscores).",
+      "Reabra o Claude Code e dê uma tarefa que dependa da ferramenta nova. Agora ele age sem pedir permissão a cada passo."
+    ],
+    "exemplo": {
+      "contexto": "Você tem uma app rodando em localhost:3000 que gera componentes de UI a partir de um prompt salvo no projeto. Os componentes saem genéricos — sempre o mesmo degradê roxo-pra-azul e padrão Tailwind manjado. Sem MCP, o Claude só lê o código do componente; ele não enxerga como aquilo fica na tela. Com o Playwright MCP, ele abre o navegador, vê o resultado renderizado e ajusta o próprio prompt de geração.",
+      "comandos": [
+        "# fora do Claude Code, no terminal",
+        "claude mcp add playwright npx @playwright/mcp@latest",
+        "claude mcp list",
+        "# dentro do Claude Code:",
+        "> Abre localhost:3000, gera um componente de exemplo, olha o estilo renderizado no navegador e reescreve o prompt em @src/lib/prompts/generation.tsx pra sair design mais original. Depois gera outro componente e me mostra a diferença."
+      ],
+      "explicacao": "O pulo do gato é o loop fechado: o Claude gera, vê com os próprios olhos pelo navegador, critica (ele mesmo reclamou do degradê clichê), edita o arquivo de prompt e testa de novo. Sem o MCP isso seria você no meio, abrindo o browser, tirando print e copiando feedback. Com o MCP, ele fecha o ciclo sozinho e o resultado costuma surpreender pra cima."
+    },
+    "dicas": [
+      "Comece por UM servidor que resolve uma dor real. Encher o Claude de MCP que você nunca usa só gasta contexto e atrapalha.",
+      "Servidor local sobe via comando (npx, node, python); servidor remoto conecta por URL. Pra ferramentas SaaS, o remoto poupa instalação. Pra navegador e banco local, o local é o caminho.",
+      "Use escopo project (.mcp.json versionado) quando o time todo precisa do mesmo servidor, e escopo user pra ferramentas suas que valem em qualquer projeto.",
+      "Nunca jogue token/senha direto no comando se o arquivo for commitado. Prefira variáveis de ambiente e mantenha credencial em settings.local.json, que fica fora do git.",
+      "Liberar mcp__servidor inteiro no allow é cômodo, mas você abre TODAS as tools daquele servidor. Pra servidor que escreve em banco ou manda mensagem, pense duas vezes antes do allow geral."
+    ],
+    "erros_comuns": [
+      "Rodar o claude mcp add de dentro do Claude Code. O comando é do terminal, fora da sessão — dentro não funciona.",
+      "Esquecer que são DOIS underscores em mcp__playwright. Com um só, a permissão simplesmente não casa e o pop-up continua aparecendo.",
+      "Aprovar tudo no allow sem perceber que servidor MCP de banco ou de e-mail pode executar ação destrutiva sem te perguntar. Capacidade nova é poder novo — trate com o mesmo cuidado de qualquer ferramenta que escreve.",
+      "Instalar dez servidores 'porque pode' e depois reclamar que o Claude tá lento ou confuso. Cada tool extra é contexto consumido; mantenha só o que usa.",
+      "Achar que MCP é mágica e largar tarefa vaga. O servidor dá a capacidade, mas o resultado ainda depende de você descrever bem o objetivo."
+    ],
+    "takeaway": "Sem MCP o Claude lê e escreve código; com MCP ele opera suas ferramentas — e aí deixa de ser assistente pra virar braço operacional do seu stack."
+  },
+  {
+    "slug": "integracao-github",
+    "titulo": "Integração com o GitHub: Claude Code rodando dentro do seu repositório",
+    "modulo": "Mãos à obra",
+    "duracao_leitura": "4 min",
+    "resumo": "O Claude Code tem uma integração oficial que o coloca pra rodar dentro do GitHub Actions. Na prática: você marca @claude numa issue ou PR e ele executa a tarefa, e todo PR aberto ganha um review automático — sem você abrir o terminal.",
+    "conceitos": [
+      {
+        "termo": "/install-github-app",
+        "definicao": "Comando que você roda dentro do Claude Code pra plugar a integração: instala o app no GitHub, configura a chave de API e abre um PR já com os arquivos de workflow prontos. É o caminho rápido oficial, não precisa montar o YAML na mão."
+      },
+      {
+        "termo": "Workflow de menção (@claude)",
+        "definicao": "Um dos dois GitHub Actions que vêm prontos. Permite marcar @claude em qualquer issue ou pull request com uma tarefa. Ele lê o pedido, monta um plano, mexe no código com acesso ao repositório e responde ali mesmo, no fio da conversa."
+      },
+      {
+        "termo": "Workflow de review de PR",
+        "definicao": "O segundo Action padrão. Toda vez que um pull request é aberto, o Claude analisa o diff, avalia o impacto das mudanças e posta um comentário de revisão automaticamente. É um revisor que nunca dorme e nunca esquece de olhar."
+      },
+      {
+        "termo": ".github/workflows",
+        "definicao": "Pasta onde moram os arquivos YAML dos Actions. Depois que você faz merge do PR gerado, é aqui que ficam os dois workflows. Editar esses arquivos é como você customiza o comportamento do Claude no CI."
+      },
+      {
+        "termo": "allowed_tools (permissões no Action)",
+        "definicao": "No CI não existe o atalho de aprovar permissão na hora, como no terminal. Você precisa listar explicitamente cada ferramenta liberada — e se usar um MCP, cada tool daquele servidor entra na lista uma por uma."
+      },
+      {
+        "termo": "custom_instructions e mcp_config",
+        "definicao": "Campos do workflow que dão contexto e capacidades ao Claude rodando no Action. custom_instructions é o briefing (ex: 'o servidor já está rodando em localhost:3000'); mcp_config registra servidores MCP, como o Playwright pra abrir navegador dentro do Action."
+      }
+    ],
+    "passos": [
+      "No terminal, dentro do repositório, rode `claude` e depois `/install-github-app`.",
+      "Siga o fluxo: instale o app do Claude na sua conta/organização do GitHub e selecione o repositório.",
+      "Adicione a chave de API quando ele pedir (vai pra Secrets do repo, não fica exposta no YAML).",
+      "Deixe ele abrir o pull request automático com os dois workflows e faça o merge.",
+      "Rode `git pull` pra trazer a pasta `.github/workflows` pra sua máquina e abra os dois arquivos YAML.",
+      "Teste com algo pequeno: crie uma issue, escreva @claude com uma tarefa simples e espere o Action rodar.",
+      "Só depois de ver funcionando, customize — adicione steps de setup, custom_instructions e MCP conforme o projeto pede."
+    ],
+    "exemplo": {
+      "contexto": "Você mantém um app web e quer que o Claude, ao ser marcado numa issue, suba o projeto e teste a interface de verdade no navegador antes de responder — tudo dentro do GitHub Action, sem você abrir nada localmente.",
+      "explicacao": "A sacada é preparar o ambiente ANTES do Claude rodar: um step que instala dependências e sobe o servidor, custom_instructions avisando que o server já está de pé em localhost:3000, e o mcp_config registrando o Playwright pra ele abrir um navegador. O detalhe que pega todo mundo é a permissão: o Playwright tem dezenas de tools (browser_navigate, browser_click, browser_snapshot...) e cada uma precisa estar listada em allowed_tools. Esqueceu de listar, a tool não roda — e não tem 'aprovar agora' no CI.",
+      "comandos": [
+        "/install-github-app",
+        "git pull origin main",
+        "# no workflow de menção, antes do step do Claude:",
+        "- name: Subir ambiente",
+        "  run: |",
+        "    npm ci",
+        "    npm run dev &",
+        "# e nos campos do action:",
+        "custom_instructions: O servidor já está rodando em localhost:3000. Use o Playwright MCP pra abrir o app no navegador e validar a UI.",
+        "allowed_tools: Bash(npm:*),mcp__playwright__browser_navigate,mcp__playwright__browser_click,mcp__playwright__browser_snapshot"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que precisa escrever o YAML do zero. O /install-github-app já entrega os dois workflows num PR pronto — comece por ele.",
+      "Esquecer de dar git pull depois do merge e ficar tentando editar workflows que só existem no GitHub, não na sua máquina.",
+      "Listar só o servidor MCP em mcp_config e esquecer de liberar cada tool dele em allowed_tools. No CI não tem atalho de permissão: tool não listada é tool que não roda.",
+      "Sair customizando tudo de cara com MCP, setup complexo e múltiplos triggers antes de validar o básico. Quando quebra, você não sabe se foi o seu setup ou a integração.",
+      "Deixar a chave de API hardcoded no YAML em vez de usar as Secrets do repositório."
+    ],
+    "dicas": [
+      "Comece com os dois workflows padrão sem mexer em nada e veja review e menção funcionando. Customize só depois, aos poucos.",
+      "Use custom_instructions como o CLAUDE.md do CI: diga o que já está pronto no ambiente e o que ele pode (ou não) assumir.",
+      "Os Actions disparam por eventos. Além de menção e PR, dá pra criar triggers próprios pra outros eventos do GitHub conforme sua operação pedir.",
+      "Trate o review automático de PR como uma segunda camada, não substituto do humano — ele pega o que cansaço e pressa deixam passar."
+    ],
+    "takeaway": "A integração com o GitHub tira o Claude Code do seu terminal e o coloca como membro do time dentro do repositório: ele responde menções, revisa PRs e executa tarefas sozinho — enquanto você tá fazendo outra coisa."
+  },
+  {
+    "slug": "introducao-hooks",
+    "titulo": "Introdução aos hooks: automatize o que você sempre esquece de fazer",
+    "modulo": "Hooks e o SDK",
+    "duracao_leitura": "4 min",
+    "resumo": "Hooks são comandos que o Claude Code dispara automaticamente antes ou depois de usar uma ferramenta. Eles transformam regras que você só \"torce pra acontecer\" em garantias da máquina: rodar o Prettier depois de cada edição, barrar leitura do .env, disparar teste quando um arquivo muda.",
+    "conceitos": [
+      {
+        "termo": "Hook",
+        "definicao": "Um comando do seu sistema (shell, node, python, o que for) que o Claude Code executa sozinho num momento específico do ciclo de trabalho. Não é IA: é determinístico, roda toda vez, sem depender de o modelo 'lembrar' de fazer."
+      },
+      {
+        "termo": "PreToolUse",
+        "definicao": "Hook que roda ANTES da ferramenta ser executada. Como acontece antes, ele tem poder de veto: pode inspecionar o que o Claude quer fazer e bloquear, devolvendo uma mensagem de erro pro modelo. É o seu portão de entrada."
+      },
+      {
+        "termo": "PostToolUse",
+        "definicao": "Hook que roda DEPOIS da ferramenta. A ação já aconteceu, então não dá pra bloquear — mas dá pra reagir: formatar o arquivo recém-editado, rodar lint/typecheck e mandar o resultado de volta pro Claude corrigir."
+      },
+      {
+        "termo": "matcher",
+        "definicao": "O filtro que diz em quais ferramentas o hook se aplica. Ex.: 'Read' para leituras, 'Write|Edit' para escrita e edição. Sem matcher casando, o hook não dispara."
+      },
+      {
+        "termo": "settings.json",
+        "definicao": "Onde os hooks moram. Global em ~/.claude/settings.json (vale pra tudo), de projeto em .claude/settings.json (versionado, vai pro time) e .claude/settings.local.json (só seu, fora do git)."
+      }
+    ],
+    "dicas": [
+      "Comece pelo PostToolUse de formatação — é o hook de maior retorno e menor risco. 'Toda vez que editar um arquivo .ts, roda o Prettier nele.' Pronto, ninguém mais comita código mal formatado.",
+      "Use PreToolUse como cinto de segurança, não como muralha. Bloquear leitura de .env, chaves e pastas de produção evita que segredo vaze pro contexto do modelo sem querer.",
+      "Não escreva o JSON na unha de primeira: rode /hooks dentro do Claude Code. Ele te guia na criação e escreve no settings certo, evitando erro de sintaxe que silenciosamente derruba o hook.",
+      "Escolha o arquivo de settings pensando em quem compartilha: regra do time vai no .claude/settings.json (versionado); macete pessoal vai no .local.json pra não encher o PR dos outros.",
+      "Hook é shell de verdade: ele recebe os detalhes da chamada (qual arquivo, qual ferramenta) via stdin em JSON. Dá pra ler isso e decidir caso a caso, não é tudo ou nada."
+    ],
+    "exemplo": {
+      "contexto": "Projeto Node/TypeScript onde o time vivia brigando no review por formatação e por código que não passava no typecheck. A regra 'sempre rode o Prettier e o tsc antes de salvar' existia no README — e ninguém seguia. Joguei a regra pro Claude Code via hook de projeto.",
+      "explicacao": "O PostToolUse casa em Write e Edit: assim que o Claude termina de mexer num arquivo, o hook formata e checa o tipo automaticamente. Como vai no .claude/settings.json versionado, todo mundo do time herda o comportamento ao dar git pull — sem instalar nada, sem combinar nada. O typecheck devolve o erro pro Claude, que corrige na hora, antes de você sequer olhar o diff.",
+      "comandos": [
+        "# .claude/settings.json (versionado, vai pro time)",
+        "{",
+        "  \"hooks\": {",
+        "    \"PostToolUse\": [",
+        "      {",
+        "        \"matcher\": \"Write|Edit\",",
+        "        \"hooks\": [",
+        "          { \"type\": \"command\", \"command\": \"npx prettier --write \\\"$CLAUDE_FILE_PATH\\\"\" },",
+        "          { \"type\": \"command\", \"command\": \"npx tsc --noEmit\" }",
+        "        ]",
+        "      }",
+        "    ]",
+        "  }",
+        "}",
+        "",
+        "# dentro do Claude Code, pra criar/editar sem errar o JSON:",
+        "/hooks"
+      ]
+    },
+    "passos": [
+      "Decida o gatilho: quer agir ANTES (controlar/bloquear) ou DEPOIS (reagir/corrigir) da ferramenta? Isso define PreToolUse vs PostToolUse.",
+      "Escolha o matcher: qual ferramenta dispara? Read pra leitura, Write|Edit pra escrita. Pense em qual ação do Claude você quer interceptar.",
+      "Escolha o arquivo de settings: global (~/.claude), de projeto versionado (.claude/settings.json) ou pessoal (.claude/settings.local.json).",
+      "Rode /hooks dentro do Claude Code e cadastre o comando — ou edite o settings na mão se já tiver intimidade com o formato.",
+      "Teste de verdade: peça pro Claude editar um arquivo e confirme que o hook rodou (formatou, bloqueou, logou). Hook que você não viu rodar é hook que você não tem."
+    ],
+    "erros_comuns": [
+      "Achar que hook é mais IA. Não é. É comando burro e determinístico — essa é a vantagem: roda 100% das vezes, sem depender de o modelo cooperar.",
+      "Tentar bloquear algo no PostToolUse. Tarde demais: a ação já rolou. Bloqueio só no PreToolUse.",
+      "Colocar regra do time no settings.local.json (que fica fora do git) e estranhar que o colega não tem o mesmo comportamento.",
+      "Esquecer que comando lento no hook trava o fluxo. Se o seu PostToolUse roda a suíte inteira de testes a cada edição, você acabou de tornar o Claude lento e irritante.",
+      "Escrever o JSON na mão e errar uma vírgula. O hook simplesmente não dispara e você fica sem entender por quê. Use /hooks."
+    ],
+    "takeaway": "Regra que depende de alguém lembrar não é regra, é torcida. Hook é a regra virando garantia da máquina."
+  },
+  {
+    "slug": "definindo-hooks",
+    "titulo": "Definindo hooks: colocando regras no caminho do Claude",
+    "modulo": "Hooks e o SDK",
+    "resumo": "Hook é um programa seu que o Claude Code executa automaticamente antes ou depois de cada ferramenta. Com ele você intercepta ações, bloqueia o que não pode acontecer e devolve um motivo pro Claude — sem depender de \"pedir por favor\" no prompt.",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Hook",
+        "definicao": "Um comando (script) que você registra no settings.json e o Claude Code roda sozinho em momentos específicos do ciclo de uma ferramenta. É a forma de aplicar regra de verdade, executada pela máquina, não pelo modelo."
+      },
+      {
+        "termo": "PreToolUse",
+        "definicao": "Hook que dispara ANTES da ferramenta rodar. É o único ponto onde você consegue de fato impedir uma ação (ler um arquivo, rodar um comando) antes que ela aconteça."
+      },
+      {
+        "termo": "PostToolUse",
+        "definicao": "Hook que dispara DEPOIS da ferramenta já ter rodado. Não bloqueia nada — serve pra reagir: formatar código, rodar lint, logar, notificar."
+      },
+      {
+        "termo": "Matcher de ferramenta",
+        "definicao": "O filtro que diz quais ferramentas acionam seu hook (Read, Edit, Bash, Grep, ou um padrão regex). Você só observa o que interessa."
+      },
+      {
+        "termo": "Exit code",
+        "definicao": "O canal de resposta do hook pro Claude. Saída 0 libera a ação; saída 2 num PreToolUse bloqueia, e o que você escreve no stderr volta como explicação pro Claude."
+      },
+      {
+        "termo": "stdin com JSON",
+        "definicao": "Toda vez que o hook roda, o Claude manda pela entrada padrão um JSON com session_id, hook_event_name, tool_name e tool_input. Seu script lê isso pra decidir o que fazer."
+      }
+    ],
+    "dicas": [
+      "Não memorize a lista de ferramentas. Abra o Claude Code e peça: 'liste em bullets todas as ferramentas que você tem acesso agora'. Isso já considera os MCPs que você plugou, que mudam a lista.",
+      "Para proteger conteúdo de arquivo, não vigie só o Read. O Grep também lê conteúdo. Se a regra é 'não tocar no .env', o matcher precisa cobrir Read e Grep — senão fica brecha.",
+      "Use exit 2 com uma mensagem clara no stderr. O Claude lê esse texto e se reorienta sozinho. Bloquear sem explicar só faz ele tentar de novo do mesmo jeito.",
+      "Comece pequeno: um hook que checa um caminho específico vale mais que um framework genérico que você nunca termina de configurar.",
+      "Teste o script isolado antes de plugar: jogue um JSON de exemplo no stdin e confira o exit code com 'echo $?'. Hook que você não testou é hook que falha calado."
+    ],
+    "takeaway": "Prompt é pedido; hook é regra. Quando algo NÃO PODE acontecer, você não escreve no CLAUDE.md — você coloca um PreToolUse no caminho e deixa a máquina garantir.",
+    "passos": [
+      "Decida o momento: se precisa IMPEDIR a ação, é PreToolUse. Se é pra reagir depois (formatar, logar), é PostToolUse.",
+      "Defina quais ferramentas vigiar — o matcher. Pense em todas as portas: pra ler arquivo são Read e Grep; pra rodar comando é Bash.",
+      "Escreva o script que recebe o JSON do tool call pelo stdin, faz o parse e lê tool_name e tool_input.",
+      "Aplique a lógica: se bate na regra (ex: caminho do .env), escreva o motivo no stderr e saia com exit 2; caso contrário saia com exit 0.",
+      "Registre o hook no .claude/settings.json, com o evento, o matcher e o command apontando pro script.",
+      "Teste: alimente um JSON falso no stdin do script e confira o exit code; depois peça pro Claude tentar a ação proibida e veja o bloqueio na prática."
+    ],
+    "exemplo": {
+      "contexto": "Num projeto de cliente, tenho um arquivo secrets/prod.env com chave de produção. O Claude está mexendo no código e em algum momento pode tentar ler esse arquivo pra 'entender a config'. Eu não quero confiar que ele vai obedecer um aviso no CLAUDE.md — quero garantia. Crio um PreToolUse que vigia Read e Grep e barra qualquer acesso a .env.",
+      "explicacao": "O script lê o JSON pelo stdin, pega o caminho que o Claude quer acessar e, se terminar em .env, escreve o motivo no stderr e sai com código 2. O Claude nunca chega a ler o arquivo e recebe a explicação de volta, então redireciona o trabalho em vez de insistir. É a máquina aplicando a regra, não o modelo decidindo respeitá-la.",
+      "comandos": [
+        "# .claude/hooks/block-env.sh",
+        "input=$(cat)  # JSON do tool call chega no stdin",
+        "path=$(echo \"$input\" | jq -r '.tool_input.file_path // .tool_input.pattern // \"\"')",
+        "if echo \"$path\" | grep -q '\\.env'; then",
+        "  echo 'Acesso a arquivos .env bloqueado por politica do projeto.' >&2",
+        "  exit 2",
+        "fi",
+        "exit 0"
+      ]
+    },
+    "erros_comuns": [
+      "Achar que o PostToolUse bloqueia. Ele roda DEPOIS — quando dispara, o arquivo já foi lido. Pra impedir, sempre PreToolUse.",
+      "Vigiar só o Read e esquecer o Grep (e às vezes o Bash com cat). A regra fica furada e o Claude acessa o conteúdo por outra porta.",
+      "Bloquear com exit 2 mas não escrever nada no stderr. O Claude leva o 'não' sem motivo e tenta a mesma coisa de novo.",
+      "Confundir o canal de saída: mensagem pro Claude vai no stderr, não no stdout. Stdout no exit 2 não vira feedback.",
+      "Colocar regra crítica de segurança no CLAUDE.md achando que é garantia. CLAUDE.md é orientação que o modelo pode ignorar; hook é execução."
+    ]
+  },
+  {
+    "slug": "implementando-hook",
+    "titulo": "Implementando um hook: bloqueando a leitura do .env",
+    "modulo": "Hooks e o SDK",
+    "resumo": "Você vai escrever um hook PreToolUse que intercepta a tool Read e bloqueia qualquer tentativa de abrir o .env. É o exemplo mais direto pra entender como hooks viram um cinto de segurança determinístico em cima do Claude.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "PreToolUse",
+        "definicao": "Evento de hook que dispara ANTES de uma tool rodar. É o único ponto onde você consegue cancelar a ação. Se sair com exit code 2, a chamada da tool é abortada e o Claude recebe o motivo."
+      },
+      {
+        "termo": "matcher",
+        "definicao": "Filtro que diz para quais tools o hook vale. 'Read' pega só a Read; você pode usar pipe pra encadear (ex: 'Read|Grep'), mas cada tool manda um payload diferente, então o matcher não garante que sua lógica cubra todas."
+      },
+      {
+        "termo": "stdin / stdout / stderr",
+        "definicao": "O hook é só um processo. O Claude Code joga o contexto da tool como JSON no stdin do seu script. O que você escreve em stderr é a mensagem que o Claude lê de volta. O exit code decide se passa (0) ou bloqueia (2)."
+      },
+      {
+        "termo": "tool_input",
+        "definicao": "Campo do JSON de entrada com os argumentos reais da tool. Pra Read, contém file_path. Cada tool tem um shape próprio: Grep manda pattern e path, Bash manda command."
+      },
+      {
+        "termo": "permissions.deny",
+        "definicao": "Regra de permissão no settings que bloqueia acesso de forma uniforme entre tools (ex: 'Read(**/.env)'). Diferente do hook, não depende de você reimplementar a checagem pra cada tool."
+      }
+    ],
+    "passos": [
+      "Abra o settings.local.json dentro de .claude/ no seu projeto (esse arquivo não vai pro git, ideal pra config local de segurança).",
+      "Adicione um bloco hooks > PreToolUse com um matcher 'Read' apontando um command que executa seu script: { \"type\": \"command\", \"command\": \"node $PWD/hooks/read_hook.js\" }.",
+      "Crie o arquivo hooks/read_hook.js que lê o stdin, faz JSON.parse, pega tool_input.file_path e checa se contém '.env'.",
+      "Se bater, escreva a mensagem no stderr com console.error e chame process.exit(2) pra abortar. Caso contrário, process.exit(0) pra liberar.",
+      "Reinicie o Claude Code. Mudança em hook só vale depois do restart — não é hot reload.",
+      "Peça pro Claude ler o .env e confirme que ele apanha o bloqueio. Depois peça outro arquivo qualquer pra ver passando normal."
+    ],
+    "exemplo": {
+      "contexto": "Projeto com um .env cheio de chave de API e token. Você não quer que o Claude leia esse arquivo durante a sessão — nem por acidente, nem se ele 'achar útil' espiar.",
+      "explicacao": "O settings registra o hook só pra Read. O script lê o JSON do stdin, isola o file_path e, se for o .env, sai com código 2 escrevendo o motivo no stderr. O Claude recebe esse texto e entende que foi barrado por um hook, ajustando o plano sozinho. Repare que isso é uma trava de código rodando localmente — não depende do modelo 'decidir respeitar', é determinístico.",
+      "comandos": [
+        "// .claude/settings.local.json",
+        "{ \"hooks\": { \"PreToolUse\": [ { \"matcher\": \"Read\", \"hooks\": [ { \"type\": \"command\", \"command\": \"node $PWD/hooks/read_hook.js\" } ] } ] } }",
+        "",
+        "// hooks/read_hook.js",
+        "let input = \"\"; process.stdin.on(\"data\", d => input += d);",
+        "process.stdin.on(\"end\", () => {",
+        "  const { tool_input } = JSON.parse(input);",
+        "  if ((tool_input?.file_path || \"\").includes(\".env\")) {",
+        "    console.error(\"Bloqueado: leitura do .env não é permitida nesta sessão.\");",
+        "    process.exit(2);",
+        "  }",
+        "  process.exit(0);",
+        "});"
+      ]
+    },
+    "dicas": [
+      "O exit code é o coração do hook: 0 libera, 2 bloqueia e devolve o stderr pro Claude. Qualquer outro código não bloqueia — então erro de digitação no seu script pode virar um hook que parece funcionar mas deixa tudo passar.",
+      "Sempre reinicie o Claude Code depois de mexer em hook. Esqueci isso umas dez vezes e fiquei achando que o script estava quebrado.",
+      "Use settings.local.json pra travas de segurança que são suas e não devem ir pro repositório. Se quiser valer pro time inteiro, vai no settings.json versionado.",
+      "$PWD no command resolve pra raiz do projeto, então o caminho do script fica portátil entre máquinas do time."
+    ],
+    "erros_comuns": [
+      "Achar que bloquear Read protege o .env de tudo. Não protege. Grep e Bash mandam payload diferente — um 'cat .env' no Bash ou um grep por API_KEY no projeto passa reto, porque nenhum deles tem file_path.",
+      "Encadear matcher 'Read|Grep' e reusar a mesma checagem de file_path. A Grep manda pattern e path (um diretório de busca), não file_path — sua condição nunca dispara e você fica com falsa sensação de segurança.",
+      "Confiar só no hook pra segurança de verdade. Pra cobertura uniforme entre todas as tools, o caminho é permissions.deny com algo como 'Read(**/.env)', que não depende de você reimplementar a lógica tool por tool.",
+      "Esquecer de tratar o stdin como stream. Se você ler antes do evento 'end', pega JSON cortado e o parse explode."
+    ],
+    "takeaway": "Hook é código determinístico rodando ANTES da tool — é o lugar onde você impõe regra que o modelo não tem como ignorar."
+  },
+  {
+    "slug": "pegadinhas-hooks",
+    "titulo": "Pegadinhas com hooks",
+    "modulo": "Hooks e o SDK",
+    "duracao_leitura": "4 min",
+    "resumo": "Hooks são poderosos, mas têm armadilhas práticas: caminho absoluto vs. relativo, segurança de scripts e como compartilhar settings.json sem quebrar na máquina do colega. Aqui está o que morde na vida real.",
+    "conceitos": [
+      {
+        "termo": "Hook",
+        "definicao": "Comando shell que o Claude Code dispara automaticamente em eventos do ciclo de vida (antes/depois de editar arquivo, rodar Bash, ao terminar uma resposta, etc). Configurado no settings.json."
+      },
+      {
+        "termo": "settings.local.json",
+        "definicao": "Arquivo de config por projeto que NÃO vai pro git (entra no .gitignore). É onde moram coisas específicas da sua máquina, como caminhos absolutos de scripts de hook."
+      },
+      {
+        "termo": "Caminho absoluto vs. relativo",
+        "definicao": "Absoluto começa na raiz (/Users/voce/projeto/scripts/check.sh). Relativo depende de onde o processo está rodando (./scripts/check.sh). A doc da Anthropic recomenda absoluto em hooks por segurança."
+      },
+      {
+        "termo": "Path interception / binary planting",
+        "definicao": "Ataques onde alguém coloca um binário ou script malicioso num diretório que será resolvido antes do legítimo. Usar caminho absoluto fecha essa porta."
+      },
+      {
+        "termo": "Placeholder de PWD",
+        "definicao": "Truque pra versionar config com caminho absoluto sem hardcodar a SUA máquina: um script de setup substitui $PWD pelo caminho real do projeto na máquina de quem clonou."
+      }
+    ],
+    "dicas": [
+      "Use caminho ABSOLUTO nos comandos de hook. Relativo parece funcionar nos seus testes e quebra silenciosamente quando o Claude roda o comando de outro diretório.",
+      "Hook roda como VOCÊ, com suas permissões. Trate o script de hook como código de produção: revise, não confie em script que veio de fora sem ler.",
+      "Mantenha config versionável (settings.json, sem caminho de máquina) separada da config local (settings.local.json, com caminhos absolutos). Coloque settings.local.json no .gitignore.",
+      "Pra compartilhar hooks no time, versione um settings.example.json com um placeholder tipo $PWD e um script de setup (npm run setup) que gera o settings.local.json com o caminho real.",
+      "Hook que retorna código de saída diferente de zero bloqueia a ação. Use isso de propósito (ex: barrar edição em arquivo proibido), mas cuidado pra não travar seu próprio fluxo sem querer."
+    ],
+    "erros_comuns": [
+      "Usar caminho relativo no hook e achar que está tudo certo porque rodou na sua pasta — em outro contexto o Claude não acha o script.",
+      "Commitar settings.local.json com /Users/seunome/... dentro. O colega clona e o hook aponta pra um caminho que não existe na máquina dele.",
+      "Tratar hook como config inofensiva. É execução de shell automática; um script malicioso colocado via path interception roda com seus privilégios.",
+      "Confundir os dois settings.json. Editar o errado e ficar achando que o hook 'não pega'."
+    ],
+    "passos": [
+      "Crie seu script de hook dentro do projeto, ex: scripts/pre-edit-check.sh, e teste rodando ele direto no terminal.",
+      "No settings.local.json, registre o hook com CAMINHO ABSOLUTO: \"command\": \"/Users/voce/projeto/scripts/pre-edit-check.sh\".",
+      "Adicione settings.local.json no .gitignore pra não vazar caminho da sua máquina.",
+      "Pra time: crie settings.example.json igual, mas troque o caminho por \"$PWD/scripts/pre-edit-check.sh\".",
+      "Escreva um script de setup (Node, shell, o que for) que copia o example, substitui $PWD pelo diretório real e salva como settings.local.json. Ligue ele no npm run setup.",
+      "Documente no README: 'rode npm run setup depois de clonar'. Pronto, hook portável e seguro."
+    ],
+    "exemplo": {
+      "contexto": "Você montou um hook que roda um lint antes de toda edição de arquivo .py. Funciona perfeito na sua máquina. Aí um dev do time clona o repo e reclama que 'o hook não faz nada'.",
+      "explicacao": "O motivo quase sempre é caminho. Se você usou caminho relativo, o Claude Code resolve a partir de um diretório que não é o que você imagina e não encontra o script — falha silenciosa. Se você usou absoluto e commitou o settings.local.json, o caminho aponta pra /Users/SEUNOME/... que não existe na máquina do colega. A solução é versionar um example com placeholder e gerar o arquivo local no setup, garantindo caminho absoluto correto em cada máquina.",
+      "comandos": [
+        "# .gitignore",
+        "echo '.claude/settings.local.json' >> .gitignore",
+        "# rodar uma vez após clonar o projeto",
+        "npm run setup",
+        "# o setup transforma $PWD/scripts/lint.sh no caminho absoluto real e gera o settings.local.json"
+      ]
+    },
+    "takeaway": "Hook que funciona só na sua máquina não é automação, é dívida técnica: caminho absoluto + config local fora do git é o que faz o time todo rodar igual."
+  },
+  {
+    "slug": "hooks-uteis",
+    "titulo": "Hooks úteis na prática: feedback automático pro Claude se corrigir sozinho",
+    "modulo": "Hooks e o SDK",
+    "resumo": "Hooks são scripts que disparam quando o Claude mexe no seu código e devolvem feedback na hora. Servem pra fechar o buraco entre \"o Claude editou o arquivo\" e \"o Claude quebrou outra coisa que não percebeu\".",
+    "duracao_leitura": "5 min",
+    "conceitos": [
+      {
+        "termo": "Hook",
+        "definicao": "Script seu que o Claude Code executa automaticamente em momentos específicos do trabalho (antes ou depois de usar uma ferramenta). Você configura em settings.json e o Claude nem precisa lembrar de chamar — a engine dispara sozinha."
+      },
+      {
+        "termo": "PostToolUse",
+        "definicao": "Tipo de hook que roda DEPOIS que o Claude usou uma ferramenta (Edit, Write, MultiEdit). É onde você valida o resultado: rodar typecheck, lint ou teste e devolver o erro pro Claude consertar."
+      },
+      {
+        "termo": "PreToolUse",
+        "definicao": "Hook que roda ANTES da ferramenta executar. Pode bloquear a ação (ex: impedir edição em pasta proibida) antes de qualquer dano."
+      },
+      {
+        "termo": "Exit code 2",
+        "definicao": "O canal de comunicação do hook com o Claude. Quando o script sai com código 2, o que ele imprimiu no stderr volta pro Claude como sinal de que algo está errado e precisa ser corrigido. Sair com 0 = está tudo certo, segue o jogo."
+      },
+      {
+        "termo": "Hook como gatekeeper",
+        "definicao": "A ideia central: o hook é determinístico e burro, mas confiável. Ele não confia que o Claude lembrou de validar — ele força a validação toda vez, sem exceção."
+      }
+    ],
+    "exemplo": {
+      "contexto": "Você tem um projeto TypeScript e pede pro Claude adicionar um parâmetro novo numa função usada em 8 lugares. O Claude edita a definição da função lindamente — e esquece de atualizar 5 dos 8 call sites. O código quebra e ele segue feliz como se nada tivesse acontecido.",
+      "explicacao": "A solução é um hook PostToolUse que roda o type-checker depois de toda edição em arquivo .ts. Se o tsc acusar erro, o hook devolve o erro pro Claude na mesma hora. O Claude lê 'argumento faltando em main.ts', entende que ele mesmo causou isso e sai corrigindo os call sites. Sem o hook, esse erro só apareceria na próxima vez que VOCÊ rodasse o build — provavelmente já tarde. A mesma lógica vale pra linguagem sem tipagem: troca o type-check por rodar a suíte de testes.",
+      "comandos": [
+        "# settings.json (.claude/settings.json no projeto)",
+        "{",
+        "  \"hooks\": {",
+        "    \"PostToolUse\": [{",
+        "      \"matcher\": \"Edit|Write|MultiEdit\",",
+        "      \"hooks\": [{ \"type\": \"command\", \"command\": \"node .claude/hooks/typecheck.js\" }]",
+        "    }]",
+        "  }",
+        "}",
+        "",
+        "# dentro do typecheck.js, o que importa:",
+        "# 1. roda: npx tsc --noEmit",
+        "# 2. se achou erro -> console.error(saida) + process.exit(2)",
+        "# 3. se passou -> process.exit(0)"
+      ]
+    },
+    "passos": [
+      "Identifique o ponto de dor real do SEU projeto: onde o Claude quebra coisa sem perceber? (typecheck, lint, teste, padrão de pasta)",
+      "Escreva um script simples que rode essa validação e saia com exit code 2 + mensagem no stderr quando falhar, ou 0 quando passar.",
+      "Registre o hook no .claude/settings.json com o matcher da ferramenta (Edit|Write|MultiEdit) e o comando do script.",
+      "Reinicie o Claude Code pra carregar o hook e teste com uma mudança que você sabe que quebraria.",
+      "Comece com hooks leves e rápidos. Só monte hooks pesados (que disparam outro Claude pra revisar) nas pastas realmente críticas."
+    ],
+    "dicas": [
+      "Mantenha o hook rápido. Um PostToolUse que demora 10s roda a cada edição e mata seu fluxo. Typecheck e lint são baratos; deixe o pesado pra pastas críticas.",
+      "Hook não substitui CLAUDE.md — combina com ele. CLAUDE.md pede 'reúse queries existentes'; o hook GARANTE quando o Claude esquece. Instrução convence, hook obriga.",
+      "Dá pra subir o nível: um hook pode disparar uma segunda instância do Claude (via SDK) só pra revisar a mudança e procurar código duplicado. Funciona, mas custa tempo e tokens a cada edição — use só onde duplicação dói de verdade.",
+      "O exit code é tudo. Errou o código de saída e o feedback não volta pro Claude — o hook vira decoração silenciosa.",
+      "Versione os hooks junto com o projeto (.claude/hooks/ + settings.json no git). Aí o time inteiro herda as mesmas redes de proteção."
+    ],
+    "erros_comuns": [
+      "Achar que o hook é instrução pro Claude. Não é — é um script que a engine roda. O Claude não 'decide' rodar o hook, ele simplesmente acontece.",
+      "Esquecer de sair com exit code 2. Sem isso, o erro que o script imprimiu nunca chega no Claude e o hook não serve pra nada.",
+      "Colocar lógica pesada em hook que dispara a cada edição. Você transforma cada Edit numa espera de vários segundos e desiste do hook em uma semana.",
+      "Monitorar o projeto inteiro com um hook caro de revisão por IA. Restrinja por pasta (ex: só ./queries) senão o custo explode.",
+      "Deixar um process.exit(0) no topo do script 'pra testar' e esquecer lá — o hook fica desligado e você jura que está funcionando."
+    ],
+    "takeaway": "O Claude é ótimo editando e péssimo lembrando de validar — o hook é a rede que valida por ele, toda vez, sem confiar na memória de ninguém."
+  },
+  {
+    "slug": "mais-um-hook",
+    "titulo": "Mais um hook útil: o ciclo de vida completo e o truque do log",
+    "modulo": "Hooks e o SDK",
+    "resumo": "Hook no Claude Code não é só PreToolUse e PostToolUse. Tem hook pra quando a sessão começa, pra quando o Claude termina de responder, pra quando você manda um prompt. E tem um truque pra parar de adivinhar o que chega no seu script.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Eventos de hook",
+        "definicao": "Os momentos do ciclo de vida do Claude Code em que você pode pendurar um comando. Além de PreToolUse e PostToolUse, existem Stop, SessionStart, SessionEnd, UserPromptSubmit, Notification, SubagentStop e PreCompact."
+      },
+      {
+        "termo": "Stop",
+        "definicao": "Dispara quando o Claude termina de responder a sua mensagem. Útil pra rodar lint, testes ou mandar um aviso quando ele 'devolve a bola' pra você."
+      },
+      {
+        "termo": "UserPromptSubmit",
+        "definicao": "Dispara no instante em que você envia um prompt, ANTES do Claude processar. Dá pra injetar contexto, bloquear ou registrar tudo que você pede."
+      },
+      {
+        "termo": "SessionStart / SessionEnd",
+        "definicao": "Disparam ao abrir/retomar e ao encerrar uma sessão. Bons pra carregar estado inicial ou fechar logs e limpar arquivos temporários."
+      },
+      {
+        "termo": "Payload de stdin",
+        "definicao": "O JSON que o Claude Code joga na entrada padrão do seu comando. O formato MUDA conforme o evento e, em Pre/PostToolUse, conforme a ferramenta que disparou."
+      },
+      {
+        "termo": "Hook de log",
+        "definicao": "Um hook descartável que só despeja o stdin num arquivo (ex: jq . > hook-log.json) pra você ver exatamente qual JSON chega antes de escrever a lógica de verdade."
+      }
+    ],
+    "passos": [
+      "Abra .claude/settings.json (ou crie o bloco hooks se ainda não existe).",
+      "Pendure um hook de log no evento que você quer investigar, com matcher \"*\" e command \"jq . > /tmp/hook-log.json\".",
+      "Rode uma tarefa normal no Claude Code que dispare aquele evento.",
+      "Abra /tmp/hook-log.json e leia o JSON real: nome do campo, estrutura do tool_input, tudo.",
+      "Agora que você sabe a forma exata do payload, troque o jq pelo seu script de verdade lendo os campos certos.",
+      "Teste de novo e confirme que o script lê o campo que você esperava, não um que você chutou."
+    ],
+    "exemplo": {
+      "contexto": "Eu queria um som de notificação toda vez que o Claude terminasse uma tarefa longa enquanto eu estava em outra aba. O evento certo é o Stop. Mas antes de escrever o script, eu não fazia ideia do que chegava no stdin do Stop, então primeiro liguei o hook de log pra ver.",
+      "explicacao": "O payload do Stop é minúsculo (basicamente session_id e stop_hook_active), bem diferente do PostToolUse, que vem cheio de tool_input e tool_response. Se eu tivesse assumido que os dois são iguais, meu jq teria quebrado tentando ler um campo que não existe. Confirmar o formato primeiro economiza meia hora de tentativa e erro.",
+      "comandos": [
+        "// .claude/settings.json — passo 1: só logar pra ver o que chega",
+        "\"Stop\": [{ \"matcher\": \"*\", \"hooks\": [{ \"type\": \"command\", \"command\": \"jq . > /tmp/stop-log.json\" }] }]",
+        "// passo 2: depois de ver o JSON, trocar pelo script real",
+        "\"Stop\": [{ \"matcher\": \"*\", \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }] }]"
+      ]
+    },
+    "dicas": [
+      "Antes de escrever QUALQUER hook não trivial, ligue o hook de log primeiro. Ver o JSON real é mais rápido que adivinhar e debugar.",
+      "Escolha o evento pela intenção: terminou de responder é Stop; você mandou prompt é UserPromptSubmit; abriu o projeto é SessionStart.",
+      "Notification dispara quando o Claude pede permissão OU fica ocioso por ~60s. Bom pra te chamar de volta, ruim se você odeia barulho.",
+      "PreCompact roda antes de compactar o contexto. Se você quer salvar algo do histórico antes dele encolher, é aqui.",
+      "Use caminhos absolutos no command do hook. O diretório de trabalho do hook nem sempre é o que você imagina."
+    ],
+    "erros_comuns": [
+      "Achar que todo hook recebe o mesmo JSON. O payload muda por evento e por ferramenta — por isso o hook de log existe.",
+      "Escrever a lógica do hook chutando o nome dos campos e descobrir só na hora que tool_input tem outra estrutura.",
+      "Confundir Stop com SessionEnd: Stop é a cada resposta concluída; SessionEnd é só quando a sessão inteira fecha.",
+      "Usar caminho relativo no command e o script não achar o arquivo porque o cwd do hook é outro.",
+      "Deixar o hook de log ligado em produção e poluir o disco com JSONs a cada evento."
+    ],
+    "takeaway": "Não adivinhe o que entra no seu hook: ligue um log de uma linha, veja o JSON real e só então escreva a lógica."
+  },
+  {
+    "slug": "sdk-claude-code",
+    "titulo": "O SDK do Claude Code: rode o agente dentro do seu código",
+    "modulo": "Hooks e o SDK",
+    "resumo": "O Agent SDK te dá o mesmo Claude Code que você usa no terminal, só que chamável de dentro de um script TypeScript ou Python. Em vez de digitar prompts à mão, você embute o agente como uma peça de um processo maior.",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "Agent SDK",
+        "definicao": "Biblioteca oficial da Anthropic (pacote @anthropic-ai/claude-agent-sdk) que expõe o Claude Code como código. Mesmo agent loop, mesmas ferramentas (Read, Edit, Glob, Bash...), só que você controla por programa em vez de digitar no terminal."
+      },
+      {
+        "termo": "query()",
+        "definicao": "A função central do SDK. Você passa um prompt e ela devolve um stream assíncrono de mensagens — chamadas de ferramenta, resultados e o texto do Claude — que você itera com for await."
+      },
+      {
+        "termo": "allowedTools",
+        "definicao": "Opção que restringe quais ferramentas o agente pode usar naquela chamada. É o equivalente em código da flag --allowedTools do CLI. Sem ela, o comportamento padrão é conservador."
+      },
+      {
+        "termo": "Padrão read-only por padrão",
+        "definicao": "Diferente do CLI interativo, o SDK não sai editando arquivo de cara. Por segurança ele tende a só ler/buscar. Pra escrever ou editar você precisa liberar explicitamente (ex: allowedTools com 'Edit') ou ajustar permissões no settings."
+      },
+      {
+        "termo": "Claude Code como peça de pipeline",
+        "definicao": "O uso mais forte do SDK não é substituir o terminal, é virar um bloco de inteligência dentro de um fluxo seu: um script de CI, um hook, um cron, um endpoint."
+      }
+    ],
+    "passos": [
+      "Crie uma pasta e inicialize o projeto: mkdir sdk-demo && cd sdk-demo && npm init -y",
+      "Instale o pacote certo: npm install @anthropic-ai/claude-agent-sdk (cuidado: @anthropic-ai/claude-code é o CLI, não dá pra importar)",
+      "Crie um index.mjs importando { query } e itere o stream com for await sobre query({ prompt })",
+      "Rode com node index.mjs e observe as mensagens JSON saindo — é a mesma conversa que rola no terminal",
+      "Quando precisar que o agente escreva, libere as ferramentas: passe options: { allowedTools: ['Read','Edit'] } na chamada",
+      "Pra algo recorrente, embuta esse script num hook, num passo de CI ou num cron — aí o SDK começa a pagar"
+    ],
+    "exemplo": {
+      "contexto": "Toda sexta eu rodo uma varredura nos repositórios de cliente procurando segredos commitados por engano (chave de API, token no .env versionado). Antes eu abria o Claude Code na mão em cada projeto. Com o SDK virou um script que roda sozinho no cron e me manda o resultado.",
+      "explicacao": "O pulo do gato é o allowedTools. Pra varredura eu só preciso de leitura e busca (Read, Glob, Grep) — não quero que o agente saia editando nada. Aí o padrão read-only do SDK joga a meu favor: é exatamente o comportamento seguro que eu quero. Só num segundo script, o que de fato corrige, é que eu libero 'Edit'. Separar leitura de escrita em duas chamadas é a forma mais simples de não tomar susto.",
+      "comandos": [
+        "mkdir varredura-segredos && cd varredura-segredos",
+        "npm init -y && npm install @anthropic-ai/claude-agent-sdk",
+        "node varredura.mjs   # itera query({ prompt, options: { allowedTools: ['Read','Glob','Grep'] } })"
+      ]
+    },
+    "erros_comuns": [
+      "Instalar @anthropic-ai/claude-code achando que vai importar no código — esse é o CLI e não é importável. O pacote do SDK é @anthropic-ai/claude-agent-sdk.",
+      "Esperar que o SDK edite arquivos sozinho como o CLI faz interativamente. Por padrão ele é conservador; sem liberar 'Edit'/'Write' ele só lê e busca, e você fica achando que 'não funcionou'.",
+      "Liberar a ferramenta toda (Edit, Bash) num script que roda sem ninguém olhando. Em automação, restrinja allowedTools ao mínimo necessário — o agente não tem você ali pra aprovar cada passo.",
+      "Tratar o SDK como um chat. O valor está em embutir como peça de pipeline (hook, CI, cron), não em recriar o terminal por código."
+    ],
+    "dicas": [
+      "Comece read-only. Rode primeiro só lendo, veja o stream de mensagens, e só depois libere escrita quando confiar no que o agente propõe.",
+      "A última mensagem do stream costuma trazer a resposta final consolidada do Claude — é dela que você extrai o resultado pra logar, postar no Slack ou abrir um PR.",
+      "Use o SDK exatamente onde o hook não basta: quando você precisa de julgamento ('isso aqui é um segredo de verdade ou é exemplo?'), não de uma regra fixa.",
+      "TypeScript e Python têm paridade — escolha a linguagem do projeto onde o agente vai morar, não a 'preferida'.",
+      "Para hook + SDK juntos: o hook dispara no evento, o SDK traz a inteligência. É a dobradinha que transforma automação burra em automação que pensa."
+    ],
+    "takeaway": "O SDK não é pra você conversar com o Claude por código — é pra colocar um agente que pensa dentro de um processo que antes era burro."
+  },
+  {
+    "slug": "resumo-proximos-passos",
+    "titulo": "Resumo e próximos passos: o que fazer na segunda-feira",
+    "modulo": "Encerramento",
+    "resumo": "Você já viu o Claude Code por dentro: CLAUDE.md, comandos, MCP, hooks e automação. Esta aula amarra tudo num plano de ação curto pra você sair do \"assisti o curso\" e entrar no \"uso todo dia no trabalho real\".",
+    "duracao_leitura": "4 min",
+    "conceitos": [
+      {
+        "termo": "CLAUDE.md",
+        "definicao": "Arquivo de memória do projeto que o Claude Code lê em toda sessão. É onde você documenta stack, convenções, comandos de build/test e regras do time. Bom CLAUDE.md = menos retrabalho e menos explicação repetida."
+      },
+      {
+        "termo": "Slash commands customizados",
+        "definicao": "Arquivos .md em .claude/commands/ que viram comandos seus (ex: /revisar-pr, /changelog). Encapsulam um prompt que você repete, transformando tarefa manual em um atalho versionado no repo."
+      },
+      {
+        "termo": "MCP (Model Context Protocol)",
+        "definicao": "Padrão pra conectar o Claude Code a ferramentas externas (banco, GitHub, Sentry, seu CRM). Você dá ao agente acesso aos sistemas que já usa, em vez de ficar copiando dado na mão."
+      },
+      {
+        "termo": "Hooks",
+        "definicao": "Gatilhos configurados em settings.json que rodam comandos seus em eventos do Claude (antes de editar, depois de salvar, ao terminar). É como você impõe lint, format e testes sem depender da boa vontade do modelo."
+      },
+      {
+        "termo": "Automação por evento (GitHub)",
+        "definicao": "Delegar ao Claude tarefas disparadas por eventos do repositório — abrir PR, responder issue, revisar diff. O salto de 'ferramenta que me ajuda enquanto digito' pra 'agente que trabalha sozinho no fundo'."
+      }
+    ],
+    "dicas": [
+      "Não tente lembrar tudo do curso. Escolha UMA coisa (provavelmente um bom CLAUDE.md) e implemente hoje no seu projeto real.",
+      "A homepage do Claude Code (docs.anthropic.com/claude-code) muda toda semana. Coloque na sua leitura de sexta — recurso novo aparece o tempo todo.",
+      "Comece os hooks pelo básico e chato: rodar o formatador e o lint depois de cada edição. Isso sozinho já elimina metade dos 'erros bobos'.",
+      "Transforme em /comando todo prompt que você digitou duas vezes. Se repetiu, vira atalho versionado no repo pro time inteiro usar.",
+      "Antes de plugar 10 MCPs, plugue 1 que resolve uma dor concreta sua (ex: o do GitHub ou o do seu banco). Ferramenta sem uso real é só barulho."
+    ],
+    "takeaway": "Curso assistido não muda nada; CLAUDE.md commitado e o primeiro /comando rodando no projeto real, sim.",
+    "passos": [
+      "Hoje: rode /init no seu projeto principal e edite o CLAUDE.md à mão — tire o genérico, escreva como o time DE VERDADE builda, testa e nomeia as coisas.",
+      "Esta semana: crie um slash command pra uma tarefa repetitiva sua (ex: .claude/commands/revisar-pr.md) e use ele de verdade pelo menos 3 vezes.",
+      "Esta semana: configure UM hook em settings.json pra rodar seu formatador/lint após edições de arquivo.",
+      "Próximas 2 semanas: conecte 1 MCP server que resolve uma dor real (GitHub, banco, ou o sistema que você mais consulta).",
+      "Quando estiver confortável: olhe a integração com GitHub e delegue uma tarefa recorrente por evento (ex: rascunhar resposta de issue ou primeira passada de review de PR)."
+    ],
+    "exemplo": {
+      "contexto": "Você terminou o curso e quer que ele renda no trabalho na próxima segunda. Em vez de 'revisar tudo', você faz três movimentos concretos no seu repositório de produção.",
+      "comandos": [
+        "claude",
+        "/init",
+        "# edite .claude/CLAUDE.md: descreva stack, comando de teste (ex: npm test) e convenções reais",
+        "mkdir -p .claude/commands && echo 'Revise o diff atual buscando bugs e quebras de contrato. Não elogie, só aponte problemas.' > .claude/commands/revisar.md",
+        "/revisar"
+      ],
+      "explicacao": "/init gera um rascunho do CLAUDE.md que você refina à mão — aí o Claude para de chutar sua stack. O arquivo em .claude/commands/ vira o comando /revisar, que você (e o time) reusa em qualquer PR. Em 15 minutos você saiu da teoria pra um fluxo que já trabalha por você."
+    },
+    "erros_comuns": [
+      "Achar que terminou: assistir ao curso e nunca commitar um CLAUDE.md. Sem isso, o agente recomeça burro toda sessão.",
+      "Tratar o Claude Code como ferramenta estática. Ele está em desenvolvimento ativo; quem não acompanha a doc perde recurso que economizaria horas.",
+      "Empilhar MCPs e comandos que ninguém usa. Automação que não resolve dor real só polui o contexto e atrapalha o agente.",
+      "Pular hooks por preguiça e depois reclamar que o Claude 'esquece' de formatar/testar. Regra que precisa ser garantida vira hook, não pedido educado no prompt."
+    ]
+  }
+]
