@@ -1,165 +1,187 @@
 import { motion } from 'framer-motion'
 import { accentOf } from './Bits.jsx'
 
-/* Biblioteca de cenas animadas que abrem cada aula (no lugar do vídeo).
-   Todas são SVG + Framer Motion, leves e em loop. Recebem labels e accent. */
+/* Aberturas de aula: arte de movimento abstrata (SVG + Framer), com glow suave.
+   Os rótulos aparecem como chips animados ABAIXO — nunca dentro das formas. */
 
-const loopT = (i) => ({ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.2 })
+const EASE = [0.22, 1, 0.36, 1]
+const CX = 240, CY = 110
 
-function SceneLoop({ labels = [], c }) {
-  const pts = [{ x: 200, y: 36 }, { x: 332, y: 130 }, { x: 282, y: 280 }, { x: 118, y: 280 }, { x: 68, y: 130 }].slice(0, Math.max(3, Math.min(5, labels.length || 4)))
+// núcleo luminoso reutilizável
+function Core({ a, r = 16 }) {
+  return (
+    <>
+      <motion.circle cx={CX} cy={CY} r={r * 2.6} fill={a} filter="url(#soft)" opacity="0.18"
+        animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} style={{ transformOrigin: `${CX}px ${CY}px` }} />
+      <circle cx={CX} cy={CY} r={r} fill={a} />
+      <circle cx={CX} cy={CY} r={r} fill="#fff" opacity="0.18" />
+    </>
+  )
+}
+
+function SceneLoop({ a }) {
   return (
     <g>
-      <motion.circle cx="200" cy="160" r="96" fill="none" stroke={c.stroke} strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 6"
-        animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }} style={{ transformOrigin: '200px 160px' }} />
-      <motion.circle cx="200" cy="64" r="6" fill={c.fill}
-        animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: 'linear' }} style={{ transformOrigin: '200px 160px' }} />
-      {pts.map((p, i) => (
-        <g key={i}>
-          <motion.circle cx={p.x} cy={p.y} r="9" fill={c.fill} animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }} transition={loopT(i)} />
-          <text x={p.x} y={p.y + (p.y < 160 ? -16 : 26)} textAnchor="middle" fontSize="13" fill="currentColor" fontWeight="600">{labels[i]}</text>
-        </g>
-      ))}
+      <circle cx={CX} cy={CY} r="74" fill="none" stroke={a} strokeOpacity="0.22" strokeWidth="1.5" />
+      {[0, 1, 2].map((i) => {
+        const ang = (i / 3) * Math.PI * 2 - Math.PI / 2
+        return <motion.circle key={i} cx={CX + Math.cos(ang) * 74} cy={CY + Math.sin(ang) * 74} r="6" fill={a}
+          animate={{ scale: [1, 1.6, 1], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.7, ease: 'easeInOut' }} />
+      })}
+      <motion.g animate={{ rotate: 360 }} transition={{ duration: 7, repeat: Infinity, ease: 'linear' }} style={{ transformOrigin: `${CX}px ${CY}px` }}>
+        <circle cx={CX} cy={CY - 74} r="7" fill={a} filter="url(#soft)" />
+        <circle cx={CX} cy={CY - 74} r="4" fill="#fff" opacity="0.9" />
+      </motion.g>
+      <Core a={a} r="13" />
     </g>
   )
 }
 
-function SceneConnect({ labels = [], c }) {
-  const sats = [{ x: 70, y: 70 }, { x: 330, y: 80 }, { x: 60, y: 250 }, { x: 340, y: 250 }, { x: 200, y: 40 }].slice(0, Math.max(3, Math.min(5, labels.length || 4)))
+function SceneConnect({ a }) {
+  const sats = [{ x: 70, y: 48 }, { x: 410, y: 56 }, { x: 64, y: 172 }, { x: 416, y: 168 }]
   return (
     <g>
       {sats.map((s, i) => (
         <g key={i}>
-          <line x1="200" y1="160" x2={s.x} y2={s.y} stroke={c.stroke} strokeOpacity="0.3" strokeWidth="1.5" />
-          <motion.circle r="4" fill={c.fill} animate={{ cx: [200, s.x], cy: [160, s.y], opacity: [0, 1, 0] }} transition={loopT(i)} />
-          <circle cx={s.x} cy={s.y} r="22" fill="var(--surface)" stroke={c.stroke} strokeOpacity="0.5" />
-          <text x={s.x} y={s.y + 4} textAnchor="middle" fontSize="11" fill="currentColor">{(labels[i] || '').slice(0, 10)}</text>
+          <line x1={CX} y1={CY} x2={s.x} y2={s.y} stroke={a} strokeOpacity="0.18" strokeWidth="1.5" />
+          <motion.circle r="3.5" fill={a} filter="url(#soft)"
+            animate={{ cx: [CX, s.x], cy: [CY, s.y], opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.45, ease: 'easeInOut' }} />
+          <motion.circle cx={s.x} cy={s.y} r="6" fill={a} animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.45 }} />
         </g>
       ))}
-      <motion.circle cx="200" cy="160" r="30" fill={c.fill} fillOpacity="0.15" stroke={c.stroke}
-        animate={{ scale: [1, 1.12, 1] }} transition={{ duration: 2.2, repeat: Infinity }} />
-      <circle cx="200" cy="160" r="13" fill={c.fill} />
+      <Core a={a} r="15" />
     </g>
   )
 }
 
-function ScenePipeline({ labels = [], c }) {
-  const stages = (labels.length ? labels : ['entrada', 'regra', 'ação', 'saída']).slice(0, 4)
-  const xs = stages.map((_, i) => 70 + i * (260 / (stages.length - 1 || 1)))
+function ScenePipeline({ a }) {
   return (
     <g>
-      <line x1="60" y1="160" x2="340" y2="160" stroke={c.stroke} strokeOpacity="0.3" strokeWidth="2" />
-      <motion.circle r="7" fill={c.fill} cy="160"
-        animate={{ cx: [60, 340], opacity: [0, 1, 1, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} />
-      {stages.map((s, i) => (
-        <g key={i}>
-          <motion.rect x={xs[i] - 26} y="138" width="52" height="44" rx="9" fill="var(--surface)" stroke={c.stroke} strokeOpacity="0.5"
-            animate={{ stroke: [c.stroke, c.fill, c.stroke] }} transition={loopT(i)} />
-          <text x={xs[i]} y="164" textAnchor="middle" fontSize="11" fill="currentColor">{(s || '').slice(0, 8)}</text>
-        </g>
+      <rect x="60" y={CY - 2} width="360" height="4" rx="2" fill={a} opacity="0.18" />
+      {[150, 240, 330].map((x, i) => (
+        <motion.circle key={i} cx={x} cy={CY} r="5" fill={a} animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.5 }} />
       ))}
-    </g>
-  )
-}
-
-function SceneTerminal({ labels = [], c }) {
-  const cmd = (labels[0] || 'claude').slice(0, 22)
-  return (
-    <g>
-      <rect x="60" y="80" width="280" height="160" rx="12" fill="#0a0a0b" stroke={c.stroke} strokeOpacity="0.5" />
-      <circle cx="80" cy="100" r="4" fill="#ff5f57" /><circle cx="94" cy="100" r="4" fill="#febc2e" /><circle cx="108" cy="100" r="4" fill="#28c840" />
-      <text x="78" y="140" fontSize="14" fontFamily="monospace" fill={c.fill}>$ {cmd}</text>
-      <motion.rect x={78 + (cmd.length + 2) * 8.2} y="129" width="8" height="15" fill={c.fill}
-        animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }} />
-      {[170, 190, 210].map((y, i) => (
-        <motion.rect key={i} x="78" y={y} height="6" rx="3" fill={c.stroke} fillOpacity="0.4"
-          animate={{ width: [0, [180, 120, 150][i]] }} transition={{ duration: 1.2, repeat: Infinity, repeatType: 'reverse', delay: 0.6 + i * 0.4 }} />
-      ))}
-    </g>
-  )
-}
-
-function SceneLayers({ labels = [], c }) {
-  const ls = (labels.length ? labels : ['base', 'contexto', 'regras', 'resultado']).slice(0, 4)
-  return (
-    <g>
-      {ls.map((l, i) => (
-        <g key={i}>
-          <motion.rect x={120} y={210 - i * 38} width="160" height="30" rx="7" fill="var(--surface)" stroke={c.stroke} strokeOpacity="0.5"
-            initial={{ opacity: 0, y: 230 - i * 38 }}
-            animate={{ opacity: [0, 1, 1], x: [120, 120] }} transition={{ duration: 2.6, repeat: Infinity, delay: i * 0.4 }} />
-          <text x="200" y={230 - i * 38} textAnchor="middle" fontSize="12" fill="currentColor">{(l || '').slice(0, 16)}</text>
-        </g>
-      ))}
-    </g>
-  )
-}
-
-function SceneDelegate({ labels = [], c }) {
-  return (
-    <g>
-      <rect x="40" y="130" width="90" height="60" rx="10" fill="var(--surface)" stroke={c.stroke} strokeOpacity="0.5" />
-      <text x="85" y="165" textAnchor="middle" fontSize="13" fill="currentColor">{(labels[0] || 'você').slice(0, 9)}</text>
-      <rect x="270" y="130" width="90" height="60" rx="10" fill="var(--surface)" stroke={c.stroke} strokeOpacity="0.6" />
-      <text x="315" y="165" textAnchor="middle" fontSize="13" fill={c.fill}>{(labels[1] || 'Claude').slice(0, 9)}</text>
-      <motion.g animate={{ x: [0, 180, 180], opacity: [1, 1, 0] }} transition={{ duration: 2.8, repeat: Infinity, times: [0, 0.5, 1] }}>
-        <rect x="135" y="146" width="28" height="28" rx="5" fill={c.fill} fillOpacity="0.85" />
-      </motion.g>
-      <motion.g animate={{ x: [0, -180, -180], opacity: [0, 1, 1] }} transition={{ duration: 2.8, repeat: Infinity, delay: 1.4, times: [0, 0.5, 1] }}>
-        <rect x="235" y="146" width="28" height="28" rx="5" fill="none" stroke={c.fill} />
-        <path d="M242 160 l5 5 l9 -11" stroke={c.fill} strokeWidth="2" fill="none" />
+      <motion.g animate={{ x: [-180, 180] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
+        <circle cx={CX} cy={CY} r="8" fill={a} filter="url(#soft)" />
+        <circle cx={CX} cy={CY} r="4.5" fill="#fff" opacity="0.85" />
       </motion.g>
     </g>
   )
 }
 
-function SceneSpark({ labels = [], c }) {
+function SceneTerminal({ a }) {
   return (
     <g>
-      {[0, 1, 2, 3, 4, 5].map((i) => {
-        const a = (i / 6) * Math.PI * 2
-        return <motion.circle key={i} r="4" fill={c.fill}
-          animate={{ cx: [200, 200 + Math.cos(a) * 110], cy: [160, 160 + Math.sin(a) * 110], opacity: [1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: i * 0.18 }} />
+      <rect x="96" y="44" width="288" height="132" rx="14" fill="#0c0c0e" stroke={a} strokeOpacity="0.35" />
+      <circle cx="116" cy="64" r="3.5" fill="#ff5f57" /><circle cx="128" cy="64" r="3.5" fill="#febc2e" /><circle cx="140" cy="64" r="3.5" fill="#28c840" />
+      <text x="116" y="104" fontSize="13" fontFamily="monospace" fill={a}>$</text>
+      <motion.rect x="130" y="94" height="13" rx="2" fill={a} fillOpacity="0.7"
+        animate={{ width: [0, 120, 120, 0] }} transition={{ duration: 3.4, repeat: Infinity, times: [0, 0.4, 0.85, 1], ease: 'easeInOut' }} />
+      {[126, 144, 162].map((y, i) => (
+        <motion.rect key={i} x="116" y={y} height="5" rx="2.5" fill="#fff" fillOpacity="0.16"
+          animate={{ width: [0, [200, 150, 180][i]] }} transition={{ duration: 1.4, repeat: Infinity, repeatType: 'reverse', delay: 1 + i * 0.3, ease: 'easeInOut' }} />
+      ))}
+    </g>
+  )
+}
+
+function SceneLayers({ a }) {
+  return (
+    <g>
+      {[0, 1, 2, 3].map((i) => (
+        <motion.rect key={i} x={CX - 90} width="180" height="20" rx="6" fill={a} fillOpacity={0.15 + i * 0.18} stroke={a} strokeOpacity="0.4"
+          initial={{ opacity: 0 }}
+          animate={{ y: [CY + 60 - i * 26, CY + 52 - i * 26], opacity: [0, 1, 1, 0.85] }}
+          transition={{ duration: 3, repeat: Infinity, delay: i * 0.35, ease: EASE }} />
+      ))}
+    </g>
+  )
+}
+
+function SceneDelegate({ a }) {
+  return (
+    <g>
+      <rect x="64" y={CY - 26} width="86" height="52" rx="12" fill={a} fillOpacity="0.1" stroke={a} strokeOpacity="0.4" />
+      <rect x="330" y={CY - 26} width="86" height="52" rx="12" fill={a} fillOpacity="0.16" stroke={a} strokeOpacity="0.6" />
+      <motion.g animate={{ x: [0, 264, 264], opacity: [1, 1, 0] }} transition={{ duration: 2.8, repeat: Infinity, times: [0, 0.55, 1], ease: 'easeInOut' }}>
+        <rect x="120" y={CY - 13} width="26" height="26" rx="7" fill={a} filter="url(#soft)" />
+      </motion.g>
+      <motion.g animate={{ x: [0, -264, -264], opacity: [0, 1, 1] }} transition={{ duration: 2.8, repeat: Infinity, delay: 1.4, times: [0, 0.55, 1], ease: 'easeInOut' }}>
+        <circle cx="360" cy={CY} r="13" fill="none" stroke={a} strokeWidth="2" />
+        <path d={`M353 ${CY} l5 5 l9 -11`} stroke={a} strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </motion.g>
+    </g>
+  )
+}
+
+function SceneSpark({ a }) {
+  return (
+    <g>
+      {[0, 1, 2].map((i) => (
+        <motion.circle key={i} cx={CX} cy={CY} r="20" fill="none" stroke={a} strokeWidth="1.5"
+          animate={{ scale: [1, 3.4], opacity: [0.5, 0] }} transition={{ duration: 2.6, repeat: Infinity, delay: i * 0.85, ease: 'easeOut' }} style={{ transformOrigin: `${CX}px ${CY}px` }} />
+      ))}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const ang = (i / 8) * Math.PI * 2
+        return <motion.circle key={i} r="2.5" fill={a}
+          animate={{ cx: [CX, CX + Math.cos(ang) * 92], cy: [CY, CY + Math.sin(ang) * 92], opacity: [0.9, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.12, ease: 'easeOut' }} />
       })}
-      <motion.circle cx="200" cy="160" r="40" fill={c.fill} fillOpacity="0.12"
-        animate={{ scale: [1, 1.25, 1] }} transition={{ duration: 2, repeat: Infinity }} />
-      <circle cx="200" cy="160" r="20" fill={c.fill} />
-      <text x="200" y="230" textAnchor="middle" fontSize="13" fill="currentColor" fontWeight="600">{(labels[0] || '').slice(0, 22)}</text>
+      <Core a={a} r="17" />
     </g>
   )
 }
 
-function SceneNetwork({ labels = [], c }) {
-  const nodes = []
-  for (let r = 0; r < 3; r++) for (let col = 0; col < 4; col++) nodes.push({ x: 110 + col * 60, y: 100 + r * 55 })
+function SceneNetwork({ a }) {
+  const ns = [{ x: 120, y: 60 }, { x: 240, y: 44 }, { x: 360, y: 64 }, { x: 96, y: 150 }, { x: 200, y: 160 }, { x: 320, y: 156 }, { x: 410, y: 130 }]
+  const edges = [[0, 1], [1, 2], [0, 3], [3, 4], [4, 5], [5, 6], [2, 6], [1, 4]]
   return (
     <g>
-      {nodes.map((n, i) => (
-        <motion.circle key={i} cx={n.x} cy={n.y} r="7" fill={c.fill}
-          animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.3, 1] }} transition={{ duration: 2.4, repeat: Infinity, delay: (i % 5) * 0.3 }} />
+      {edges.map(([p, q], i) => (
+        <line key={i} x1={ns[p].x} y1={ns[p].y} x2={ns[q].x} y2={ns[q].y} stroke={a} strokeOpacity="0.16" strokeWidth="1.2" />
       ))}
-      <text x="200" y="250" textAnchor="middle" fontSize="12" fill="currentColor">{(labels[0] || '').slice(0, 24)}</text>
+      {ns.map((n, i) => (
+        <motion.circle key={i} cx={n.x} cy={n.y} r="6" fill={a}
+          animate={{ scale: [1, 1.6, 1], opacity: [0.35, 1, 0.35] }} transition={{ duration: 2.6, repeat: Infinity, delay: (i % 4) * 0.5, ease: 'easeInOut' }} />
+      ))}
     </g>
   )
 }
 
 const SCENES = { loop: SceneLoop, connect: SceneConnect, pipeline: ScenePipeline, terminal: SceneTerminal, layers: SceneLayers, delegate: SceneDelegate, spark: SceneSpark, network: SceneNetwork }
+const accentVar = (accent) => `var(--color-${accent === 'blue' ? 'brand-2' : accent === 'violet' ? 'brand-3' : accent === 'amber' ? 'amber' : 'brand'})`
 
 export default function AnimatedHero({ scene = 'spark', labels = [], legenda, accent = 'brand' }) {
   const ac = accentOf(accent)
-  const c = { fill: `var(--color-${accent === 'brand' ? 'brand' : accent === 'blue' ? 'brand-2' : accent === 'violet' ? 'brand-3' : 'amber'})`, stroke: `var(--color-${accent === 'brand' ? 'brand' : accent === 'blue' ? 'brand-2' : accent === 'violet' ? 'brand-3' : 'amber'})` }
+  const a = accentVar(accent)
   const Scene = SCENES[scene] || SceneSpark
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-      className="card overflow-hidden bg-dots relative">
-      <svg viewBox="0 0 400 320" className="w-full text-cloud" style={{ maxHeight: 300 }} role="img" aria-label={legenda || 'animação da aula'}>
-        <Scene labels={labels} c={c} />
+    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+      className="card overflow-hidden bg-dots">
+      <svg viewBox="0 0 480 220" className="w-full block" style={{ maxHeight: 260 }} role="img" aria-label={legenda || 'animação da aula'}>
+        <defs>
+          <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="5" />
+          </filter>
+        </defs>
+        <Scene a={a} />
       </svg>
-      {legenda && (
-        <div className="absolute bottom-0 left-0 right-0 px-5 py-3 bg-gradient-to-t from-ink to-transparent">
-          <p className={`text-sm ${ac.text} font-medium`}>{legenda}</p>
+
+      {labels?.length > 0 && (
+        <div className="flex flex-wrap gap-2 px-5 pt-1 pb-3 justify-center">
+          {labels.slice(0, 4).map((l, i) => (
+            <motion.span key={i}
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.12, duration: 0.4, ease: EASE }}
+              className={`text-xs font-medium px-3 py-1 rounded-full border ${ac.border} ${ac.bg} ${ac.text}`}>
+              {l}
+            </motion.span>
+          ))}
         </div>
+      )}
+
+      {legenda && (
+        <p className="px-5 pb-4 -mt-1 text-sm text-fog text-center">{legenda}</p>
       )}
     </motion.div>
   )
