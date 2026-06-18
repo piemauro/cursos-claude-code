@@ -5,6 +5,7 @@ import { Reveal, PageWrap, Badge, CodeBlock, accentOf } from '../components/Bits
 import Flashcards from '../components/Flashcards.jsx'
 import Quiz from '../components/Quiz.jsx'
 import AnimatedHero from '../components/AnimatedHero.jsx'
+import LessonSidebar from '../components/LessonSidebar.jsx'
 
 function Section({ icon: Icon, title, children, tone = 'brand' }) {
   const c = { brand: 'text-brand', amber: 'text-amber', fog: 'text-fog' }[tone]
@@ -29,20 +30,22 @@ export default function Aula() {
 
   return (
     <PageWrap>
-      <article className="mx-auto max-w-3xl px-5 pt-12 pb-10">
-        <div className="flex items-center justify-between text-sm">
+      <div className="mx-auto max-w-7xl px-5 xl:grid xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-12 xl:items-start">
+        <aside className="hidden xl:block pt-12"><LessonSidebar cursoSlug={cursoSlug} aulaSlug={aulaSlug} /></aside>
+      <article className="max-w-3xl w-full mx-auto pt-12 pb-10">
+        <div className="flex items-center justify-between text-sm xl:hidden">
           <Link to={`/${cursoSlug}`} className="inline-flex items-center gap-1.5 text-fog hover:text-cloud"><ArrowLeft size={15} /> {curso.titulo}</Link>
           <span className="text-fog font-mono text-xs">{indice + 1}/{total}</span>
         </div>
-        <div className="mt-3 h-1 rounded-full bg-ink-3 overflow-hidden"><div className={`h-full ${ac.dot}`} style={{ width: `${pct}%` }} /></div>
+        <div className="mt-3 h-1 rounded-full bg-ink-3 overflow-hidden xl:hidden"><div className={`h-full ${ac.dot}`} style={{ width: `${pct}%` }} /></div>
 
-        <header className="mt-8">
+        <header className="mt-8 xl:mt-0">
           <div className="flex flex-wrap items-center gap-2">
             <Badge tone="fog">{curso.titulo}</Badge>
             {a.duracao_leitura && <Badge><Clock size={11} /> {a.duracao_leitura}</Badge>}
           </div>
-          <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight leading-tight">{a.titulo}</h1>
-          {a.resumo && <p className="mt-4 text-lg text-fog leading-relaxed">{a.resumo}</p>}
+          <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] leading-[1.08]">{a.titulo}</h1>
+          {a.resumo && <p className="mt-5 text-lg lg:text-xl text-fog leading-relaxed max-w-2xl">{a.resumo}</p>}
         </header>
 
         <div className="mt-6">
@@ -153,6 +156,7 @@ export default function Aula() {
           )}
         </nav>
       </article>
+      </div>
     </PageWrap>
   )
 }
