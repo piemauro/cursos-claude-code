@@ -114,3 +114,59 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* ============================================================
+   SKIN V2 — "Liquid Glass" (porte web do liquid_glass_renderer)
+   Ativada via <html class="v2">. Vidro = backdrop blur+saturate,
+   borda especular (lightAngle), tint (glassColor), fundo aurora.
+   ============================================================ */
+html.v2 { --glass-tint: color-mix(in srgb, var(--card) 46%, transparent); }
+html.v2[data-theme="dark"] { --glass-tint: color-mix(in srgb, var(--card) 40%, transparent); }
+
+html.v2 body { background: var(--bg); }
+
+/* fundo aurora atrás de tudo (a refração precisa de cor pra distorcer) */
+.v2-aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.v2-aurora span {
+  position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%;
+  filter: blur(60px); opacity: .55; mix-blend-mode: screen;
+}
+html.v2[data-theme="light"] .v2-aurora span { opacity: .4; mix-blend-mode: multiply; }
+
+/* superfícies de vidro */
+html.v2 .card {
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(20px) saturate(175%);
+  backdrop-filter: blur(20px) saturate(175%);
+  border: 1px solid color-mix(in srgb, white 26%, transparent);
+  border-radius: 1.4rem;
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, white 50%, transparent),   /* brilho especular topo (lightAngle) */
+    inset 0 -1px 1px 0 color-mix(in srgb, black 16%, transparent), /* espessura (thickness) */
+    0 12px 40px -14px rgba(0,0,0,.45);
+  position: relative; overflow: hidden;
+}
+html.v2[data-theme="dark"] .card { border-color: color-mix(in srgb, white 16%, transparent); }
+
+/* sheen especular que desliza (fonte de luz virtual) */
+html.v2 .card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, white 22%, transparent) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform .9s cubic-bezier(.22,1,.36,1);
+}
+html.v2 .card-hover:hover::after { transform: translateX(120%); }
+
+/* nav e botões viram vidro */
+html.v2 header { background: color-mix(in srgb, var(--bg) 55%, transparent) !important; -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%); }
+html.v2 .kbd { background: var(--glass-tint); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+
+/* chips e pills com leve vidro */
+html.v2 .card .rounded-full { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+
+/* hover mais "líquido": squash sutil */
+html.v2 .card-hover { transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, border-color .3s ease; }
+html.v2 .card-hover:hover { transform: translateY(-5px) scale(1.012); }
+
+@media (prefers-reduced-motion: reduce) {
+  html.v2 .card::after { transition: none; }
+}
