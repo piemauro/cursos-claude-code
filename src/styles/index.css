@@ -159,8 +159,8 @@ html.v2 .card::after {
 }
 html.v2 .card-hover:hover::after { transform: translateX(120%); }
 
-/* nav e botões viram vidro */
-html.v2 header { background: color-mix(in srgb, var(--bg) 55%, transparent) !important; -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%); }
+/* nav (apenas o header sticky) vira vidro — NÃO o <header> de conteúdo da aula */
+html.v2 header.sticky { background: color-mix(in srgb, var(--bg) 55%, transparent) !important; -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%); }
 html.v2 .kbd { background: var(--glass-tint); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 
 /* chips e pills com leve vidro */

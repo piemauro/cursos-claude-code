@@ -158,14 +158,16 @@ export default function AnimatedHero({ scene = 'spark', labels = [], legenda, ac
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
       className="card overflow-hidden bg-dots">
-      <svg viewBox="0 0 480 220" className="w-full block" style={{ maxHeight: 260 }} role="img" aria-label={legenda || 'animação da aula'}>
-        <defs>
-          <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="5" />
-          </filter>
-        </defs>
-        <Scene a={a} />
-      </svg>
+      <div className="w-full aspect-[24/11]">
+        <svg viewBox="0 0 480 220" preserveAspectRatio="xMidYMid meet" className="w-full h-full block text-cloud" role="img" aria-label={legenda || 'animação da aula'}>
+          <defs>
+            <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="5" />
+            </filter>
+          </defs>
+          <Scene a={a} />
+        </svg>
+      </div>
 
       {labels?.length > 0 && (
         <div className="flex flex-wrap gap-2 px-5 pt-1 pb-3 justify-center">
